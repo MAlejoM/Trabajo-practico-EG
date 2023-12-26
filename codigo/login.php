@@ -1,3 +1,5 @@
+<?php 
+include("header.php"); ?>
 <?php
 
 include_once("funciones.php");
@@ -35,13 +37,17 @@ if (isset($_POST['nombre']) && isset($_POST['contrasenia'])) {
 
 ?>
 
-<h2>Iniciar sesión</h2>
-    <form method="post" action="login.php">
-        <label for="username">usuario:</label>
+<div><h2 class="inicio">Iniciar sesión</h2></div>
+<div class="iniciarSesion">
+    <form method="post" action="login.php" class="formularios">
+        <label for="username" style="border: 2px solid black; width: 85px;">usuario:</label>
         <input type="text" name="nombre" required><br><br>
-        <label for="password">contrasenia:</label>
+        <label for="password" style="border: 2px solid black; width: 85px;">contrasenia:</label>
         <input type="password" name="contrasenia" required><br><br>
-        <input type="submit" value="Iniciar sesión">
-        <input type="submit" value="Crear usuario" formaction="signup.php">
-
+        <input type="submit" value="Iniciar sesión" class="pulser">
+        <input type="submit" value="Crear usuario" formaction="signup.php" class="pulser">
     </form>
+</div>
+    
+<?php 
+include("footer.php"); ?>
