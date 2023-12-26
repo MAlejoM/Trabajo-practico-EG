@@ -1,4 +1,6 @@
-<?php include("header.php"); ?>
+<?php 
+session_start();
+include("header.php"); ?>
 
 <?php 
 
@@ -6,7 +8,7 @@ include_once("funciones.php");
  
 
 echo "Conexion exitosa";
-session_start();
+
 $_SESSION['nombre_insertado'] = false; 
 ?>
 
