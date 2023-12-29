@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </form>
 
           <?php
-          if (isset($_POST['validacion'])) {
+            if (isset($_POST['validacion'])) {
             if ($_POST['validacion'] == $validacion) {
               echo "Código correcto";
               $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password')";
