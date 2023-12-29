@@ -22,11 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           $validacion = rand(1000, 9999);
 
-          // Abrir una nueva ventana y mostrar el código de validación
-          echo "<script>window.open('codValidacion.php?validacion=$validacion', '_blank');</script>";
 
+          // Enviar un mail con el código de validación
+          // no lo reaclizamos pq no sabemos como hacerlo, 
+          // pero se puede hacer con la función mail() de php, tenemos complicaciones con el hosting.
+
+            // Mostrar una alerta con el codigo de validacion
+            echo '<script>alert("El codigo de validacion es: \'' . $validacion . '\'");</script>';
+          
           ?>
-
           <form method='POST' action='validacion.php'>
             <label for='validacion'>Ingrese el código de validación:</label>
             <input type='number' name='validacion' required><br><br>
