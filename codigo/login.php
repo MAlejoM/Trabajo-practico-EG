@@ -38,7 +38,7 @@ if (isset($_POST['nombre']) && isset($_POST['contrasenia'])) {
 ?>
 
 <div><h2 class="inicio">Iniciar sesión</h2></div>
-<div class="iniciarSesion">
+<div>
     <form method="post" action="login.php" class="formularios">
         <label for="username" style="border: 2px solid black; width: 85px;">usuario:</label>
         <input type="text" name="nombre" required><br><br>

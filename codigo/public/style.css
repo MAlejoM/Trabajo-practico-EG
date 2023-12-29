@@ -1,130 +1,139 @@
 body{
-    background-color: rgb(246,212,163)
+  background-color: rgb(246,212,163)
 }
 
 /*footer*/
 
 .footer-btns div{  /* Son los botones con link "contacto" "quienes somos"  */
-    display: inline;
-    padding: 10px;
-    margin: 10px;   
-    background:rgb(7,102,88);
-    border-radius: 10px;
+  display: inline;
+  padding: 10px;
+  margin: 10px;   
+  background:rgb(7,102,88);
+  border-radius: 10px;
 }
 
 .footer-btns{/* Es el div que contiene los botones del footer(contacto y ¿quienes somos?)  */
-    background-color: rgb(246,212,163);
-    height: 104px;
-    margin-top: 50%;
-    border-top: 2px solid rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
+  background-color: rgb(246,212,163);
+  height: 104px;
+  margin-top: 50%;
+  border-top: 2px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
 }
 
 /*header*/
 
 .header-btns { /* Es el div que contiene los botones del header(logo y perfil)  */
-    background-color: rgb(246,212,163);
-    display: flex;
-    justify-content: space-between;
-    height: 104px;
-    padding: 0;
-    border: 0;
-    margin: 0;   
-    background-color: rgb(164,186,67);
+  background-color: rgb(246,212,163);
+  display: flex;
+  justify-content: space-between;
+  height: 104px;
+  padding: 0;
+  border: 0;
+  margin: 0;   
+  background-color: rgb(164,186,67);
 }
 
 h1 {
-    text-align: center;
-    font-size: 50px;
-    justify-content: center;
-    background-color: rgb(164,186,67);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  text-align: center;
+  font-size: 50px;
+  justify-content: center;
+  background-color: rgb(164,186,67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*login*/
 .inicio{
-    background-color: rgb(246,212,163);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid rgb(0, 0, 0);
-    border-top: 2px solid rgb(0, 0, 0);
-    height: 50px;
-    margin: 0;
-    padding: 0;
-}
-
-.iniciarSesion {
-    text-align: center;
-    width: 300px;
-    align-items: center;
-    justify-content: center;
-    
+  background-color: rgb(246,212,163);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-top: 2px solid rgb(0, 0, 0);
+  height: 50px;
+  margin: 0;
+  padding: 0;
 }
 
 .formularios{
-    text-align: left;
-    background-color: rgb(164,186,67);
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 25px;
-}
-
-/*signup*/
-
-
-li {
-    text-decoration: none;
-    list-style: none;
-    display: inline;
-    padding: 10px;
-    margin: 10px;
-    background:rgb(7,102,88);
-    border-radius: 10px;
-}
-
-*{
-    background-color: rgb(246,212,163);
-}
-
-img{
-    height:  104px;
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
-
-a{
-    text-decoration: none;
-    color: rgb(246,212,163);    
-}
-
-p{
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-ul {
-    display: flex;
-    background-color: rgb(148, 57, 57);
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  background-color: rgb(164,186,67);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 25px;
+  margin-left: auto; /* Added to center horizontally */
+  margin-right: auto; /* Added to center horizontally */
 }
 
 .pulser{
-    transition-duration: 250ms;
-    transition-property: background-color;
-    transition-timing-function: cubic-bezier(x1 y1, x2 y2);
+  transition-duration: 250ms;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(x1 y1, x2 y2);
 }
-    
-.pulser:hover {
-    background-color: rgb(0, 0, 0);
-    box-shadow: 0 0 0px;
+
+.pulser:hover{
+  background-color: rgb(7,102,88);
+  box-shadow: 0 0 0px;
 }
+
+/*signup*/
+.registro{
+  background-color: rgb(246,212,163);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-top: 2px solid rgb(0, 0, 0);
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  display: inline;
+  padding: 10px;
+  margin: 10px;
+  background:rgb(7,102,88);
+  border-radius: 10px;
+}
+
+*{
+  background-color: rgb(246,212,163);
+}
+
+img{
+  height:  104px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: rgb(246,212,163);    
+}
+
+p{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ul {
+  display: flex;
+  background-color: rgb(148, 57, 57);
+  gap: 10px;
+}
+
 
 
 
