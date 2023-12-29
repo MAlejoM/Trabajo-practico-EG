@@ -13,10 +13,9 @@ $_SESSION['nombre_insertado'] = false;
 ?>
 
 <form action="muestreo.php" method="POST">
-    <input type="text" name="nombre">
-    <input type="submit" value="Enviar">
+	<input type="text" name="nombre">
+	<input type="submit" value="Enviar">
 </form>
 
 <?php include("footer.php"); ?>
-
 

@@ -6,10 +6,10 @@ define ('DB_NAME', 'users');
 
 
 function consultaSql($query){
-    $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME ) or die ("error");
-    $resultados = mysqli_query ($connection, $query);
-    mysqli_close($connection);
-    return $resultados; 
+  $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME ) or die ("error");
+  $resultados = mysqli_query ($connection, $query);
+  mysqli_close($connection);
+  return $resultados; 
 } 
 
 ?>
