@@ -1,5 +1,6 @@
 <?php
 include_once("funciones.php");
+include("header.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['dni'])) {
@@ -31,8 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           // Mostrar una alerta con el codigo de validacion
           echo '<script>alert("El codigo de validacion es: \'' . $validacion . '\'");</script>';
           ?>
-
-          <form method='POST' action='confirmacionValidacion.php'>
+          <head>
+            <link rel="stylesheet" type="text/css" href="style.css">
+          </head>
+          <div><h2 class="validacion">Validacion de codigo</h2></div>
+          <form method='POST' action='confirmacionValidacion.php' class="formularios">
             
             <input type='hidden' name='nombre' value='<?php echo $nombre; ?>'>
             <input type='hidden' name='apellido' value='<?php echo $apellido; ?>'>
@@ -41,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type='hidden' name='password' value='<?php echo $password; ?>'>
             <label for='validacion'>Ingrese el código de validación:</label>
             <input type='number' name='ingresovalidacion' required><br><br>
-            <input type='submit' value='Validar'>
+            <input type='submit' value='Validar' class='pulser'>
           </form>
 
           <?php
@@ -59,5 +63,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
-
+include("footer.php")
 ?>

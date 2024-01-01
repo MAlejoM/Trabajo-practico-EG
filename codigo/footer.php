@@ -7,6 +7,6 @@
         <a href="contacto.php"><div class="pulser">Contacto</div></a>
         <a href="quienesSomos.php"><div class="pulser">¿Quienes somos?</div></a>
       </div>
-    </footer>
+    </footer> 
   </body> 
 </html> 
