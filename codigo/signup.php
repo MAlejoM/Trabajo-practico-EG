@@ -1,9 +1,6 @@
 <?php
   include("header.php"); 
 ?>
-<head>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
 <div><h2 class="registro">Registro</h2></div>
   <div>
     <form method="POST" action="validacion.php" class="formularios">

@@ -1,5 +1,5 @@
 body{
-  background-color: rgb(246,212,163)
+  background-color: rgb(246,212,163);
 }
 
 /*footer*/
@@ -45,7 +45,6 @@ body{
   margin: 0;
   padding: 0;
 }
-
 
 h1 {
   text-align: center;
@@ -136,8 +135,10 @@ img{
 
 a{
   text-decoration: none;
-  color: rgb(246,212,163);    
+  color: black;    
 }
+
+
 
 p{
   text-align: center;
@@ -152,8 +153,8 @@ ul {
 }
 
 input{
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   background-color: white;
   border: 2px solid rgb(0, 0, 0);
 }

@@ -1,7 +1,7 @@
 <?php
 include_once("funciones.php");
 include("header.php");
-
+  
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['dni'])) {
     $dni = $_POST['dni'];

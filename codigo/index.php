@@ -1,21 +1,14 @@
 <?php 
 session_start();
-include("header.php"); ?>
-
-<?php 
-
+include("header.php"); 
 include_once("funciones.php");
- 
 
-echo "Conexion exitosa";
+if(!isset($_SESSION['dni'])){
+  include("nosession.php");
+}
+else{
+  include("session.php");
+}
 
-$_SESSION['nombre_insertado'] = false; 
-?>
-
-<form action="muestreo.php" method="POST">
-	<input type="text" name="nombre">
-	<input type="submit" value="Enviar">
-</form>
-
-<?php include("footer.php"); ?>
+include("footer.php"); ?>
 

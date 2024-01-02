@@ -1,6 +1,5 @@
 <?php 
 include("header.php"); ?>
-
 <?php
 
 include_once("funciones.php");
@@ -13,7 +12,9 @@ if (isset($_GET['error'])) {
     echo "Ha ocurrido un error durante el inicio de sesión.";
     // Aquí puedes agregar más código para manejar este error específico
   }
+    // Aquí puedes agregar más código para manejar este error específico
   // Puedes agregar más condiciones para manejar otros códigos de error
+
 }
 
 if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
@@ -27,10 +28,7 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
     $usuario = mysqli_fetch_array($resultados);
     session_start();
     $_SESSION['dni'] = $usuario;
-    echo "<script>alert('SE LOGUEO CORRECTAMENTE'); </script>";
-
-    
-
+    echo "<script>alert('SE LOGUEO CORRECTAMENTE'); window.location.href='index.php'; </script>";
   } else {
     echo "<script>alert('ERROR AL LOGUEARS'); window.location.href='login.php?error=1';</script>";
   }
@@ -46,9 +44,10 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
     <label for="password" style="border: 2px solid black; width: 85px;">contraseña:</label>
     <input type="password" name="contrasenia" required><br><br>
     <input type="submit" value="Iniciar sesión" class="pulser">
-    <input type="submit" value="Crear usuario" formaction="signup.php" class="pulser">
   </form>
+  <div><a href="/Trabajo-practico-EG/codigo/signup.php" class="crear">Crear usuario</a></div>
 </div>
     
 <?php 
-include("footer.php"); ?>
+include("footer.php"); 
+?>
