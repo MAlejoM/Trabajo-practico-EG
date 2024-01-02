@@ -20,7 +20,9 @@ if(isset($_SESSION['dni'])){
   
 </div>
 <div>
-
+  <?php
+  include("muestreoCatalogo.php");
+  ?>
 </div>
 
 
