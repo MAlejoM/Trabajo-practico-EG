@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
       } else {
         echo "<h1>error, el dni ingresado ya está registrado</h1>";
+        echo "<div><a href='signup.php' class='crear'>Iniciar sesion</a></div>";
       }
     } else {
       echo "<h1>error, el dni debe ser un entero mayor que un millón</h1>";

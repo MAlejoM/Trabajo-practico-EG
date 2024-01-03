@@ -1,5 +1,8 @@
 <?php 
-include("header.php"); ?>
+session_start();
+session_destroy(); //destruyo la session e inicio una nueva, ya que al entrar en el menu de login se supone que no hay ninguna session iniciada
+include("header.php"); 
+?>
 <?php
 
 include_once("funciones.php");
@@ -30,22 +33,24 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
     $_SESSION['dni'] = $usuario;
     echo "<script>alert('SE LOGUEO CORRECTAMENTE'); window.location.href='index.php'; </script>";
   } else {
-    echo "<script>alert('ERROR AL LOGUEARS'); window.location.href='login.php?error=1';</script>";
+    echo "<script>alert('ERROR AL LOGUEARSE'); window.location.href='login.php?error=1';</script>";
   }
 }
 
 ?>
 
 <div><h2 class="inicio">Iniciar sesión</h2></div>
-<div>
-  <form method="post" action="login.php" class="formularios">
-    <label for="username" style="border: 2px solid black; width: 85px;">dni:</label>
+<div class="formLogin-signup">
+  <form method="post" action="login.php" class="formulario">
+    <label for="username" style="border: 2px solid black; width: 85px;">Dni:</label>
     <input type="number" name="dni" required><br><br>
-    <label for="password" style="border: 2px solid black; width: 85px;">contraseña:</label>
+    <label for="password" style="border: 2px solid black; width: 85px;">Contraseña:</label>
     <input type="password" name="contrasenia" required><br><br>
-    <input type="submit" value="Iniciar sesión" class="pulser">
+    <input type="submit" value="Iniciar" class="pulser">
   </form>
-  <div><a href="/Trabajo-practico-EG/codigo/signup.php" class="crear">Crear usuario</a></div>
+  <div>
+    <a href="signup.php" class="crear pulser">Crear usuario</a>
+  </div>
 </div>
     
 <?php 

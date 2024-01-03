@@ -34,6 +34,28 @@ body{
   background-color: rgb(164,186,67);
 }
 
+.header-btns a{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(0, 0, 0);
+  border-bottom: 0px;
+  
+}
+
+.header-btns a{
+  transition-duration: 250ms;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(x1 y1, x2 y2);
+}
+
+.header-btns a:hover{
+  background-color: rgb(7,102,88);
+  box-shadow: 0 0 0px;
+}
+
+
 .inicio{
   background-color: rgb(246,212,163);
   display: flex;
@@ -58,20 +80,59 @@ h1 {
 
 /*login*/
 
-.formularios{
+.formLogin-signup{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   max-width: 400px;
   background-color: rgb(164,186,67);
-  border: 2px solid rgb(0, 0, 0);
+  border: 3px solid rgb(0, 0, 0);
   border-radius: 10px;
   padding: 10px;
   margin-top: 25px;
   margin-left: auto; /* Added to center horizontally */
   margin-right: auto; /* Added to center horizontally */
 }
+
+.formulario{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  background-color: rgb(164,186,67);
+  border: 0px;
+  padding: 10px;
+  margin-top: 25px;
+  margin-left: auto; /* Added to center horizontally */
+  margin-right: auto; /* Added to center horizontally */
+}
+
+input[type="submit"] {
+  width: 120px;
+  height: 40px;
+}
+
+.formLogin-signup div{
+  width: 120px;
+  height: 40px;
+  
+  display: flex;
+  
+}
+
+
+.crear{
+  background-color: white;
+  border: 2px solid rgb(0, 0, 0);
+  flex-grow: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .pulser{
   transition-duration: 250ms;
@@ -159,6 +220,8 @@ input{
   border: 2px solid rgb(0, 0, 0);
 }
 
-
+label{
+  border: 2px solid rgb(0, 0, 0);
+}
 
 

@@ -1,9 +1,12 @@
 <?php
+  session_start(); 
+  session_destroy(); //destruyo la session e inicio una nueva, ya que al entrar en el menu de login se supone que no hay ninguna session iniciada
   include("header.php"); 
+  
 ?>
 <div><h2 class="registro">Registro</h2></div>
   <div>
-    <form method="POST" action="validacion.php" class="formularios">
+    <form method="POST" action="validacion.php" class="formLogin-signup">
       <label for="nombre">Nombre:</label>
       <input type="text" name="nombre" required><br><br>
 
