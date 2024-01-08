@@ -11,9 +11,6 @@ if(isset($_SESSION['dni'])){
 <div >
   <?php //Si no esta logueado se muestran las opciones de catalogo y novedades
   if($login){
-    echo "<a href='catalogo.php'>CATALOGO</a>";
-    echo "<a href='novedades.php'>NOVEDADES</a>";
-    
     
   }else{
     echo "<a href='catalogo.php'>CATALOGO</a>";
@@ -24,7 +21,7 @@ if(isset($_SESSION['dni'])){
 </div>
 <div>
   <?php
-  include("muestreoCatalogo.php");
+  include("muestreoNovedades.php");
   ?>
 </div>
 
