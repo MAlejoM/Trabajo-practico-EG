@@ -30,7 +30,7 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
   if ($cantidad == 1) {
     $usuario = mysqli_fetch_array($resultados);
     session_start();
-    $_SESSION['dni'] = $usuario;
+    $_SESSION['dni'] = $usuario['dni'];
     echo "<script>alert('SE LOGUEO CORRECTAMENTE'); window.location.href='index.php'; </script>";
   } else {
     echo "<script>alert('ERROR AL LOGUEARSE'); window.location.href='login.php?error=1';</script>";

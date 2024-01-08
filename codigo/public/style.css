@@ -173,6 +173,15 @@ input[type="submit"] {
   padding: 0;
 }
 
+.menuLat {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  border: 2px solid black;
+  
+}
+
 li {
   text-decoration: none;
   list-style: none;
