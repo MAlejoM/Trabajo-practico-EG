@@ -39,7 +39,9 @@ if($login){
     
     
   }else{
+    
     echo "<a href='catalogo.php'>CATALOGO</a>";
+    echo "<br>";
     echo "<a href='novedades.php'>NOVEDADES</a>";
   }
 ?>

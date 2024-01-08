@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Veterinaria San Anton</title>
-  <link rel="stylesheet" type="text/css" href="public/style.css?v=1">
+  <link rel="stylesheet" type="text/css" href="public/style.css?v=0">
 </head>
 <body>
   <header>       
