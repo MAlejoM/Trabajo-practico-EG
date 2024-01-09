@@ -10,9 +10,12 @@ if(isset($_GET['id_mascota'])){ //validar que se haya enviado el id de la mascot
         if($resultados['dni_cliente'] == $_SESSION['dni']){   //validar que la mascota sea del cliente
             $query = "SELECT * FROM atenciones WHERE id_mascota = ".$id_mascota; //validar que la mascota tenga atenciones
             $resultados = consultaSql($query); 
+            $resultados = mysqli_fetch_all($resultados, MYSQLI_ASSOC); //crea un arreglo con los datos de la consulta a la BD
+           
+            // Get the length of the array
             if($resultados){
                 foreach ($resultados as $atencion) 
-                    {                                   //mostrar las atenciones de la mascota
+                    {                                 
                     echo "<div class='atencion'>"; 
                     echo "<h3>".$atencion['titulo']."</h3>"; 
                     echo "<br>";
@@ -27,7 +30,8 @@ if(isset($_GET['id_mascota'])){ //validar que se haya enviado el id de la mascot
                     echo "<h4> Tipo de Servicio:".servicio($atencion['id_servicio'])['tipo']."</h4>"; //funcion que devuelve el tipo del servicio
                     echo "</div>";
                     }
-                }else{
+                }
+                else{
                     echo "error, no hay atenciones para esa mascota";
                 }
             }else{
@@ -40,4 +44,6 @@ if(isset($_GET['id_mascota'])){ //validar que se haya enviado el id de la mascot
         else{
             echo "error";
         }
+
+include("footer.php");
 ?>

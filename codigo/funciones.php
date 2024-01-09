@@ -20,13 +20,15 @@ function rol($dni)
   return $rol;
 }
 
-function nombre($dni)
+function nombre($id)
 { //Funcion para obtener el nombre de un usuario
-  $query = "SELECT * FROM datosusuario WHERE dni = '$dni'";
+  $query = "SELECT * FROM datosusuario WHERE id = '$id'";
   $resultados = consultaSql($query);
   $nombre = mysqli_fetch_assoc($resultados)['nombre'];
   return $nombre;
 }
+
+
 
 function servicio($id)
 { //Funcion para obtener los datos de un servicio
