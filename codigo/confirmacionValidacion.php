@@ -1,19 +1,19 @@
 <?php
-session_start();
+
 include_once("funciones.php");
 include("header.php");
 
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])){
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])){ //si se envio el formulario
   
-  if ($_SESSION['validacion']== $_POST['ingresovalidacion']) {
+  if ($_SESSION['validacion']== $_POST['ingresovalidacion']) { //si el codigo es correcto
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
     $dni = $_POST['dni'];
     $password = $_POST['password'];
     echo "Código correcto";
-    $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password')";
-    $resultados = consultaSql($query);
+    $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password')"; //inserta los datos en la base de datos
+    $resultados = consultaSql($query); 
     
     if ($resultados == true) {
       ?>

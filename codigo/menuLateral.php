@@ -1,14 +1,14 @@
 <?php
 include_once("funciones.php");
 
-if(isset($_SESSION['dni'])){
+if(isset($_SESSION['dni'])){ 
     $login = true;
     $rol = rol($_SESSION['dni']);
 }else{
   $login = false;
 }
 
-if($login){
+if($login){ 
     
     if($rol == "admin"){
         

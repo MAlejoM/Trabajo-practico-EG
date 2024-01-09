@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           $validacion = rand(1000, 9999);
 
-          session_start();
+          
           $_SESSION['validacion'] = $validacion;
 
           // Enviar un mail con el código de validación
