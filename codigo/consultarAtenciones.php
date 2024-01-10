@@ -5,9 +5,11 @@ if(isset($_GET['id_mascota'])){ //validar que se haya enviado el id de la mascot
     $id_mascota = $_GET['id_mascota']; 
     $query = "SELECT * FROM mascotas WHERE id = ".$id_mascota; //validar que la mascota exista
     $resultados =  consultaSql($query); 
+    $resultados = mysqli_fetch_array($resultados);
+
     if($resultados){  
-        $resultados = mysqli_fetch_array($resultados); 
-        if($resultados['dni_cliente'] == $_SESSION['dni']){   //validar que la mascota sea del cliente
+
+        if(isset($resultados['dni_cliente'])&&$resultados['dni_cliente'] == $_SESSION['dni']){   //validar que la mascota sea del cliente
             $query = "SELECT * FROM atenciones WHERE id_mascota = ".$id_mascota; //validar que la mascota tenga atenciones
             $resultados = consultaSql($query); 
             $resultados = mysqli_fetch_all($resultados, MYSQLI_ASSOC); //crea un arreglo con los datos de la consulta a la BD
