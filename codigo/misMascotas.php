@@ -10,7 +10,7 @@ include_once("funciones.php");
     </div>
     <div class="mascotas">
         <?php
-        $query = "SELECT * FROM mascotas WHERE dni_cliente = ".$_SESSION['dni']; //consulta a la base de datos
+        $query = "SELECT * FROM mascotas WHERE dni_cliente = ".$_SESSION['dni']." AND estado = 'activo'"; //consulta a la base de datos
         $resultados = consultaSql($query); 
         foreach ($resultados as $mascota) { //recorre los resultados de la consulta
 
@@ -27,6 +27,7 @@ include_once("funciones.php");
             echo "<br>";
             ?>
             <div><a href='consultarAtenciones.php?id_mascota=<?php echo $mascota['id']; ?>'>CONSULTAR ATENCIONES</a> </div>
+            <div><a href='editarMascota.php?id_mascota=<?php echo $mascota['id']; ?>'>EDITAR</a> </div>
             <?php
             
             echo "</div>";
