@@ -22,7 +22,7 @@ include_once("funciones.php");
                 $resultados = consultaSql($query);
                 $resultados = mysqli_fetch_array($resultados);
                 if($resultados){
-                    echo "<form action='procesoCarga.php' method='post' enctype='multipart/form-data'>";
+                    echo "<form action='p_carga_mascota.php' method='post' enctype='multipart/form-data'>";
                     echo "<input type='hidden' name='id_mascota' value='".$id_mascota."'>";
                     echo "<label for='nombre'>Nombre</label>";
                     echo "<input type='text' name='nombre' value='".$resultados['nombre']."'>";
