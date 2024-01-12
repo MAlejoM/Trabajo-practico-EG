@@ -39,17 +39,17 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
 
 ?>
 
-<div><h2 class="inicio">Iniciar sesión</h2></div>
+<div><h2>Iniciar sesión</h2></div>
 <div class="formLogin-signup">
   <form method="post" action="login.php" class="formulario">
-    <label for="username" style="border: 2px solid black; width: 85px;">Dni:</label>
+    <label for="username" >Dni:</label>
     <input type="number" name="dni" required><br><br>
-    <label for="password" style="border: 2px solid black; width: 85px;">Contraseña:</label>
+    <label for="password" >Contraseña:</label>
     <input type="password" name="contrasenia" required><br><br>
-    <input type="submit" value="Iniciar" class="pulser">
+    <input type="submit" value="Iniciar" class="btn btn-success">
   </form>
   <div>
-    <a href="signup.php" class="crear pulser">Crear usuario</a>
+    <a href="signup.php" class="btn btn-success">Crear usuario</a>
   </div>
 </div>
     

@@ -16,7 +16,6 @@ footer{
   display: inline;
   padding: 10px;
   margin: 10px;   
-  background:rgb(7,102,88);
   border-radius: 10px;
 }
 
@@ -33,14 +32,14 @@ footer{
 /*header*/
 
 .header-btns { /* Es el div que contiene los botones del header(logo y perfil)  */
-  background-color: rgb(246,212,163);
   display: flex;
   justify-content: space-between;
   height: 104px;
   padding: 0;
   border: 0;
   margin: 0;   
-  background-color: rgb(164,186,67);
+  background-color: rgb(246,212,163);
+  border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 .header-btns a{
@@ -81,13 +80,36 @@ h1 {
   text-align: center;
   font-size: 50px;
   justify-content: center;
-  background-color: rgb(164,186,67);
+  background-color: rgb(246,212,163);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+h2{
+  background-color: darkgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-top: 2px solid rgb(0, 0, 0);
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+h3{
+  background-color: rgb(7,102,88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /*login*/
+
+.btn btn-success{
+  background-color: rgb(7,102,88);
+
+}
 
 .formLogin-signup{
   display: flex;
@@ -95,13 +117,14 @@ h1 {
   align-items: center;
   flex-direction: column;
   max-width: 400px;
-  background-color: rgb(164,186,67);
+  background-color: rgb(7,102,88);  
   border: 3px solid rgb(0, 0, 0);
   border-radius: 10px;
   padding: 10px;
   margin-top: 25px;
   margin-left: auto; /* Added to center horizontally */
   margin-right: auto; /* Added to center horizontally */
+  margin-bottom: 25px;
 }
 
 .formulario{
@@ -110,8 +133,7 @@ h1 {
   align-items: center;
   flex-direction: column;
   max-width: 400px;
-  background-color: rgb(164,186,67);
-  border: 0px;
+  background-color: rgb(7,102,88);
   padding: 10px;
   margin-top: 25px;
   margin-left: auto; /* Added to center horizontally */
@@ -126,9 +148,9 @@ input[type="submit"] {
 .formLogin-signup div{
   width: 120px;
   height: 40px;
-  
+  background-color: rgb(7,102,88);
   display: flex;
-  
+
 }
 
 .crear{
@@ -139,17 +161,6 @@ input[type="submit"] {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.pulser{
-  transition-duration: 250ms;
-  transition-property: background-color;
-  transition-timing-function: cubic-bezier(x1 y1, x2 y2);
-}
-
-.pulser:hover{
-  background-color: rgb(7,102,88);
-  box-shadow: 0 0 0px;
 }
 
 /*signup*/
@@ -184,7 +195,24 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   width: 100%;
-  
+
+}
+
+.menuPpal{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 25px;
+  background-color: rgb(7,102,88);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  max-width: 750px;
+}
+
+img{
+  object-fit: contain;
+  background-color: rgb(7,102,88);
+
 }
 
 /*catalogo*/
@@ -274,7 +302,7 @@ img{
 
 a{
   text-decoration: none;
-  color: black;    
+  color: black;
 }
 
 p{
@@ -291,13 +319,25 @@ ul {
 
 input{
   margin-bottom: 5px;
-  margin-top: 5px;
   background-color: white;
-  border: 2px solid rgb(0, 0, 0);
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+  height: 30px;
+  width: 200px;
 }
 
 label{
-  border: 2px solid rgb(0, 0, 0);
+  border-top: 2px solid rgb(0, 0, 0);
+  border-left: 2px solid rgb(0, 0, 0);
+  border-right: 2px solid rgb(0, 0, 0);
+  background-color: white;
+  margin-bottom: 0px;
+  height: 30px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
