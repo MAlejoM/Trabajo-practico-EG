@@ -4,7 +4,7 @@
   include("header.php"); 
   
 ?>
-<div><h2 class="registro">Registro</h2></div>
+<div><h2>Registro</h2></div>
   <div>
     <form method="POST" action="validacion.php" class="formLogin-signup">
       <label for="nombre">Nombre:</label>
@@ -25,7 +25,7 @@
       <label for="password">Contraseña nuevamente:</label>
       <input type="text" name="passwordDuplicada" required><br><br>
 
-      <input type="submit" value="Registrarse" class="pulser">
+      <input type="submit" value="Registrarse" class="btn btn-success">
     </form>
   </div>
 <?php

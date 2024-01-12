@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <link rel="stylesheet" type="text/css" href="style.css">
           </head>
           <div><h2 class="validacion">Validacion de codigo</h2></div>
-          <form method='POST' action='confirmacionValidacion.php' class="formularios">
+          <form method='POST' action='confirmacionValidacion.php' class="formulario">
             
             <input type='hidden' name='nombre' value='<?php echo $nombre; ?>'>
             <input type='hidden' name='apellido' value='<?php echo $apellido; ?>'>
@@ -49,9 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </form>
 
           <?php
-            
-          
-
         } else {
           echo "<h1>error, las 2 contraseñas son distintas</h1>";
         }
