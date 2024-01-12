@@ -26,7 +26,12 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
   
   $query = "SELECT * FROM datosUsuario WHERE dni = '$dni' AND contrasenia = '$contrasenia'";
   $resultados = consultaSql($query);
+  
   $cantidad = mysqli_num_rows($resultados);
+  
+
+
+
   if ($cantidad == 1) {
     $usuario = mysqli_fetch_array($resultados);
     session_start();

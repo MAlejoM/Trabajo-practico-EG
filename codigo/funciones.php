@@ -37,3 +37,10 @@ function servicio($id)
   $resultados = mysqli_fetch_array($resultados);
   return $resultados;
 }
+
+function persona($dni){
+  $query = "SELECT * FROM datosusuario WHERE dni = '$dni'";
+  $resultados = consultaSql($query);
+  $resultados = mysqli_fetch_array($resultados);
+  return $resultados;
+}
