@@ -6,6 +6,10 @@ include_once("funciones.php");
         <div class="menuLateral">
             <?php
             include("menuLateral.php");
+            if (rol($_SESSION['dni']) == 'cliente') {
+                header("Location: index.php"); // Rebotar si es usuario cliente
+                exit();
+            }
             ?>
         </div>
         <div>   
@@ -45,7 +49,7 @@ include_once("funciones.php");
                             echo "<td>".$persona[1]."</td>";
                             echo "<td>".$persona[2]."</td>";
                             echo "<td>".$persona[5]."</td>";
-                            echo "<td><a href='seleccionar_dueño.php?dni=".$persona[5]."'>Seleccionar Dueño </a></td>";
+                            echo "<td><a href='seleccionar_duenio.php?dni=".$persona[5]."'>Seleccionar Dueño </a></td>";
                             echo "</tr>";
                         }
                         echo "</table>"; // Add this line to close the table
