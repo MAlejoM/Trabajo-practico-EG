@@ -9,8 +9,15 @@
         $servicio = $_POST['servicio'];
         $descripcion = $_POST['descripcion'];
         $profesional = $_POST['profesional'];
+        $id_mascota = $_POST['id_mascota'];
         $fecha = $_POST['fecha'];
-        $query = "INSERT INTO atenciones (titulo, descripcion, id_servicio, id_profesional, fecha) VALUES ('$titulo', '$descripcion', '$servicio', '$profesional', '$fecha')";
+        $query = "INSERT INTO atenciones (id_mascota, titulo, descripcion, id_servicio, id_personal, fecha_hora) VALUES ('$id_mascota','$titulo', '$descripcion', '$servicio', '$profesional', '$fecha')";
         $resultados = consultaSql($query);
+        if($resultados){
+            echo "<script>alert('SE CARG CORRECTAMENTE LA ATENCION'); window.location.href='servicios.php'; </script>";
+        }else{
+            echo "<script>alert('ERROR EN LA CARGA'); window.location.href='servicios.php'; </script>";
+        }
         
     }
+?>

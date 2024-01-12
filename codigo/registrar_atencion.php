@@ -2,8 +2,8 @@
 
     include("header.php");
     include_once("funciones.php");
-    if (rol($_SESSION['dni']) == 'cliente') {
-        header("Location: index.php"); // Rebotar si es usuario cliente
+    if (rol($_SESSION['dni']) == 'cliente' || $_GET['id_mascota'] == null) {
+        header("Location: index.php"); // Rebotar si es usuario cliente o si no hay id de mascota
         exit();
     }
     ?>
@@ -15,6 +15,7 @@
             </div>
             <div>
                 <form action='p_carga_atencion.php' method='post'>
+                    <input type="hidden" name="id_mascota" value="<?php echo $_GET['id_mascota']; ?>">
                     <input type="text" name="titulo" id="titulo" placeholder="Ingrese el título" required>
                     <br>
                     <label for="servicio">Seleccione un servicio:</label>
