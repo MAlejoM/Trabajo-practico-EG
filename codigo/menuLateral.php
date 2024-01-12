@@ -12,36 +12,36 @@ if($login){
     
     if($rol == "admin"){
         
-      echo "<a href='administrarCatalogo.php'>ADMINISTRAR CATALOGO</a>";
+      echo "<a href='administrarCatalogo.php' class='btn btn-success'>ADMINISTRAR CATALOGO</a>";
         echo "<br>";
-      echo "<a href='administrarNovedades.php'>ADMINISTRAR NOVEDADES</a>";
+      echo "<a href='administrarNovedades.php' class='btn btn-success'>ADMINISTRAR NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='administrarUsuarios.php'>ADMINISTRAR USUARIOS</a>";
+      echo "<a href='administrarUsuarios.php'class='btn btn-success'>ADMINISTRAR USUARIOS</a>";
         echo "<br>";
-      echo "<a href='servicios.php'>SERVICIOS</a>";
+      echo "<a href='servicios.php'class='btn btn-success'>SERVICIOS</a>";
         echo "<br>";
       
       }elseif($rol == "cliente"){
-      echo "<a href='catalogo.php'>CATALOGO</a>";
+      echo "<a href='catalogo.php' class='btn btn-success'>CATALOGO</a>";
         echo "<br>";
-      echo "<a href='novedades.php'>NOVEDADES</a>";
+      echo "<a href='novedades.php' class='btn btn-success'>NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='mismascotas.php'>MIS MASCOTAS</a>";
+      echo "<a href='mismascotas.php' class='btn btn-success'>MIS MASCOTAS</a>";
     }elseif($rol == "prof"){
-      echo "<a href='catalogo.php'>CATALOGO</a>";
+      echo "<a href='catalogo.php'class='btn btn-success'>CATALOGO</a>";
         echo "<br>";
-      echo "<a href='novedades.php'>NOVEDADES</a>";
+      echo "<a href='novedades.php'class='btn btn-success'>NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='servicios.php'>SERVICIOS</a>";
+      echo "<a href='servicios.php'class='btn btn-success'>SERVICIOS</a>";
         echo "<br>";
-      echo "<a href='mismascotas.php'>MIS MASCOTAS</a>";
+      echo "<a href='mismascotas.php'class='btn btn-success'>MIS MASCOTAS</a>";
     }  
     
     
   }else{
     
-    echo "<a href='catalogo.php'>CATALOGO</a>";
+    echo "<a href='catalogo.php'class='btn btn-success'>CATALOGO</a>";
     echo "<br>";
-    echo "<a href='novedades.php'>NOVEDADES</a>";
+    echo "<a href='novedades.php'class='btn btn-success'>NOVEDADES</a>";
   }
 ?>

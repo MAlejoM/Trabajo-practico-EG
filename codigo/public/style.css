@@ -106,8 +106,11 @@ h3{
 }
 /*login*/
 
-.btn btn-success{
+.btn btn-success{ 
   background-color: rgb(7,102,88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -195,24 +198,44 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   width: 100%;
-
+  align-items: center;
+  justify-content: center;
 }
 
 .menuPpal{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 33.33%); 
   margin-top: 25px;
   background-color: rgb(7,102,88);
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
-  max-width: 750px;
+  max-width: 60%;
+  align-items: center;
+  justify-content: center;
 }
+
+/*menu lateral*/
+.menuLateral{
+  width: 15%;
+  height: 300px;
+  min-width: 150px;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  background-color: rgb(7,102,88);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 25px;
+  margin-right: 50px;
+  
+}
+
 
 img{
   object-fit: contain;
   background-color: rgb(7,102,88);
-
 }
 
 /*catalogo*/
@@ -228,21 +251,6 @@ img{
   margin: 5px;
 }
 
-/*menu lateral*/
-.menuLateral{
-  width: 20%;
-  height: 300px;
-  min-width: 150px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(164,186,67);
-  border: 2px solid rgb(0, 0, 0);
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 25px;
-  margin-right: 50px;
-  
-}
 
 /*Mis mascotas*/
 
@@ -340,5 +348,3 @@ label{
   align-items: center;
   justify-content: center;
 }
-
-
