@@ -15,7 +15,7 @@ include_once("funciones.php");
   <div class="menuPpal">
   <?php 
   echo "<h3>BIENVENIDO A LA PAGINA DE INICIO</h3>"; 
-  echo "<img src= .\img\bienvenida.png alt='imagen de bienvenida'>"; 
+  echo "<img src='./img/bienvenida.png' alt='imagen de bienvenida'>"; 
   ?>
   </div>
   
