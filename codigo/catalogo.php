@@ -2,6 +2,8 @@
 include_once("funciones.php");
 
 ?>
+<div><h2>Catalogo</h2></div>
+
 <div class="menuGlobal">
   <div class="menuLateral">
     <?php //Si no esta logueado se muestran las opciones de catalogo y novedades

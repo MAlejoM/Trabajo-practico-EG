@@ -2,6 +2,8 @@
 include("header.php"); 
 include_once("funciones.php");
 ?>
+<div><h2>Servicios</h2></div>
+
     <div class="menuGlobal">
         <div class="menuLateral">
             <?php
@@ -12,11 +14,11 @@ include_once("funciones.php");
             }
             ?>
         </div>
-        <div>   
+        <div class="formulario" >   
             <div>
-                <form action="servicios.php" method="GET">
+                <form action="servicios.php" method="GET" id="buscarDNI">
                     <input type="text" name="dni" placeholder="Enter client's DNI">
-                    <button type="submit">Submit</button>
+                    <button type="button" class="btn btn-success">Buscar</button>
                 </form>
             </div>
             <div>
@@ -25,7 +27,7 @@ include_once("funciones.php");
                         $dni = $_GET['dni'];
                         $persona = persona($dni);
                         if($persona){
-                            echo "<table>";
+                            echo "<table id='tabla-servicios'>";
                             echo "<tr><th>Name</th><th>Surname</th><th>DNI</th><th>Link</th></tr>";
                             echo "<tr>";
                             echo "<td>".$persona['nombre']."</td>";

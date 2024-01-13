@@ -112,6 +112,7 @@ h3{
   justify-content: center;
   align-items: center;
   margin: 2%;
+  width: auto;
 }
 
 .btn-success{
@@ -129,15 +130,16 @@ h3{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 25%;
+  min-width: fit-content;
   background-color: rgb(7,102,88);  
-  border: 3px solid rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
   padding: 10px;
-  margin-top: 25px;
   margin-left: auto; /* Added to center horizontally */
   margin-right: auto; /* Added to center horizontally */
-  margin-bottom: 25px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .formulario{
@@ -145,12 +147,13 @@ h3{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 400px;
+  width: 75%;
+  height: max-content;
   background-color: rgb(7,102,88);
   padding: 10px;
-  margin-top: 25px;
   margin-left: auto; /* Added to center horizontally */
   margin-right: auto; /* Added to center horizontally */
+
 }
 
 input[type="submit"] {
@@ -265,9 +268,31 @@ img{
 
 .card-text{
   background-color: rgb(9,174,20);
-  
+
 }
 
+/*Servicios*/
+
+#buscarDNI{
+  display: inline-flex;
+  align-items: self-end;
+  height: 2%;
+}
+
+#tabla-servicios{
+  background-color: rgb(9,174,20);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+}
+
+tr{
+  background-color: rgb(9,174,20);
+  margin-left: 3%;
+  margin-right: 3%;
+}
 
 /*Mis mascotas*/
 
@@ -315,9 +340,6 @@ li {
   border-radius: 10px;
 }
 
-*{
-  background-color: rgb(246,212,163);
-}
 
 img{
   height: 100%;
