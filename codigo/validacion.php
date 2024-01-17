@@ -26,11 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_SESSION['validacion'] = $validacion;
 
           // Enviar un mail con el código de validación
-          // no lo reaclizamos pq no sabemos como hacerlo, 
-          // pero se puede hacer con la función mail() de php, tenemos complicaciones con el hosting.
-
+            
+          $envio = sendMail($email, "Codigo de validacion", "Su codigo de validacion es: " . $validacion);
+          if($envio == "ok"){
+            echo '<script>alert("El codigo de validacion fue enviado correctamente a su mail");</script>';
           // Mostrar una alerta con el codigo de validacion
-          echo '<script>alert("El codigo de validacion es: \'' . $validacion . '\'");</script>';
+          }else{
+            echo '<script>alert("El codigo de validacion no pudo ser enviado");</script>';
+          }
+          
           ?>
           <head>
             <link rel="stylesheet" type="text/css" href="style.css">
