@@ -9,11 +9,10 @@ define('PASSWORD',"qbscabxaxvjoisvt");
 
 define('SEND_FROM',"info@nosequeponer.com");
 
-define('SEND_FROM_NAME',"Nosequeponer");
+define('SEND_FROM_NAME',"Veterinaria San Anton");
 
-define('REPLY_TO',"info@nosequeponer.com");
+define('REPLY_TO',"info@veterinariasananton.com");
 
 define('REPLY_TO_NAME',"Matias");
 
 ?>
-```

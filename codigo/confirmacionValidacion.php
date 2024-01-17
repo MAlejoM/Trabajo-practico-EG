@@ -12,7 +12,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])
     $dni = $_POST['dni'];
     $password = $_POST['password'];
     echo "Código correcto";
-    $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password')"; //inserta los datos en la base de datos
+    $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia, rol) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password', 'cliente')"; //inserta los datos en la base de datos
     $resultados = consultaSql($query); 
     
     if ($resultados == true) {
