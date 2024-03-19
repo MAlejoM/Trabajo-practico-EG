@@ -5,7 +5,7 @@ include("header.php");
 ?>
 <?php
 
-include_once("funciones.php");
+include_once("../../procesos/funciones.php");
 
 if (isset($_GET['error'])) {
   $error_code = $_GET['error'];
@@ -36,6 +36,7 @@ if (isset($_POST['dni']) && isset($_POST['contrasenia'])) {
     $usuario = mysqli_fetch_array($resultados);
     session_start();
     $_SESSION['dni'] = $usuario['dni'];
+    $_SESSION['rol'] = $usuario['rol'];
     echo "<script>alert('SE LOGUEO CORRECTAMENTE'); window.location.href='index.php'; </script>";
   } else {
     echo "<script>alert('ERROR AL LOGUEARSE'); window.location.href='login.php?error=1';</script>";

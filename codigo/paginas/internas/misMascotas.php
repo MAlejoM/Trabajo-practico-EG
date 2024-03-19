@@ -1,11 +1,11 @@
 <?php 
-include("header.php");
-include_once("funciones.php");
+include("../generales/header.php");
+include_once("../../procesos/funciones.php");
 ?>
 <div class="menuGlobal">
     <div class="menuLateral">
         <?php
-        include("menuLateral.php");
+        include("../generales/menuLateral.php");
         ?>
     </div>
     <div class="mascotas">
@@ -39,5 +39,5 @@ include_once("funciones.php");
 
 
 <?php
-include("footer.php");
+include("../generales/footer.php");
 ?>

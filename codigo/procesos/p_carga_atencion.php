@@ -1,7 +1,7 @@
 <?php
     include_once("funciones.php");
-    if (rol($_SESSION['dni']) == 'cliente') {
-        header("Location: index.php"); // Rebotar si es usuario cliente
+    if (rol($_SESSION['rol']) == 'cliente') {
+        header("Location: ../paginas/generales/index.php"); // Rebotar si es usuario cliente
         exit();
     }
     if(isset($_POST['titulo']) && isset($_POST['servicio']) && isset($_POST['descripcion']) && isset($_POST['profesional']) && isset($_POST['fecha'])){
@@ -14,9 +14,9 @@
         $query = "INSERT INTO atenciones (id_mascota, titulo, descripcion, id_servicio, id_personal, fecha_hora) VALUES ('$id_mascota','$titulo', '$descripcion', '$servicio', '$profesional', '$fecha')";
         $resultados = consultaSql($query);
         if($resultados){
-            echo "<script>alert('SE CARG CORRECTAMENTE LA ATENCION'); window.location.href='servicios.php'; </script>";
+            echo "<script>alert('SE CARG CORRECTAMENTE LA ATENCION'); window.location.href='../paginas/internas/servicios.php'; </script>";
         }else{
-            echo "<script>alert('ERROR EN LA CARGA'); window.location.href='servicios.php'; </script>";
+            echo "<script>alert('ERROR EN LA CARGA'); window.location.href='../paginas/internas/servicios.php'; </script>";
         }
         
     }

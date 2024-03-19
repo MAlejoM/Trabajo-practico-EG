@@ -1,7 +1,7 @@
 <?php
 
-include_once("funciones.php");
-include("header.php");
+include_once("../../procesos/funciones.php");
+include("../generales/header.php");
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])) { //si se envio el formulario
 
@@ -18,20 +18,20 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])
     if ($resultados == true) {
       ?>
       <h2>Dirijase al LOGIN tocando aca</h2>
-      <a href="login.php">LOGIN</a>
+      <a href="../generales/login.php">LOGIN</a>
       <?php
     } else {
       echo "<h1>error, no se pudo realizar la conexión con la base de datos</h1>";
       ?>
       <h2>Dirijase al LOGIN tocando aca</h2>
-      <a href="login.php">LOGIN</a>
+      <a href="../generales/login.php">LOGIN</a>
       <?php
     }
   } else {
     echo "Código incorrecto";
     ?>
     <h2>Dirijase al SIGNUP tocando aca</h2>
-    <a href="signup.php">SIGNUP</a>
+    <a href="../generales/signup.php">SIGNUP</a>
     <?php
 
   }
@@ -39,7 +39,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])
   echo "error";
   ?>
   <h2>Dirijase al LOGIN tocando aca</h2>
-  <a href="login.php">LOGIN</a>
+  <a href="../generales/login.php">LOGIN</a>
   <?php
 }
 ?>

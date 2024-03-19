@@ -1,53 +1,13 @@
 <?php
-include("header.php"); 
-include_once("funciones.php");
-
-?>
-
-<div class="menuGlobal">
-    <div class="menuLateral">
-        <?php
-            include("menuLateral.php")
-        ?>
-    </div>
-    <div>
-        <?php
-            $query = "SELECT * FROM mascotas WHERE id=".$_GET['id_mascota']; //consulta a la base de datos
-            $resultados = consultaSql($query); 
-            
-            foreach ($resultados as $mascota) { //recorre los resultados de la consulta
-    
-                echo "<div class='etiquetaMascota'>";
-                echo "<h3>".$mascota['nombre']."</h3>";
-                echo "<br>";
-                echo "<img src='data:image/jpeg;base64,".base64_encode($mascota['imagen'])."' />"; //imagen de la mascota
-                echo "<br>";
-                echo "<h4>".$mascota['color']."</h4>";
-                echo "<br>";
-                echo "<h4>".$mascota['raza']."</h4>";
-                echo "<br>";
-                echo "<h4>".$mascota['sexo']."</h4>";
-                echo "<br>";                
-                echo "</div>";
-            }
 
 
-
-        ?>
-    </div>
-    <div class="atenciones">
-    <?php
-
-
-    if(isset($_GET['id_mascota'])){ //validar que se haya enviado el id de la mascota
-        $id_mascota = $_GET['id_mascota']; 
         $query = "SELECT * FROM mascotas WHERE id = ".$id_mascota; //validar que la mascota exista
         $resultados =  consultaSql($query); 
         $resultados = mysqli_fetch_array($resultados);
 
         if($resultados){  
 
-            if(isset($resultados['dni_cliente'])&&$resultados['dni_cliente'] == $_SESSION['dni']){   //validar que la mascota sea del cliente
+            if($_SESSION['rol']!='cliente'||(isset($resultados['dni_cliente'])&&$resultados['dni_cliente'] == $_SESSION['dni'])){   //validar que la mascota sea del cliente y en el caso de no ser cliente, este pude acceder a todas las mascotas
                 $query = "SELECT * FROM atenciones WHERE id_mascota = ".$id_mascota; //validar que la mascota tenga atenciones
                 $resultados = consultaSql($query); 
                 $resultados = mysqli_fetch_all($resultados, MYSQLI_ASSOC); //crea un arreglo con los datos de la consulta a la BD
@@ -68,6 +28,7 @@ include_once("funciones.php");
                         echo "<h4> Servicio:".servicio($atencion['id_servicio'])['nombre']."</h4>"; //funcion que devuelve el nombre del servicio
                         echo "<br>";
                         echo "<h4> Tipo de Servicio:".servicio($atencion['id_servicio'])['tipo']."</h4>"; //funcion que devuelve el tipo del servicio
+                        if($_SESSION['rol']!='cliente'){echo "<a href='editarAtencion.php?id_atencion=".$atencion['id']."'>Editar atención</a>";} //validar que el usuario no sea cliente para poder editar atenciones
                         echo "</div>";
                         }
                     }
@@ -78,16 +39,9 @@ include_once("funciones.php");
                     echo "error, no es su mascota";
                 }
             }else{
-                echo "error, no hay mascotas con ese id";
+                echo "error, no existe la mascota";
             }
-        }    
-            else{
-                echo "error";
-            }
-                ?>
-        </div>
 
-</div>
-<?php
-include("footer.php");
+
+
 ?>

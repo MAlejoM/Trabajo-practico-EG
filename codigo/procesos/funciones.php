@@ -86,3 +86,4 @@ function persona($dni){
   $resultados = mysqli_fetch_array($resultados);
   return $resultados;
 }
+

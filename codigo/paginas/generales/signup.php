@@ -6,7 +6,7 @@
 ?>
 <div><h2>Registro</h2></div>
   <div>
-    <form method="POST" action="validacion.php" class="formLogin-signup">
+    <form method="POST" action="../internas/validacion.php" class="formLogin-signup">
       <label for="nombre">Nombre:</label>
       <input type="text" name="nombre" required><br><br>
 

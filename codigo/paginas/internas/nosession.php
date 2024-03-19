@@ -1,6 +1,6 @@
 <?php
-include("header.php");
-include_once("funciones.php");
+include("../generales/header.php");
+include_once("../../procesos/funciones.php");
 ?>
 
 <h1>Bienvenido a nuestro sitio web de veterianria san anton</h1>
@@ -11,5 +11,5 @@ include_once("funciones.php");
 <a href="novedades.php">NOVEDADES</a>
 
 <?php
-include("footer.php");
+include("../generales/footer.php");
 ?>

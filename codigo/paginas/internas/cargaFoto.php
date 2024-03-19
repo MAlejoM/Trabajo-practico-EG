@@ -1,5 +1,5 @@
 <?php
-include("header.php");
+include("../generales/header.php");
 ?>
 <form action="procesoCarga.php" method="post" enctype="multipart/form-data">
   <input type="text" required name="nombre" placeholder="Nombre..." value="">
@@ -8,5 +8,5 @@ include("header.php");
   <input type="submit" value="aceptar">
 </form>
 <?php
-include("footer.php");
+include("../generales/footer.php");
 ?>

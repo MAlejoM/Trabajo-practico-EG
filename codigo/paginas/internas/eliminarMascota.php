@@ -1,6 +1,6 @@
 <?php
-include("header.php");
-include_once("funciones.php");
+include("../generales/header.php");
+include_once("../../procesos/funciones.php");
 $id_mascota = $_GET['id_mascota']; 
 $query = "SELECT * FROM mascotas WHERE id = ".$id_mascota; //validar que la mascota exista
 $resultados =  consultaSql($query); 
@@ -22,5 +22,5 @@ if($resultados){
 ?>
 
 <?php
-include("footer.php");
+include("../generales/footer.php");
 ?>
