@@ -3,9 +3,9 @@
 include_once("funciones.php");
 include("header.php");
 
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])){ //si se envio el formulario
-  
-  if ($_SESSION['validacion']== $_POST['ingresovalidacion']) { //si el codigo es correcto
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])) { //si se envio el formulario
+
+  if ($_SESSION['validacion'] == $_POST['ingresovalidacion']) { //si el codigo es correcto
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
@@ -13,11 +13,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])
     $password = $_POST['password'];
     echo "Código correcto";
     $query = "INSERT INTO datosUsuario (nombre, apellido, email, dni, contrasenia, rol) VALUES ('$nombre', '$apellido', '$email', '$dni', '$password', 'cliente')"; //inserta los datos en la base de datos
-    $resultados = consultaSql($query); 
-    
+    $resultados = consultaSql($query);
+
     if ($resultados == true) {
       ?>
-      <h2>Dirijase al LOGIN tocando aca</h2>  
+      <h2>Dirijase al LOGIN tocando aca</h2>
       <a href="login.php">LOGIN</a>
       <?php
     } else {
@@ -27,21 +27,19 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['ingresovalidacion'])
       <a href="login.php">LOGIN</a>
       <?php
     }
-    } else {
+  } else {
     echo "Código incorrecto";
     ?>
     <h2>Dirijase al SIGNUP tocando aca</h2>
     <a href="signup.php">SIGNUP</a>
     <?php
 
-    }
-  } else{
+  }
+} else {
   echo "error";
   ?>
-    <h2>Dirijase al LOGIN tocando aca</h2>
-    <a href="login.php">LOGIN</a>
+  <h2>Dirijase al LOGIN tocando aca</h2>
+  <a href="login.php">LOGIN</a>
   <?php
-  }
+}
 ?>
-
-           
