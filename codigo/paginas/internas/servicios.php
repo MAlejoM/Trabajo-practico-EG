@@ -31,7 +31,7 @@ include_once("../../procesos/funciones.php");
                             echo "<td>".$persona['nombre']."</td>";
                             echo "<td>".$persona['apellido']."</td>";
                             echo "<td>".$persona['dni']."</td>";
-                            echo "<td><a href='seleccionar_dueño.php?dni=".$persona[5]."'>Seleccionar Dueño </a></td>";
+                            echo "<td><a href='seleccionar_duenio.php?dni=".$persona[5]."'>Seleccionar Dueño </a></td>";
                             echo "</tr>";
                             echo "</table>";
                             
