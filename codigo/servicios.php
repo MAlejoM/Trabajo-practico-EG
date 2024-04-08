@@ -1,6 +1,6 @@
 <?php
 include("header.php"); 
-include_once("../../procesos/funciones.php");
+include_once("procesos/funciones.php");
 ?>
     <div class="menuGlobal">
         <div class="menuLateral">

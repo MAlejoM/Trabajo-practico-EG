@@ -1,7 +1,7 @@
 <?php 
 
     include("header.php");
-    include_once("../../procesos/funciones.php");
+    include_once("procesos/funciones.php");
     if (rol($_SESSION['dni']) == 'cliente' || $_GET['id_mascota'] == null) {
         header("Location: index.php"); // Rebotar si es usuario cliente o si no hay id de mascota
         exit();

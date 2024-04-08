@@ -2,24 +2,13 @@
 <html>
 <head>
   <title>Veterinaria San Anton</title>
-  <link rel="stylesheet" type="text/css" href="../../public/style.css?v=0">
+  <link rel="stylesheet" type="text/css" href="public/style.css?v=0">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
   <header>       
     <div class="header-btns">
-      <?php
-      // Obtener el nombre del archivo actual
-      $currentFile = basename($_SERVER['PHP_SELF']);
-      // Verificar si el archivo actual es 'index.php'
-      if ($currentFile === 'index.php') {
-        // Si es 'index.php', establecer el enlace como 'index.php'
-        $link = 'index.php';
-      } else {
-        // Si no es 'index.php', establecer el enlace como '../generales/index.php'
-        $link = '/index.php';
-      }
-      ?>
+      
       <a href="<?php echo $link; ?>">
         <img src="public/img/Logo.jpeg" alt="Descripción de la imagen">
       </a>

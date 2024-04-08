@@ -26,7 +26,7 @@ if($login){
         echo "<br>";
       echo "<a href='novedades.php' class='btn btn-success'>NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='mismascotas.php' class='btn btn-success'>MIS MASCOTAS</a>";
+      echo "<a href='misMascotas.php' class='btn btn-success'>MIS MASCOTAS</a>";
     }elseif($rol == "prof"){
       echo "<a href='catalogo.php'class='btn btn-success'>CATALOGO</a>";
         echo "<br>";
@@ -34,7 +34,7 @@ if($login){
         echo "<br>";
       echo "<a href='servicios.php'class='btn btn-success'>SERVICIOS</a>";
         echo "<br>";
-      echo "<a href='mismascotas.php'class='btn btn-success'>MIS MASCOTAS</a>";
+      echo "<a href='misMascotas.php'class='btn btn-success'>MIS MASCOTAS</a>";
     }  
     
     
