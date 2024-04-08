@@ -1,11 +1,11 @@
 <?php 
-include("../generales/header.php");
-include_once("../../procesos/funciones.php");
+include("header.php");
+include_once("procesos/funciones.php");
 ?>
 <div class="menuGlobal">
     <div class="menuLateral">
         <?php
-        include("../generales/menuLateral.php");
+        include("menuLateral.php");
         ?>
     </div>
     <div class="mascotas">

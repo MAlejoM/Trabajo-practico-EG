@@ -17,11 +17,11 @@
         $link = 'index.php';
       } else {
         // Si no es 'index.php', establecer el enlace como '../generales/index.php'
-        $link = '../generales/index.php';
+        $link = '/index.php';
       }
       ?>
       <a href="<?php echo $link; ?>">
-        <img src="../../public/img/Logo.jpeg" alt="Descripción de la imagen">
+        <img src="public/img/Logo.jpeg" alt="Descripción de la imagen">
       </a>
       <h1>Veterinaria San Anton</h1>
       <?php 
@@ -29,7 +29,7 @@
       if(isset($_SESSION['dni'])){
         ?>
       <a href="miPerfil.php" style="text-decoration: none; border-bottom: 2px solid rgb(0, 0, 0);">
-        <img src="../../public/img/Perfil.jpeg" alt="Descripción de la imagen">
+        <img src="public/img/Perfil.jpeg" alt="Descripción de la imagen">
       </a>
       <?php }else{ ?>
       <a href="login.php" class="btn btn-success" style="text-decoration: none; border-bottom: 2px solid rgb(0, 0, 0); ">

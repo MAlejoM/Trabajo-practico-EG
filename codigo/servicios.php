@@ -1,13 +1,13 @@
 <?php
-include("../generales/header.php"); 
+include("header.php"); 
 include_once("../../procesos/funciones.php");
 ?>
     <div class="menuGlobal">
         <div class="menuLateral">
             <?php
-            include("../generales/menuLateral.php");
+            include("menuLateral.php");
             if (rol($_SESSION['dni']) == 'cliente') {
-                header("Location: ../generales/index.php"); // Rebotar si es usuario cliente
+                header("Location: index.php"); // Rebotar si es usuario cliente
                 exit();
             }
             ?>
@@ -61,5 +61,5 @@ include_once("../../procesos/funciones.php");
     </div>
 
 <?php
-include("../generales/footer.php");
+include("footer.php");
 ?>

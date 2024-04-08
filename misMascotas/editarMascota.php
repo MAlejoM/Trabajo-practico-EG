@@ -22,7 +22,7 @@ include_once("../../procesos/funciones.php");
                 $resultados = consultaSql($query);
                 $resultados = mysqli_fetch_array($resultados);
                 if($resultados){
-                    echo "<form action='../../procesos/p_carga_mascota.php' method='post' enctype='multipart/form-data'>";
+                    echo "<form action='../procesos/p_carga_mascota.php' method='post' enctype='multipart/form-data'>";
                     echo "<input type='hidden' name='id_mascota' value='".$id_mascota."'>";
                     echo "<label for='nombre'>Nombre</label>";
                     echo "<input type='text' name='nombre' value='".$resultados['nombre']."'>";
@@ -43,7 +43,7 @@ include_once("../../procesos/funciones.php");
                     echo "<input type='submit' value='Editar'>";
                     echo "</form>";
 
-                    echo "<div><a href='../../procesos/eliminarMascota.php?id_mascota=".$resultados["id"]."'>Eliminar</a></div>";
+                    echo "<div><a href='editarMascota/eliminarMascota.php?id_mascota=".$resultados["id"]."'>Eliminar</a></div>";
                 }else{
                     echo "error, no es su mascota";
                 }
