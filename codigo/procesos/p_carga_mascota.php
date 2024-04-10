@@ -6,18 +6,18 @@
       $query = "UPDATE mascotas SET estado = 'eliminado' WHERE id = ".$_GET['id_mascota'];
       $resultado = consultaSql($query);
       if($resultado){
-        echo "<script>alert('SE ELIMINO CORRECTAMENTE'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+        echo "<script>alert('SE ELIMINO CORRECTAMENTE'); window.location.href='../misMascotas.php'; </script>";
       }else{
-        echo "<script>alert('ERROR EN LA ELIMINACION'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+        echo "<script>alert('ERROR EN LA ELIMINACION'); window.location.href='../misMascotas.php'; </script>";
       }
       }elseif($_GET['eliminar']==2){
   
         $query = "UPDATE mascotas SET estado = 'fallecido', fecha_mue = '" . date('Y-m-d') . "' WHERE id = " . $_GET['id_mascota'];
         $resultado = consultaSql($query);
         if($resultado){
-          echo "<script>alert('SE ELIMINO CORRECTAMENTE'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+          echo "<script>alert('SE ELIMINO CORRECTAMENTE'); window.location.href='../misMascotas.php'; </script>";
         }else{
-          echo "<script>alert('ERROR EN LA ELIMINACION'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+          echo "<script>alert('ERROR EN LA ELIMINACION'); window.location.href='../misMascotas.php'; </script>";
         }
       }
   }
@@ -44,11 +44,11 @@
     }
     $resultado = consultaSql($query);
     if($resultado){
-      echo "<script>alert('SE ACTUALIZO CORRECTAMENTE'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+      echo "<script>alert('SE ACTUALIZO CORRECTAMENTE'); window.location.href='../misMascotas.php'; </script>";
     }else{
-      echo "<script>alert('ERROR EN LA CARGA'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+      echo "<script>alert('ERROR EN LA CARGA'); window.location.href='../misMascotas.php'; </script>";
     }
   } else {
-    echo "<script>alert('ERROR EN LA CARGA, EL ARCHIVO PESA MAS DE 1MB'); window.location.href='../paginas/internas/misMascotas.php'; </script>";
+    echo "<script>alert('ERROR EN LA CARGA, EL ARCHIVO PESA MAS DE 1MB'); window.location.href='../misMascotas.php'; </script>";
   }
 ?>

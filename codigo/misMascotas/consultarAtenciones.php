@@ -1,13 +1,13 @@
 <?php
-include ("../generales/header.php");
-include_once ("../../procesos/funciones.php");
+include ("../header.php");
+include_once ("../procesos/funciones.php");
 
 ?>
 
 <div class="menuGlobal">
     <div class="menuLateral">
         <?php
-        include ("../generales/menuLateral.php")
+        include ("../menuLateral.php")
             ?>
     </div>
     <div>
@@ -39,7 +39,7 @@ include_once ("../../procesos/funciones.php");
 
     if (isset ($_GET['id_mascota'])) { //validar que se haya enviado el id de la mascota
         $id_mascota = $_GET['id_mascota'];
-        include ("../../procesos/muestreoAtenciones.php");
+        include ("../procesos/muestreoAtenciones.php");
     } else {
         echo "error";
     }
@@ -47,5 +47,5 @@ include_once ("../../procesos/funciones.php");
     </div>
 </div>
 <?php
-include ("../generales/footer.php");
+include ("../footer.php");
 ?>

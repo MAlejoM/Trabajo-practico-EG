@@ -5,7 +5,7 @@ include("header.php");
 ?>
 <?php
 
-include_once("../../procesos/funciones.php");
+include_once("procesos/funciones.php");
 
 if (isset($_GET['error'])) {
   $error_code = $_GET['error'];

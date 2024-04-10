@@ -1,11 +1,11 @@
 <?php 
-include("../generales/header.php");
-include_once("../../procesos/funciones.php");
+include("header.php");
+include_once("procesos/funciones.php");
 ?>
 <div class="menuGlobal">
     <div class="menuLateral">
         <?php
-        include("../generales/menuLateral.php");
+        include("menuLateral.php");
         ?>
     </div>
     <div class="mascotas">
@@ -26,8 +26,8 @@ include_once("../../procesos/funciones.php");
             echo "<h4>".$mascota['sexo']."</h4>";
             echo "<br>";
             ?>
-            <div><a href='consultarAtenciones.php?id_mascota=<?php echo $mascota['id']; ?>'>CONSULTAR ATENCIONES</a> </div>
-            <div><a href='editarMascota.php?id_mascota=<?php echo $mascota['id']; ?>'>EDITAR</a> </div>
+            <div><a href='misMascotas/consultarAtenciones.php?id_mascota=<?php echo $mascota['id']; ?>'>CONSULTAR ATENCIONES</a> </div>
+            <div><a href='misMascotas/editarMascota.php?id_mascota=<?php echo $mascota['id']; ?>'>EDITAR</a> </div>
             <?php
             
             echo "</div>";
@@ -39,5 +39,5 @@ include_once("../../procesos/funciones.php");
 
 
 <?php
-include("../generales/footer.php");
+include("footer.php");
 ?>

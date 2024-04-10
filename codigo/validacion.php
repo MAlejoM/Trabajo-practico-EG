@@ -1,6 +1,6 @@
 <?php
-include_once("../../procesos/funciones.php");
-include("../generales/header.php");
+include_once("procesos/funciones.php");
+include("header.php");
   
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['dni'])) {
@@ -65,5 +65,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
-include("../generales/footer.php")
+include("footer.php");
 ?>
