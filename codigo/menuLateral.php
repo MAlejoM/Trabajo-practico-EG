@@ -8,33 +8,54 @@ if(isset($_SESSION['dni'])){
   $login = false;
 }
 
+
+// Obtener el nombre del archivo actual
+$currentFile = basename($_SERVER['PHP_SELF']);
+// Verificar si el archivo actual es 'index.php'
+if ($currentFile === 'editarMascota.php' || $currentFile === 'consultarAtenciones.php') {
+  // Si es 'index.php', establecer el enlace como 'index.php'
+  $link = '../';
+}else if ($currentFile === 'eliminarMascota.php') {
+  // Si es 'index.php', establecer el enlace como 'index.php'
+  $link = '../../';
+} 
+else {
+  // Si no es 'index.php', establecer el enlace como '../generales/index.php'
+  $link = '';
+}
+
+
+
+
 if($login){ 
     
     if($rol == "admin"){
         
-      echo "<a href='administrarCatalogo.php' class='btn btn-success'>ADMINISTRAR CATALOGO</a>";
+      echo "<a href=".$link."administrarCatalogo.php class='btn btn-success'>ADMINISTRAR CATALOGO</a>";
         echo "<br>";
-      echo "<a href='administrarNovedades.php' class='btn btn-success'>ADMINISTRAR NOVEDADES</a>";
+      echo "<a href=".$link."administrarNovedades.php class='btn btn-success'>ADMINISTRAR NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='administrarUsuarios.php'class='btn btn-success'>ADMINISTRAR USUARIOS</a>";
+      echo "<a href=".$link."administrarUsuarios.php class='btn btn-success'>ADMINISTRAR USUARIOS</a>";
         echo "<br>";
-      echo "<a href='servicios.php'class='btn btn-success'>SERVICIOS</a>";
+      echo "<a href=".$link."servicios.php class='btn btn-success'>SERVICIOS</a>";
         echo "<br>";
       
       }elseif($rol == "cliente"){
-      echo "<a href='catalogo.php' class='btn btn-success'>CATALOGO</a>";
+        //es coloca el link previo a catalogo para el caso en que se este en un archivo con carpeta
+
+      echo "<a href=".$link."catalogo.php class='btn btn-success'>CATALOGO</a>";
         echo "<br>";
-      echo "<a href='novedades.php' class='btn btn-success'>NOVEDADES</a>";
+      echo "<a href=".$link."novedades.php class='btn btn-success'>NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='misMascotas.php' class='btn btn-success'>MIS MASCOTAS</a>";
+      echo "<a href=".$link."misMascotas.php class='btn btn-success'>MIS MASCOTAS</a>";
     }elseif($rol == "prof"){
-      echo "<a href='catalogo.php'class='btn btn-success'>CATALOGO</a>";
+      echo "<a href=".$link."catalogo.php class='btn btn-success'>CATALOGO</a>";
         echo "<br>";
-      echo "<a href='novedades.php'class='btn btn-success'>NOVEDADES</a>";
+      echo "<a href=".$link."novedades.php class='btn btn-success'>NOVEDADES</a>";
         echo "<br>";
-      echo "<a href='servicios.php'class='btn btn-success'>SERVICIOS</a>";
+      echo "<a href=".$link."servicios.php class='btn btn-success'>SERVICIOS</a>";
         echo "<br>";
-      echo "<a href='misMascotas.php'class='btn btn-success'>MIS MASCOTAS</a>";
+      echo "<a href=".$link."misMascotas.php class='btn btn-success'>MIS MASCOTAS</a>";
     }  
     
     

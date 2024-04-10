@@ -6,16 +6,16 @@
   <?php
       // Obtener el nombre del archivo actual
       $currentFile = basename($_SERVER['PHP_SELF']);
-      // Verificar si el archivo actual es 'index.php'
+      
       if ($currentFile === 'editarMascota.php' || $currentFile === 'consultarAtenciones.php') {
-        // Si es 'index.php', establecer el enlace como 'index.php'
+        
         $link = '../';
       }else if ($currentFile === 'eliminarMascota.php') {
-        // Si es 'index.php', establecer el enlace como 'index.php'
+        
         $link = '../../';
       } 
       else {
-        // Si no es 'index.php', establecer el enlace como '../generales/index.php'
+        
         $link = '';
       }
       
