@@ -1,33 +1,46 @@
 <?php
-session_start();
-session_destroy(); //destruyo la session e inicio una nueva, ya que al entrar en el menu de login se supone que no hay ninguna session iniciada
-include_once __DIR__ . "/../src/includes/header.php";
+
+require_once __DIR__ . '/../src/logic/auth.logic.php';
+
+$resultado = procesar_registro($_POST);
+
+require_once __DIR__ . '/../src/includes/header.php';
 ?>
+
 <div>
-  <h2>Registro</h2>
+  <h2>Registro de Nuevo Usuario</h2>
 </div>
-<div>
-  <form method="POST" action="validacion.php" class="formLogin-signup">
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre" required><br><br>
 
-    <label for="apellido">apellido:</label>
-    <input type="text" name="apellido" required><br><br>
+<div class="formLogin-signup">
+  <?php
+  if (!empty($resultado)):
+  ?>
+    <div class="alert alert-<?php echo ($resultado['status'] == 'success') ? 'success' : 'danger'; ?>">
+      <?php echo htmlspecialchars($resultado['message']); ?>
+    </div>
+  <?php endif; ?>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" required><br><br>
-
-    <label for="dni">dni:</label>
-    <input type="number" name="dni" required><br><br>
-
-    <label for="password">Contraseña:</label>
-    <input type="text" name="password" required><br><br>
-
-    <label for="password">Contraseña nuevamente:</label>
-    <input type="text" name="passwordDuplicada" required><br><br>
-
-    <input type="submit" value="Registrarse" class="btn btn-success">
-  </form>
+  <?php
+  if (empty($resultado) || $resultado['status'] == 'error'):
+  ?>
+    <form method="POST" action="sign_up.php">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required class="form-control" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required class="form-control" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label for="passwordDuplicada">Repetir Contraseña:</label>
+        <input type="password" id="passwordDuplicada" name="passwordDuplicada" required class="form-control" autocomplete="new-password">
+      </div>
+      <input type="submit" value="Registrarse" class="btn btn-success">
+    </form>
+  <?php endif; ?>
 </div>
+
 <?php
-include_once __DIR__ . "/../src/includes/footer.php"; ?>
+require_once __DIR__ . '/../src/includes/footer.php';
+?>

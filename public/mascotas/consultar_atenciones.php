@@ -39,7 +39,7 @@ include_once __DIR__ . "/../src/lib/funciones.php";
 
         if (isset($_GET['id_mascota'])) { //validar que se haya enviado el id de la mascota
             $id_mascota = $_GET['id_mascota'];
-            include("../procesos/muestreoAtenciones.php");
+            include_once __DIR__ . "../muestreo_atenciones.php";
         } else {
             echo "error";
         }

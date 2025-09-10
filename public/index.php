@@ -2,7 +2,6 @@
 
 include_once __DIR__ . "/../src/includes/header.php";
 
-include_once __DIR__ . "/../src/logic/funciones.php";
 ?>
 <div>
   <h2>Menu principal</h2>
@@ -17,7 +16,7 @@ include_once __DIR__ . "/../src/logic/funciones.php";
   <div class="menuPpal">
     <?php
     echo "<h3>BIENVENIDO A LA PAGINA DE INICIO</h3>";
-    echo "<img src='public/img/bienvenida.png' alt='imagen de bienvenida'>";
+    echo "<img src='" . BASE_URL . "public/uploads/bienvenida.png' alt='imagen de bienvenida'>";
     ?>
   </div>
 

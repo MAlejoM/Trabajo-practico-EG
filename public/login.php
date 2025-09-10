@@ -10,25 +10,26 @@ if (isset($_SESSION['dni'])) {
 require_once __DIR__ . '/../src/includes/header.php';
 ?>
 
-<div>
-  <h2>Iniciar sesión</h2>
-</div>
-<div class="formLogin-signup">
-  <?php
-  if (isset($_GET['error']) && $_GET['error'] == 1) {
-    echo "<div class='alert alert-danger'>DNI o contraseña incorrectos.</div>";
-  }
-  ?>
-  <form method="post" action="login.php" class="formulario">
-    <label for="dni">Dni:</label>
-    <input type="number" name="dni" required class="form-control"><br>
-    <label for="contrasenia">Contraseña:</label>
-    <input type="password" name="contrasenia" required class="form-control"><br>
-    <input type="submit" value="Iniciar" class="btn btn-success">
-  </form>
-  <div>
-    <a href="signup.php" class="btn btn-info">Crear usuario</a>
+<div class="main-container">
+  <div class="form-container">
+    <h2 class="text-center mb-3">Iniciar sesión</h2>
+
+    <?php
+    if (isset($_GET['error']) && $_GET['error'] == 1) {
+      echo "<div class='alert alert-danger mb-2'>DNI o clave incorrectos.</div>";
+    }
+    ?>
+
+    <form method="post" action="login.php" class="formulario">
+      <label for="email">Email:</label>
+      <input type="email" name="email" required class="form-control"><br>
+      <label for="clave">Clave:</label>
+      <input type="password" name="clave" required class="form-control"><br>
+      <input type="submit" value="Iniciar" class="btn btn-success">
+    </form>
   </div>
+</div>
+</div>
 </div>
 
 <?php

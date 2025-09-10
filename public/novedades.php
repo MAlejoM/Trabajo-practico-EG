@@ -12,7 +12,7 @@ include_once __DIR__ . "/../src/lib/funciones.php";
 
   <div>
     <?php
-    include("procesos/muestreo_novedades.php");
+    include_once __DIR__ . "../muestreo_novedades.php";
     ?>
   </div>
 </div>
