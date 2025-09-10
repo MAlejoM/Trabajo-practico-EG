@@ -1,50 +1,33 @@
 <?php
-define('DB_HOST', 'localhost');
+
+if (session_status()=== PHP_SESSION_NONE) {
+  session_start();
+}
+
+function conectarDb (){
+  define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_NAME', 'users');
 
-// Archivos para envio de mails
-
-use PHPMailer\PHPMailer\Exception;      //deben estar los archivos de PHPMailer en la misma carpeta
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-
-require 'config.php';
-
-function sendMail($email, $subject , $message){
-    $mail = new PHPMailer(true);
-
-    $mail -> isSMTP();
-    $mail -> SMTPAuth = true;
-    $mail -> Host = MAILHOST;
-    $mail -> Username = USERNAME;
-    $mail -> Password = PASSWORD;
-    $mail -> SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail -> Port = 587;
-    $mail -> setFrom(SEND_FROM, SEND_FROM_NAME);
-    $mail -> addAddress($email);
-    $mail -> addReplyTo(REPLY_TO, REPLY_TO_NAME);
-    $mail -> isHTML(true);
-    $mail -> Subject = $subject;
-    $mail -> Body = $message;
-    $mail -> AltBody = $message;
-
-    if(!$mail -> send()){
-        return "error";
-    }else{
-        return "ok";
-    }
-
+$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+if (!$connection) {
+    die("Error de conexion: " . mysqli_connect_error());
+} return $connection;
 }
 
-
-
-
+function rol($dni){
+  $db = conectarDb();
+    $stmt = $db->prepare("SELECT rol FROM datosusuario WHERE dni = ?");
+    $stmt->bind_param("s", $dni);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $usuario = $result->fetch_assoc();
+    $stmt->close();
+    $db->close();
+    
+    return $usuario ? $usuario['rol'] : null;
+}
 
 function consultaSql($query)
 { //Funcion para realizar consultas a la base de datos

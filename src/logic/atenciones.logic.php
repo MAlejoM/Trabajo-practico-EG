@@ -1,4 +1,4 @@
-<?php
+  <?php
     include_once("funciones.php");
     if (rol($_SESSION['rol']) == 'cliente') {
         header("Location: ../paginas/generales/index.php"); // Rebotar si es usuario cliente

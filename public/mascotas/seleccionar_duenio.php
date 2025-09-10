@@ -1,22 +1,25 @@
 <?php
-include ("../header.php");
-include_once ("../procesos/funciones.php");
+include_once __DIR__ . "/../src/includes/header.php";
+include_once __DIR__ . "/../src/lib/funciones.php";
+if (rol($_SESSION['dni']) == 'cliente') {
+    header("Location: index.php"); // Rebotar si es usuario cliente
+    exit();
+}
 
 ?>
-
 <div class="menuGlobal">
     <div class="menuLateral">
         <?php
-        include ("../menuLateral.php")
-            ?>
+        include_once __DIR__ . "/../src/includes/menu_lateral.php";
+        ?>
     </div>
     <div>
         <?php
-        $query = "SELECT * FROM mascotas WHERE id=" . $_GET['id_mascota']; //consulta a la base de datos
+        $query = "SELECT * FROM mascotas WHERE dni_cliente = '" . $_GET['dni'] . "'";
         $resultados = consultaSql($query);
 
         foreach ($resultados as $mascota) { //recorre los resultados de la consulta
-        
+
             echo "<div class='etiquetaMascota'>";
             echo "<h3>" . $mascota['nombre'] . "</h3>";
             echo "<br>";
@@ -28,24 +31,18 @@ include_once ("../procesos/funciones.php");
             echo "<br>";
             echo "<h4>" . $mascota['sexo'] . "</h4>";
             echo "<br>";
+        ?>
+            <div><a href='consultarAtenciones.php?id_mascota=<?php echo $mascota['id']; ?>'>CONSULTAR ATENCIONES</a> </div>
+            <div><a href='registrar_atencion.php?id_mascota=<?php echo $mascota['id']; ?>'>REGISTRAR ATENCIONES</a> </div>
+        <?php
+
             echo "</div>";
         }
-
         ?>
     </div>
-    <div class="atenciones">
-    <?php
 
-
-    if (isset ($_GET['id_mascota'])) { //validar que se haya enviado el id de la mascota
-        $id_mascota = $_GET['id_mascota'];
-        include ("../procesos/muestreoAtenciones.php");
-    } else {
-        echo "error";
-    }
-    ?>
-    </div>
 </div>
+
+
 <?php
-include ("../footer.php");
-?>
+include_once __DIR__ . "/../src/includes/footer.php"; ?>

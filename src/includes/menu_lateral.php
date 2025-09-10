@@ -1,5 +1,5 @@
 <?php
-include_once("procesos/funciones.php");
+require_once __DIR__ . '/../lib/funciones.php';
 
 if(isset($_SESSION['dni'])){ 
     $login = true;

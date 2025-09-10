@@ -1,3 +1,5 @@
+enviar_email_validacion($destinatario, $codigo);
+
 <?php
 
 require ("script.php");
