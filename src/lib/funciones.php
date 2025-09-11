@@ -8,10 +8,11 @@ if (session_status() === PHP_SESSION_NONE) {
 //conexion bd
 function conectarDb()
 {
-  define('DB_HOST', 'localhost');
-  define('DB_USER', 'root');
-  define('DB_PASS', ''); // Dejar vacío si no tienes contraseña en XAMPP/WAMP
-  define('DB_NAME', 'users');
+  if (!defined('DB_HOST')) define('DB_HOST', 'localhost');
+  if (!defined('DB_USER')) define('DB_USER', 'root');
+  if (!defined('DB_PASS')) define('DB_PASS', '');
+
+  if (!defined('DB_NAME')) define('DB_NAME', 'veterinaria_db');
 
   $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   if (!$connection) {
@@ -20,38 +21,38 @@ function conectarDb()
   return $connection;
 }
 
-//consigo rol por dni
-function rol($dni)
+//consigo rol por id
+function get_personal_by_id($personal_id)
 {
   $db = conectarDb();
-  $stmt = $db->prepare("SELECT rol FROM datosusuario WHERE dni = ?");
-  $stmt->bind_param("s", $dni); // 's' porque DNI es un string (puede tener ceros delante)
+  $stmt = $db->prepare("SELECT * FROM personal WHERE id = ?");
+  $stmt->bind_param("i", $personal_id);
   $stmt->execute();
   $result = $stmt->get_result();
-  $usuario = $result->fetch_assoc();
+  $personal = $result->fetch_assoc();
   $stmt->close();
   $db->close();
 
-  return $usuario ? $usuario['rol'] : null;
+  return $personal;
 }
 
 //consigo apelnom por id
-function nombre($id)
+function get_cliente_by_id($cliente_id)
 {
   $db = conectarDb();
-  $stmt = $db->prepare("SELECT nombre, apellido FROM datosusuario WHERE id = ?");
-  $stmt->bind_param("i", $id); // 'i' porque el ID es un integer
+  $stmt = $db->prepare("SELECT * FROM clientes WHERE id = ?");
+  $stmt->bind_param("i", $cliente_id);
   $stmt->execute();
   $result = $stmt->get_result();
-  $usuario = $result->fetch_assoc();
+  $cliente = $result->fetch_assoc();
   $stmt->close();
   $db->close();
 
-  return $usuario ? $usuario['nombre'] . ' ' . $usuario['apellido'] : 'Profesional no encontrado';
+  return $cliente;
 }
 
 //consigo servicio por id
-function servicio($id)
+function get_servicio_by_id($id)
 {
   $db = conectarDb();
   $stmt = $db->prepare("SELECT * FROM servicios WHERE id = ?");
@@ -63,19 +64,4 @@ function servicio($id)
   $db->close();
 
   return $servicio;
-}
-
-//consigo data persona por dni
-function persona($dni)
-{
-  $db = conectarDb();
-  $stmt = $db->prepare("SELECT * FROM datosusuario WHERE dni = ?");
-  $stmt->bind_param("s", $dni);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $persona = $result->fetch_assoc();
-  $stmt->close();
-  $db->close();
-
-  return $persona;
 }

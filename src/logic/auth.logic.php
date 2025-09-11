@@ -27,7 +27,6 @@ function procesar_registro($post_data)
   if ($stmt->get_result()->num_rows > 0) {
     return ['status' => 'error', 'message' => 'El Email ya se encuentra registrado.'];
   }
-  die('exito');
   $stmt->close();
 
   $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -43,10 +42,6 @@ function procesar_registro($post_data)
     return ['status' => 'error', 'message' => 'Error al registrar el usuario.'];
   }
 }
-
-
-
-
 
 function procesar_login($post_data)
 {
