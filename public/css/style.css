@@ -1,0 +1,41 @@
+/* Estilos complementarios a Bootstrap para la veterinaria */
+
+:root{
+	--brand-green: #198754; /* Bootstrap success */
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.brand-title {
+	font-weight: 700;
+}
+
+.hero-image {
+	max-height: 340px;
+	object-fit: cover;
+}
+
+.hover-card{
+	transition: transform .15s ease, box-shadow .15s ease;
+}
+.hover-card:hover{
+	transform: translateY(-2px);
+	box-shadow: 0 0.25rem 1rem rgba(0,0,0,.08);
+}
+
+/* Botones del menú lateral que vienen del include */
+.menuLateral a.btn{
+	width: 100%;
+}
+
+/* Imagen del navbar */
+.object-fit-cover{
+	object-fit: cover;
+}

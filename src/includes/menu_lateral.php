@@ -19,7 +19,7 @@ $user_role = $_SESSION['rol'] ?? null;
     <?php elseif ($user_role == "cliente"): ?>
       <a href="<?php echo BASE_URL; ?>public/catalogo.php" class='btn btn-success'>CATALOGO</a>
       <a href="<?php echo BASE_URL; ?>public/novedades.php" class='btn btn-success'>NOVEDADES</a>
-      <a href="<?php echo BASE_URL; ?>public/mascotas/mis_mascotas.php" class='btn btn-success'>MIS MASCOTAS</a>
+      <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class='btn btn-success'>MIS MASCOTAS</a>
 
     <?php elseif ($user_role == "prof"): ?>
       <a href="<?php echo BASE_URL; ?>public/catalogo.php" class='btn btn-success'>CATALOGO</a>
@@ -27,7 +27,7 @@ $user_role = $_SESSION['rol'] ?? null;
       <a href="<?php echo BASE_URL; ?>public/servicios.php" class='btn btn-success'>SERVICIOS</a>
 
       //Un profesional también debería ver sus mascotas o las de clientes??
-      <a href="<?php echo BASE_URL; ?>public/mascotas/mis_mascotas.php" class='btn btn-success'>MIS MASCOTAS</a>
+  <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class='btn btn-success'>MIS MASCOTAS</a>
     <?php endif; ?>
   <?php else: 
   ?>
