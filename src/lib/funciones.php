@@ -65,3 +65,21 @@ function get_servicio_by_id($id)
 
   return $servicio;
 }
+
+function get_all_catalogo()
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM productos WHERE activo = 1");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $catalogo = array();
+  
+  while ($row = $result->fetch_assoc()) {
+    $catalogo[] = $row;
+  }
+  
+  $stmt->close();
+  $db->close();
+  
+  return $catalogo;
+}
