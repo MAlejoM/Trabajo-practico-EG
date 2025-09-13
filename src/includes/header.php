@@ -13,7 +13,7 @@ if (!defined('BASE_URL')) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Veterinaria San Anton</title>
+    <title>Veterinaria San Antón</title>
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/style.css?v=<?php echo time(); ?>">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
