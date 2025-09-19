@@ -38,7 +38,7 @@ if (!defined('BASE_URL')) {
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
                         <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/catalogo.php">Catálogo</a></li>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/novedades.php">Novedades</a></li>
-                        <?php if (isset($_SESSION['dni'])): ?>
+                        <?php if (isset($_SESSION['usuarioId'])): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?php echo BASE_URL; ?>public/uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">

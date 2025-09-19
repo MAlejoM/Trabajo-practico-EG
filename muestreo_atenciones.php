@@ -7,7 +7,7 @@
 
         if($resultados){  
 
-            if($_SESSION['rol']!='cliente'||(isset($resultados['dni_cliente'])&&$resultados['dni_cliente'] == $_SESSION['dni'])){   //validar que la mascota sea del cliente y en el caso de no ser cliente, este pude acceder a todas las mascotas
+            if($_SESSION['rol']!='cliente'||(isset($resultados['dni_cliente'])&&$resultados['dni_cliente'] == $_SESSION['usuarioId'])){   //validar que la mascota sea del cliente y en el caso de no ser cliente, este pude acceder a todas las mascotas
                 $query = "SELECT * FROM atenciones WHERE id_mascota = ".$id_mascota; //validar que la mascota tenga atenciones
                 $resultados = consultaSql($query); 
                 $resultados = mysqli_fetch_all($resultados, MYSQLI_ASSOC); //crea un arreglo con los datos de la consulta a la BD

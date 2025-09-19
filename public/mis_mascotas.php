@@ -10,7 +10,7 @@ include_once __DIR__ . "/../src/lib/funciones.php";
     </div>
     <div class="mascotas">
         <?php
-        $query = "SELECT * FROM mascotas WHERE dni_cliente = " . $_SESSION['dni'] . " AND estado = 'activo'"; //consulta a la base de datos
+        $query = "SELECT * FROM mascotas WHERE dni_cliente = " . $_SESSION['usuarioId'] . " AND estado = 'activo'"; //consulta a la base de datos
         $resultados = consultaSql($query);
         foreach ($resultados as $mascota) { //recorre los resultados de la consulta
 
