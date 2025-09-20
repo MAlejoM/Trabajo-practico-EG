@@ -10,7 +10,11 @@ if (isset($_SESSION['usuarioId'])) {
 require_once __DIR__ . '/../src/includes/header.php';
 ?>
 
-<main class="d-flex align-items-center min-vh-100 py-5">
+<script>
+document.body.classList.add('login-page');
+</script>
+
+<main class="login-main py-4">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-8 col-md-6 col-lg-4">

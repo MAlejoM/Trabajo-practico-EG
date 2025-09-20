@@ -19,6 +19,8 @@ if (!defined('BASE_URL')) {
     <title>Veterinaria San Antón</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Estilos propios -->
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/style.css?v=<?php echo time(); ?>">
 </head>
@@ -36,8 +38,16 @@ if (!defined('BASE_URL')) {
                 </button>
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/catalogo.php">Catálogo</a></li>
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/novedades.php">Novedades</a></li>
+                        <?php 
+                        // Obtener el nombre del archivo actual
+                        $current_page = basename($_SERVER['PHP_SELF']);
+                        $show_mobile_menu = !isset($_SESSION['usuarioId']) || 
+                                          in_array($current_page, ['mascotas.php', 'atenciones.php', 'catalogo.php', 'novedades.php', 'servicios.php']);
+                        ?>
+                        <?php if ($show_mobile_menu): ?>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/catalogo.php">Catálogo</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/novedades.php">Novedades</a></li>
+                        <?php endif; ?>
                         <?php if (isset($_SESSION['usuarioId'])): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
