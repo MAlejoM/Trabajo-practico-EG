@@ -17,13 +17,13 @@ $is_cliente = isset($_SESSION['cliente_id']);
         <a href="<?php echo BASE_URL; ?>public/admin/novedades.php" class='btn btn-success mb-2 w-100'>ADMINISTRAR NOVEDADES</a>
         <a href="<?php echo BASE_URL; ?>public/admin/usuarios.php" class='btn btn-success mb-2 w-100'>USUARIOS</a>
         <a href="<?php echo BASE_URL; ?>public/servicios.php" class='btn btn-success mb-2 w-100'>SERVICIOS</a>
-        <a href="<?php echo BASE_URL; ?>public/mascotas.php" class='btn btn-success mb-2 w-100'>MASCOTAS</a>
+        <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class='btn btn-success mb-2 w-100'>MASCOTAS</a>
         <a href="<?php echo BASE_URL; ?>public/atenciones.php" class='btn btn-success mb-2 w-100'>ATENCIONES</a>
 
       <?php else: ?>
         <a href="<?php echo BASE_URL; ?>public/catalogo.php" class='btn btn-success mb-2 w-100'>CATÁLOGO</a>
         <a href="<?php echo BASE_URL; ?>public/novedades.php" class='btn btn-success mb-2 w-100'>NOVEDADES</a>
-        <a href="<?php echo BASE_URL; ?>public/mascotas.php" class='btn btn-success mb-2 w-100'>MASCOTAS</a>
+        <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class='btn btn-success mb-2 w-100'>MASCOTAS</a>
         <a href="<?php echo BASE_URL; ?>public/atenciones.php" class='btn btn-success mb-2 w-100'>ATENCIONES</a>
       <?php endif; ?>
 

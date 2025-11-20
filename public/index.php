@@ -116,7 +116,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas y historial médico.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/mascotas.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class="btn btn-success">Acceder</a>
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas y consultas.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/atenciones.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/atencion_list.php" class="btn btn-primary">Acceder</a>
                 </div>
               </div>
             </div>
@@ -215,7 +215,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas, historial médico y datos de contacto.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/mascotas.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class="btn btn-success">Acceder</a>
                 </div>
               </div>
             </div>
