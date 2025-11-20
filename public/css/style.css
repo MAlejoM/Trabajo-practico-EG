@@ -13,6 +13,12 @@ body {
 	flex-direction: column;
 }
 
+/* Ajuste específico para páginas de login */
+body.login-page {
+	height: auto;
+	min-height: 100vh;
+}
+
 .brand-title {
 	font-weight: 700;
 }
@@ -38,4 +44,12 @@ body {
 /* Imagen del navbar */
 .object-fit-cover{
 	object-fit: cover;
+}
+
+/* Para páginas de login - evitar scroll innecesario */
+.login-main {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	padding: 2rem 0;
 }

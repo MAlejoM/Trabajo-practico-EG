@@ -24,7 +24,7 @@ $resultados =  consultaSql($query);
 $resultados = mysqli_fetch_array($resultados);
 if ($resultados) {
 
-  if (isset($resultados['dni_cliente']) && $resultados['dni_cliente'] == $_SESSION['dni']) {
+  if (isset($resultados['dni_cliente']) && $resultados['dni_cliente'] == $_SESSION['usuarioId']) {
     echo '<a href="' . BASE_URL . 'public/procesos/p_carga_mascota.php?eliminar=1&id_mascota=' . $id_mascota . '">Eliminar mascota</a>';
     echo '<a href="' . BASE_URL . 'public/procesos/p_carga_mascota.php?eliminar=2&id_mascota=' . $id_mascota . '">Fallecio</a>';
     echo '<a href="' . BASE_URL . 'public/mis_mascotas.php">Cancelar</a>';
@@ -75,7 +75,7 @@ $color = $_POST["color"];
 $raza = $_POST["raza"];
 $sexo = $_POST["sexo"];
 $tamaño = 0;
-$dni_cliente = $_SESSION['dni'];
+$dni_cliente = $_SESSION['usuarioId'];
 $hay_imagen = !empty($_FILES['imagen']['tmp_name']);
 if ($hay_imagen) {
   $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));

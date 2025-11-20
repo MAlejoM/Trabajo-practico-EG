@@ -19,7 +19,7 @@ include_once __DIR__ . "/../src/lib/funciones.php";
           <h1 class="h4 mb-0">Novedades</h1>
         </div>
         <div class="card-body">
-          <?php include_once __DIR__ . "/../muestreo_novedades.php"; ?>
+          <?php include_once __DIR__ . "/novedad_list.php"; ?>
         </div>
       </div>
     </div>

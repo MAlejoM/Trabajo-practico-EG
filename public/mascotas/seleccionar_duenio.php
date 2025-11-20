@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . "/../src/includes/header.php";
 include_once __DIR__ . "/../src/lib/funciones.php";
-if (rol($_SESSION['dni']) == 'cliente') {
+if (rol($_SESSION['usuarioId']) == 'cliente') {
     header("Location: index.php"); // Rebotar si es usuario cliente
     exit();
 }

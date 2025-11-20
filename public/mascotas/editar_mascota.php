@@ -16,7 +16,7 @@ include_once __DIR__ . "/../src/lib/funciones.php";
         $resultados =  consultaSql($query);
         $resultados = mysqli_fetch_array($resultados);
         if ($resultados) {
-            if (isset($resultados['dni_cliente']) && $resultados['dni_cliente'] == $_SESSION['dni']) {   //validar que la mascota sea del cliente
+            if (isset($resultados['dni_cliente']) && $resultados['dni_cliente'] == $_SESSION['usuarioId']) {   //validar que la mascota sea del cliente
                 $query = "SELECT * FROM mascotas WHERE id = " . $id_mascota;
                 $resultados = consultaSql($query);
                 $resultados = mysqli_fetch_array($resultados);

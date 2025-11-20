@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . "/src/lib/funciones.php";
+include_once __DIR__ . "/../src/lib/funciones.php";
 
 $result = get_all_catalogo();
 

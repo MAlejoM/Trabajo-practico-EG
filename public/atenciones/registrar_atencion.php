@@ -2,7 +2,7 @@
 
 include_once __DIR__ . "/../src/includes/header.php";
 include_once __DIR__ . "/../src/lib/funciones.php";
-if (rol($_SESSION['dni']) == 'cliente' || $_GET['id_mascota'] == null) {
+if (rol($_SESSION['usuarioId']) == 'cliente' || $_GET['id_mascota'] == null) {
     header("Location: index.php"); // Rebotar si es usuario cliente o si no hay id de mascota
     exit();
 }
