@@ -118,35 +118,41 @@ function get_all_atenciones()
 
 function get_atenciones_by_fecha($fecha)
 {
-  $db = conectarDb();
-  $stmt = $db->prepare("
-    SELECT 
-      a.id,
-      a.fecha,
-      a.motivo,
-      a.estado,
-      m.nombre as nombre_mascota,
-      u.nombre as nombre_cliente,
-      u.apellido as apellido_cliente
-    FROM atenciones a
-    JOIN mascotas m ON a.id_mascota = m.id
-    JOIN clientes c ON m.clienteId = c.id
-    JOIN usuarios u ON c.usuarioId = u.id
-    WHERE DATE(a.fecha) = ?
-    ORDER BY a.fecha ASC
-  ");
-  $stmt->bind_param("s", $fecha);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $atenciones = array();
+
+  //Comentamos para evaluar bien los datos, pero estaba medianamente correcta.
+
+
+  // $db = conectarDb();
+  // $stmt = $db->prepare("
+  //   SELECT 
+  //     a.id,
+  //     a.fecha,
+  //     a.motivo,
+  //     a.estado,
+  //     m.nombre as nombre_mascota,
+  //     u.nombre as nombre_cliente,
+  //     u.apellido as apellido_cliente
+  //   FROM atenciones a
+  //   JOIN mascotas m ON a.id_mascota = m.id
+  //   JOIN clientes c ON m.clienteId = c.id
+  //   JOIN usuarios u ON c.usuarioId = u.id
+  //   WHERE DATE(a.fecha) = ?
+  //   ORDER BY a.fecha ASC
+  // ");
+  // $stmt->bind_param("s", $fecha);
+  // $stmt->execute();
+  // $result = $stmt->get_result();
+  // $atenciones = array();
   
-  while ($row = $result->fetch_assoc()) {
-    $atenciones[] = $row;
-  }
+  // while ($row = $result->fetch_assoc()) {
+  //   $atenciones[] = $row;
+  // }
   
-  $stmt->close();
-  $db->close();
-  
+  // $stmt->close();
+  // $db->close();
+
+
+  $atenciones = [];
   return $atenciones;
 }
 
