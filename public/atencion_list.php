@@ -8,7 +8,9 @@ if (!isset($_SESSION['personal_id'])) {
     exit();
 }
 
-$atenciones = get_all_atenciones();
+// Obtener parámetro para mostrar inactivos
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+$atenciones = get_all_atenciones($mostrar_inactivos);
 ?>
 
 <div class="container py-4">
@@ -23,9 +25,17 @@ $atenciones = get_all_atenciones();
     </aside>
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h1 class="h4 mb-0">Gestión de Atenciones</h1>
-          <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success">Nueva Atención</a>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check form-switch d-flex align-items-center mb-0">
+              <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
+                     <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
+                     onchange="window.location.href='?inactivos=' + (this.checked ? '1' : '0')">
+              <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivos</label>
+            </div>
+            <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success btn-sm">Nueva Atención</a>
+          </div>
         </div>
         <div class="card-body">
           <?php if (empty($atenciones)): ?>
@@ -41,6 +51,7 @@ $atenciones = get_all_atenciones();
                     <th>Fecha</th>
                     <th>Motivo</th>
                     <th>Estado</th>
+                    <th>Visibilidad</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -55,6 +66,11 @@ $atenciones = get_all_atenciones();
                       <td>
                         <span class="badge bg-<?php echo $atencion['estado'] == 'completada' ? 'success' : 'warning'; ?>">
                           <?php echo ucfirst($atencion['estado']); ?>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge bg-<?php echo $atencion['activo'] ? 'success' : 'secondary'; ?>">
+                          <?php echo $atencion['activo'] ? 'Activo' : 'Inactivo'; ?>
                         </span>
                       </td>
                       <td>

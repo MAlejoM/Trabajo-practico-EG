@@ -4,8 +4,13 @@ require_once __DIR__ . '/../lib/funciones.php';
 
 
 // trae todos los usuarios con sus roles y tipos
-function get_all_usuarios() {
+function get_all_usuarios($mostrar_inactivos = false) {
     $db = conectarDb();
+    
+    // Si mostrar_inactivos es true, filtramos SOLO por inactivos (activo = 0)
+    // Si es false, no filtramos (Todos)
+    $filtro_activo = $mostrar_inactivos ? "WHERE u.activo = 0" : "";
+    
     $stmt = $db->prepare("
         SELECT 
             u.id,
@@ -15,7 +20,11 @@ function get_all_usuarios() {
             u.activo,
             p.id as personal_id,
             c.id as cliente_id,
-            r.nombre as rol_nombre,
+            CASE 
+                WHEN r.nombre IS NOT NULL THEN r.nombre
+                WHEN c.id IS NOT NULL THEN 'Cliente'
+                ELSE 'Sin Rol'
+            END as rol_nombre,
             CASE 
                 WHEN p.id IS NOT NULL THEN 'Personal'
                 WHEN c.id IS NOT NULL THEN 'Cliente'
@@ -25,6 +34,7 @@ function get_all_usuarios() {
         LEFT JOIN Personal p ON p.usuarioId = u.id
         LEFT JOIN Clientes c ON c.usuarioId = u.id
         LEFT JOIN Roles r ON p.rolId = r.id
+        $filtro_activo
         ORDER BY u.id ASC
     ");
     $stmt->execute();
@@ -280,6 +290,38 @@ function update_cliente_datos($cliente_id, $datos) {
         $cliente_id
     );
     
+    $result = $stmt->execute();
+    $stmt->close();
+    $db->close();
+    
+    return $result;
+}
+
+/**
+ * Da de baja un usuario (baja lógica)
+ * @param int $usuario_id ID del usuario
+ * @return bool True si se dio de baja correctamente
+ */
+function dar_baja_usuario($usuario_id) {
+    $db = conectarDb();
+    $stmt = $db->prepare("UPDATE Usuarios SET activo = 0 WHERE id = ?");
+    $stmt->bind_param("i", $usuario_id);
+    $result = $stmt->execute();
+    $stmt->close();
+    $db->close();
+    
+    return $result;
+}
+
+/**
+ * Reactiva un usuario previamente dado de baja
+ * @param int $usuario_id ID del usuario
+ * @return bool True si se reactivó correctamente
+ */
+function reactivar_usuario($usuario_id) {
+    $db = conectarDb();
+    $stmt = $db->prepare("UPDATE Usuarios SET activo = 1 WHERE id = ?");
+    $stmt->bind_param("i", $usuario_id);
     $result = $stmt->execute();
     $stmt->close();
     $db->close();

@@ -9,26 +9,20 @@ if (!isset($_SESSION['personal_id']) || !verificar_es_admin()) {
     exit();
 }
 
-// Obtener todos los usuarios
-$usuarios = get_all_usuarios();
+// Cargar usuarios con o sin inactivos
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+$usuarios = get_all_usuarios($mostrar_inactivos);
 
-// Obtener lista de roles únicos para los filtros
-$db = conectarDb();
-$stmt = $db->prepare("SELECT DISTINCT nombre FROM Roles ORDER BY nombre ASC");
-$stmt->execute();
-$result = $stmt->get_result();
-$roles_disponibles = [];
-while ($row = $result->fetch_assoc()) {
-    $roles_disponibles[] = $row['nombre'];
-}
-$stmt->close();
-$db->close();
+// Obtener lista de roles únicos para los filtros de los usuarios cargados
+$roles_disponibles = array_unique(array_filter(array_map(function($u) {
+    return $u['rol_nombre'];
+}, $usuarios)));
+sort($roles_disponibles);
 
 // Filtrar por rol si se especifica
 $filtro_rol = isset($_GET['rol']) ? $_GET['rol'] : 'todos';
 if ($filtro_rol !== 'todos') {
     $usuarios = array_filter($usuarios, function($u) use ($filtro_rol) {
-        // Comparar el rol del usuario con el filtro
         if ($filtro_rol === 'sin_rol') {
             return empty($u['rol_nombre']);
         }
@@ -63,6 +57,12 @@ if ($filtro_rol !== 'todos') {
                   </a>
                 <?php endforeach; ?>
                 <a href="?rol=sin_rol" class="btn btn-outline-primary <?php echo $filtro_rol === 'sin_rol' ? 'active' : ''; ?>">Sin Rol</a>
+              </div>
+              <div class="form-check form-switch ms-3 d-flex align-items-center">
+                <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
+                       <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
+                       onchange="window.location.href='?rol=<?php echo $filtro_rol; ?>&inactivos=' + (this.checked ? '1' : '0')">
+                <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivos</label>
               </div>
               <a href="<?php echo BASE_URL; ?>public/usuarios/nuevo_usuario.php" class="btn btn-success btn-sm">
                 <i class="fas fa-user-plus me-1"></i> Nuevo Usuario
@@ -106,7 +106,7 @@ if ($filtro_rol !== 'todos') {
                         <?php endif; ?>
                       </td>
                       <td>
-                        <span class="badge bg-<?php echo $usuario['activo'] ? 'success' : 'danger'; ?>">
+                        <span class="badge bg-<?php echo $usuario['activo'] ? 'success' : 'secondary'; ?>">
                           <?php echo $usuario['activo'] ? 'Activo' : 'Inactivo'; ?>
                         </span>
                       </td>

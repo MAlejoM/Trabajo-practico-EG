@@ -46,86 +46,117 @@ if (!$mascota) {
     exit();
 }
 
-// Procesar formulario de actualización
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_mascota'])) {
-    $nombre = trim($_POST['nombre']);
-    $raza = trim($_POST['raza']);
-    $color = trim($_POST['color']);
-    $fechaDeNac = $_POST['fechaDeNac'] ?: null;
-    $fechaMuerte = $_POST['fechaMuerte'] ?: null;
-    $activo = isset($_POST['activo']) ? 1 : 0;
-    
-    if (empty($nombre)) {
-        $mensaje = 'El nombre de la mascota es obligatorio.';
-        $tipo_mensaje = 'danger';
-    } else {
-        $actualizar_foto = false;
-        $foto_blob = null;
+// Incluir lógica de mascotas para funciones de baja
+include_once __DIR__ . "/../../src/logic/mascotas.logic.php";
+
+// Procesar el formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['guardar_mascota'])) {
+        $id = $mascota_id; 
+        $nombre = $_POST['nombre'];
+        $raza = $_POST['raza'];
+        $color = $_POST['color'];
+        $fechaNac = $_POST['fechaDeNac'] ?: null;
+        $fechaMuerte = $_POST['fechaMuerte'] ?: null;
+        $activo = isset($_POST['activo']) ? 1 : 0;
         
-        if (isset($_FILES['foto']) && $_FILES['foto']['size'] > 0) {
-            $tamaño_mb = $_FILES['foto']['size'] / 1048576;
+        if (empty($nombre)) {
+            $mensaje = 'El nombre de la mascota es obligatorio.';
+            $tipo_mensaje = 'danger';
+        } else {
+            $actualizar_foto = false;
+            $foto_blob = null;
             
-            if ($tamaño_mb > 2) {
-                $mensaje = 'La imagen no debe pesar más de 2MB.';
-                $tipo_mensaje = 'danger';
-            } else {
-                $foto_blob = file_get_contents($_FILES['foto']['tmp_name']);
-                $actualizar_foto = true;
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+                if ($_FILES['foto']['size'] > 2 * 1024 * 1024) {
+                    $mensaje = 'La foto no debe superar los 2MB.';
+                    $tipo_mensaje = 'danger';
+                } else {
+                    $foto_blob = file_get_contents($_FILES['foto']['tmp_name']);
+                    $actualizar_foto = true;
+                }
+            }
+            
+            if (empty($mensaje)) {
+                if ($actualizar_foto) {
+                    $stmt = $db->prepare("
+                        UPDATE Mascotas 
+                        SET nombre = ?, raza = ?, color = ?, fechaDeNac = ?, fechaMuerte = ?, activo = ?, foto = ?
+                        WHERE id = ?
+                    ");
+                    $null = NULL; 
+                    $stmt->bind_param("sssssibi", $nombre, $raza, $color, $fechaNac, $fechaMuerte, $activo, $null, $id);
+                    $stmt->send_long_data(6, $foto_blob);
+                } else {
+                    $stmt = $db->prepare("
+                        UPDATE Mascotas 
+                        SET nombre = ?, raza = ?, color = ?, fechaDeNac = ?, fechaMuerte = ?, activo = ?
+                        WHERE id = ?
+                    ");
+                    $stmt->bind_param("sssssii", $nombre, $raza, $color, $fechaNac, $fechaMuerte, $activo, $id);
+                }
+                
+                if ($stmt->execute()) {
+                    $mensaje = 'Mascota actualizada correctamente.';
+                    $tipo_mensaje = 'success';
+                    
+                    $stmt->close(); 
+                    $stmt = $db->prepare("
+                        SELECT 
+                            m.id, m.nombre, m.raza, m.color, m.fechaDeNac, m.fechaMuerte, m.foto, m.activo, m.clienteId, 
+                            u.nombre as nombre_cliente, u.apellido as apellido_cliente
+                        FROM Mascotas m
+                        JOIN Clientes c ON m.clienteId = c.id
+                        JOIN Usuarios u ON c.usuarioId = u.id
+                        WHERE m.id = ?
+                    ");
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                    $mascota = $stmt->get_result()->fetch_assoc();
+                } else {
+                    $mensaje = 'Error al actualizar la mascota.';
+                    $tipo_mensaje = 'danger';
+                }
+                $stmt->close();
             }
         }
-        
-        if (empty($mensaje)) {
-            if ($actualizar_foto) {
-                $stmt = $db->prepare("
-                    UPDATE Mascotas 
-                    SET nombre = ?, raza = ?, color = ?, fechaDeNac = ?, fechaMuerte = ?, foto = ?, activo = ?
-                    WHERE id = ?
-                ");
-                $stmt->bind_param("ssssssii", $nombre, $raza, $color, $fechaDeNac, $fechaMuerte, $foto_blob, $activo, $mascota_id);
-            } else {
-                $stmt = $db->prepare("
-                    UPDATE Mascotas 
-                    SET nombre = ?, raza = ?, color = ?, fechaDeNac = ?, fechaMuerte = ?, activo = ?
-                    WHERE id = ?
-                ");
-                $stmt->bind_param("sssssii", $nombre, $raza, $color, $fechaDeNac, $fechaMuerte, $activo, $mascota_id);
-            }
-            
-            if ($stmt->execute()) {
-                $mensaje = 'Mascota actualizada correctamente.';
-                $tipo_mensaje = 'success';
-                
-                $stmt = $db->prepare("
-                    SELECT 
-                        m.id,
-                        m.nombre,
-                        m.raza,
-                        m.color,
-                        m.fechaDeNac,
-                        m.fechaMuerte,
-                        m.foto,
-                        m.activo,
-                        m.clienteId,
-                        u.nombre as nombre_cliente,
-                        u.apellido as apellido_cliente
-                    FROM Mascotas m
-                    JOIN Clientes c ON m.clienteId = c.id
-                    JOIN Usuarios u ON c.usuarioId = u.id
-                    WHERE m.id = ?
-                ");
-                $stmt->bind_param("i", $mascota_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $mascota = $result->fetch_assoc();
-                $stmt->close();
-            } else {
-                $mensaje = 'Error al actualizar la mascota.';
-                $tipo_mensaje = 'danger';
-            }
+    } elseif (isset($_POST['dar_baja'])) {
+        if (dar_baja_mascota($mascota_id)) { 
+            $mensaje = 'Mascota dada de baja correctamente.';
+            $tipo_mensaje = 'success';
+            $mascota['activo'] = 0;
+        } else {
+            $mensaje = 'Error al dar de baja la mascota.';
+            $tipo_mensaje = 'danger';
+        }
+    } elseif (isset($_POST['reactivar'])) {
+        if (reactivar_mascota($mascota_id)) { 
+            $mensaje = 'Mascota reactivada correctamente.';
+            $tipo_mensaje = 'success';
+            $mascota['activo'] = 1;
+        } else {
+            $mensaje = 'Error al reactivar la mascota.';
+            $tipo_mensaje = 'danger';
         }
     }
 }
-
+$db = conectarDb(); // Reabrir para el resto de la página si es necesario, 
+// o mejor, asegurar que get_usuario_completo ya cerró la suya.
+// En realidad, el código original cerraba la conexión al final del procesamiento.
+// Necesito asegurarme de que $mascota esté cargada.
+$stmt = $db->prepare("
+    SELECT 
+        m.id, m.nombre, m.raza, m.color, m.fechaDeNac, m.fechaMuerte, m.foto, m.activo, m.clienteId, 
+        u.nombre as nombre_cliente, u.apellido as apellido_cliente
+    FROM Mascotas m
+    JOIN Clientes c ON m.clienteId = c.id
+    JOIN Usuarios u ON c.usuarioId = u.id
+    WHERE m.id = ?
+");
+$stmt->bind_param("i", $mascota_id);
+$stmt->execute();
+$mascota = $stmt->get_result()->fetch_assoc();
+$stmt->close();
 $db->close();
 ?>
 
@@ -234,10 +265,21 @@ $db->close();
               <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class="btn btn-secondary">
                 <i class="fas fa-arrow-left me-1"></i> Volver a Lista
               </a>
-              <button type="submit" name="actualizar_mascota" class="btn btn-success">
-                <i class="fas fa-save me-1"></i> Guardar Cambios
-              </button>
-            </div>
+                <button type="submit" name="guardar_mascota" class="btn btn-success">
+                  <i class="fas fa-save me-1"></i> Guardar Cambios
+                </button>
+                
+                <?php if ($mascota['activo']): ?>
+                  <button type="submit" name="dar_baja" class="btn btn-outline-danger" 
+                          onclick="return confirm('¿Está seguro que desea dar de baja a esta mascota?')">
+                    <i class="fas fa-ban me-1"></i> Dar de Baja
+                  </button>
+                <?php else: ?>
+                  <button type="submit" name="reactivar" class="btn btn-outline-success">
+                    <i class="fas fa-check-circle me-1"></i> Reactivar Mascota
+                  </button>
+                <?php endif; ?>
+              </div>
           </form>
         </div>
       </div>

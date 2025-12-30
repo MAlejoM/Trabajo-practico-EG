@@ -2,13 +2,18 @@
 include_once __DIR__ . "/../src/includes/header.php";
 include_once __DIR__ . "/../src/lib/funciones.php";
 
-// Verificar que sea personal autorizado
+// Verificar personal autorizado
 if (!isset($_SESSION['personal_id'])) {
     header('Location: ' . BASE_URL . 'public/login.php');
     exit();
 }
 
-$mascotas = get_all_mascotas();
+// Obtener parámetro para mostrar inactivos
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+
+// Necesitamos actualizar get_all_mascotas o filtrar aquí. 
+// Vamos a filtrar aquí o actualizar la función en funciones.php
+$mascotas = get_all_mascotas($mostrar_inactivos); 
 ?>
 
 <div class="container py-4">
@@ -23,9 +28,17 @@ $mascotas = get_all_mascotas();
     </aside>
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h1 class="h4 mb-0">Gestión de Mascotas</h1>
-          <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php" class="btn btn-success">Nueva Mascota</a>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check form-switch d-flex align-items-center mb-0">
+              <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
+                     <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
+                     onchange="window.location.href='?inactivos=' + (this.checked ? '1' : '0')">
+              <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivas</label>
+            </div>
+            <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php" class="btn btn-success btn-sm">Nueva Mascota</a>
+          </div>
         </div>
         <div class="card-body">
           <?php if (empty($mascotas)): ?>

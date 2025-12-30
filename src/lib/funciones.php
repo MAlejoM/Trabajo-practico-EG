@@ -84,23 +84,31 @@ function get_all_catalogo()
   return $catalogo;
 }
 
-function get_all_atenciones()
+function get_all_atenciones($mostrar_inactivas = false)
 {
   $db = conectarDb();
+  
+  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
+  // Si es false, no filtramos (Todos)
+  $filtro_activo = $mostrar_inactivas ? "WHERE a.activo = 0" : "";
+  
   $stmt = $db->prepare("
     SELECT 
       a.id,
-      a.fechaHora,
-      a.motivo,
+      a.fechaHora as fecha,
+      a.titulo as motivo,
+      a.descripcion,
       a.estado,
+      a.activo,
       m.nombre as nombre_mascota,
       u.nombre as nombre_cliente,
       u.apellido as apellido_cliente
     FROM atenciones a
-    JOIN mascotas m ON a.id_mascota = m.id
-    JOIN clientes c ON m.cliente_id = c.id
+    JOIN mascotas m ON a.mascotaId = m.id
+    JOIN clientes c ON m.clienteId = c.id
     JOIN usuarios u ON c.usuarioId = u.id
-    ORDER BY a.fecha DESC
+    $filtro_activo
+    ORDER BY a.fechaHora DESC
   ");
   $stmt->execute();
   $result = $stmt->get_result();
@@ -116,49 +124,54 @@ function get_all_atenciones()
   return $atenciones;
 }
 
-function get_atenciones_by_fecha($fecha)
+function get_atenciones_by_fecha($fecha, $mostrar_inactivas = false)
 {
-
-  //Comentamos para evaluar bien los datos, pero estaba medianamente correcta.
-
-
-  // $db = conectarDb();
-  // $stmt = $db->prepare("
-  //   SELECT 
-  //     a.id,
-  //     a.fecha,
-  //     a.motivo,
-  //     a.estado,
-  //     m.nombre as nombre_mascota,
-  //     u.nombre as nombre_cliente,
-  //     u.apellido as apellido_cliente
-  //   FROM atenciones a
-  //   JOIN mascotas m ON a.id_mascota = m.id
-  //   JOIN clientes c ON m.clienteId = c.id
-  //   JOIN usuarios u ON c.usuarioId = u.id
-  //   WHERE DATE(a.fecha) = ?
-  //   ORDER BY a.fecha ASC
-  // ");
-  // $stmt->bind_param("s", $fecha);
-  // $stmt->execute();
-  // $result = $stmt->get_result();
-  // $atenciones = array();
+  $db = conectarDb();
   
-  // while ($row = $result->fetch_assoc()) {
-  //   $atenciones[] = $row;
-  // }
+  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
+  // Si es false, no filtramos por activo (vemos todas las de esa fecha)
+  $filtro_activo = $mostrar_inactivas ? "AND a.activo = 0" : "";
   
-  // $stmt->close();
-  // $db->close();
-
-
-  $atenciones = [];
+  $stmt = $db->prepare("
+    SELECT 
+      a.id,
+      a.fechaHora as fecha,
+      a.titulo as motivo,
+      a.estado,
+      a.activo,
+      m.nombre as nombre_mascota,
+      u.nombre as nombre_cliente,
+      u.apellido as apellido_cliente
+    FROM atenciones a
+    JOIN mascotas m ON a.mascotaId = m.id
+    JOIN clientes c ON m.clienteId = c.id
+    JOIN usuarios u ON c.usuarioId = u.id
+    WHERE DATE(a.fechaHora) = ? $filtro_activo
+    ORDER BY a.fechaHora ASC
+  ");
+  $stmt->bind_param("s", $fecha);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $atenciones = array();
+  
+  while ($row = $result->fetch_assoc()) {
+    $atenciones[] = $row;
+  }
+  
+  $stmt->close();
+  $db->close();
+  
   return $atenciones;
 }
 
-function get_all_mascotas()
+function get_all_mascotas($mostrar_inactivas = false)
 {
   $db = conectarDb();
+  
+  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
+  // Si es false, no filtramos (Todos)
+  $filtro_activo = $mostrar_inactivas ? "WHERE m.activo = 0" : "";
+  
   $stmt = $db->prepare("
     SELECT 
       m.id,
@@ -174,6 +187,7 @@ function get_all_mascotas()
     FROM mascotas m
     JOIN clientes c ON m.clienteId = c.id
     JOIN usuarios u ON c.usuarioId = u.id
+    $filtro_activo
     ORDER BY m.nombre ASC
   ");
   $stmt->execute();
@@ -256,7 +270,7 @@ function get_mascotas_by_cliente_id($cliente_id) {
       m.fechaMuerte,
       m.activo
     FROM Mascotas m
-    WHERE m.clienteId = ?
+    WHERE m.clienteId = ? AND m.activo = 1
     ORDER BY m.nombre ASC
   ");
   $stmt->bind_param("i", $cliente_id);
@@ -273,4 +287,30 @@ function get_mascotas_by_cliente_id($cliente_id) {
   
   return $mascotas;
 }
-
+function get_all_servicios($mostrar_inactivos = false)
+{
+  $db = conectarDb();
+  
+  // Si mostrar_inactivos es true, filtramos SOLO por inactivos (activo = 0)
+  // Si es false, no filtramos (Todos)
+  $filtro_activo = $mostrar_inactivos ? "WHERE activo = 0" : "";
+  
+  $stmt = $db->prepare("
+    SELECT * FROM servicios 
+    $filtro_activo
+    ORDER BY nombre ASC
+  ");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $servicios = array();
+  
+  while ($row = $result->fetch_assoc()) {
+    $servicios[] = $row;
+  }
+  
+  $stmt->close();
+  $db->close();
+  
+  return $servicios;
+}
+?>

@@ -20,4 +20,37 @@
         }
         
     }
+
+
+/**
+ * Da de baja una atención (baja lógica)
+ * @param int $id ID de la atención
+ * @return bool
+ */
+function dar_baja_atencion($id) {
+    $db = conectarDb();
+    $stmt = $db->prepare("UPDATE atenciones SET activo = 0 WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    $db->close();
+    
+    return $result;
+}
+
+/**
+ * Reactiva una atención
+ * @param int $id ID de la atención
+ * @return bool
+ */
+function reactivar_atencion($id) {
+    $db = conectarDb();
+    $stmt = $db->prepare("UPDATE atenciones SET activo = 1 WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    $db->close();
+    
+    return $result;
+}
 ?>
