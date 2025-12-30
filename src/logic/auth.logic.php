@@ -36,7 +36,19 @@ function procesar_login($post_data)
   if ($result->num_rows === 1) {
     $usuario = $result->fetch_assoc();
 
-    if ($clave === $usuario['clave']) {
+    // Verificar contraseña - soporta tanto hash como texto plano (compatibilidad)
+    $password_valida = false;
+    
+    // Primero intentar con password_verify (contraseñas hasheadas - seguro)
+    if (password_verify($clave, $usuario['clave'])) {
+      $password_valida = true;
+    } 
+    // Si falla, comparar como texto plano (legacy - para migración)
+    elseif ($clave === $usuario['clave']) {
+      $password_valida = true;
+    }
+
+    if ($password_valida) {
       session_start();
       $_SESSION['usuarioId'] = $usuario['id'];
       $_SESSION['nombre'] = $usuario['nombre'];

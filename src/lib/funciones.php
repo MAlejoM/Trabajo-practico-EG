@@ -238,3 +238,39 @@ function get_all_clientes()
   
   return $clientes;
 }
+
+function verificar_es_admin() {
+  return isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
+}
+
+function get_mascotas_by_cliente_id($cliente_id) {
+  $db = conectarDb();
+  $stmt = $db->prepare("
+    SELECT 
+      m.id,
+      m.nombre,
+      m.raza,
+      m.color,
+      m.foto,
+      m.fechaDeNac,
+      m.fechaMuerte,
+      m.activo
+    FROM Mascotas m
+    WHERE m.clienteId = ?
+    ORDER BY m.nombre ASC
+  ");
+  $stmt->bind_param("i", $cliente_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $mascotas = array();
+  
+  while ($row = $result->fetch_assoc()) {
+    $mascotas[] = $row;
+  }
+  
+  $stmt->close();
+  $db->close();
+  
+  return $mascotas;
+}
+
