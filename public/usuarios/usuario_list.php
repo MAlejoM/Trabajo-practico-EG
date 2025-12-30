@@ -53,15 +53,20 @@ if ($filtro_rol !== 'todos') {
         <div class="card-header">
           <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
             <h1 class="h4 mb-0">Gestión de Usuarios</h1>
-            <div class="btn-group btn-group-sm" role="group">
-              <a href="?rol=todos" class="btn btn-outline-primary <?php echo $filtro_rol === 'todos' ? 'active' : ''; ?>">Todos</a>
-              <?php foreach ($roles_disponibles as $rol): ?>
-                <a href="?rol=<?php echo urlencode($rol); ?>" 
-                   class="btn btn-outline-primary <?php echo strtolower($filtro_rol) === strtolower($rol) ? 'active' : ''; ?>">
-                  <?php echo ucfirst(htmlspecialchars($rol)); ?>
-                </a>
-              <?php endforeach; ?>
-              <a href="?rol=sin_rol" class="btn btn-outline-primary <?php echo $filtro_rol === 'sin_rol' ? 'active' : ''; ?>">Sin Rol</a>
+            <div class="d-flex gap-2 align-items-center flex-wrap">
+              <div class="btn-group btn-group-sm" role="group">
+                <a href="?rol=todos" class="btn btn-outline-primary <?php echo $filtro_rol === 'todos' ? 'active' : ''; ?>">Todos</a>
+                <?php foreach ($roles_disponibles as $rol): ?>
+                  <a href="?rol=<?php echo urlencode($rol); ?>" 
+                     class="btn btn-outline-primary <?php echo strtolower($filtro_rol) === strtolower($rol) ? 'active' : ''; ?>">
+                    <?php echo ucfirst(htmlspecialchars($rol)); ?>
+                  </a>
+                <?php endforeach; ?>
+                <a href="?rol=sin_rol" class="btn btn-outline-primary <?php echo $filtro_rol === 'sin_rol' ? 'active' : ''; ?>">Sin Rol</a>
+              </div>
+              <a href="<?php echo BASE_URL; ?>public/usuarios/nuevo_usuario.php" class="btn btn-success btn-sm">
+                <i class="fas fa-user-plus me-1"></i> Nuevo Usuario
+              </a>
             </div>
           </div>
         </div>

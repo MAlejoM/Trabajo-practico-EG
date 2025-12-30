@@ -25,7 +25,7 @@ function get_all_usuarios() {
         LEFT JOIN Personal p ON p.usuarioId = u.id
         LEFT JOIN Clientes c ON c.usuarioId = u.id
         LEFT JOIN Roles r ON p.rolId = r.id
-        ORDER BY u.nombre ASC, u.apellido ASC
+        ORDER BY u.id ASC
     ");
     $stmt->execute();
     $result = $stmt->get_result();
