@@ -22,9 +22,12 @@ Sistema completo de gestión de usuarios y mascotas con permisos diferenciados s
 - ❌ Sin acceso a módulo de gestión de usuarios
 
 ### 3. **Cliente**
+- ✅ **Visualización** de sus propias mascotas
+- ✅ Ver detalles completos de cada mascota
 - ✅ Cambio de contraseña únicamente
 - ✅ Visualización de sus datos en modo lectura
 - ❌ No puede modificar datos personales (solo administrador)
+- ❌ No puede crear o editar mascotas (solo personal)
 
 ---
 
@@ -124,6 +127,20 @@ Funciones auxiliares agregadas:
 
 ---
 
+### Vista de Mascotas para Clientes
+
+#### **[REWRITTEN]** `public/mis_mascotas.php`
+**Vista de mascotas del cliente:**
+- Lista de todas sus mascotas registradas
+- Tarjetas con foto y datos básicos
+- Cálculo automático de edad
+- Indicadores: Activo/Inactivo, Fallecido
+- Botón "Ver Detalles" para cada mascota
+- Enlace desde menú lateral: "MIS MASCOTAS"
+- Solo lectura (no puede editar)
+
+---
+
 ### Perfil de Usuario
 
 #### **[MODIFIED]** `public/mi_perfil.php`
@@ -208,6 +225,18 @@ Funciones auxiliares agregadas:
 ---
 
 ### Para Clientes
+
+#### **Ver Mis Mascotas:**
+1. Ir a "MIS MASCOTAS" en el menú lateral
+2. Ver lista de todas tus mascotas con:
+   - Foto
+   - Nombre, raza, color
+   - Edad calculada automáticamente
+   - Estado (Activo/Fallecido)
+3. Hacer clic en **"Ver Detalles"** para:
+   - Información completa de la mascota
+   - Datos del dueño (tú)
+   - Historial de atenciones médicas
 
 #### **Cambiar Contraseña:**
 1. Ir a "Mi Perfil" (menú superior derecho)
@@ -321,9 +350,12 @@ Atenciones
 - [ ] Crear/editar mascotas
 
 ### 3. Como Cliente
+- [ ] Ver lista de mis mascotas
+- [ ] Ver detalles de una mascota
 - [ ] Cambiar contraseña
 - [ ] Verificar datos personales en solo lectura
 - [ ] Intentar acceder a páginas de admin (debe redirigir)
+- [ ] Verificar que no puedo editar mascotas
 
 ### 4. Validaciones de Seguridad
 - [ ] Email duplicado rechazado
@@ -364,7 +396,7 @@ El sistema se integra perfectamente con:
 
 ## 📊 Resumen de ArchivosCreados/Modificados
 
-### Creados (8 archivos):
+### Creados (9 archivos):
 1. `src/logic/usuarios.logic.php`
 2. `public/usuarios/usuario_list.php`
 3. `public/usuarios/nuevo_usuario.php`
@@ -373,6 +405,7 @@ El sistema se integra perfectamente con:
 6. `public/mascotas/nueva_mascota.php`
 7. `public/mascotas/editar_mascota.php` (reescrito)
 8. `public/mascotas/ver_mascota.php`
+9. `public/mis_mascotas.php` (reescrito)
 
 ### Modificados (4 archivos):
 1. `public/mi_perfil.php`
