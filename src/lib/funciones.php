@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . "/../includes/error_handler.php";
+
 // Iniciar sesión de forma segura si no está iniciada.
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -51,6 +53,20 @@ function get_cliente_by_id($cliente_id)
   return $cliente;
 }
 
+function get_usuario_by_id($id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = ?");
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $usuario = $result->fetch_assoc();
+  $stmt->close();
+  $db->close();
+
+  return $usuario;
+}
+
 //consigo servicio por id
 function get_servicio_by_id($id)
 {
@@ -91,16 +107,21 @@ function get_all_atenciones()
     SELECT 
       a.id,
       a.fechaHora,
-      a.motivo,
-      a.estado,
+      a.titulo,
+      a.descripcion,
+      a.personalId,
       m.nombre as nombre_mascota,
-      u.nombre as nombre_cliente,
-      u.apellido as apellido_cliente
+      uc.nombre as nombre_cliente,
+      uc.apellido as apellido_cliente,
+      up.nombre as nombre_personal,
+      up.apellido as apellido_personal
     FROM atenciones a
-    JOIN mascotas m ON a.id_mascota = m.id
-    JOIN clientes c ON m.cliente_id = c.id
-    JOIN usuarios u ON c.usuarioId = u.id
-    ORDER BY a.fecha DESC
+    JOIN mascotas m ON a.mascotaId = m.id
+    JOIN clientes c ON m.clienteId = c.id
+    JOIN usuarios uc ON c.usuarioId = uc.id
+    JOIN personal p ON a.personalId = p.id
+    JOIN usuarios up ON p.usuarioId = up.id
+    ORDER BY a.fechaHora DESC
   ");
   $stmt->execute();
   $result = $stmt->get_result();
@@ -197,7 +218,7 @@ function get_cliente_completo_by_id($cliente_id)
     SELECT 
       c.id,
       u.nombre,
-      u.apellido,
+      u.apellido
     FROM clientes c
     JOIN usuarios u ON c.usuarioId = u.id
     WHERE c.id = ? AND u.activo = 1
@@ -298,6 +319,7 @@ function search_mascotas($termino)
   $stmt = $db->prepare("
     SELECT 
       m.id,
+      m.clienteId,
       m.nombre,
       m.raza,
       m.color,
@@ -326,4 +348,200 @@ function search_mascotas($termino)
   $db->close();
 
   return $mascotas;
+}
+
+function search_atenciones($termino)
+{
+  $db = conectarDb();
+  $search = "%" . $termino . "%";
+  $stmt = $db->prepare("
+    SELECT 
+      a.id,
+      a.fechaHora,
+      a.titulo,
+      a.descripcion,
+      a.personalId,
+      m.nombre as nombre_mascota,
+      uc.nombre as nombre_cliente,
+      uc.apellido as apellido_cliente,
+      up.nombre as nombre_personal,
+      up.apellido as apellido_personal
+    FROM atenciones a
+    JOIN mascotas m ON a.mascotaId = m.id
+    JOIN clientes c ON m.clienteId = c.id
+    JOIN usuarios uc ON m.clienteId = c.id AND c.usuarioId = uc.id
+    JOIN personal p ON a.personalId = p.id
+    JOIN usuarios up ON p.usuarioId = up.id
+    WHERE m.nombre LIKE ? 
+       OR uc.nombre LIKE ? 
+       OR uc.apellido LIKE ? 
+       OR a.motivo LIKE ? 
+       OR a.titulo LIKE ?
+    ORDER BY a.fechaHora DESC
+  ");
+  $stmt->bind_param("sssss", $search, $search, $search, $search, $search);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $atenciones = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $atenciones[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $atenciones;
+}
+
+function get_atencion_by_id($id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("
+    SELECT 
+      a.*,
+      m.nombre as nombre_mascota,
+      uc.nombre as nombre_cliente,
+      uc.apellido as apellido_cliente,
+      up.nombre as nombre_personal,
+      up.apellido as apellido_personal
+    FROM atenciones a
+    JOIN mascotas m ON a.mascotaId = m.id
+    JOIN clientes c ON m.clienteId = c.id
+    JOIN usuarios uc ON c.usuarioId = uc.id
+    JOIN personal p ON a.personalId = p.id
+    JOIN usuarios up ON p.usuarioId = up.id
+    WHERE a.id = ?
+  ");
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $atencion = $result->fetch_assoc();
+  $stmt->close();
+  $db->close();
+
+  return $atencion;
+}
+
+function update_atencion($id, $titulo, $descripcion, $servicioId, $personalId, $fechaHora)
+{
+  $db = conectarDb();
+
+  // Manejar servicioId opcional
+  $servicioId = (!empty($servicioId)) ? $servicioId : null;
+
+  $stmt = $db->prepare("
+    UPDATE atenciones 
+    SET titulo = ?, descripcion = ?, servicioId = ?, personalId = ?, fechaHora = ? 
+    WHERE id = ?
+  ");
+  $stmt->bind_param("ssiisi", $titulo, $descripcion, $servicioId, $personalId, $fechaHora, $id);
+  $result = $stmt->execute();
+  $stmt->close();
+  $db->close();
+
+  return $result;
+}
+
+function get_all_servicios()
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM servicios WHERE activo = 1 ORDER BY nombre ASC");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $servicios = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $servicios[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $servicios;
+}
+
+function get_all_personal()
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("
+    SELECT 
+      p.id,
+      u.nombre,
+      u.apellido
+    FROM personal p
+    JOIN usuarios u ON p.usuarioId = u.id
+    WHERE p.activo = 1
+    ORDER BY u.nombre ASC
+  ");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $personal = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $personal[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $personal;
+}
+
+function get_servicios_by_personal($personalId)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("
+    SELECT s.* 
+    FROM servicios s
+    JOIN rolesServicios rs ON s.id = rs.servicioId
+    JOIN personal p ON rs.rolId = p.rolId
+    WHERE p.id = ? AND s.activo = 1
+    ORDER BY s.nombre ASC
+  ");
+  $stmt->bind_param("i", $personalId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $servicios = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $servicios[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $servicios;
+}
+
+function insert_atencion($clienteId, $mascotaId, $personalId, $fechaHora, $titulo, $servicioId, $descripcion)
+{
+  $db = conectarDb();
+
+  // Manejar servicioId opcional (si llega vacío o cero, ponerlo como NULL)
+  $servicioId = (!empty($servicioId)) ? $servicioId : null;
+
+  $stmt = $db->prepare("
+    INSERT INTO atenciones (clienteId, mascotaId, personalId, fechaHora, titulo, servicioId, descripcion) 
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  ");
+  $stmt->bind_param("iiissis", $clienteId, $mascotaId, $personalId, $fechaHora, $titulo, $servicioId, $descripcion);
+  $result = $stmt->execute();
+  $newId = $db->insert_id;
+  $stmt->close();
+  $db->close();
+
+  return $result ? $newId : false;
+}
+
+function delete_atencion($id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("DELETE FROM atenciones WHERE id = ?");
+  $stmt->bind_param("i", $id);
+  $result = $stmt->execute();
+  $stmt->close();
+  $db->close();
+
+  return $result;
 }

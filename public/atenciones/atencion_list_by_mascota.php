@@ -82,7 +82,7 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                             <table class="table table-hover align-middle">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Fecha Realización</th>
+                                        <th>Fecha y Hora</th>
                                         <th>Título</th>
                                         <th>Motivo</th>
                                         <th>Estado</th>
@@ -97,13 +97,12 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                         $estadoCalculado = $tieneDescripcion ? 'Atendida' : 'Programada';
                                         $badgeClass = $tieneDescripcion ? 'success' : 'warning';
 
-                                        // Fechas
-                                        $fechaRealizacion = $atencion['fecha_realizacion'] ?? null;
-                                        $fechaRegistro = $atencion['fechaHora'] ?? null;
+                                        // Fecha
+                                        $fechaHora = $atencion['fechaHora'] ?? null;
                                         ?>
                                         <tr>
                                             <td>
-                                                <?php echo $fechaRealizacion ? date('d/m/Y', strtotime($fechaRealizacion)) : '<span class="text-muted">-</span>'; ?>
+                                                <?php echo $fechaHora ? date('d/m/Y H:i', strtotime($fechaHora)) : '<span class="text-muted">-</span>'; ?>
                                             </td>
                                             <td class="fw-bold"><?php echo htmlspecialchars($atencion['titulo'] ?? 'Sin título'); ?></td>
                                             <td>
@@ -140,15 +139,9 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                                                     <h6 class="fw-bold">Estado</h6>
                                                                     <span class="badge bg-<?php echo $badgeClass; ?>"><?php echo $estadoCalculado; ?></span>
                                                                 </div>
-                                                                <div class="row mb-3">
-                                                                    <div class="col-6">
-                                                                        <h6 class="fw-bold">Fecha Realización</h6>
-                                                                        <p><?php echo $fechaRealizacion ? date('d/m/Y', strtotime($fechaRealizacion)) : '-'; ?></p>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <h6 class="fw-bold">Fecha Registro</h6>
-                                                                        <p><?php echo $fechaRegistro ? date('d/m/Y H:i', strtotime($fechaRegistro)) : '-'; ?></p>
-                                                                    </div>
+                                                                <div class="mb-3">
+                                                                    <h6 class="fw-bold">Fecha y Hora</h6>
+                                                                    <p><?php echo $fechaHora ? date('d/m/Y H:i', strtotime($fechaHora)) : '-'; ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <h6 class="fw-bold">Descripción / Motivo</h6>
