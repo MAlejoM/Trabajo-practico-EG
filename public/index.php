@@ -244,7 +244,89 @@ include_once __DIR__ . "/../src/includes/header.php";
         </div>
       </div>
     </section>
-  <?php else: ?>
+    <?php elseif (isset($_SESSION['usuarioId']) && isset($_SESSION['cliente_id'])): ?>
+  <!-- Panel de Cliente -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="display-5 fw-semibold mb-3">Panel de Cliente</h1>
+          <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+        </div>
+      </div>
+      
+      <!-- Menú de opciones para Cliente -->
+      <div class="row g-4">
+        
+        <!-- Tarjeta 1: Mis Mascotas -->
+        <div class="col-sm-6 col-lg-4 col-xl-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <div class="flex-shrink-0">
+                  <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fas fa-paw"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="card-title mb-0">Mis Mascotas</h5>
+                </div>
+              </div>
+              <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
+              <div class="mt-auto">
+                <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class="btn btn-success">Acceder</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 2: Catálogo -->
+        <div class="col-sm-6 col-lg-4 col-xl-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <div class="flex-shrink-0">
+                  <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="card-title mb-0">Catálogo</h5>
+                </div>
+              </div>
+              <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
+              <div class="mt-auto">
+                <a href="<?php echo BASE_URL; ?>public/catalogo.php" class="btn btn-info">Acceder</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 3: Novedades -->
+        <div class="col-sm-6 col-lg-4 col-xl-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <div class="flex-shrink-0">
+                  <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fas fa-newspaper"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="card-title mb-0">Novedades</h5>
+                </div>
+              </div>
+              <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
+              <div class="mt-auto">
+                <a href="<?php echo BASE_URL; ?>public/novedades.php" class="btn btn-warning">Acceder</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <?php else: ?>
     <!-- Contenido público para usuarios no autenticados o con otros roles -->
     <section class="py-5 bg-light border-bottom">
       <div class="container">

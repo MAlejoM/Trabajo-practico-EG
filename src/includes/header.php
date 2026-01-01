@@ -8,11 +8,12 @@ if (!defined('BASE_URL')) {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
     $host = $_SERVER['HTTP_HOST'];
     // Ajustar el subdirectorio si cambia el nombre del repo o carpeta de despliegue
-    define('BASE_URL', $protocol . $host. "/");
+    define('BASE_URL', $protocol . $host . "/");
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,9 +25,27 @@ if (!defined('BASE_URL')) {
     <!-- Estilos propios -->
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <!-- Navbar -->
     <header>
+        <?php if (isset($_SESSION['system_error'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-exclamation-triangle me-2 fs-4"></i>
+                        <div>
+                            <strong>¡Ops! Algo salió mal</strong><br>
+                            <?php
+                            echo htmlspecialchars($_SESSION['system_error']);
+                            unset($_SESSION['system_error']);
+                            ?>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php endif; ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>public/index.php">
@@ -38,11 +57,11 @@ if (!defined('BASE_URL')) {
                 </button>
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-                        <?php 
+                        <?php
                         // Obtener el nombre del archivo actual
                         $current_page = basename($_SERVER['PHP_SELF']);
-                        $show_mobile_menu = !isset($_SESSION['usuarioId']) || 
-                                          in_array($current_page, ['mascotas.php', 'atenciones.php', 'catalogo.php', 'novedades.php', 'servicios.php']);
+                        $show_mobile_menu = !isset($_SESSION['usuarioId']) ||
+                            in_array($current_page, ['mascota_list.php', 'atencion_list.php', 'catalogo.php', 'novedades.php', 'servicios.php']);
                         ?>
                         <?php if ($show_mobile_menu): ?>
                             <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/catalogo.php">Catálogo</a></li>
@@ -56,7 +75,9 @@ if (!defined('BASE_URL')) {
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>public/mi_perfil.php">Mi perfil</a></li>
-                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>public/logout.php">Cerrar sesión</a></li>
                                 </ul>
                             </li>
