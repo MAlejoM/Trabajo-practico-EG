@@ -28,7 +28,10 @@ document.body.classList.add('login-page');
 
             <?php
             if (isset($_GET['error']) && $_GET['error'] == 1) {
-              echo "<div class='alert alert-danger mb-3'>Email o clave incorrectos.</div>";
+              echo "<div class='alert alert-danger mb-3'>
+                      <strong>No se pudo iniciar sesión.</strong><br>
+                      Verifique sus credenciales o contacte con administración.
+                    </div>";
             }
             ?>
 
