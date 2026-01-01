@@ -73,14 +73,14 @@ function get_all_catalogo()
   $stmt->execute();
   $result = $stmt->get_result();
   $catalogo = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $catalogo[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $catalogo;
 }
 
@@ -105,14 +105,14 @@ function get_all_atenciones()
   $stmt->execute();
   $result = $stmt->get_result();
   $atenciones = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $atenciones[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $atenciones;
 }
 
@@ -143,11 +143,11 @@ function get_atenciones_by_fecha($fecha)
   // $stmt->execute();
   // $result = $stmt->get_result();
   // $atenciones = array();
-  
+
   // while ($row = $result->fetch_assoc()) {
   //   $atenciones[] = $row;
   // }
-  
+
   // $stmt->close();
   // $db->close();
 
@@ -179,14 +179,14 @@ function get_all_mascotas()
   $stmt->execute();
   $result = $stmt->get_result();
   $mascotas = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $mascotas[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $mascotas;
 }
 
@@ -208,7 +208,7 @@ function get_cliente_completo_by_id($cliente_id)
   $cliente = $result->fetch_assoc();
   $stmt->close();
   $db->close();
-  
+
   return $cliente;
 }
 
@@ -228,13 +228,65 @@ function get_all_clientes()
   $stmt->execute();
   $result = $stmt->get_result();
   $clientes = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $clientes[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $clientes;
+}
+
+function get_mascotas_by_cliente($cliente_id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM mascotas WHERE clienteId = ? AND activo = 1");
+  $stmt->bind_param("i", $cliente_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $mascotas = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $mascotas[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $mascotas;
+}
+
+function get_mascota_by_id($mascota_id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM mascotas WHERE id = ?");
+  $stmt->bind_param("i", $mascota_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $mascota = $result->fetch_assoc();
+  $stmt->close();
+  $db->close();
+
+  return $mascota;
+}
+
+function get_atenciones_by_mascota($mascota_id)
+{
+  $db = conectarDb();
+  $stmt = $db->prepare("SELECT * FROM atenciones WHERE mascotaId = ? ORDER BY fechaHora DESC");
+  $stmt->bind_param("i", $mascota_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $atenciones = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $atenciones[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $atenciones;
 }
