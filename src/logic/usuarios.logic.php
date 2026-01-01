@@ -7,9 +7,9 @@ require_once __DIR__ . '/../lib/funciones.php';
 function get_all_usuarios($mostrar_inactivos = false) {
     $db = conectarDb();
     
-    // Si mostrar_inactivos es true, filtramos SOLO por inactivos (activo = 0)
-    // Si es false, no filtramos (Todos)
-    $filtro_activo = $mostrar_inactivos ? "WHERE u.activo = 0" : "";
+    // Si mostrar_inactivos es false, filtramos SOLO activos (activo = 1)
+    // Si es true, no filtramos (mostramos todos)
+    $filtro_activo = $mostrar_inactivos ? "" : "WHERE u.activo = 1";
     
     $stmt = $db->prepare("
         SELECT 

@@ -33,7 +33,7 @@ $atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada, $mostrar_inac
               <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
                      <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
                      onchange="window.location.href='?fecha=<?php echo $fecha_seleccionada; ?>&inactivos=' + (this.checked ? '1' : '0')">
-              <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivos</label>
+              <label class="form-check-label small" for="mostrarInactivos">Ver todas (incluir inactivas)</label>
             </div>
             <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success btn-sm">Nueva Atención</a>
           </div>

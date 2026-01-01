@@ -21,16 +21,20 @@ Se utiliza la columna `activo` (BOOLEAN/TINYINT) en las siguientes tablas:
 
 ### 2. Lógica de Consultas (Backend)
 
-Se han modificado las funciones core en `src/lib/funciones.php` y `src/logic/usuarios.logic.php` para filtrar por defecto los registros activos:
+Se han modificado las funciones core en `src/lib/funciones.php` y `src/logic/usuarios.logic.php` para filtrar por defecto solo los registros activos:
 
 - **Usuarios**: `get_all_usuarios($mostrar_inactivos = false)`
-  - **Desmarcado (OFF)**: Devuelve **TODOS** los usuarios.
-  - **Marcado (ON)**: Devuelve **exclusivamente** registros con `activo = 0`.
+  - **Desmarcado (OFF)**: Devuelve **SOLO** usuarios activos (`activo = 1`).
+  - **Marcado (ON)**: Devuelve **TODOS** los usuarios (activos e inactivos).
 - **Mascotas**: `get_all_mascotas($mostrar_inactivas = false)` (Comportamiento idéntico a Usuarios).
 - **Atenciones**:
   - `get_all_atenciones($mostrar_inactivas)` y `get_atenciones_by_fecha($fecha, $mostrar_inactivas)`.
   - Se han unificado los nombres de columnas y agregado alias para compatibilidad con la UI (`fechaHora as fecha`, `titulo as motivo`).
+  - Por defecto filtra solo atenciones activas.
 - **Servicios**: `get_all_servicios($mostrar_inactivos)`.
+  - Por defecto filtra solo servicios activos.
+- **Catálogo**: Ya filtraba por `activo = 1`.
+- **Funciones específicas**: `get_mascotas_by_cliente_id()`, `get_all_clientes()`, y `get_cliente_completo_by_id()` siempre filtran por `activo = 1`.
 - **Catálogo**: Ya filtraba por `activo = 1`.
 
 ### 3. Nuevas Funcionalidades de Gestión
@@ -44,11 +48,11 @@ Se han creado/actualizado archivos de lógica para manejar las bajas y reactivac
 
 ### 4. Cambios en la Base de Datos
 
-Para soportar estas funcionalidades, se han realizado las siguientes alteraciones:
+Para soportar estas funcionalidades, se han realizado las siguientes modificaciones en `init.sql`:
 
-- `ALTER TABLE atenciones ADD COLUMN activo TINYINT(1) DEFAULT 1`
-- `ALTER TABLE atenciones ADD COLUMN estado VARCHAR(50) DEFAULT 'pendiente'` (Para consistencia con la UI).
-- `ALTER TABLE servicios ADD COLUMN activo TINYINT(1) DEFAULT 1`
+- Tabla `atenciones`: Se agregaron las columnas `activo TINYINT(1) DEFAULT 1` y `estado VARCHAR(50) DEFAULT 'pendiente'`
+- Tabla `servicios`: Ya contenía la columna `activo TINYINT(1) DEFAULT 1`
+- Tablas `usuarios`, `mascotas`, `productos`, `personal`, `novedades`: Ya contenían el campo `activo`
 
 ---
 
@@ -56,15 +60,21 @@ Para soportar estas funcionalidades, se han realizado las siguientes alteracione
 
 ### Gestión de Usuarios
 
-- **Listado**: Se agregó un switch **"Ver inactivos"** para administradores.
+- **Listado**: Se agregó un toggle **"Ver todos (incluir inactivos)"** para administradores.
+- **Comportamiento**: Por defecto muestra solo usuarios activos. Al activar el toggle, muestra todos (activos e inactivos).
 - **Badges**: Los usuarios inactivos se muestran con una etiqueta gris "Inactivo".
 - **Edición**: Se permite activar/desactivar la cuenta mediante un checkbox de estado.
 
 ### Gestión de Mascotas
 
-- **Listado General**: Solo muestra mascotas activas.
-- **Mis Mascotas (Clientes)**: Solo muestra mascotas activas.
-- **Edición**: Próximamente se integrarán botones de baja rápida.
+- **Listado General**: Por defecto muestra solo mascotas activas. El toggle "Ver todas (incluir inactivas)" permite ver todas.
+- **Mis Mascotas (Clientes)**: Solo muestra mascotas activas (sin opción de ver inactivas).
+- **Edición**: Se pueden gestionar bajas y reactivaciones desde la página de edición.
+
+### Gestión de Atenciones
+
+- **Listados**: Por defecto muestran solo atenciones activas. El toggle permite ver todas.
+- **Integración completa**: Tanto en vista general como en vista por fecha.
 
 ---
 
@@ -80,13 +90,22 @@ Para soportar estas funcionalidades, se han realizado las siguientes alteracione
 1. **Usuarios**:
 
    - Vaya a Gestión de Usuarios.
-   - Desactive un usuario cliente.
-   - Verifique que desaparece de la lista.
-   - Active "Ver inactivos" y verifique que reaparece con badge gris.
+   - Por defecto solo verá usuarios activos.
+   - Desactive un usuario cliente desde su página de edición.
+   - Verifique que desaparece del listado.
+   - Active el toggle "Ver todos (incluir inactivos)" y verifique que reaparece con badge gris "Inactivo".
    - Intente loguearse con esa cuenta (debe fallar).
 
 2. **Mascotas**:
+
    - Vaya a la edición de una mascota.
    - Márquela como inactiva (o registre fallecimiento).
+   - Verifique que desaparece del listado general (que por defecto solo muestra activas).
+   - Active el toggle "Ver todas (incluir inactivas)" para verificar que sigue existiendo.
    - Verifique que el cliente ya no la ve en "Mis Mascotas".
-   - Verifique que el personal no la ve en el listado general (salvo edición directa).
+
+3. **Atenciones**:
+
+   - Las atenciones pueden marcarse como inactivas (bajas lógicas).
+   - Por defecto los listados solo muestran atenciones activas.
+   - Use el toggle para ver todas las atenciones incluyendo las inactivas.

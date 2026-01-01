@@ -35,7 +35,7 @@ $mascotas = get_all_mascotas($mostrar_inactivos);
               <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
                      <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
                      onchange="window.location.href='?inactivos=' + (this.checked ? '1' : '0')">
-              <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivas</label>
+              <label class="form-check-label small" for="mostrarInactivos">Ver todas (incluir inactivas)</label>
             </div>
             <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php" class="btn btn-success btn-sm">Nueva Mascota</a>
           </div>

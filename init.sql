@@ -37,7 +37,9 @@ CREATE TABLE `atenciones` (
   `personalId` int(11) NOT NULL,
   `fechaHora` datetime NOT NULL,
   `titulo` varchar(200) NOT NULL,
-  `descripcion` text DEFAULT NULL
+  `descripcion` text DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT 1,
+  `estado` varchar(50) DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

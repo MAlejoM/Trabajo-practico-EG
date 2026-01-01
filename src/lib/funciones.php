@@ -88,9 +88,9 @@ function get_all_atenciones($mostrar_inactivas = false)
 {
   $db = conectarDb();
   
-  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
-  // Si es false, no filtramos (Todos)
-  $filtro_activo = $mostrar_inactivas ? "WHERE a.activo = 0" : "";
+  // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
+  // Si es true, no filtramos (mostramos todas)
+  $filtro_activo = $mostrar_inactivas ? "" : "WHERE a.activo = 1";
   
   $stmt = $db->prepare("
     SELECT 
@@ -128,9 +128,9 @@ function get_atenciones_by_fecha($fecha, $mostrar_inactivas = false)
 {
   $db = conectarDb();
   
-  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
-  // Si es false, no filtramos por activo (vemos todas las de esa fecha)
-  $filtro_activo = $mostrar_inactivas ? "AND a.activo = 0" : "";
+  // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
+  // Si es true, no filtramos por activo (vemos todas las de esa fecha)
+  $filtro_activo = $mostrar_inactivas ? "" : "AND a.activo = 1";
   
   $stmt = $db->prepare("
     SELECT 
@@ -168,9 +168,9 @@ function get_all_mascotas($mostrar_inactivas = false)
 {
   $db = conectarDb();
   
-  // Si mostrar_inactivas es true, filtramos SOLO por inactivas (activo = 0)
-  // Si es false, no filtramos (Todos)
-  $filtro_activo = $mostrar_inactivas ? "WHERE m.activo = 0" : "";
+  // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
+  // Si es true, no filtramos (mostramos todas)
+  $filtro_activo = $mostrar_inactivas ? "" : "WHERE m.activo = 1";
   
   $stmt = $db->prepare("
     SELECT 
@@ -291,9 +291,9 @@ function get_all_servicios($mostrar_inactivos = false)
 {
   $db = conectarDb();
   
-  // Si mostrar_inactivos es true, filtramos SOLO por inactivos (activo = 0)
-  // Si es false, no filtramos (Todos)
-  $filtro_activo = $mostrar_inactivos ? "WHERE activo = 0" : "";
+  // Si mostrar_inactivos es false, filtramos SOLO activos (activo = 1)
+  // Si es true, no filtramos (mostramos todos)
+  $filtro_activo = $mostrar_inactivos ? "" : "WHERE activo = 1";
   
   $stmt = $db->prepare("
     SELECT * FROM servicios 

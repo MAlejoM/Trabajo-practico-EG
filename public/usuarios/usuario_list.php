@@ -62,7 +62,7 @@ if ($filtro_rol !== 'todos') {
                 <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
                        <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
                        onchange="window.location.href='?rol=<?php echo $filtro_rol; ?>&inactivos=' + (this.checked ? '1' : '0')">
-                <label class="form-check-label small" for="mostrarInactivos">Filtrar solo inactivos</label>
+                <label class="form-check-label small" for="mostrarInactivos">Ver todos (incluir inactivos)</label>
               </div>
               <a href="<?php echo BASE_URL; ?>public/usuarios/nuevo_usuario.php" class="btn btn-success btn-sm">
                 <i class="fas fa-user-plus me-1"></i> Nuevo Usuario
