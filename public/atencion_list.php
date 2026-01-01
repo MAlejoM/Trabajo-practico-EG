@@ -125,7 +125,9 @@ if (isset($_GET['ajax_search'])) {
   exit();
 }
 
-$atenciones = get_all_atenciones();
+// Obtener parámetro para mostrar inactivos
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+$atenciones = get_all_atenciones($mostrar_inactivos);
 ?>
 
 <div class="container py-4">
@@ -141,7 +143,7 @@ $atenciones = get_all_atenciones();
 
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h1 class="h4 mb-0">Gestión de Atenciones</h1>
           <?php if ($user_role === 'admin'): ?>
             <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success btn-sm">

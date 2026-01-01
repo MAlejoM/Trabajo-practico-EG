@@ -1,13 +1,38 @@
 <?php 
-include_once __DIR__ . "/../src/includes/header.php";
-include_once __DIR__ . "/../src/lib/funciones.php";
+include_once __DIR__ . "/../../src/includes/header.php";
+include_once __DIR__ . "/../../src/lib/funciones.php";
+include_once __DIR__ . "/../../src/logic/usuarios.logic.php";
 
-if (!isset($_SESSION['cliente_id'])) {
+// Verificar que sea administrador
+if (!isset($_SESSION['personal_id']) || !verificar_es_admin()) {
     header('Location: ' . BASE_URL . 'public/index.php');
     exit();
 }
 
-$mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
+// Verificar que se proporcionó un ID
+if (!isset($_GET['id'])) {
+    header('Location: ' . BASE_URL . 'public/usuarios/usuario_list.php');
+    exit();
+}
+
+$usuario_id = intval($_GET['id']);
+
+// Obtener datos del usuario
+$usuario = get_usuario_completo_by_id($usuario_id);
+
+if (!$usuario) {
+    header('Location: ' . BASE_URL . 'public/usuarios/usuario_list.php');
+    exit();
+}
+
+// Verificar que sea un cliente
+if ($usuario['tipo_usuario'] !== 'Cliente') {
+    header('Location: ' . BASE_URL . 'public/usuarios/editar_usuario.php?id=' . $usuario_id);
+    exit();
+}
+
+// Obtener mascotas
+$mascotas = get_mascotas_by_cliente_id($usuario['cliente_id']);
 ?>
 
 <div class="container py-4">
@@ -16,24 +41,34 @@ $mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
       <div class="card sticky-top" style="top: 1rem;">
         <div class="card-header fw-semibold">Menú principal</div>
         <div class="card-body d-grid gap-2">
-          <?php include_once __DIR__ . "/../src/includes/menu_lateral.php"; ?>
+          <?php include_once __DIR__ . "/../../src/includes/menu_lateral.php"; ?>
         </div>
       </div>
     </aside>
     
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header">
-          <h1 class="h4 mb-0">
-            <i class="fas fa-paw me-2"></i>
-            Mis Mascotas
-          </h1>
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h1 class="h4 mb-0">Mascotas de <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h1>
+          <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php?cliente_id=<?php echo $usuario['cliente_id']; ?>" class="btn btn-success btn-sm">
+            <i class="fas fa-plus me-1"></i> Nueva Mascota
+          </a>
         </div>
         <div class="card-body">
+          <!-- Información del cliente -->
+          <div class="alert alert-info mb-4">
+            <strong>Cliente:</strong> <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>
+            <br>
+            <strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?>
+            <?php if ($usuario['telefono']): ?>
+              <br><strong>Teléfono:</strong> <?php echo htmlspecialchars($usuario['telefono']); ?>
+            <?php endif; ?>
+          </div>
+
           <?php if (empty($mascotas)): ?>
-            <div class="alert alert-info">
+            <div class="alert alert-warning">
               <i class="fas fa-info-circle me-1"></i>
-              No tienes mascotas registradas. Contacta al administrador para agregar una.
+              Este cliente no tiene mascotas registradas.
             </div>
           <?php else: ?>
             <div class="row g-3">
@@ -62,17 +97,9 @@ $mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
                         <?php endif; ?>
                         <?php if ($mascota['fechaDeNac']): ?>
                           <strong>Fecha Nac:</strong> <?php echo date('d/m/Y', strtotime($mascota['fechaDeNac'])); ?><br>
-                          <?php
-                          // Calculo d edad
-                          $fecha_nac = new DateTime($mascota['fechaDeNac']);
-                          $hoy = new DateTime();
-                          $edad = $fecha_nac->diff($hoy);
-                          ?>
-                          <strong>Edad:</strong> <?php echo $edad->y; ?> año<?php echo $edad->y != 1 ? 's' : ''; ?> 
-                          <?php echo $edad->m; ?> mes<?php echo $edad->m != 1 ? 'es' : ''; ?><br>
                         <?php endif; ?>
                         <?php if ($mascota['fechaMuerte']): ?>
-                          <strong class="text-danger">Falleció:</strong> <?php echo date('d/m/Y', strtotime($mascota['fechaMuerte'])); ?><br>
+                          <strong>Fecha Muerte:</strong> <?php echo date('d/m/Y', strtotime($mascota['fechaMuerte'])); ?><br>
                         <?php endif; ?>
                       </p>
                       
@@ -80,15 +107,14 @@ $mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
                         <span class="badge bg-<?php echo $mascota['activo'] ? 'success' : 'secondary'; ?> mb-2">
                           <?php echo $mascota['activo'] ? 'Activo' : 'Inactivo'; ?>
                         </span>
-                        <?php if ($mascota['fechaMuerte']): ?>
-                          <span class="badge bg-warning mb-2">
-                            <i class="fas fa-heart-broken me-1"></i> Fallecido
-                          </span>
-                        <?php endif; ?>
                         <div class="d-flex gap-1">
                           <a href="<?php echo BASE_URL; ?>public/mascotas/ver_mascota.php?id=<?php echo $mascota['id']; ?>" 
                              class="btn btn-sm btn-outline-primary flex-fill">
-                            <i class="fas fa-eye me-1"></i> Ver Detalles
+                            <i class="fas fa-eye me-1"></i> Ver
+                          </a>
+                          <a href="<?php echo BASE_URL; ?>public/mascotas/editar_mascota.php?id=<?php echo $mascota['id']; ?>" 
+                             class="btn btn-sm btn-outline-secondary flex-fill">
+                            <i class="fas fa-edit me-1"></i> Editar
                           </a>
                         </div>
                       </div>
@@ -98,11 +124,15 @@ $mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
               <?php endforeach; ?>
             </div>
           <?php endif; ?>
-          
-          <hr class="my-4">
-          <div class="alert alert-info mb-0">
-            <i class="fas fa-info-circle me-1"></i>
-            <strong>Nota:</strong> Para agregar o editar mascotas, contacta con el personal de la veterinaria.
+
+          <!-- Botón de regreso -->
+          <div class="mt-4">
+            <a href="<?php echo BASE_URL; ?>public/usuarios/editar_usuario.php?id=<?php echo $usuario_id; ?>" class="btn btn-secondary">
+              <i class="fas fa-arrow-left me-1"></i> Volver a Editar Usuario
+            </a>
+            <a href="<?php echo BASE_URL; ?>public/usuarios/usuario_list.php" class="btn btn-outline-secondary">
+              <i class="fas fa-list me-1"></i> Lista de Usuarios
+            </a>
           </div>
         </div>
       </div>
@@ -111,5 +141,5 @@ $mascotas = get_mascotas_by_cliente_id($_SESSION['cliente_id']);
 </div>
 
 <?php
-include_once __DIR__ . "/../src/includes/footer.php";
+include_once __DIR__ . "/../../src/includes/footer.php";
 ?>

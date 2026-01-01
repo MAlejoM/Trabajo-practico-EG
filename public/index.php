@@ -74,7 +74,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de usuarios, roles y permisos del sistema.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/admin/usuarios.php" class="btn btn-danger">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/usuarios/usuario_list.php" class="btn btn-danger">Acceder</a>
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas, consultas y seguimientos de pacientes.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/atenciones.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/atencion_list.php" class="btn btn-primary">Acceder</a>
                 </div>
               </div>
             </div>

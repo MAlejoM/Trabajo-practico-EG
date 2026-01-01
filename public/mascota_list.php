@@ -14,6 +14,9 @@ if (!isset($_SESSION['personal_id'])) {
   exit();
 }
 
+// Obtener parámetro para mostrar inactivos
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+
 // Manejo de búsqueda AJAX - Debe ser antes de incluir el header.php para evitar output HTML extra
 if (isset($_GET['ajax_search'])) {
   $termino = $_GET['q'] ?? '';
@@ -62,7 +65,7 @@ if (isset($_GET['ajax_search'])) {
 
 include_once __DIR__ . "/../src/includes/header.php";
 
-$mascotas = get_all_mascotas();
+$mascotas = get_all_mascotas($mostrar_inactivos);
 ?>
 
 <div class="container py-4">
@@ -78,11 +81,17 @@ $mascotas = get_all_mascotas();
 
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h1 class="h4 mb-0">Mascotas</h1>
-          <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php" class="btn btn-success btn-sm">
-            <i class="fas fa-plus me-1"></i>Nueva Mascota
-          </a>
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <h1 class="h4 mb-0">Gestión de Mascotas</h1>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check form-switch d-flex align-items-center mb-0">
+              <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
+                     <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
+                     onchange="window.location.href='?inactivos=' + (this.checked ? '1' : '0')">
+              <label class="form-check-label small" for="mostrarInactivos">Ver todas (incluir inactivas)</label>
+            </div>
+            <a href="<?php echo BASE_URL; ?>public/mascotas/nueva_mascota.php" class="btn btn-success btn-sm">Nueva Mascota</a>
+          </div>
         </div>
 
         <div class="card-body">

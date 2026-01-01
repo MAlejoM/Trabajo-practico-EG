@@ -10,7 +10,8 @@ if (!isset($_SESSION['personal_id'])) {
 
 $fecha_hoy = date('Y-m-d');
 $fecha_seleccionada = $_GET['fecha'] ?? $fecha_hoy;
-$atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada);
+$mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+$atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada, $mostrar_inactivos);
 ?>
 
 <div class="container py-4">
@@ -25,9 +26,17 @@ $atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada);
     </aside>
     <div class="col-12 col-md-8 col-lg-9">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h1 class="h4 mb-0">Atenciones del Día</h1>
-          <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success">Nueva Atención</a>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check form-switch d-flex align-items-center mb-0">
+              <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos" 
+                     <?php echo $mostrar_inactivos ? 'checked' : ''; ?>
+                     onchange="window.location.href='?fecha=<?php echo $fecha_seleccionada; ?>&inactivos=' + (this.checked ? '1' : '0')">
+              <label class="form-check-label small" for="mostrarInactivos">Ver todas (incluir inactivas)</label>
+            </div>
+            <a href="<?php echo BASE_URL; ?>public/atenciones/registrar_atencion.php" class="btn btn-success btn-sm">Nueva Atención</a>
+          </div>
         </div>
         <div class="card-body">
           <form action="servicios.php" method="GET" class="mb-4">
@@ -64,6 +73,7 @@ $atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada);
                     <th>Cliente</th>
                     <th>Motivo</th>
                     <th>Estado</th>
+                    <th>Visibilidad</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -80,6 +90,11 @@ $atenciones_del_dia = get_atenciones_by_fecha($fecha_seleccionada);
                                ($atencion['estado'] == 'cancelada' ? 'danger' : 'warning'); 
                         ?>">
                           <?php echo ucfirst($atencion['estado']); ?>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge bg-<?php echo $atencion['activo'] ? 'success' : 'secondary'; ?>">
+                          <?php echo $atencion['activo'] ? 'Activo' : 'Inactivo'; ?>
                         </span>
                       </td>
                       <td>
