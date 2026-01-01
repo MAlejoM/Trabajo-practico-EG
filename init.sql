@@ -80,7 +80,9 @@ CREATE TABLE Atenciones (
     personalId INT NOT NULL,
     fechaHora DATETIME NOT NULL,
     titulo VARCHAR(200) NOT NULL,
+    servicioId INT NOT NULL,
     descripcion TEXT,
+    FOREIGN KEY (servicioId) REFERENCES Servicios(id) ON DELETE RESTRICT,
     FOREIGN KEY (clienteId) REFERENCES Clientes(id) ON DELETE CASCADE,
     FOREIGN KEY (mascotaId) REFERENCES Mascotas(id) ON DELETE CASCADE,
     FOREIGN KEY (personalId) REFERENCES Personal(id) ON DELETE RESTRICT
