@@ -290,3 +290,40 @@ function get_atenciones_by_mascota($mascota_id)
 
   return $atenciones;
 }
+
+function search_mascotas($termino)
+{
+  $db = conectarDb();
+  $search = "%" . $termino . "%";
+  $stmt = $db->prepare("
+    SELECT 
+      m.id,
+      m.nombre,
+      m.raza,
+      m.color,
+      m.foto,
+      m.fechaDeNac,
+      m.fechaMuerte,
+      m.activo,
+      u.nombre as nombre_cliente,
+      u.apellido as apellido_cliente
+    FROM mascotas m
+    JOIN clientes c ON m.clienteId = c.id
+    JOIN usuarios u ON c.usuarioId = u.id
+    WHERE m.nombre LIKE ? OR u.nombre LIKE ? OR u.apellido LIKE ?
+    ORDER BY m.nombre ASC
+  ");
+  $stmt->bind_param("sss", $search, $search, $search);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $mascotas = array();
+
+  while ($row = $result->fetch_assoc()) {
+    $mascotas[] = $row;
+  }
+
+  $stmt->close();
+  $db->close();
+
+  return $mascotas;
+}

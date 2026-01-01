@@ -2,10 +2,6 @@
 include_once __DIR__ . "/../../src/includes/header.php";
 include_once __DIR__ . "/../../src/lib/funciones.php";
 
-if (!isset($_SESSION['cliente_id'])) {
-    header("Location: " . BASE_URL . "public/login.php");
-    exit;
-}
 
 $mascota_id = $_GET['id'] ?? null;
 
@@ -24,7 +20,7 @@ if (!$mascota) {
 }
 
 
-if ($mascota['clienteId'] != $_SESSION['cliente_id']) {
+if ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'personal' && $mascota['clienteId'] != $_SESSION['cliente_id']) {
     echo "<div class='container py-4'><div class='alert alert-danger'>No tienes permiso para ver esta mascota.</div></div>";
     include_once __DIR__ . "/../../src/includes/footer.php";
     exit;
@@ -48,7 +44,10 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h1 class="h4 mb-0">Atenciones de <?php echo $mascota['nombre']; ?></h1>
-                    <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class="btn btn-outline-secondary btn-sm">
+                    <?php
+                    $volver_url = isset($_SESSION['cliente_id']) ? "public/mis_mascotas.php" : "public/mascota_list.php";
+                    ?>
+                    <a href="<?php echo BASE_URL . $volver_url; ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-arrow-left me-1"></i>Volver
                     </a>
                 </div>
