@@ -103,19 +103,16 @@ function get_all_catalogo()
 function get_all_atenciones($mostrar_inactivas = false)
 {
   $db = conectarDb();
-  
+
   // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
   // Si es true, no filtramos (mostramos todas)
-  $filtro_activo = $mostrar_inactivas ? "" : "WHERE a.activo = 1";
-  
+
   $stmt = $db->prepare("
     SELECT 
       a.id,
       a.fechaHora as fecha,
       a.titulo as motivo,
       a.descripcion,
-      a.estado,
-      a.activo,
       m.nombre as nombre_mascota,
       uc.nombre as nombre_cliente,
       uc.apellido as apellido_cliente,
@@ -124,8 +121,9 @@ function get_all_atenciones($mostrar_inactivas = false)
     FROM atenciones a
     JOIN mascotas m ON a.mascotaId = m.id
     JOIN clientes c ON m.clienteId = c.id
-    JOIN usuarios u ON c.usuarioId = u.id
-    $filtro_activo
+    JOIN usuarios uc ON c.usuarioId = uc.id
+    JOIN personal p ON a.personalId = p.id
+    JOIN usuarios up ON p.usuarioId = up.id
     ORDER BY a.fechaHora DESC
   ");
   $stmt->execute();
@@ -145,18 +143,15 @@ function get_all_atenciones($mostrar_inactivas = false)
 function get_atenciones_by_fecha($fecha, $mostrar_inactivas = false)
 {
   $db = conectarDb();
-  
+
   // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
   // Si es true, no filtramos por activo (vemos todas las de esa fecha)
-  $filtro_activo = $mostrar_inactivas ? "" : "AND a.activo = 1";
-  
+
   $stmt = $db->prepare("
     SELECT 
       a.id,
       a.fechaHora as fecha,
       a.titulo as motivo,
-      a.estado,
-      a.activo,
       m.nombre as nombre_mascota,
       u.nombre as nombre_cliente,
       u.apellido as apellido_cliente
@@ -164,32 +159,32 @@ function get_atenciones_by_fecha($fecha, $mostrar_inactivas = false)
     JOIN mascotas m ON a.mascotaId = m.id
     JOIN clientes c ON m.clienteId = c.id
     JOIN usuarios u ON c.usuarioId = u.id
-    WHERE DATE(a.fechaHora) = ? $filtro_activo
+    WHERE DATE(a.fechaHora) = ?  
     ORDER BY a.fechaHora ASC
   ");
   $stmt->bind_param("s", $fecha);
   $stmt->execute();
   $result = $stmt->get_result();
   $atenciones = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $atenciones[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $atenciones;
 }
 
 function get_all_mascotas($mostrar_inactivas = false)
 {
   $db = conectarDb();
-  
+
   // Si mostrar_inactivas es false, filtramos SOLO activas (activo = 1)
   // Si es true, no filtramos (mostramos todas)
   $filtro_activo = $mostrar_inactivas ? "" : "WHERE m.activo = 1";
-  
+
   $stmt = $db->prepare("
     SELECT 
       m.id,
@@ -272,15 +267,29 @@ function get_all_clientes()
 }
 
 
-function verificar_es_admin() {
+function verificar_es_admin()
+{
   return isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
 }
 
 
-function get_mascotas_by_cliente($cliente_id)
+function get_mascotas_by_cliente_id($cliente_id)
 {
   $db = conectarDb();
-  $stmt = $db->prepare("SELECT * FROM mascotas WHERE clienteId = ? AND activo = 1");
+  $stmt = $db->prepare("
+    SELECT 
+      m.id,
+      m.nombre,
+      m.raza,
+      m.color,
+      m.foto,
+      m.fechaDeNac,
+      m.fechaMuerte,
+      m.activo
+    FROM mascotas m
+    WHERE m.clienteId = ? AND m.activo = 1
+    ORDER BY m.nombre ASC
+  ");
   $stmt->bind_param("i", $cliente_id);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -330,7 +339,7 @@ function get_atenciones_by_mascota($mascota_id)
 }
 
 function search_mascotas($termino)
-  {
+{
   $db = conectarDb();
   $search = "%" . $termino . "%";
   $stmt = $db->prepare("
@@ -342,7 +351,8 @@ function search_mascotas($termino)
       m.color,
       m.foto,
       m.fechaDeNac,
-      m.fechaMuerte,m.activo,
+      m.fechaMuerte,
+      m.activo,
       u.nombre as nombre_cliente,
       u.apellido as apellido_cliente
     FROM mascotas m
@@ -459,23 +469,7 @@ function update_atencion($id, $titulo, $descripcion, $servicioId, $personalId, $
   return $result;
 }
 
-function get_all_servicios()
-{
-  $db = conectarDb();
-  $stmt = $db->prepare("SELECT * FROM servicios WHERE activo = 1 ORDER BY nombre ASC");
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $servicios = array();
 
-  while ($row = $result->fetch_assoc()) {
-    $servicios[] = $row;
-  }
-
-  $stmt->close();
-  $db->close();
-
-  return $servicios;
-}
 
 function get_all_personal()
 {
@@ -564,11 +558,11 @@ function delete_atencion($id)
 function get_all_servicios($mostrar_inactivos = false)
 {
   $db = conectarDb();
-  
+
   // Si mostrar_inactivos es false, filtramos SOLO activos (activo = 1)
   // Si es true, no filtramos (mostramos todos)
   $filtro_activo = $mostrar_inactivos ? "" : "WHERE activo = 1";
-  
+
   $stmt = $db->prepare("
     SELECT * FROM servicios 
     $filtro_activo
@@ -577,14 +571,13 @@ function get_all_servicios($mostrar_inactivos = false)
   $stmt->execute();
   $result = $stmt->get_result();
   $servicios = array();
-  
+
   while ($row = $result->fetch_assoc()) {
     $servicios[] = $row;
   }
-  
+
   $stmt->close();
   $db->close();
-  
+
   return $servicios;
 }
-?>

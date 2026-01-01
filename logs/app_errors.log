@@ -1,0 +1,58 @@
+[2026-01-02 00:04:07] Exception: Unknown column 'a.estado' in 'field list' in C:\xampp\htdocs\src\lib\funciones.php:111
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(111): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\atencion_list.php(130): get_all_atenciones(false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:06:02] Exception: Unknown column 'a.estado' in 'field list' in C:\xampp\htdocs\src\lib\funciones.php:111
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(111): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\atencion_list.php(130): get_all_atenciones(false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:06:04] Exception: Unknown column 'a.estado' in 'field list' in C:\xampp\htdocs\src\lib\funciones.php:111
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(111): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\atencion_list.php(130): get_all_atenciones(false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:06:15] Exception: Unknown column 'a.activo' in 'field list' in C:\xampp\htdocs\src\lib\funciones.php:111
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(111): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\atencion_list.php(130): get_all_atenciones(false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:06:19] Exception: Unknown column 'a.activo' in 'where clause' in C:\xampp\htdocs\src\lib\funciones.php:111
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(111): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\atencion_list.php(130): get_all_atenciones(false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:07:11] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77
+[2026-01-02 00:08:19] Exception: Unknown column 'a.estado' in 'field list' in C:\xampp\htdocs\src\lib\funciones.php:151
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(151): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\servicios.php(14): get_atenciones_by_fecha('2026-01-02', false)
+#2 {main}
+
+================================================================================
+
+[2026-01-02 00:08:40] Exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$
+    ORDER BY a.fechaHora ASC' at line 12 in C:\xampp\htdocs\src\lib\funciones.php:150
+Stack trace:
+#0 C:\xampp\htdocs\src\lib\funciones.php(150): mysqli->prepare('\r\n    SELECT \r\n...')
+#1 C:\xampp\htdocs\public\servicios.php(14): get_atenciones_by_fecha('2026-01-02', false)
+#2 {main}
+
+================================================================================
+

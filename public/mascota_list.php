@@ -17,9 +17,6 @@ if (!isset($_SESSION['personal_id'])) {
 // Obtener parámetro para mostrar inactivos
 $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
 
-// Necesitamos actualizar get_all_mascotas o filtrar aquí. 
-// Vamos a filtrar aquí o actualizar la función en funciones.php
-$mascotas = get_all_mascotas($mostrar_inactivos); 
 // Manejo de búsqueda AJAX - Debe ser antes de incluir el header.php para evitar output HTML extra
 if (isset($_GET['ajax_search'])) {
   $termino = $_GET['q'] ?? '';
@@ -68,7 +65,7 @@ if (isset($_GET['ajax_search'])) {
 
 include_once __DIR__ . "/../src/includes/header.php";
 
-$mascotas = get_all_mascotas();
+$mascotas = get_all_mascotas($mostrar_inactivos);
 ?>
 
 <div class="container py-4">
