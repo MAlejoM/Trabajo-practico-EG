@@ -1,0 +1,9 @@
+# Archivos de sistema y logs
+logs/
+*.log
+
+# Archivos de configuración local (si existen)
+.env
+config.local.php
+
+app_errors.log

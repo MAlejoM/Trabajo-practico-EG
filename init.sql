@@ -136,7 +136,12 @@ INSERT INTO `personal` (`id`, `usuarioId`, `rolId`, `activo`) VALUES
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `precio` decimal(10,2) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `imagen` longblob DEFAULT NULL,
+  `categoria` varchar(100) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  `usuarioId` int(11) NOT NULL,
   `activo` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -391,6 +396,58 @@ ALTER TABLE `personal`
 ALTER TABLE `rolesservicios`
   ADD CONSTRAINT `rolesservicios_ibfk_1` FOREIGN KEY (`rolId`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `rolesservicios_ibfk_2` FOREIGN KEY (`servicioId`) REFERENCES `servicios` (`id`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `novedades`
+--
+
+CREATE TABLE `novedades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(200) NOT NULL,
+  `contenido` text NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `fechaPublicacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  `usuarioId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuarioId` (`usuarioId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catalogos`
+--
+
+CREATE TABLE `catalogos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `imagen` longblob DEFAULT NULL,
+  `categoria` varchar(100) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  `usuarioId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuarioId` (`usuarioId`),
+  KEY `categoria` (`categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Filtros para la tabla `novedades`
+--
+ALTER TABLE `novedades`
+  ADD CONSTRAINT `novedades_ibfk_1` FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `catalogos`
+--
+ALTER TABLE `catalogos`
+  ADD CONSTRAINT `catalogos_ibfk_1` FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
