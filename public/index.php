@@ -14,7 +14,7 @@ include_once __DIR__ . "/../src/includes/header.php";
             <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
           </div>
         </div>
-        
+
         <!-- Menú de opciones para Administrador -->
         <div class="row g-4">
           <div class="col-sm-6 col-lg-4 col-xl-2">
@@ -32,7 +32,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión completa de productos y servicios del catálogo.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/admin/catalogo.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Control de noticias y actualizaciones del sitio web.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/admin/novedades.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@ include_once __DIR__ . "/../src/includes/header.php";
             <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
           </div>
         </div>
-        
+
         <!-- Menú de opciones para Personal -->
         <div class="row g-4">
           <div class="col-md-6 col-lg-3">
@@ -173,7 +173,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Ver productos y servicios disponibles en la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/catalogo.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
                 </div>
               </div>
             </div>
@@ -194,7 +194,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Últimas noticias y actualizaciones de la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/novedades.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
                 </div>
               </div>
             </div>
@@ -244,89 +244,89 @@ include_once __DIR__ . "/../src/includes/header.php";
         </div>
       </div>
     </section>
-    <?php elseif (isset($_SESSION['usuarioId']) && isset($_SESSION['cliente_id'])): ?>
-  <!-- Panel de Cliente -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="display-5 fw-semibold mb-3">Panel de Cliente</h1>
-          <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+  <?php elseif (isset($_SESSION['usuarioId']) && isset($_SESSION['cliente_id'])): ?>
+    <!-- Panel de Cliente -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="display-5 fw-semibold mb-3">Panel de Cliente</h1>
+            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+          </div>
+        </div>
+
+        <!-- Menú de opciones para Cliente -->
+        <div class="row g-4">
+
+          <!-- Tarjeta 1: Mis Mascotas -->
+          <div class="col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <i class="fas fa-paw"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h5 class="card-title mb-0">Mis Mascotas</h5>
+                  </div>
+                </div>
+                <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
+                <div class="mt-auto">
+                  <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class="btn btn-success">Acceder</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Catálogo -->
+          <div class="col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h5 class="card-title mb-0">Catálogo</h5>
+                  </div>
+                </div>
+                <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
+                <div class="mt-auto">
+                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Novedades -->
+          <div class="col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <i class="fas fa-newspaper"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h5 class="card-title mb-0">Novedades</h5>
+                  </div>
+                </div>
+                <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
+                <div class="mt-auto">
+                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <!-- Menú de opciones para Cliente -->
-      <div class="row g-4">
-        
-        <!-- Tarjeta 1: Mis Mascotas -->
-        <div class="col-sm-6 col-lg-4 col-xl-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
-                <div class="flex-shrink-0">
-                  <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                    <i class="fas fa-paw"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <h5 class="card-title mb-0">Mis Mascotas</h5>
-                </div>
-              </div>
-              <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
-              <div class="mt-auto">
-                <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class="btn btn-success">Acceder</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tarjeta 2: Catálogo -->
-        <div class="col-sm-6 col-lg-4 col-xl-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
-                <div class="flex-shrink-0">
-                  <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                    <i class="fas fa-shopping-cart"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <h5 class="card-title mb-0">Catálogo</h5>
-                </div>
-              </div>
-              <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
-              <div class="mt-auto">
-                <a href="<?php echo BASE_URL; ?>public/catalogo.php" class="btn btn-info">Acceder</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tarjeta 3: Novedades -->
-        <div class="col-sm-6 col-lg-4 col-xl-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
-                <div class="flex-shrink-0">
-                  <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                    <i class="fas fa-newspaper"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <h5 class="card-title mb-0">Novedades</h5>
-                </div>
-              </div>
-              <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
-              <div class="mt-auto">
-                <a href="<?php echo BASE_URL; ?>public/novedades.php" class="btn btn-warning">Acceder</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-    <?php else: ?>
+    </section>
+  <?php else: ?>
     <!-- Contenido público para usuarios no autenticados o con otros roles -->
     <section class="py-5 bg-light border-bottom">
       <div class="container">
@@ -335,8 +335,8 @@ include_once __DIR__ . "/../src/includes/header.php";
             <h1 class="display-5 fw-semibold mb-3">Bienvenido a Veterinaria San Antón</h1>
             <p class="lead mb-4">Cuidamos a tus mascotas con amor y profesionalismo. Conocé nuestros servicios, novedades y catálogo.</p>
             <div class="d-flex gap-2 flex-wrap">
-              <a class="btn btn-success" href="<?php echo BASE_URL; ?>public/catalogo.php">Ver catálogo</a>
-              <a class="btn btn-outline-success" href="<?php echo BASE_URL; ?>public/novedades.php">Últimas novedades</a>
+              <a class="btn btn-success" href="<?php echo BASE_URL; ?>public/catalogo_list.php">Ver catálogo</a>
+              <a class="btn btn- outline-success" href="<?php echo BASE_URL; ?>public/novedad_list.php">Últimas novedades</a>
             </div>
           </div>
           <div class="col-12 col-lg-6 text-center">

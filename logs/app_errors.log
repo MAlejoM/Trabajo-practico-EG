@@ -56,3 +56,97 @@ Stack trace:
 
 ================================================================================
 
+[2026-01-02 19:09:16] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:09:16] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+[2026-01-02 19:09:16] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\catalogo_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\catalogo.php(21): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:24] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:09:24] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+[2026-01-02 19:09:24] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\novedad_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\novedades.php(22): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:25] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:09:25] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+[2026-01-02 19:09:25] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\catalogo_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\catalogo.php(21): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:26] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:09:26] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+[2026-01-02 19:09:26] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\novedad_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\novedades.php(22): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:26] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:09:26] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+[2026-01-02 19:09:26] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\catalogo_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\catalogo.php(21): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:27] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:09:27] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+[2026-01-02 19:09:27] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\novedad_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\novedades.php(22): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:27] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:09:27] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+[2026-01-02 19:09:27] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\catalogos.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\catalogo_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\catalogo.php(21): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:09:28] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:09:28] WARNING: require_once(C:\xampp\htdocs\src\logic/../includes/db.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+[2026-01-02 19:09:28] Exception: Failed opening required 'C:\xampp\htdocs\src\logic/../includes/db.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\src\logic\novedades.logic.php:2
+Stack trace:
+#0 C:\xampp\htdocs\public\novedad_list.php(3): require_once()
+#1 C:\xampp\htdocs\public\novedades.php(22): include_once('C:\\xampp\\htdocs...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 19:10:54] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:10:58] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:11:02] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\novedad_list.php:2
+[2026-01-02 19:11:10] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77
+[2026-01-02 19:11:59] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77
+[2026-01-02 19:12:02] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:12:02] WARNING: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\public\catalogo.php:12) in C:\xampp\htdocs\public\catalogo_list.php:8
+[2026-01-02 19:12:07] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\public\catalogo_list.php:2
+[2026-01-02 19:12:07] WARNING: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\public\catalogo.php:12) in C:\xampp\htdocs\public\catalogo_list.php:8
+[2026-01-02 19:19:34] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77
+[2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:265
+[2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:315
+[2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:265
+[2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:315
