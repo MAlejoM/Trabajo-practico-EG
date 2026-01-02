@@ -5,3 +5,5 @@ logs/
 # Archivos de configuración local (si existen)
 .env
 config.local.php
+
+app_errors.log
