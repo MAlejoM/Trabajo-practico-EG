@@ -56,15 +56,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcion = $_POST['descripcion'] ?? '';
     $servicioId = $_POST['servicioId'] ?? '';
 
-    // Si no es admin, el personalId se mantiene fijo
+    // Si no es admin, el personalId y el estado se mantienen fijos
     $personalId = ($user_role === 'admin') ? ($_POST['personalId'] ?? $atencion['personalId']) : $atencion['personalId'];
+    $estado = ($user_role === 'admin') ? ($_POST['estado'] ?? $atencion['estado']) : $atencion['estado'];
 
     $fechaHora = $_POST['fechaHora'] ?? '';
 
-    if (empty($titulo) || empty($personalId) || empty($fechaHora)) {
+    if (empty($titulo) || empty($personalId) || empty($fechaHora) || empty($estado)) {
         $error = "Por favor, completa todos los campos obligatorios.";
     } else {
-        $resultado = update_atencion($id_atencion, $titulo, $descripcion, $servicioId, $personalId, $fechaHora);
+        $resultado = update_atencion($id_atencion, $titulo, $descripcion, $servicioId, $personalId, $fechaHora, $estado);
         if ($resultado) {
             $mensaje = "Atención actualizada correctamente.";
             // Recargar datos actualizados
@@ -160,9 +161,20 @@ $personal_list = get_all_personal();
                                 <div id="serviceHelp" class="form-text">Solo se muestran los servicios habilitados para el profesional seleccionado.</div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="fechaHora" class="form-label fw-bold">Fecha y Hora *</label>
                                 <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($atencion['fechaHora'])); ?>" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="estado" class="form-label fw-bold">Estado *</label>
+                                <select name="estado" id="estado" class="form-select" required <?php echo ($user_role !== 'admin') ? 'disabled' : ''; ?>>
+                                    <option value="pendiente" <?php echo ($atencion['estado'] === 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
+                                    <option value="realizada" <?php echo ($atencion['estado'] === 'realizada') ? 'selected' : ''; ?>>Realizada</option>
+                                </select>
+                                <?php if ($user_role !== 'admin'): ?>
+                                    <input type="hidden" name="estado" value="<?php echo $atencion['estado']; ?>">
+                                <?php endif; ?>
                             </div>
 
                             <div class="col-12">
