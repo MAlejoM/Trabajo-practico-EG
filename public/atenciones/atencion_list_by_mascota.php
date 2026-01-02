@@ -20,7 +20,7 @@ if (!$mascota) {
 }
 
 
-if ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'personal' && $mascota['clienteId'] != $_SESSION['cliente_id']) {
+if (!isset($_SESSION['personal_id']) && (!isset($_SESSION['cliente_id']) || $mascota['clienteId'] != $_SESSION['cliente_id'])) {
     echo "<div class='container py-4'><div class='alert alert-danger'>No tienes permiso para ver esta mascota.</div></div>";
     include_once __DIR__ . "/../../src/includes/footer.php";
     exit;
