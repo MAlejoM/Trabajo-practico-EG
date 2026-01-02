@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_perfil']))
         $nombre = trim($_POST['nombre']);
         $apellido = trim($_POST['apellido']);
         $email = trim($_POST['email']);
-        
+
         // Validaciones básicas
         if (empty($nombre) || empty($apellido) || empty($email)) {
             $mensaje = 'Todos los campos obligatorios deben estar completos.';
@@ -72,17 +72,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_perfil']))
                 'nombre' => $nombre,
                 'apellido' => $apellido
             ];
-            
+
             $resultado = update_usuario_personal($_SESSION['usuarioId'], $datos);
-            
+
             if ($resultado) {
                 // Actualizar sesión
                 $_SESSION['nombre'] = $nombre;
                 $_SESSION['apellido'] = $apellido;
-                
+
                 $mensaje = 'Perfil actualizado correctamente.';
                 $tipo_mensaje = 'success';
-                
+
                 // Recargar datos del usuario
                 $stmt = $db->prepare("
                     SELECT 
@@ -114,28 +114,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_perfil']))
     }
 }
 
-// Procesar cambio de contraseña (solo para clientes)
+// Procesar cambio de contraseña (PARA TODOS los usuarios)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])) {
-    if (!$es_cliente) {
-        $mensaje = 'Solo los clientes pueden cambiar su contraseña desde este formulario.';
+    $clave_actual = $_POST['clave_actual'];
+    $nueva_clave = $_POST['nueva_clave'];
+    $confirmar_clave = $_POST['confirmar_clave'];
+
+    // Validaciones mejoradas
+    if (empty($clave_actual) || empty($nueva_clave) || empty($confirmar_clave)) {
+        $mensaje = 'Todos los campos son obligatorios.';
+        $tipo_mensaje = 'danger';
+    } elseif (strlen($nueva_clave) < 8) {
+        $mensaje = 'La contraseña debe tener al menos 8 caracteres.';
+        $tipo_mensaje = 'danger';
+    } elseif ($nueva_clave !== $confirmar_clave) {
+        $mensaje = 'Las contraseñas nuevas no coinciden.';
         $tipo_mensaje = 'danger';
     } else {
-        $clave_actual = $_POST['clave_actual'];
-        $nueva_clave = $_POST['nueva_clave'];
-        $confirmar_clave = $_POST['confirmar_clave'];
-        
-        // Validaciones
-        if (empty($clave_actual) || empty($nueva_clave) || empty($confirmar_clave)) {
-            $mensaje = 'Todos los campos son obligatorios.';
-            $tipo_mensaje = 'danger';
-        } elseif ($nueva_clave !== $confirmar_clave) {
-            $mensaje = 'Las contraseñas nuevas no coinciden.';
-            $tipo_mensaje = 'danger';
-        } else {
-            $resultado = cambiar_contrasena($_SESSION['usuarioId'], $clave_actual, $nueva_clave);
-            $mensaje = $resultado['mensaje'];
-            $tipo_mensaje = $resultado['success'] ? 'success' : 'danger';
-        }
+        $resultado = cambiar_contrasena($_SESSION['usuarioId'], $clave_actual, $nueva_clave);
+        $mensaje = $resultado['mensaje'];
+        $tipo_mensaje = $resultado['success'] ? 'success' : 'danger';
     }
 }
 ?>
@@ -155,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         <?php endif; ?>
-                        
+
                         <!-- Información básica -->
                         <div class="text-center mb-4">
                             <img src="<?php echo BASE_URL; ?>public/uploads/Perfil.jpeg" alt="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover">
@@ -171,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <!-- VISTA PARA CLIENTES: Solo cambio de contraseña -->
                             <div class="alert alert-info">
                                 <i class="fas fa-info-circle me-1"></i>
-                                <strong>Información:</strong> Como cliente, solo puedes cambiar tu contraseña. 
+                                <strong>Información:</strong> Como cliente, solo puedes cambiar tu contraseña.
                                 Para modificar otros datos, contacta al administrador.
                             </div>
 
@@ -213,12 +211,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                                     <input type="password" class="form-control" id="clave_actual" name="clave_actual" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nueva_clave" class="form-label">Nueva Contraseña * (mínimo 6 caracteres)</label>
-                                    <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="6" required>
+                                    <label for="nueva_clave" class="form-label">Nueva Contraseña * (mínimo 8 caracteres)</label>
+                                    <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="8" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="confirmar_clave" class="form-label">Confirmar Nueva Contraseña *</label>
-                                    <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="6" required>
+                                    <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="8" required>
                                 </div>
                                 <button type="submit" name="cambiar_contrasena" class="btn btn-success w-100">
                                     <i class="fas fa-key me-1"></i> Cambiar Contraseña
@@ -230,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <?php if ($es_admin): ?>
                                 <div class="alert alert-success">
                                     <i class="fas fa-crown me-1"></i>
-                                    <strong>Administrador:</strong> Puedes gestionar todos los usuarios desde el 
+                                    <strong>Administrador:</strong> Puedes gestionar todos los usuarios desde el
                                     <a href="<?php echo BASE_URL; ?>public/usuarios/usuario_list.php" class="alert-link">módulo de usuarios</a>.
                                 </div>
                             <?php endif; ?>
@@ -267,6 +265,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
 
                                 <button type="submit" name="actualizar_perfil" class="btn btn-success w-100">
                                     <i class="fas fa-save me-1"></i> Actualizar Perfil
+                                </button>
+                            </form>
+
+                            <!-- Sección de Cambio de Contraseña para Personal/Admin -->
+                            <hr class="my-4">
+                            <h5 class="mb-3">Cambiar Contraseña</h5>
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="clave_actual" class="form-label">Contraseña Actual *</label>
+                                    <input type="password" class="form-control" id="clave_actual" name="clave_actual" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nueva_clave" class="form-label">Nueva Contraseña * (mínimo 8 caracteres)</label>
+                                    <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="8" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmar_clave" class="form-label">Confirmar Nueva Contraseña *</label>
+                                    <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="8" required>
+                                </div>
+                                <button type="submit" name="cambiar_contrasena" class="btn btn-warning w-100">
+                                    <i class="fas fa-key me-1"></i> Cambiar Contraseña
                                 </button>
                             </form>
                         <?php endif; ?>

@@ -56,3 +56,13 @@ Stack trace:
 
 ================================================================================
 
+[2026-01-02 14:38:18] Exception: Table 'veterinaria_db.password_reset_tokens' doesn't exist in C:\xampp\htdocs\src\logic\password_recovery.logic.php:56
+Stack trace:
+#0 C:\xampp\htdocs\src\logic\password_recovery.logic.php(56): mysqli->prepare('UPDATE password...')
+#1 C:\xampp\htdocs\public\forgot_password.php(27): solicitar_recuperacion('alejomartina477...')
+#2 {main}
+
+================================================================================
+
+[2026-01-02 14:45:06] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77
+[2026-01-02 14:45:28] NOTICE: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\src\logic\auth.logic.php:77

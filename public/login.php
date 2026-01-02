@@ -11,7 +11,7 @@ require_once __DIR__ . '/../src/includes/header.php';
 ?>
 
 <script>
-document.body.classList.add('login-page');
+  document.body.classList.add('login-page');
 </script>
 
 <main class="login-main py-4">
@@ -40,14 +40,20 @@ document.body.classList.add('login-page');
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" id="email" required class="form-control" placeholder="tu@email.com">
               </div>
-              
+
               <div class="mb-4">
                 <label for="clave" class="form-label">Contraseña</label>
                 <input type="password" name="clave" id="clave" required class="form-control" placeholder="Ingresá tu contraseña">
               </div>
-              
+
               <div class="d-grid">
                 <button type="submit" class="btn btn-success btn-lg">Iniciar sesión</button>
+              </div>
+
+              <div class="text-center mt-3">
+                <a href="forgot_password.php" class="text-muted small text-decoration-none">
+                  <i class="fas fa-key me-1"></i>¿Olvidaste tu contraseña?
+                </a>
               </div>
             </form>
           </div>

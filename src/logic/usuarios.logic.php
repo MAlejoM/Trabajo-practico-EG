@@ -4,13 +4,14 @@ require_once __DIR__ . '/../lib/funciones.php';
 
 
 // trae todos los usuarios con sus roles y tipos
-function get_all_usuarios($mostrar_inactivos = false) {
+function get_all_usuarios($mostrar_inactivos = false)
+{
     $db = conectarDb();
-    
+
     // Si mostrar_inactivos es false, filtramos SOLO activos (activo = 1)
     // Si es true, no filtramos (mostramos todos)
     $filtro_activo = $mostrar_inactivos ? "" : "WHERE u.activo = 1";
-    
+
     $stmt = $db->prepare("
         SELECT 
             u.id,
@@ -40,14 +41,14 @@ function get_all_usuarios($mostrar_inactivos = false) {
     $stmt->execute();
     $result = $stmt->get_result();
     $usuarios = array();
-    
+
     while ($row = $result->fetch_assoc()) {
         $usuarios[] = $row;
     }
-    
+
     $stmt->close();
     $db->close();
-    
+
     return $usuarios;
 }
 
@@ -56,7 +57,8 @@ function get_all_usuarios($mostrar_inactivos = false) {
  * @param int $usuario_id ID del usuario
  * @return array|null Datos del usuario o null si no existe
  */
-function get_usuario_completo_by_id($usuario_id) {
+function get_usuario_completo_by_id($usuario_id)
+{
     $db = conectarDb();
     $stmt = $db->prepare("
         SELECT 
@@ -89,7 +91,7 @@ function get_usuario_completo_by_id($usuario_id) {
     $usuario = $result->fetch_assoc();
     $stmt->close();
     $db->close();
-    
+
     return $usuario;
 }
 
@@ -99,9 +101,10 @@ function get_usuario_completo_by_id($usuario_id) {
  * @param array $datos Datos a actualizar (email, nombre, apellido, activo)
  * @return bool True si se actualizó correctamente
  */
-function update_usuario_admin($usuario_id, $datos) {
+function update_usuario_admin($usuario_id, $datos)
+{
     $db = conectarDb();
-    
+
     if (isset($datos['email'])) {
         $stmt = $db->prepare("SELECT id FROM Usuarios WHERE email = ? AND id != ?");
         $stmt->bind_param("si", $datos['email'], $usuario_id);
@@ -114,7 +117,7 @@ function update_usuario_admin($usuario_id, $datos) {
         }
         $stmt->close();
     }
-    
+
 
     $stmt = $db->prepare("
         UPDATE Usuarios 
@@ -129,11 +132,11 @@ function update_usuario_admin($usuario_id, $datos) {
         $datos['activo'],
         $usuario_id
     );
-    
+
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     return $result;
 }
 
@@ -144,9 +147,10 @@ function update_usuario_admin($usuario_id, $datos) {
  * @return bool True si se actualizó correctamente
  */
 
-function update_usuario_personal($usuario_id, $datos) {
+function update_usuario_personal($usuario_id, $datos)
+{
     $db = conectarDb();
-    
+
     // Validar que el email no esté duplicado
     if (isset($datos['email'])) {
         $stmt = $db->prepare("SELECT id FROM Usuarios WHERE email = ? AND id != ?");
@@ -160,7 +164,7 @@ function update_usuario_personal($usuario_id, $datos) {
         }
         $stmt->close();
     }
-    
+
     $stmt = $db->prepare("
         UPDATE Usuarios 
         SET email = ?, nombre = ?, apellido = ?
@@ -173,11 +177,11 @@ function update_usuario_personal($usuario_id, $datos) {
         $datos['apellido'],
         $usuario_id
     );
-    
+
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     return $result;
 }
 
@@ -189,46 +193,51 @@ function update_usuario_personal($usuario_id, $datos) {
  * @return array Array con 'success' (bool) y 'mensaje' (string)
  */
 
-function cambiar_contrasena($usuario_id, $clave_actual, $nueva_clave) {
+function cambiar_contrasena($usuario_id, $clave_actual, $nueva_clave)
+{
     $db = conectarDb();
-    
-    // Obtener la clave actual hasheada
-    $stmt = $db->prepare("SELECT clave FROM Usuarios WHERE id = ?");
+
+    // Obtener datos del usuario incluyendo email y nombre
+    $stmt = $db->prepare("
+        SELECT u.id, u.clave, u.email, u.nombre, u.apellido 
+        FROM Usuarios u 
+        WHERE u.id = ?
+    ");
     $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $usuario = $result->fetch_assoc();
     $stmt->close();
-    
+
     if (!$usuario) {
         $db->close();
         return ['success' => false, 'mensaje' => 'Usuario no encontrado'];
     }
-    
+
     // Verificar contraseña actual
     // Soporta tanto contraseñas hasheadas como texto plano (para migración)
     $password_valida = false;
-    
+
     // Primero intentar con password_verify (hash bcrypt)
     if (password_verify($clave_actual, $usuario['clave'])) {
         $password_valida = true;
-    } 
+    }
     // Si falla, comparar como texto plano (para contraseñas legacy)
     elseif ($clave_actual === $usuario['clave']) {
         $password_valida = true;
     }
-    
+
     if (!$password_valida) {
         $db->close();
         return ['success' => false, 'mensaje' => 'La contraseña actual es incorrecta'];
     }
-    
-    // Validar longitud de nueva contraseña
-    if (strlen($nueva_clave) < 6) {
+
+    // Validar longitud de nueva contraseña (mínimo 8 caracteres)
+    if (strlen($nueva_clave) < 8) {
         $db->close();
-        return ['success' => false, 'mensaje' => 'La nueva contraseña debe tener al menos 6 caracteres'];
+        return ['success' => false, 'mensaje' => 'La nueva contraseña debe tener al menos 8 caracteres'];
     }
-    
+
     // Hashear y actualizar nueva contraseña
     $nueva_clave_hash = password_hash($nueva_clave, PASSWORD_DEFAULT);
     $stmt = $db->prepare("UPDATE Usuarios SET clave = ? WHERE id = ?");
@@ -236,9 +245,14 @@ function cambiar_contrasena($usuario_id, $clave_actual, $nueva_clave) {
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     if ($result) {
-        return ['success' => true, 'mensaje' => 'Contraseña actualizada correctamente'];
+        // Enviar email de confirmación
+        require_once __DIR__ . '/mail.logic.php';
+        $nombre_completo = $usuario['nombre'] . ' ' . $usuario['apellido'];
+        enviar_email_confirmacion_cambio($usuario['email'], $nombre_completo);
+
+        return ['success' => true, 'mensaje' => 'Contraseña actualizada correctamente. Se ha enviado un email de confirmación.'];
     } else {
         return ['success' => false, 'mensaje' => 'Error al actualizar la contraseña'];
     }
@@ -252,17 +266,18 @@ function cambiar_contrasena($usuario_id, $clave_actual, $nueva_clave) {
  * @return bool True si tiene permisos
  */
 
-function validar_permisos_edicion($usuario_actual_id, $usuario_editar_id, $rol_actual) {
+function validar_permisos_edicion($usuario_actual_id, $usuario_editar_id, $rol_actual)
+{
     // El administrador puede editar cualquier usuario
     if ($rol_actual === 'admin') {
         return true;
     }
-    
+
     // El personal solo puede editar sus propios datos
     if ($usuario_actual_id == $usuario_editar_id) {
         return true;
     }
-    
+
     return false;
 }
 
@@ -274,9 +289,10 @@ function validar_permisos_edicion($usuario_actual_id, $usuario_editar_id, $rol_a
  * @return bool True si se actualizó correctamente
  */
 
-function update_cliente_datos($cliente_id, $datos) {
+function update_cliente_datos($cliente_id, $datos)
+{
     $db = conectarDb();
-    
+
     $stmt = $db->prepare("
         UPDATE Clientes 
         SET telefono = ?, direccion = ?, ciudad = ?
@@ -289,11 +305,11 @@ function update_cliente_datos($cliente_id, $datos) {
         $datos['ciudad'],
         $cliente_id
     );
-    
+
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     return $result;
 }
 
@@ -302,14 +318,15 @@ function update_cliente_datos($cliente_id, $datos) {
  * @param int $usuario_id ID del usuario
  * @return bool True si se dio de baja correctamente
  */
-function dar_baja_usuario($usuario_id) {
+function dar_baja_usuario($usuario_id)
+{
     $db = conectarDb();
     $stmt = $db->prepare("UPDATE Usuarios SET activo = 0 WHERE id = ?");
     $stmt->bind_param("i", $usuario_id);
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     return $result;
 }
 
@@ -318,14 +335,14 @@ function dar_baja_usuario($usuario_id) {
  * @param int $usuario_id ID del usuario
  * @return bool True si se reactivó correctamente
  */
-function reactivar_usuario($usuario_id) {
+function reactivar_usuario($usuario_id)
+{
     $db = conectarDb();
     $stmt = $db->prepare("UPDATE Usuarios SET activo = 1 WHERE id = ?");
     $stmt->bind_param("i", $usuario_id);
     $result = $stmt->execute();
     $stmt->close();
     $db->close();
-    
+
     return $result;
 }
-?>
