@@ -330,17 +330,7 @@ Acceder a `http://localhost/public/login.php` y probar el flujo completo
 ---
 
 ## ⚙️ Mantenimiento
-
-### Limpieza de Tokens Expirados
-
-Ejecutar periódicamente (cron job o manualmente):
-
-```php
-require_once 'src/logic/password_recovery.logic.php';
-$eliminados = limpiar_tokens_expirados();
-echo "Tokens eliminados: $eliminados";
-```
-
+ 
 Recomendación: Ejecutar diariamente
 
 ### Logs
