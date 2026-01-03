@@ -307,7 +307,7 @@ function get_all_atenciones($mostrar_inactivas = false)
   $stmt = $db->prepare("
     SELECT 
       a.id,
-      a.fechaHora as fecha,
+      a.fechaHora,
       a.titulo,
       a.descripcion,
       a.estado,
