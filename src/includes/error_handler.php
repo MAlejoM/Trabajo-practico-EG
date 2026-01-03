@@ -3,7 +3,7 @@
 /**
  * CONFIGURACIÓN DE MODO - Cambiar a false en producción
  */
-define('DEV_MODE', false);
+define('DEV_MODE', true);
 
 /**
  * Manejador global de excepciones

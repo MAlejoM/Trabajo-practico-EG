@@ -16,7 +16,7 @@ $is_cliente = isset($_SESSION['cliente_id']);
         <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class='btn btn-success mb-2 w-100'>ADMINISTRAR CATÁLOGO</a>
         <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class='btn btn-success mb-2 w-100'>ADMINISTRAR NOVEDADES</a>
         <a href="<?php echo BASE_URL; ?>public/usuarios/usuario_list.php" class='btn btn-success mb-2 w-100'>USUARIOS</a>
-        <a href="<?php echo BASE_URL; ?>public/servicios.php" class='btn btn-success mb-2 w-100'>SERVICIOS</a>
+        <a href="<?php echo BASE_URL; ?>public/servicios/index.php" class='btn btn-success mb-2 w-100'>SERVICIOS</a>
         <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class='btn btn-success mb-2 w-100'>MASCOTAS</a>
         <a href="<?php echo BASE_URL; ?>public/atencion_list.php" class='btn btn-success mb-2 w-100'>ATENCIONES</a>
 
