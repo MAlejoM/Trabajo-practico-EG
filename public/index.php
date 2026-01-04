@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . "/../src/includes/header.php";
+include_once __DIR__ . "/../src/Templates/header.php";
 
 ?>
 <main>
@@ -32,7 +32,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión completa de productos y servicios del catálogo.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/catalogos/index.php" class="btn btn-info">Acceder</a>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Control de noticias y actualizaciones del sitio web.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/novedades/index.php" class="btn btn-warning">Acceder</a>
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de usuarios, roles y permisos del sistema.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/usuarios/usuario_list.php" class="btn btn-danger">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/usuarios/index.php" class="btn btn-danger">Acceder</a>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Configuración y gestión de servicios disponibles.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/servicios.php" class="btn btn-secondary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/servicios/index.php" class="btn btn-secondary">Acceder</a>
                 </div>
               </div>
             </div>
@@ -116,7 +116,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas y historial médico.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/mascotas/index.php" class="btn btn-success">Acceder</a>
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas y consultas.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/atencion_list.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/atenciones/index.php" class="btn btn-primary">Acceder</a>
                 </div>
               </div>
             </div>
@@ -173,7 +173,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Ver productos y servicios disponibles en la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/catalogos/index.php" class="btn btn-info">Acceder</a>
                 </div>
               </div>
             </div>
@@ -194,7 +194,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Últimas noticias y actualizaciones de la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/novedades/index.php" class="btn btn-warning">Acceder</a>
                 </div>
               </div>
             </div>
@@ -215,7 +215,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas, historial médico y datos de contacto.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/mascota_list.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/mascotas/index.php" class="btn btn-success">Acceder</a>
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas, consultas y seguimientos de pacientes.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/atencion_list.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/atenciones/index.php" class="btn btn-primary">Acceder</a>
                 </div>
               </div>
             </div>
@@ -274,7 +274,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/mis_mascotas.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/mascotas/mis_mascotas.php" class="btn btn-success">Acceder</a>
                 </div>
               </div>
             </div>
@@ -296,7 +296,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/catalogo_list.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/catalogos/index.php" class="btn btn-info">Acceder</a>
                 </div>
               </div>
             </div>
@@ -318,7 +318,7 @@ include_once __DIR__ . "/../src/includes/header.php";
                 </div>
                 <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>public/novedad_list.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>public/novedades/index.php" class="btn btn-warning">Acceder</a>
                 </div>
               </div>
             </div>
@@ -335,8 +335,8 @@ include_once __DIR__ . "/../src/includes/header.php";
             <h1 class="display-5 fw-semibold mb-3">Bienvenido a Veterinaria San Antón</h1>
             <p class="lead mb-4">Cuidamos a tus mascotas con amor y profesionalismo. Conocé nuestros servicios, novedades y catálogo.</p>
             <div class="d-flex gap-2 flex-wrap">
-              <a class="btn btn-success" href="<?php echo BASE_URL; ?>public/catalogo_list.php">Ver catálogo</a>
-              <a class="btn btn- outline-success" href="<?php echo BASE_URL; ?>public/novedad_list.php">Últimas novedades</a>
+              <a class="btn btn-success" href="<?php echo BASE_URL; ?>public/catalogos/index.php">Ver catálogo</a>
+              <a class="btn btn- outline-success" href="<?php echo BASE_URL; ?>public/novedades/index.php">Últimas novedades</a>
             </div>
           </div>
           <div class="col-12 col-lg-6 text-center">
@@ -349,4 +349,4 @@ include_once __DIR__ . "/../src/includes/header.php";
 </main>
 
 <?php
-include_once __DIR__ . "/../src/includes/footer.php"; ?>
+include_once __DIR__ . "/../src/Templates/footer.php"; ?>

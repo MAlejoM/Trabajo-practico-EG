@@ -1,9 +1,12 @@
 <?php
-include_once __DIR__ . "/../../src/includes/header.php";
-include_once __DIR__ . "/../../src/lib/funciones.php";
-include_once __DIR__ . "/../../src/logic/servicios.logic.php";
+include_once __DIR__ . "/../../src/Templates/header.php";
 
-if (!verificar_es_admin()) {
+// include_once __DIR__ . "/../../src/logic/servicios.logic.php";
+
+use App\Modules\Servicios\ServicioService;
+use App\Modules\Usuarios\UsuarioService;
+
+if (!UsuarioService::esAdmin()) {
     header("Location: " . BASE_URL . "public/index.php");
     exit();
 }
@@ -14,7 +17,7 @@ if (!$id) {
     exit();
 }
 
-$servicio = get_servicio_by_id($id);
+$servicio = ServicioService::getById($id);
 if (!$servicio) {
     header("Location: index.php");
     exit();
@@ -25,38 +28,31 @@ $exito = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['guardar_cambios'])) {
-        $nombre = trim($_POST['nombre'] ?? '');
-        $precio = floatval($_POST['precio'] ?? 0);
-        $rol_ids = $_POST['roles'] ?? []; // Array de IDs de roles
+        $data = [
+            'nombre' => trim($_POST['nombre'] ?? ''),
+            'precio' => floatval($_POST['precio'] ?? 0),
+            'roles' => $_POST['roles'] ?? []
+        ];
 
-        if (empty($nombre)) {
-            $error = "El nombre del servicio es obligatorio.";
-        } elseif ($precio < 0) {
-            $error = "El precio no puede ser negativo.";
-        } else {
-            // Actualizar datos básicos
-            $ok_datos = actualizar_servicio($id, $nombre, $precio);
-
-            // Actualizar roles asignados
-            $ok_roles = asignar_roles_a_servicio($id, $rol_ids);
-
-            if ($ok_datos && $ok_roles) {
+        try {
+            if (ServicioService::update($id, $data)) {
                 $exito = "Servicio actualizado correctamente.";
-                // Refrescar datos
-                $servicio = get_servicio_by_id($id);
+                $servicio = ServicioService::getById($id); // Refrescar
             } else {
-                $error = "Error al intentar actualizar el servicio o sus roles.";
+                $error = "Error al actualizar el servicio.";
             }
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
     } elseif (isset($_POST['dar_baja'])) {
-        if (dar_baja_servicio($id)) {
+        if (ServicioService::delete($id)) {
             $exito = "Servicio desactivado correctamente.";
             $servicio['activo'] = 0;
         } else {
             $error = "Error al desactivar el servicio.";
         }
     } elseif (isset($_POST['reactivar'])) {
-        if (reactivar_servicio($id)) {
+        if (ServicioService::reactivate($id)) {
             $exito = "Servicio reactivado correctamente.";
             $servicio['activo'] = 1;
         } else {
@@ -65,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$all_roles = get_all_roles();
-$roles_asignados = get_roles_ids_by_servicio($id);
+$all_roles = ServicioService::getAllRoles();
+$roles_asignados = ServicioService::getRolesIds($id);
 ?>
 
 <div class="container py-4">
@@ -75,7 +71,7 @@ $roles_asignados = get_roles_ids_by_servicio($id);
             <div class="card sticky-top" style="top: 1rem;">
                 <div class="card-header fw-semibold">Menú principal</div>
                 <div class="card-body d-grid gap-2">
-                    <?php include_once __DIR__ . "/../../src/includes/menu_lateral.php"; ?>
+                    <?php include_once __DIR__ . "/../../src/Templates/menu_lateral.php"; ?>
                 </div>
             </div>
         </aside>
@@ -184,4 +180,4 @@ $roles_asignados = get_roles_ids_by_servicio($id);
     }
 </style>
 
-<?php include_once __DIR__ . "/../../src/includes/footer.php"; ?>
+<?php include_once __DIR__ . "/../../src/Templates/footer.php"; ?>

@@ -3,31 +3,30 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-include_once __DIR__ . '/../../src/includes/header.php';
-require_once __DIR__ . '/../../src/logic/novedades.logic.php';
+include_once __DIR__ . '/../../src/Templates/header.php';
+
+use App\Modules\Novedades\NovedadService;
 
 // Verificar que el usuario sea admin
 if (!isset($_SESSION['usuarioId']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-  header('Location: ../novedad_list.php');
+  header('Location: index.php');
   exit;
 }
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id <= 0) {
-  $_SESSION['mensaje'] = 'ID de novedad inválido';
-  $_SESSION['tipo_mensaje'] = 'danger';
-  header('Location: ../novedad_list.php');
+  header('Location: index.php');
   exit;
 }
 
 // Obtener la novedad
-$novedad = obtenerNovedadPorId($id);
+$novedad = NovedadService::getById($id);
 
 if (!$novedad) {
   $_SESSION['mensaje'] = 'Novedad no encontrada';
   $_SESSION['tipo_mensaje'] = 'danger';
-  header('Location: ../novedad_list.php');
+  header('Location: index.php');
   exit;
 }
 
@@ -35,55 +34,26 @@ $mensaje = '';
 $tipoMensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $titulo = trim($_POST['titulo'] ?? '');
-  $contenido = trim($_POST['contenido'] ?? '');
+  try {
+    $resultado = NovedadService::update($id, $_POST);
 
-  // Validaciones
-  if (empty($titulo)) {
-    $mensaje = 'El título es obligatorio';
-    $tipoMensaje = 'danger';
-  } elseif (empty($contenido)) {
-    $mensaje = 'El contenido es obligatorio';
-    $tipoMensaje = 'danger';
-  } else {
-    // Procesar imagen si se subió una nueva
-    $imagenBlob = null;
-    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-      // Validar tipo de archivo
-      $tipoArchivo = $_FILES['imagen']['type'];
-      $extensionesPermitidas = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-
-      if (!in_array($tipoArchivo, $extensionesPermitidas)) {
-        $mensaje = 'Formato de imagen no permitido. Use JPG, PNG o GIF';
-        $tipoMensaje = 'danger';
-      } elseif ($_FILES['imagen']['size'] > 5000000) { // 5MB
-        $mensaje = 'La imagen es demasiado grande (máximo 5MB)';
-        $tipoMensaje = 'danger';
-      } else {
-        // Leer el archivo como datos binarios
-        $imagenBlob = file_get_contents($_FILES['imagen']['tmp_name']);
-      }
+    if ($resultado) {
+      $_SESSION['mensaje'] = 'Novedad actualizada exitosamente';
+      $_SESSION['tipo_mensaje'] = 'success';
+      header('Location: index.php');
+      exit;
+    } else {
+      $mensaje = 'Error al actualizar la novedad';
+      $tipoMensaje = 'danger';
     }
-
-    // Si no hubo error, modificar la novedad
-    if ($tipoMensaje !== 'danger') {
-      $resultado = modificarNovedad($id, $titulo, $contenido, $imagenBlob);
-
-      if ($resultado) {
-        $_SESSION['mensaje'] = 'Novedad actualizada exitosamente';
-        $_SESSION['tipo_mensaje'] = 'success';
-        header('Location: ../novedad_list.php');
-        exit;
-      } else {
-        $mensaje = 'Error al actualizar la novedad';
-        $tipoMensaje = 'danger';
-      }
-    }
+  } catch (Exception $e) {
+    $mensaje = $e->getMessage();
+    $tipoMensaje = 'danger';
   }
 
-  // Actualizar datos para mostrar en el formulario
-  $novedad['titulo'] = $titulo;
-  $novedad['contenido'] = $contenido;
+  // Actualizar datos para mostrar en el formulario (por si hubo error)
+  $novedad['titulo'] = $_POST['titulo'];
+  $novedad['contenido'] = $_POST['contenido'];
 }
 ?>
 
@@ -93,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="card sticky-top" style="top: 1rem;">
         <div class="card-header fw-semibold">Menú principal</div>
         <div class="card-body d-grid gap-2">
-          <?php include_once __DIR__ . '/../../src/includes/menu_lateral.php'; ?>
+          <?php include_once __DIR__ . '/../../src/Templates/menu_lateral.php'; ?>
         </div>
       </div>
     </aside>
@@ -159,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <hr class="my-4">
             <div class="d-flex gap-2 justify-content-between">
-              <a href="../novedad_list.php" class="btn btn-secondary">
+              <a href="index.php" class="btn btn-secondary">
                 <i class="fas fa-arrow-left me-1"></i> Volver
               </a>
               <button type="submit" class="btn btn-success">
@@ -174,5 +144,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php
-include_once __DIR__ . '/../../src/includes/footer.php';
+include_once __DIR__ . '/../../src/Templates/footer.php';
 ?>
