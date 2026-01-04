@@ -3,11 +3,13 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-require_once __DIR__ . '/../../src/logic/novedades.logic.php';
+require_once __DIR__ . '/../../src/autoload.php';
+
+use App\Modules\Novedades\NovedadService;
 
 // Verificar que el usuario sea admin
 if (!isset($_SESSION['usuarioId']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-  header('Location: ../novedad_list.php');
+  header('Location: index.php');
   exit;
 }
 
@@ -15,7 +17,7 @@ if (!isset($_SESSION['usuarioId']) || !isset($_SESSION['rol']) || $_SESSION['rol
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id > 0) {
-  $resultado = eliminarNovedad($id);
+  $resultado = NovedadService::delete($id);
 
   if ($resultado) {
     $_SESSION['mensaje'] = 'Novedad eliminada exitosamente';
@@ -29,5 +31,5 @@ if ($id > 0) {
   $_SESSION['tipo_mensaje'] = 'error';
 }
 
-header('Location: ../novedad_list.php');
+header('Location: index.php');
 exit;

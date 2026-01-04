@@ -1,10 +1,13 @@
 <?php
-include_once __DIR__ . "/../../src/includes/header.php";
-include_once __DIR__ . "/../../src/lib/funciones.php";
-include_once __DIR__ . "/../../src/logic/servicios.logic.php";
+include_once __DIR__ . "/../../src/Templates/header.php";
+// Aún necesario para otras cosas? Posiblemente sí, auth, menús.
+// include_once __DIR__ . "/../../src/logic/servicios.logic.php"; // REMOVED
+
+use App\Modules\Servicios\ServicioService;
+use App\Modules\Usuarios\UsuarioService;
 
 // Solo administradores pueden gestionar servicios
-if (!verificar_es_admin()) {
+if (!UsuarioService::esAdmin()) {
     header("Location: " . BASE_URL . "public/index.php");
     exit();
 }
@@ -15,7 +18,7 @@ $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
 // Manejo de búsqueda AJAX
 if (isset($_GET['ajax_search'])) {
     $termino = $_GET['q'] ?? '';
-    $servicios = get_all_servicios($mostrar_inactivos);
+    $servicios = ServicioService::getAll($mostrar_inactivos);
     if (!empty($termino)) {
         $servicios = array_filter($servicios, function ($s) use ($termino) {
             return strpos(strtolower($s['nombre']), strtolower($termino)) !== false;
@@ -61,15 +64,15 @@ if (isset($_GET['ajax_search'])) {
 if (isset($_GET['accion']) && isset($_GET['id'])) {
     $id = $_GET['id'];
     if ($_GET['accion'] === 'baja') {
-        dar_baja_servicio($id);
+        ServicioService::delete($id);
     } elseif ($_GET['accion'] === 'reactivar') {
-        reactivar_servicio($id);
+        ServicioService::reactivate($id);
     }
     header("Location: index.php?inactivos=" . ($mostrar_inactivos ? '1' : '0'));
     exit();
 }
 
-$servicios = get_all_servicios($mostrar_inactivos);
+$servicios = ServicioService::getAll($mostrar_inactivos);
 ?>
 
 <div class="container py-4">
@@ -78,7 +81,7 @@ $servicios = get_all_servicios($mostrar_inactivos);
             <div class="card sticky-top" style="top: 1rem;">
                 <div class="card-header fw-semibold">Menú principal</div>
                 <div class="card-body d-grid gap-2">
-                    <?php include_once __DIR__ . "/../../src/includes/menu_lateral.php"; ?>
+                    <?php include_once __DIR__ . "/../../src/Templates/menu_lateral.php"; ?>
                 </div>
             </div>
         </aside>
@@ -188,4 +191,4 @@ $servicios = get_all_servicios($mostrar_inactivos);
     });
 </script>
 
-<?php include_once __DIR__ . "/../../src/includes/footer.php"; ?>
+<?php include_once __DIR__ . "/../../src/Templates/footer.php"; ?>

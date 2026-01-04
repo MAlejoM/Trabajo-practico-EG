@@ -1,32 +1,35 @@
 <?php
-include_once __DIR__ . "/../../src/includes/header.php";
-include_once __DIR__ . "/../../src/lib/funciones.php";
+include_once __DIR__ . "/../../src/Templates/header.php";
+// Para menús y roles
+
+use App\Modules\Atenciones\AtencionService;
+use App\Modules\Mascotas\MascotaService;
 
 
 $mascota_id = $_GET['id'] ?? null;
 
 if (!$mascota_id) {
     echo "<div class='container py-4'><div class='alert alert-danger'>Mascota no especificada.</div></div>";
-    include_once __DIR__ . "/../../src/includes/footer.php";
+    include_once __DIR__ . "/../../src/Templates/footer.php";
     exit;
 }
 
-$mascota = get_mascota_by_id($mascota_id);
+$mascota = MascotaService::getById($mascota_id);
 
 if (!$mascota) {
     echo "<div class='container py-4'><div class='alert alert-danger'>Mascota no encontrada.</div></div>";
-    include_once __DIR__ . "/../../src/includes/footer.php";
+    include_once __DIR__ . "/../../src/Templates/footer.php";
     exit;
 }
 
 
 if (!isset($_SESSION['personal_id']) && (!isset($_SESSION['cliente_id']) || $mascota['clienteId'] != $_SESSION['cliente_id'])) {
     echo "<div class='container py-4'><div class='alert alert-danger'>No tienes permiso para ver esta mascota.</div></div>";
-    include_once __DIR__ . "/../../src/includes/footer.php";
+    include_once __DIR__ . "/../../src/Templates/footer.php";
     exit;
 }
 
-$atenciones = get_atenciones_by_mascota($mascota_id);
+$atenciones = AtencionService::getByMascotaId($mascota_id);
 
 ?>
 
@@ -36,16 +39,16 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
             <div class="card sticky-top" style="top: 1rem;">
                 <div class="card-header fw-semibold">Menú principal</div>
                 <div class="card-body d-grid gap-2">
-                    <?php include_once __DIR__ . "/../../src/includes/menu_lateral.php"; ?>
+                    <?php include_once __DIR__ . "/../../src/Templates/menu_lateral.php"; ?>
                 </div>
             </div>
         </aside>
         <div class="col-12 col-md-8 col-lg-9">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1 class="h4 mb-0">Atenciones de <?php echo $mascota['nombre']; ?></h1>
+                    <h1 class="h4 mb-0">Atenciones de <?php echo htmlspecialchars($mascota['nombre']); ?></h1>
                     <?php
-                    $volver_url = isset($_SESSION['cliente_id']) ? "public/mis_mascotas.php" : "public/mascota_list.php";
+                    $volver_url = isset($_SESSION['cliente_id']) ? "public/mis_mascotas.php" : "public/mascotas/index.php";
                     ?>
                     <a href="<?php echo BASE_URL . $volver_url; ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-arrow-left me-1"></i>Volver
@@ -59,7 +62,7 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>"
                                     class="rounded-circle me-3"
                                     style="width: 60px; height: 60px; object-fit: cover;"
-                                    alt="<?php echo $mascota['nombre']; ?>">
+                                    alt="<?php echo htmlspecialchars($mascota['nombre']); ?>">
                             <?php else: ?>
                                 <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-3"
                                     style="width: 60px; height: 60px;">
@@ -67,8 +70,8 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                 </div>
                             <?php endif; ?>
                             <div>
-                                <h5 class="mb-0"><?php echo $mascota['nombre']; ?></h5>
-                                <small class="text-muted"><?php echo $mascota['raza'] ?? 'Raza no especificada'; ?></small>
+                                <h5 class="mb-0"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
+                                <small class="text-muted"><?php echo htmlspecialchars($mascota['raza'] ?? 'Raza no especificada'); ?></small>
                             </div>
                         </div>
                     </div>
@@ -84,7 +87,6 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                     <tr>
                                         <th>Fecha y Hora</th>
                                         <th>Título</th>
-                                        <th>Motivo</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -92,12 +94,8 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                 <tbody>
                                     <?php foreach ($atenciones as $atencion): ?>
                                         <?php
-                                        // Lógica de estado
-                                        $tieneDescripcion = !empty($atencion['descripcion']);
-                                        $estadoCalculado = $tieneDescripcion ? 'Atendida' : 'Programada';
-                                        $badgeClass = $tieneDescripcion ? 'success' : 'warning';
-
-                                        // Fecha
+                                        $estado = $atencion['estado'] ?? 'pendiente';
+                                        $badgeClass = ($estado === 'realizada') ? 'success' : 'warning';
                                         $fechaHora = $atencion['fechaHora'] ?? null;
                                         ?>
                                         <tr>
@@ -106,13 +104,8 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                             </td>
                                             <td class="fw-bold"><?php echo htmlspecialchars($atencion['titulo'] ?? 'Sin título'); ?></td>
                                             <td>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    <?php echo htmlspecialchars($atencion['motivo'] ?? $atencion['descripcion'] ?? ''); ?>
-                                                </span>
-                                            </td>
-                                            <td>
                                                 <span class="badge bg-<?php echo $badgeClass; ?>">
-                                                    <?php echo $estadoCalculado; ?>
+                                                    <?php echo ucfirst($estado); ?>
                                                 </span>
                                             </td>
                                             <td>
@@ -137,15 +130,15 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <h6 class="fw-bold">Estado</h6>
-                                                                    <span class="badge bg-<?php echo $badgeClass; ?>"><?php echo $estadoCalculado; ?></span>
+                                                                    <span class="badge bg-<?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <h6 class="fw-bold">Fecha y Hora</h6>
                                                                     <p><?php echo $fechaHora ? date('d/m/Y H:i', strtotime($fechaHora)) : '-'; ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Descripción / Motivo</h6>
-                                                                    <p class="text-break"><?php echo nl2br(htmlspecialchars($atencion['descripcion'] ?? $atencion['motivo'] ?? '')); ?></p>
+                                                                    <h6 class="fw-bold">Descripción</h6>
+                                                                    <p class="text-break" style="white-space: pre-wrap;"><?php echo htmlspecialchars($atencion['descripcion'] ?? ''); ?></p>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -168,5 +161,5 @@ $atenciones = get_atenciones_by_mascota($mascota_id);
 </div>
 
 <?php
-include_once __DIR__ . "/../../src/includes/footer.php";
+include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>

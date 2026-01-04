@@ -1,9 +1,12 @@
 <?php
-include_once __DIR__ . "/../../src/includes/header.php";
-include_once __DIR__ . "/../../src/lib/funciones.php";
-include_once __DIR__ . "/../../src/logic/servicios.logic.php";
+include_once __DIR__ . "/../../src/Templates/header.php";
 
-if (!verificar_es_admin()) {
+// include_once __DIR__ . "/../../src/logic/servicios.logic.php";
+
+use App\Modules\Servicios\ServicioService;
+use App\Modules\Usuarios\UsuarioService;
+
+if (!UsuarioService::esAdmin()) {
     header("Location: " . BASE_URL . "public/index.php");
     exit();
 }
@@ -12,29 +15,26 @@ $error = null;
 $exito = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = trim($_POST['nombre'] ?? '');
-    $precio = floatval($_POST['precio'] ?? 0);
-    $rol_ids = $_POST['roles'] ?? []; // Array de IDs de roles
+    $data = [
+        'nombre' => trim($_POST['nombre'] ?? ''),
+        'precio' => floatval($_POST['precio'] ?? 0),
+        'roles' => $_POST['roles'] ?? []
+    ];
 
-    if (empty($nombre)) {
-        $error = "El nombre del servicio es obligatorio.";
-    } elseif ($precio < 0) {
-        $error = "El precio no puede ser negativo.";
-    } else {
-        $nuevo_id = insertar_servicio($nombre, $precio);
+    try {
+        $nuevo_id = ServicioService::create($data);
         if ($nuevo_id) {
-            // Asignar roles seleccionados
-            asignar_roles_a_servicio($nuevo_id, $rol_ids);
-
             header("Location: index.php?exito=creado");
             exit();
         } else {
             $error = "Error al intentar crear el servicio.";
         }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
     }
 }
 
-$all_roles = get_all_roles();
+$all_roles = ServicioService::getAllRoles();
 ?>
 
 <div class="container py-4">
@@ -43,7 +43,7 @@ $all_roles = get_all_roles();
             <div class="card sticky-top" style="top: 1rem;">
                 <div class="card-header fw-semibold">Menú principal</div>
                 <div class="card-body d-grid gap-2">
-                    <?php include_once __DIR__ . "/../../src/includes/menu_lateral.php"; ?>
+                    <?php include_once __DIR__ . "/../../src/Templates/menu_lateral.php"; ?>
                 </div>
             </div>
         </aside>
@@ -132,4 +132,4 @@ $all_roles = get_all_roles();
     }
 </style>
 
-<?php include_once __DIR__ . "/../../src/includes/footer.php"; ?>
+<?php include_once __DIR__ . "/../../src/Templates/footer.php"; ?>
