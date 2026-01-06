@@ -1,4 +1,7 @@
 <?php
+// Cargar configuración global (Base de Datos, Rutas, etc.)
+require_once __DIR__ . '/config.php';
+
 spl_autoload_register(function ($class) {
     // Namespace base
     $prefix = 'App\\';

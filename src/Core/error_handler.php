@@ -177,7 +177,7 @@ function global_exception_handler($exception)
     $host = $_SERVER['HTTP_HOST'];
     $baseUrl = $protocol . $host . "/";
 
-    header("Location: " . $baseUrl . "public/index.php");
+    header("Location: " . $baseUrl . "index.php");
     exit;
 }
 

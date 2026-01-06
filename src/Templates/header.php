@@ -22,13 +22,13 @@ if (!defined('BASE_URL')) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Veterinaria San Antón</title>
-    <link rel="icon" href="<?php echo BASE_URL; ?>public/uploads/Logo.jpeg" type="image/jpeg">
+    <link rel="icon" href="<?php echo BASE_URL; ?>uploads/Logo.jpeg" type="image/jpeg">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Estilos propios -->
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -53,8 +53,8 @@ if (!defined('BASE_URL')) {
         <?php endif; ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>public/index.php">
-                    <img src="<?php echo BASE_URL; ?>public/uploads/Logo.jpeg" alt="Logo Veterinaria San Anton" width="40" height="40" class="me-2 rounded-circle object-fit-cover">
+                <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>index.php">
+                    <img src="<?php echo BASE_URL; ?>uploads/Logo.jpeg" alt="Logo Veterinaria San Anton" width="40" height="40" class="me-2 rounded-circle object-fit-cover">
                     <span class="brand-title">Veterinaria San Antón</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,26 +68,26 @@ if (!defined('BASE_URL')) {
                         $show_mobile_menu = !isset($_SESSION['usuarioId']) ||
                             in_array($current_page, ['index.php', 'buscar.php']); // Simplificado para que aparezcan en la mayoría de las páginas si no está logueado
                         ?>
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/catalogos/index.php">Catálogo</a></li>
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>public/novedades/index.php">Novedades</a></li>
+                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
+                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
 
                         <?php if (isset($_SESSION['usuarioId'])): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?php echo BASE_URL; ?>public/uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
+                                    <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
                                     <span>Mi cuenta</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>public/perfil/index.php">Mi perfil</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>public/auth/logout.php">Cerrar sesión</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesión</a></li>
                                 </ul>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a href="<?php echo BASE_URL; ?>public/auth/login.php" class="btn btn-success ms-lg-2">Iniciar sesión</a>
+                                <a href="<?php echo BASE_URL; ?>auth/login.php" class="btn btn-success ms-lg-2">Iniciar sesión</a>
                             </li>
                         <?php endif; ?>
                     </ul>
