@@ -12,10 +12,10 @@ class AuthService
         $db = DB::getConn();
         $stmt = $db->prepare("
             SELECT u.*, p.id as personal_id, c.id as cliente_id, r.nombre as rol_nombre
-            FROM Usuarios u
-            LEFT JOIN Personal p ON p.usuarioId = u.id
-            LEFT JOIN Clientes c ON c.usuarioId = u.id
-            LEFT JOIN Roles r ON p.rolId = r.id
+            FROM usuarios u
+            LEFT JOIN personal p ON p.usuarioId = u.id
+            LEFT JOIN clientes c ON c.usuarioId = u.id
+            LEFT JOIN roles r ON p.rolId = r.id
             WHERE u.email = ? AND u.activo = 1
         ");
         $stmt->bind_param("s", $email);

@@ -9,13 +9,18 @@ class DB
 
     private function __construct()
     {
-        $host = 'localhost';
-        $user = 'root';
-        $pass = ''; // La clave es vacía según la configuración del usuario
-        $name = 'veterinaria_db';
+        $host = 'sql.freedb.tech';
+        $user = 'freedb_admin_vet';
+        $pass = '4%X9R3NE2wassnR'; // La clave es vacía según la configuración del usuario
+        $name = 'freedb_veterinaria_db';
 
-        // Intentar conectar al puerto 3307 primero, luego al 3306
-        $this->connection = @mysqli_connect($host, $user, $pass, $name, 3306);
+        $this->connection = mysqli_connect($host, $user, $pass, $name, 3306);
+
+        if (!$this->connection) {
+            $error = mysqli_connect_error();
+            $errno = mysqli_connect_errno();
+            die("Error de conexión a la base de datos: [$errno] $error");
+        }
 
         $this->connection->set_charset("utf8mb4");
     }

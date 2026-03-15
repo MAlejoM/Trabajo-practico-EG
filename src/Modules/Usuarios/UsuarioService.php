@@ -6,6 +6,15 @@ use Exception;
 
 class UsuarioService
 {
+    public static function ObtenerUsuarioLoggedId(): int
+    {
+        return $_SESSION['usuarioId'];
+    }
+
+    public static function ObtenerPersonalLoggedId(): ?int
+    {
+        return $_SESSION['personal_id'] ?? null;
+    }
     public static function esAdmin()
     {
         return isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
@@ -67,11 +76,11 @@ class UsuarioService
 
             // 3. Crear extensión (Cliente o Personal)
             if ($data['tipo'] === 'cliente') {
-                $stmt = $db->prepare("INSERT INTO Clientes (id, usuarioId, telefono, direccion, ciudad) VALUES (?, ?, ?, ?, ?)");
+                $stmt = $db->prepare("INSERT INTO clientes (id, usuarioId, telefono, direccion, ciudad) VALUES (?, ?, ?, ?, ?)");
                 $stmt->bind_param("iisss", $id, $id, $data['telefono'], $data['direccion'], $data['ciudad']);
                 $stmt->execute();
             } else {
-                $stmt = $db->prepare("INSERT INTO Personal (id, usuarioId, rolId, activo) VALUES (?, ?, ?, 1)");
+                $stmt = $db->prepare("INSERT INTO personal (id, usuarioId, rolId, activo) VALUES (?, ?, ?, 1)");
                 $stmt->bind_param("iii", $id, $id, $data['rol_id']);
                 $stmt->execute();
             }

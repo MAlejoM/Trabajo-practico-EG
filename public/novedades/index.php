@@ -3,12 +3,13 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 
 use App\Modules\Novedades\NovedadService;
+use App\Modules\Usuarios\UsuarioService;
 
 // Verificar si el usuario es admin
-if (!isset($_SESSION['usuarioId']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    $esAdmin = false;
-} else {
+if (UsuarioService::esAdmin()) {
     $esAdmin = true;
+} else {
+    $esAdmin = false;
 }
 
 // Obtener todas las novedades

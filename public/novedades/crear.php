@@ -4,12 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 include_once __DIR__ . '/../../src/Templates/header.php';
-// require_once __DIR__ . '/../../src/logic/novedades.logic.php'; // REMOVED
 
 use App\Modules\Novedades\NovedadService;
+use App\Modules\Usuarios\UsuarioService;
 
 // Verificar que el usuario sea admin
-if (!isset($_SESSION['usuarioId']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+if (!UsuarioService::esAdmin()) {
   header('Location: index.php');
   exit;
 }

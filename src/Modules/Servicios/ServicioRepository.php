@@ -11,7 +11,7 @@ class ServicioRepository
         $db = DB::getConn();
         $stmt = $db->prepare("SELECT s.* 
             FROM servicios s
-            JOIN rolesServicios rs ON s.id = rs.servicioId
+            JOIN rolesservicios rs ON s.id = rs.servicioId
             JOIN personal p ON rs.rolId = p.rolId
             WHERE p.id = ? AND s.activo = 1
             ORDER BY s.nombre ASC");

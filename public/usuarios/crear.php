@@ -14,7 +14,7 @@ $tipo_mensaje = '';
 
 // Obtener roles para el selector (Legacy for now)
 $db = \App\Core\DB::getConn();
-$roles = $db->query("SELECT id, nombre FROM Roles ORDER BY nombre ASC")->fetch_all(MYSQLI_ASSOC);
+$roles = $db->query("SELECT id, nombre FROM roles ORDER BY nombre ASC")->fetch_all(MYSQLI_ASSOC);
 
 // Procesar formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {

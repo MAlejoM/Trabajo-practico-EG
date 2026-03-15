@@ -25,10 +25,10 @@ class UsuarioRepository
                     WHEN c.id IS NOT NULL THEN 'Cliente'
                     ELSE 'Desconocido'
                 END as tipo_usuario
-            FROM Usuarios u
-            LEFT JOIN Personal p ON p.usuarioId = u.id
-            LEFT JOIN Clientes c ON c.usuarioId = u.id
-            LEFT JOIN Roles r ON p.rolId = r.id
+            FROM usuarios u
+            LEFT JOIN personal p ON p.usuarioId = u.id
+            LEFT JOIN clientes c ON c.usuarioId = u.id
+            LEFT JOIN roles r ON p.rolId = r.id
             $filtro_activo
             ORDER BY u.id ASC
         ";
@@ -40,7 +40,7 @@ class UsuarioRepository
     public static function getById($id)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("SELECT * FROM Usuarios WHERE id = ?");
+        $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -61,10 +61,10 @@ class UsuarioRepository
                     WHEN c.id IS NOT NULL THEN 'Cliente'
                     ELSE 'Desconocido'
                 END as tipo_usuario
-            FROM Usuarios u
-            LEFT JOIN Personal p ON p.usuarioId = u.id
-            LEFT JOIN Clientes c ON c.usuarioId = u.id
-            LEFT JOIN Roles r ON p.rolId = r.id
+            FROM usuarios u
+            LEFT JOIN personal p ON p.usuarioId = u.id
+            LEFT JOIN clientes c ON c.usuarioId = u.id
+            LEFT JOIN roles r ON p.rolId = r.id
             WHERE u.id = ?
         ");
         $stmt->bind_param("i", $id);
@@ -77,10 +77,10 @@ class UsuarioRepository
     {
         $db = DB::getConn();
         if ($excludeId) {
-            $stmt = $db->prepare("SELECT id FROM Usuarios WHERE email = ? AND id != ?");
+            $stmt = $db->prepare("SELECT id FROM usuarios WHERE email = ? AND id != ?");
             $stmt->bind_param("si", $email, $excludeId);
         } else {
-            $stmt = $db->prepare("SELECT id FROM Usuarios WHERE email = ?");
+            $stmt = $db->prepare("SELECT id FROM usuarios WHERE email = ?");
             $stmt->bind_param("s", $email);
         }
         $stmt->execute();
@@ -90,7 +90,7 @@ class UsuarioRepository
     public static function create($data)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("INSERT INTO Usuarios (email, nombre, apellido, clave, activo) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO usuarios (email, nombre, apellido, clave, activo) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param(
             "ssssi",
             $data['email'],
@@ -108,7 +108,7 @@ class UsuarioRepository
     public static function update($id, $data)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("UPDATE Usuarios SET email = ?, nombre = ?, apellido = ?, activo = ? WHERE id = ?");
+        $stmt = $db->prepare("UPDATE usuarios SET email = ?, nombre = ?, apellido = ?, activo = ? WHERE id = ?");
         $stmt->bind_param(
             "sssii",
             $data['email'],
@@ -123,7 +123,7 @@ class UsuarioRepository
     public static function updatePassword($id, $hashedPassword)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("UPDATE Usuarios SET clave = ? WHERE id = ?");
+        $stmt = $db->prepare("UPDATE usuarios SET clave = ? WHERE id = ?");
         $stmt->bind_param("si", $hashedPassword, $id);
         return $stmt->execute();
     }
@@ -131,7 +131,7 @@ class UsuarioRepository
     public static function setEstado($id, $activo)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("UPDATE Usuarios SET activo = ? WHERE id = ?");
+        $stmt = $db->prepare("UPDATE usuarios SET activo = ? WHERE id = ?");
         $stmt->bind_param("ii", $activo, $id);
         return $stmt->execute();
     }
@@ -140,7 +140,7 @@ class UsuarioRepository
     public static function getClienteById($id)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("SELECT * FROM Clientes WHERE id = ?");
+        $stmt = $db->prepare("SELECT * FROM clientes WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
@@ -151,8 +151,8 @@ class UsuarioRepository
         $db = DB::getConn();
         $sql = "
             SELECT c.id, u.nombre, u.apellido
-            FROM Clientes c
-            JOIN Usuarios u ON c.usuarioId = u.id
+            FROM clientes c
+            JOIN usuarios u ON c.usuarioId = u.id
             WHERE u.activo = 1
             ORDER BY u.nombre ASC
         ";
@@ -162,7 +162,7 @@ class UsuarioRepository
     public static function updateCliente($id, $data)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("UPDATE Clientes SET telefono = ?, direccion = ?, ciudad = ? WHERE id = ?");
+        $stmt = $db->prepare("UPDATE clientes SET telefono = ?, direccion = ?, ciudad = ? WHERE id = ?");
         $stmt->bind_param("sssi", $data['telefono'], $data['direccion'], $data['ciudad'], $id);
         return $stmt->execute();
     }
@@ -171,7 +171,7 @@ class UsuarioRepository
     public static function getPersonalById($id)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("SELECT * FROM Personal WHERE id = ?");
+        $stmt = $db->prepare("SELECT * FROM personal WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
@@ -183,8 +183,8 @@ class UsuarioRepository
         $filtro = $soloActivos ? "WHERE p.activo = 1" : "";
         $sql = "
             SELECT p.id, u.nombre, u.apellido
-            FROM Personal p
-            JOIN Usuarios u ON p.usuarioId = u.id
+            FROM personal p
+            JOIN usuarios u ON p.usuarioId = u.id
             $filtro
             ORDER BY u.nombre ASC
         ";
