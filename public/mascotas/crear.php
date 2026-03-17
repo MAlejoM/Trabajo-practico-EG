@@ -6,7 +6,7 @@ use App\Modules\Usuarios\UsuarioService;
 
 // Verificar que sea admin o personal
 if (!UsuarioService::esPersonal()) {
-    header('Location: ' . BASE_URL . 'public/index.php');
+    header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
 
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
                         <div class="d-flex gap-2 flex-wrap justify-content-between">
                             <div class="d-flex gap-2">
                                 <?php if ($cliente_id): ?>
-                                    <a href="<?php echo BASE_URL; ?>public/usuarios/mascotas_usuario.php?id=<?php echo $_GET['usuario_id'] ?? ''; ?>" class="btn btn-secondary">
+                                    <a href="<?php echo BASE_URL; ?>usuarios/mascotas_usuario.php?id=<?php echo $_GET['usuario_id'] ?? ''; ?>" class="btn btn-secondary">
                                         <i class="fas fa-arrow-left me-1"></i> Volver
                                     </a>
                                 <?php else: ?>
@@ -173,3 +173,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
 <?php
 include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>
+

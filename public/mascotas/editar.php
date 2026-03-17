@@ -5,7 +5,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 use App\Modules\Mascotas\MascotaService;
 
 if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'public/index.php');
+    header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
 

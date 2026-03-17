@@ -1,1 +1,9 @@
+RewriteEngine On
+
+# Si la ruta no empieza con /public/
+RewriteCond %{REQUEST_URI} !^/public/
+# Redirigir a public/ internamente
+RewriteRule ^(.*)$ public/$1 [L]
+
+
 ErrorDocument 404 /public/site/404.php

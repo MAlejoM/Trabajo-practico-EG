@@ -6,7 +6,7 @@ use App\Modules\Atenciones\AtencionService;
 
 // Verificar que sea personal autorizado
 if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'public/auth/login.php');
+    header('Location: ' . BASE_URL . 'auth/login.php');
     exit();
 }
 

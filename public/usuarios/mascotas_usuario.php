@@ -6,7 +6,7 @@ use App\Modules\Usuarios\UsuarioService;
 use App\Modules\Mascotas\MascotaService;
 
 if (!UsuarioService::esPersonal()) {
-  header('Location: ' . BASE_URL . 'public/index.php');
+  header('Location: ' . BASE_URL . 'index.php');
   exit();
 }
 
@@ -40,7 +40,7 @@ $mascotas = MascotaService::getByClienteId($usuario['cliente_id']);
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h1 class="h4 mb-0">Mascotas de <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h1>
-          <a href="<?php echo BASE_URL; ?>public/mascotas/crear.php?cliente_id=<?php echo $usuario['cliente_id']; ?>" class="btn btn-success btn-sm">
+          <a href="<?php echo BASE_URL; ?>mascotas/crear.php?cliente_id=<?php echo $usuario['cliente_id']; ?>" class="btn btn-success btn-sm">
             <i class="fas fa-plus me-1"></i> Nueva Mascota
           </a>
         </div>
@@ -68,8 +68,8 @@ $mascotas = MascotaService::getByClienteId($usuario['cliente_id']);
                       <h5 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
                       <p class="card-text small text-muted mb-3"><?php echo htmlspecialchars($mascota['raza'] ?? 'Sin raza'); ?></p>
                       <div class="mt-auto d-flex gap-2">
-                        <a href="<?php echo BASE_URL; ?>public/mascotas/editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-sm btn-outline-secondary flex-fill">Editar</a>
-                        <a href="<?php echo BASE_URL; ?>public/atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-sm btn-outline-primary flex-fill">Atenciones</a>
+                        <a href="<?php echo BASE_URL; ?>mascotas/editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-sm btn-outline-secondary flex-fill">Editar</a>
+                        <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-sm btn-outline-primary flex-fill">Atenciones</a>
                       </div>
                     </div>
                   </div>
@@ -92,3 +92,4 @@ $mascotas = MascotaService::getByClienteId($usuario['cliente_id']);
 <?php
 include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>
+

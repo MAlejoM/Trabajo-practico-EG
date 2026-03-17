@@ -6,7 +6,7 @@ use App\Modules\Usuarios\UsuarioService;
 
 // Verificar que sea administrador
 if (!UsuarioService::esAdmin()) {
-    header('Location: ' . BASE_URL . 'public/index.php');
+    header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
 

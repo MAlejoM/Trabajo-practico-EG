@@ -4,7 +4,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 use App\Modules\Mascotas\MascotaService;
 
 if (!isset($_SESSION['cliente_id'])) {
-    header('Location: ' . BASE_URL . 'public/index.php');
+    header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
 
@@ -83,7 +83,7 @@ $mascotas = MascotaService::getByClienteId($_SESSION['cliente_id']);
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="d-grid">
-                                                    <a href="<?php echo BASE_URL; ?>public/atenciones/atencion_list_by_mascota.php?id_mascota=<?php echo $mascota['id']; ?>"
+                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id_mascota=<?php echo $mascota['id']; ?>"
                                                         class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-notes-medical me-1"></i> Ver Atenciones
                                                     </a>
@@ -124,3 +124,5 @@ $mascotas = MascotaService::getByClienteId($_SESSION['cliente_id']);
 <?php
 include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>
+
+

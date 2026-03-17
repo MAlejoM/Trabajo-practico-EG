@@ -7,7 +7,7 @@ use App\Modules\Servicios\ServicioService;
 use App\Modules\Usuarios\UsuarioService;
 
 if (!UsuarioService::esAdmin()) {
-    header("Location: " . BASE_URL . "public/index.php");
+    header("Location: " . BASE_URL . "index.php");
     exit();
 }
 

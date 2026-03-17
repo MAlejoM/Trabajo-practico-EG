@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
 
                         <!-- Información básica -->
                         <div class="text-center mb-4">
-                            <img src="<?php echo BASE_URL; ?>public/uploads/Perfil.jpeg" alt="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover">
+                            <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover">
                             <h5><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h5>
                             <?php if ($usuario['rol_nombre']): ?>
                                 <span class="badge bg-success"><?php echo htmlspecialchars($usuario['rol_nombre']); ?></span>
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <?php if ($es_admin): ?>
                                 <div class="alert alert-success">
                                     <i class="fas fa-crown me-1"></i>
-                                    <strong>Admin:</strong> Gestiona usuarios en el <a href="<?php echo BASE_URL; ?>public/usuarios/index.php" class="alert-link">módulo de usuarios</a>.
+                                    <strong>Admin:</strong> Gestiona usuarios en el <a href="<?php echo BASE_URL; ?>usuarios/index.php" class="alert-link">módulo de usuarios</a>.
                                 </div>
                             <?php endif; ?>
 

@@ -9,7 +9,7 @@ use App\Modules\Usuarios\UsuarioService;
 
 // Verificar que sea personal autorizado
 if (!UsuarioService::esPersonal()) {
-    header('Location: ' . BASE_URL . 'public/auth/login.php');
+    header('Location: ' . BASE_URL . 'auth/login.php');
     exit();
 }
 

@@ -6,7 +6,7 @@ use App\Modules\Mascotas\MascotaService;
 
 // Verificar que sea personal autorizado
 if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'public/auth/login.php');
+    header('Location: ' . BASE_URL . 'auth/login.php');
     exit();
 }
 
@@ -53,8 +53,8 @@ if (isset($_GET['ajax_search'])) {
             echo "<td><span class='badge bg-$badgeClass'>$estado</span></td>";
             echo "<td>
                     <div class='btn-group btn-group-sm'>
-                        <a href='" . BASE_URL . "public/mascotas/editar.php?id=$id' class='btn btn-outline-secondary' title='Editar'><i class='fas fa-edit'></i></a>
-                        <a href='" . BASE_URL . "public/atenciones/atencion_list_by_mascota.php?id=$id' class='btn btn-outline-info' title='Atenciones'><i class='fas fa-notes-medical'></i></a>
+                        <a href=\"" . BASE_URL . "mascotas/editar.php?id=$id\" class='btn btn-outline-secondary' title='Editar'><i class='fas fa-edit'></i></a>
+                        <a href=\"" . BASE_URL . "atenciones/atencion_list_by_mascota.php?id=$id\" class='btn btn-outline-info' title='Atenciones'><i class='fas fa-notes-medical'></i></a>
                     </div>
                   </td>";
             echo "</tr>";
@@ -144,7 +144,7 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
                                                 <div class="btn-group btn-group-sm">
                                                     <a href="editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-secondary" title="Editar"><i class="fas fa-edit"></i></a>
                                                     <!-- Nota: atencion_list_by_mascota.php todavía no ha sido migrado, se mantiene el enlace relativo o absoluto -->
-                                                    <a href="<?php echo BASE_URL; ?>public/atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" title="Atenciones"><i class="fas fa-notes-medical"></i></a>
+                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" title="Atenciones"><i class="fas fa-notes-medical"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -186,3 +186,4 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
 <?php
 include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>
+

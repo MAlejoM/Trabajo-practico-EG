@@ -4,8 +4,8 @@
         <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
             <span class="text-body-secondary small">© <?php echo date('Y'); ?> Veterinaria San Antón</span>
             <div class="d-flex gap-2">
-                <a href="<?php echo BASE_URL; ?>public/contacto.php" class="btn btn-outline-success btn-sm">Contacto</a>
-                <a href="<?php echo BASE_URL; ?>public/quienes_somos.php" class="btn btn-success btn-sm">¿Quiénes somos?</a>
+                <a href="<?php echo BASE_URL; ?>contacto.php" class="btn btn-outline-success btn-sm">Contacto</a>
+                <a href="<?php echo BASE_URL; ?>quienes_somos.php" class="btn btn-success btn-sm">¿Quiénes somos?</a>
             </div>
         </div>
     </footer>

@@ -5,7 +5,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 use App\Modules\Catalogos\CatalogoService;
 
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-  header('Location: ' . BASE_URL . 'public/index.php');
+  header('Location: ' . BASE_URL . 'index.php');
   exit();
 }
 

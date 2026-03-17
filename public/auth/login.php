@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
         <div class="card shadow">
           <div class="card-body p-4">
             <div class="text-center mb-4">
-              <img src="<?php echo BASE_URL; ?>public/uploads/Logo.jpeg" alt="Logo" width="64" height="64" class="rounded-circle mb-3">
+              <img src="<?php echo BASE_URL; ?>uploads/Logo.jpeg" alt="Logo" width="64" height="64" class="rounded-circle mb-3">
               <h1 class="h4 mb-0">Iniciar sesión</h1>
               <p class="text-muted small">Ingresá a tu cuenta</p>
             </div>
@@ -71,3 +71,4 @@ require_once __DIR__ . '/../../src/Templates/header.php';
 <?php
 require_once __DIR__ . '/../../src/Templates/footer.php';
 ?>
+

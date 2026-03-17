@@ -8,7 +8,7 @@ use App\Modules\Usuarios\UsuarioService;
 
 // Solo administradores pueden gestionar servicios
 if (!UsuarioService::esAdmin()) {
-    header("Location: " . BASE_URL . "public/index.php");
+    header("Location: " . BASE_URL . "index.php");
     exit();
 }
 
@@ -39,7 +39,7 @@ if (isset($_GET['ajax_search'])) {
             echo "<tr class='$mutedClass'>";
             echo "<td>$id</td>";
             echo "<td><strong>$nombre</strong></td>";
-            echo "<td>$$precio</td>";
+            echo "<td>$" . $precio . "</td>";
             echo "<td><span class='badge bg-$badgeClass'>$estado</span></td>";
             echo "<td>
                     <div class='btn-group btn-group-sm'>

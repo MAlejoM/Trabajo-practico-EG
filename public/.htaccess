@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+# Redirigir contacto.php a site/contacto.php internamente
+RewriteRule ^contacto\.php$ site/contacto.php [L]
+
+# Redirigir quienes_somos.php a site/quienes_somos.php internamente
+RewriteRule ^quienes_somos\.php$ site/quienes_somos.php [L]
