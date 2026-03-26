@@ -9,10 +9,10 @@ class DB
 
     private function __construct()
     {
-        $host = 'sql.freedb.tech';
-        $user = 'freedb_admin_vet';
-        $pass = '4%X9R3NE2wassnR'; // La clave es vacía según la configuración del usuario
-        $name = 'freedb_veterinaria_db';
+        $host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $name = 'veterinaria_db';
 
         $this->connection = mysqli_connect($host, $user, $pass, $name, 3306);
 

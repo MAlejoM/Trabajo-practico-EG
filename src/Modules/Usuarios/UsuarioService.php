@@ -129,7 +129,7 @@ class UsuarioService
         }
 
         $hash = password_hash($nueva, PASSWORD_DEFAULT);
-        return UsuarioRepository::update($usuarioId, ['clave' => $hash]);
+        return UsuarioRepository::updatePassword($usuarioId, $hash);
     }
 
     public static function setEstado($id, $activo)

@@ -138,11 +138,8 @@ class MascotaRepository
                 INSERT INTO mascotas (clienteId, nombre, raza, color, fechaDeNac, foto, activo) 
                 VALUES (?, ?, ?, ?, ?, ?, 1)
             ");
-            // 'b' para blob, pero usaremos 's' como en Novedades si es string binario, 
-            // o send_long_data si es muy grande. Por simpleza y tamaño < 2MB, 's' suele funcionar en drivers modernos.
-            // Si falla, usaremos send_long_data.
             $null = null;
-            $stmt->bind_param("isssss", $clienteId, $nombre, $raza, $color, $fechaDeNac, $null);
+            $stmt->bind_param("issssb", $clienteId, $nombre, $raza, $color, $fechaDeNac, $null);
             $stmt->send_long_data(5, $fotoBlob);
         } else {
             $stmt = $db->prepare("

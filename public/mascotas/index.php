@@ -1,13 +1,10 @@
 <?php
-include_once __DIR__ . "/../../src/Templates/header.php";
-// Necesario para menús y sesiones por ahora
+require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Mascotas\MascotaService;
 
-// Verificar que sea personal autorizado
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
 // Obtener parámetro para mostrar inactivos
@@ -15,6 +12,10 @@ $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
 
 // Manejo de búsqueda AJAX
 if (isset($_GET['ajax_search'])) {
+    if (!isset($_SESSION['personal_id'])) {
+        exit();
+    }
+
     $termino = $_GET['q'] ?? '';
     try {
         if (!empty($termino)) {
@@ -29,6 +30,11 @@ if (isset($_GET['ajax_search'])) {
     if (empty($mascotas)) {
         echo "<tr><td colspan='7' class='text-center'>No se encontraron mascotas.</td></tr>";
     } else {
+        if (!defined('BASE_URL')) {
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+            $host = $_SERVER['HTTP_HOST'];
+            define('BASE_URL', $protocol . $host . "/");
+        }
         foreach ($mascotas as $mascota) {
             $badgeClass = $mascota['activo'] == 1 ? 'success' : 'secondary';
             $estado = $mascota['activo'] == 1 ? 'Activo' : 'Inactivo';
@@ -63,6 +69,14 @@ if (isset($_GET['ajax_search'])) {
     exit();
 }
 
+include_once __DIR__ . "/../../src/Templates/header.php";
+
+// Verificar que sea personal autorizado
+if (!isset($_SESSION['personal_id'])) {
+    header('Location: ' . BASE_URL . 'auth/login.php');
+    exit();
+}
+
 $mascotas = MascotaService::getAll($mostrar_inactivos);
 ?>
 
@@ -93,6 +107,31 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
                 </div>
 
                 <div class="card-body">
+                    <?php if (isset($_GET['creado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Mascota registrada correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['editado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Mascota actualizada correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['baja'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Mascota dada de baja correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['reactivado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Mascota reactivada correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Buscador -->
                     <div class="input-group mb-4">
                         <span class="input-group-text bg-white border-end-0">

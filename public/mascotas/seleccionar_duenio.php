@@ -45,7 +45,7 @@ $mascotas = MascotaService::getByClienteDni($dni);
                                                 Sexo: <?php echo htmlspecialchars($mascota['sexo']); ?>
                                             </p>
                                             <div class="btn-group btn-group-sm mt-auto">
-                                                <a href='../atenciones/atencion_list_by_mascota.php?id_mascota=<?php echo $mascota['id']; ?>' class="btn btn-outline-primary">Atenciones</a>
+                                                <a href='../atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>' class="btn btn-outline-primary">Atenciones</a>
                                                 <a href='../atenciones/crear.php?id_mascota=<?php echo $mascota['id']; ?>' class="btn btn-outline-success">Registrar</a>
                                             </div>
                                         </div>

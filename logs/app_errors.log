@@ -150,3 +150,27 @@ Stack trace:
 [2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:315
 [2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:265
 [2026-01-02 19:53:39] WARNING: Undefined array key "fechaHora" in C:\xampp\htdocs\public\atencion_list.php:315
+[2026-03-25 14:16:58] Exception: Undefined constant "REPLY_TO" in C:\xampp\htdocs\public\auth\forgot_password.php:124
+Stack trace:
+#0 {main}
+
+================================================================================
+
+[2026-03-25 14:18:33] Exception: Undefined constant "REPLY_TO" in C:\xampp\htdocs\public\auth\forgot_password.php:124
+Stack trace:
+#0 {main}
+
+================================================================================
+
+[2026-03-25 14:45:59] Exception: Undefined constant "REPLY_TO" in C:\xampp\htdocs\public\auth\forgot_password.php:124
+Stack trace:
+#0 {main}
+
+================================================================================
+
+[2026-03-25 16:09:46] Exception: Undefined constant "REPLY_TO" in C:\xampp\htdocs\public\auth\forgot_password.php:124
+Stack trace:
+#0 {main}
+
+================================================================================
+

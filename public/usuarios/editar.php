@@ -21,14 +21,37 @@ $tipo_mensaje = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_usuario'])) {
     try {
         $_POST['activo'] = isset($_POST['activo']) ? 1 : 0;
-        UsuarioService::updateAdmin($usuario_id, $_POST);
 
+        // Obtener datos actuales para comparar
+        $actual = UsuarioService::getUsuarioCompletoById($usuario_id);
+        $hayCambiosUsuario = (
+            $actual['nombre'] !== trim($_POST['nombre']) ||
+            $actual['apellido'] !== trim($_POST['apellido']) ||
+            $actual['email'] !== trim($_POST['email']) ||
+            (int)$actual['activo'] !== (int)$_POST['activo']
+        );
+        $hayCambiosCliente = false;
         if (isset($_POST['cliente_id'])) {
-            UsuarioService::updateClienteDatos($_POST['cliente_id'], $_POST);
+            $hayCambiosCliente = (
+                ($actual['telefono'] ?? '') !== trim($_POST['telefono'] ?? '') ||
+                ($actual['ciudad'] ?? '') !== trim($_POST['ciudad'] ?? '') ||
+                ($actual['direccion'] ?? '') !== trim($_POST['direccion'] ?? '')
+            );
         }
 
-        $mensaje = 'Usuario actualizado correctamente.';
-        $tipo_mensaje = 'success';
+        if (!$hayCambiosUsuario && !$hayCambiosCliente) {
+            $mensaje = 'No se detectaron cambios.';
+            $tipo_mensaje = 'info';
+        } else {
+            if ($hayCambiosUsuario) {
+                UsuarioService::updateAdmin($usuario_id, $_POST);
+            }
+            if ($hayCambiosCliente && isset($_POST['cliente_id'])) {
+                UsuarioService::updateClienteDatos($_POST['cliente_id'], $_POST);
+            }
+            header("Location: index.php?editado=1");
+            exit();
+        }
     } catch (Exception $e) {
         $mensaje = $e->getMessage();
         $tipo_mensaje = 'danger';

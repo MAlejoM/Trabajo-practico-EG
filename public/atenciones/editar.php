@@ -1,10 +1,28 @@
 <?php
-include_once __DIR__ . "/../../src/Templates/header.php";
-// Para menús y roles
+require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Atenciones\AtencionService;
 use App\Modules\Usuarios\UsuarioService;
 use App\Modules\Servicios\ServicioService;
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// AJAX para servicios
+if (isset($_GET['ajax_servicios'])) {
+    if (!isset($_SESSION['personal_id'])) {
+        exit();
+    }
+    $p_id = $_GET['personal_id'] ?? 0;
+    $servs = ServicioService::getServiciosByPersonalId($p_id);
+    foreach ($servs as $s) {
+        echo "<option value='{$s['id']}'>" . htmlspecialchars($s['nombre']) . "</option>";
+    }
+    exit();
+}
+
+include_once __DIR__ . "/../../src/Templates/header.php";
 
 // Verificar que sea personal autorizado
 if (!isset($_SESSION['personal_id'])) {
@@ -34,16 +52,6 @@ if ($user_role !== 'admin' && $atencion['personalId'] != $my_personal_id) {
     exit;
 }
 
-// AJAX para servicios
-if (isset($_GET['ajax_servicios'])) {
-    $p_id = $_GET['personal_id'] ?? 0;
-    $servs = ServicioService::getServiciosByPersonalId($p_id);
-    foreach ($servs as $s) {
-        echo "<option value='{$s['id']}'>" . htmlspecialchars($s['nombre']) . "</option>";
-    }
-    exit();
-}
-
 $mensaje = "";
 $error = "";
 
@@ -59,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if (AtencionService::update($id_atencion, $_POST)) {
-            $mensaje = "Atención actualizada correctamente.";
-            $atencion = AtencionService::getById($id_atencion); // Refrescar
+            header("Location: index.php?editado=1");
+            exit();
         } else {
             $error = "Hubo un error al actualizar la atención.";
         }

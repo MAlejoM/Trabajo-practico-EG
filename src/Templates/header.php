@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Incluir el manejador de errores
 require_once __DIR__ . '/../Core/error_handler.php';
 require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../config.php';
 
 if (!defined('BASE_URL')) {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';

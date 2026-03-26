@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             if (ServicioService::update($id, $data)) {
-                $exito = "Servicio actualizado correctamente.";
-                $servicio = ServicioService::getById($id); // Refrescar
+                header("Location: index.php?editado=1");
+                exit();
             } else {
                 $error = "Error al actualizar el servicio.";
             }
@@ -46,15 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif (isset($_POST['dar_baja'])) {
         if (ServicioService::delete($id)) {
-            $exito = "Servicio desactivado correctamente.";
-            $servicio['activo'] = 0;
+            header("Location: index.php?desactivado=1");
+            exit();
         } else {
             $error = "Error al desactivar el servicio.";
         }
     } elseif (isset($_POST['reactivar'])) {
         if (ServicioService::reactivate($id)) {
-            $exito = "Servicio reactivado correctamente.";
-            $servicio['activo'] = 1;
+            header("Location: index.php?reactivado=1");
+            exit();
         } else {
             $error = "Error al reactivar el servicio.";
         }
