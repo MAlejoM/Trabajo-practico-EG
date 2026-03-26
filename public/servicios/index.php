@@ -41,9 +41,10 @@ if (isset($_GET['ajax_search'])) {
                     <div class='btn-group btn-group-sm'>
                         <a href='editar.php?id=$id' class='btn btn-outline-secondary' title='Editar'><i class='fas fa-edit'></i></a>";
             if ($s['activo']) {
-                echo "<a href='?accion=baja&id=$id&inactivos=" . ($mostrar_inactivos ? '1' : '0') . "' 
+                $bajaUrl = '?accion=baja&id=' . $id . '&inactivos=' . ($mostrar_inactivos ? '1' : '0');
+                echo "<a href='#' 
                          class='btn btn-outline-danger' 
-                         onclick=\"return confirm('¿Está seguro de desactivar este servicio?')\" title='Desactivar'>
+                         onclick=\"confirmarAccion('¿Está seguro de desactivar este servicio?', function(){ window.location.href='$bajaUrl'; }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' }); return false;\" title='Desactivar'>
                          <i class='fas fa-toggle-on'></i></a>";
             } else {
                 echo "<a href='?accion=reactivar&id=$id&inactivos=" . ($mostrar_inactivos ? '1' : '0') . "' 
@@ -171,9 +172,9 @@ $servicios = ServicioService::getAll($mostrar_inactivos);
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <?php if ($s['activo']): ?>
-                                                        <a href="?accion=baja&id=<?php echo $s['id']; ?>&inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>"
+                                                        <a href="#"
                                                             class="btn btn-outline-danger"
-                                                            onclick="return confirm('¿Está seguro de desactivar este servicio?')" title="Desactivar">
+                                                            onclick="confirmarAccion('¿Está seguro de desactivar este servicio?', function(){ window.location.href='?accion=baja&id=<?php echo $s['id']; ?>&inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>'; }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' }); return false;" title="Desactivar">
                                                             <i class="fas fa-toggle-on"></i>
                                                         </a>
                                                     <?php else: ?>

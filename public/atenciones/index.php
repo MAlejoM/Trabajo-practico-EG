@@ -388,7 +388,7 @@ if (!empty($filtro_fecha)) {
     });
 
     function confirmarEliminacion(id) {
-        if (confirm('¿Estás seguro de que deseas eliminar esta atención?')) {
+        confirmarAccion('¿Estás seguro de que deseas eliminar esta atención?', function() {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '';
@@ -399,11 +399,11 @@ if (!empty($filtro_fecha)) {
             form.appendChild(input);
             document.body.appendChild(form);
             form.submit();
-        }
+        }, { titulo: 'Eliminar atención', btnTexto: 'Eliminar', btnClase: 'btn-danger' });
     }
 
     function completarAtencion(id) {
-        if (confirm('¿Deseas marcar esta atención como realizada?')) {
+        confirmarAccion('¿Deseas marcar esta atención como realizada?', function() {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '';
@@ -414,7 +414,7 @@ if (!empty($filtro_fecha)) {
             form.appendChild(input);
             document.body.appendChild(form);
             form.submit();
-        }
+        }, { titulo: 'Completar atención', btnTexto: 'Confirmar', btnClase: 'btn-success' });
     }
 </script>
 

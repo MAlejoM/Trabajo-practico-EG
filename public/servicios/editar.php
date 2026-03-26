@@ -147,8 +147,8 @@ $roles_asignados = ServicioService::getRolesIds($id);
                                     </a>
                                     <div class="d-flex gap-2">
                                         <?php if ($servicio['activo']): ?>
-                                            <button type="submit" name="dar_baja" class="btn btn-outline-danger"
-                                                onclick="return confirm('¿Está seguro que desea desactivar este servicio?')">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                onclick="confirmarAccion('¿Está seguro que desea desactivar este servicio?', function(){ var f = document.querySelector('form[action*=editar]'); var h = document.createElement('input'); h.type='hidden'; h.name='dar_baja'; h.value='1'; f.appendChild(h); f.submit(); }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' })">
                                                 <i class="fas fa-ban me-1"></i> Desactivar
                                             </button>
                                         <?php else: ?>

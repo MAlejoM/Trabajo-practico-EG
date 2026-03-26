@@ -77,20 +77,38 @@ class CatalogoRepository
     public static function create($data)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("
-            INSERT INTO productos (nombre, descripcion, precio, imagen, categoria, stock, usuarioId)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ");
-        $stmt->bind_param(
-            "ssdssii",
-            $data['nombre'],
-            $data['descripcion'],
-            $data['precio'],
-            $data['imagen'],
-            $data['categoria'],
-            $data['stock'],
-            $data['usuarioId']
-        );
+        if (!empty($data['imagen'])) {
+            $stmt = $db->prepare("
+                INSERT INTO productos (nombre, descripcion, precio, imagen, categoria, stock, usuarioId)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ");
+            $null = null;
+            $stmt->bind_param(
+                "ssdbsii",
+                $data['nombre'],
+                $data['descripcion'],
+                $data['precio'],
+                $null,
+                $data['categoria'],
+                $data['stock'],
+                $data['usuarioId']
+            );
+            $stmt->send_long_data(3, $data['imagen']);
+        } else {
+            $stmt = $db->prepare("
+                INSERT INTO productos (nombre, descripcion, precio, categoria, stock, usuarioId)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->bind_param(
+                "ssdsii",
+                $data['nombre'],
+                $data['descripcion'],
+                $data['precio'],
+                $data['categoria'],
+                $data['stock'],
+                $data['usuarioId']
+            );
+        }
         if ($stmt->execute()) {
             return $db->insert_id;
         }
@@ -107,16 +125,18 @@ class CatalogoRepository
                     imagen = ?, categoria = ?, stock = ?
                 WHERE id = ?
             ");
+            $null = null;
             $stmt->bind_param(
-                "ssdssii",
+                "ssdbsii",
                 $data['nombre'],
                 $data['descripcion'],
                 $data['precio'],
-                $data['imagen'],
+                $null,
                 $data['categoria'],
                 $data['stock'],
                 $id
             );
+            $stmt->send_long_data(3, $data['imagen']);
         } else {
             $stmt = $db->prepare("
                 UPDATE productos 

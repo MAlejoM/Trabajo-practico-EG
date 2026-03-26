@@ -143,7 +143,7 @@ $productos_js = array_map(function ($p) {
     }
 
     function confirmarEliminar(id) {
-        if (confirm('¿Eliminar producto?')) {
+        confirmarAccion('¿Está seguro de que desea eliminar este producto?', function() {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = 'index.php';
@@ -154,7 +154,7 @@ $productos_js = array_map(function ($p) {
             form.appendChild(input);
             document.body.appendChild(form);
             form.submit();
-        }
+        }, { titulo: 'Eliminar producto', btnTexto: 'Eliminar' });
     }
 </script>
 
