@@ -109,10 +109,11 @@ $novedades_js = array_map(function ($n) {
                                                     <a href="editar.php?id=<?php echo $novedad['id']; ?>" class="btn btn-outline-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form action="index.php" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta novedad?');">
+                                                    <form action="index.php" method="POST" class="d-inline" id="formEliminarNovedad<?php echo $novedad['id']; ?>">
                                                         <input type="hidden" name="accion" value="eliminar">
                                                         <input type="hidden" name="id" value="<?php echo $novedad['id']; ?>">
-                                                        <button type="submit" class="btn btn-outline-danger">
+                                                        <button type="button" class="btn btn-outline-danger"
+                                                            onclick="confirmarAccion('¿Estás seguro de que deseas eliminar esta novedad?', function(){ document.getElementById('formEliminarNovedad<?php echo $novedad['id']; ?>').submit(); }, { titulo: 'Eliminar novedad', btnTexto: 'Eliminar' })">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>

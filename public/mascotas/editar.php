@@ -170,8 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </button>
 
                             <?php if ($mascota['activo']): ?>
-                                <button type="submit" name="dar_baja" class="btn btn-outline-danger"
-                                    onclick="return confirm('¿Está seguro que desea dar de baja a esta mascota?')">
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="confirmarAccion('¿Está seguro que desea dar de baja a esta mascota?', function(){ var f = document.querySelector('form[method=post]'); var h = document.createElement('input'); h.type='hidden'; h.name='dar_baja'; h.value='1'; f.appendChild(h); f.submit(); }, { titulo: 'Dar de baja mascota', btnTexto: 'Dar de Baja' })">
                                     <i class="fas fa-ban me-1"></i> Dar de Baja
                                 </button>
                             <?php else: ?>
