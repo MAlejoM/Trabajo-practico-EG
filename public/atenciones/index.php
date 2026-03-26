@@ -1,44 +1,21 @@
 <?php
-include_once __DIR__ . "/../../src/Templates/header.php";
-// Para menús y roles
+require_once __DIR__ . "/../../src/autoload.php";
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 use App\Modules\Atenciones\AtencionService;
-
-// Verificar que sea personal autorizado
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
 
 $user_role = $_SESSION['rol'] ?? '';
 $my_personal_id = $_SESSION['personal_id'] ?? null;
 
-// --- MANEJO DE POST (Mutaciones) ---
-
-// Manejo de eliminación
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
-    $id_a_eliminar = $_POST['eliminar_id'];
-    $atencion_check = AtencionService::getById($id_a_eliminar);
-    if ($atencion_check && ($user_role === 'admin' || $atencion_check['personalId'] == $my_personal_id)) {
-        if (AtencionService::delete($id_a_eliminar)) {
-            header("Location: index.php?eliminado=1");
-            exit();
-        }
-    }
-}
-
-// Manejo de cambio de estado
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['completar_id'])) {
-    $id_a_completar = $_POST['completar_id'];
-    if (AtencionService::updateEstado($id_a_completar, 'realizada')) {
-        header("Location: index.php?completado=1");
+if (isset($_GET['ajax_search'])) {
+    // Verificar autenticación
+    if (!isset($_SESSION['personal_id'])) {
         exit();
     }
-}
 
-// --- MANEJO DE AJAX ---
-
-if (isset($_GET['ajax_search'])) {
     $termino = $_GET['q'] ?? '';
     $fecha = $_GET['fecha'] ?? '';
 
@@ -139,6 +116,37 @@ if (isset($_GET['ajax_search'])) {
     exit();
 }
 
+include_once __DIR__ . "/../../src/Templates/header.php";
+
+// Verificar que sea personal autorizado
+if (!isset($_SESSION['personal_id'])) {
+    header('Location: ' . BASE_URL . 'auth/login.php');
+    exit();
+}
+
+// --- MANEJO DE POST (Mutaciones) ---
+
+// Manejo de eliminación
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
+    $id_a_eliminar = $_POST['eliminar_id'];
+    $atencion_check = AtencionService::getById($id_a_eliminar);
+    if ($atencion_check && ($user_role === 'admin' || $atencion_check['personalId'] == $my_personal_id)) {
+        if (AtencionService::delete($id_a_eliminar)) {
+            header("Location: index.php?eliminado=1");
+            exit();
+        }
+    }
+}
+
+// Manejo de cambio de estado
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['completar_id'])) {
+    $id_a_completar = $_POST['completar_id'];
+    if (AtencionService::updateEstado($id_a_completar, 'realizada')) {
+        header("Location: index.php?completado=1");
+        exit();
+    }
+}
+
 $filtro_fecha = $_GET['fecha'] ?? '';
 
 if (!empty($filtro_fecha)) {
@@ -188,6 +196,13 @@ if (!empty($filtro_fecha)) {
                     <?php if (isset($_GET['completado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="fas fa-check-circle me-2"></i>Atención marcada como realizada.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($_GET['editado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Atención actualizada correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>

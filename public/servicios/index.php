@@ -1,15 +1,11 @@
 <?php
-include_once __DIR__ . "/../../src/Templates/header.php";
-// Aún necesario para otras cosas? Posiblemente sí, auth, menús.
-// include_once __DIR__ . "/../../src/logic/servicios.logic.php"; // REMOVED
+require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Servicios\ServicioService;
 use App\Modules\Usuarios\UsuarioService;
 
-// Solo administradores pueden gestionar servicios
-if (!UsuarioService::esAdmin()) {
-    header("Location: " . BASE_URL . "index.php");
-    exit();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
 // Obtener parámetro para mostrar inactivos
@@ -60,6 +56,14 @@ if (isset($_GET['ajax_search'])) {
     exit();
 }
 
+include_once __DIR__ . "/../../src/Templates/header.php";
+
+// Solo administradores pueden gestionar servicios
+if (!UsuarioService::esAdmin()) {
+    header("Location: " . BASE_URL . "index.php");
+    exit();
+}
+
 // Manejo de acciones (baja/reactivación)
 if (isset($_GET['accion']) && isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -101,6 +105,31 @@ $servicios = ServicioService::getAll($mostrar_inactivos);
                     </div>
                 </div>
                 <div class="card-body">
+                    <?php if (isset($_GET['exito'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Servicio creado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['editado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Servicio actualizado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['desactivado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Servicio desactivado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['reactivado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Servicio reactivado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Buscador -->
                     <div class="input-group mb-4">
                         <span class="input-group-text bg-white border-end-0">

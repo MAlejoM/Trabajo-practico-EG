@@ -37,10 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
     try {
         $exito = MascotaService::create($_POST, $_FILES);
         if ($exito) {
-            $mensaje = 'Mascota registrada correctamente.';
-            $tipo_mensaje = 'success';
-            // Limpiar form
-            $nombre = $raza = $color = $fechaDeNac = '';
+            header("Location: index.php?creado=1");
+            exit();
         } else {
             $mensaje = 'Error al registrar la mascota.';
             $tipo_mensaje = 'danger';

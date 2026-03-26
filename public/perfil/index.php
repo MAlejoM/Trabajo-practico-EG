@@ -38,23 +38,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_perfil']))
             $apellido = trim($_POST['apellido']);
             $email = trim($_POST['email']);
 
-            $datos = [
-                'email' => $email,
-                'nombre' => $nombre,
-                'apellido' => $apellido
-            ];
+            // Detectar si hubo cambios
+            $hayCambios = (
+                $usuario['nombre'] !== $nombre ||
+                $usuario['apellido'] !== $apellido ||
+                $usuario['email'] !== $email
+            );
 
-            UsuarioService::updateAdmin($_SESSION['usuarioId'], $datos);
+            if (!$hayCambios) {
+                $mensaje = 'No se detectaron cambios.';
+                $tipo_mensaje = 'info';
+            } else {
+                $datos = [
+                    'email' => $email,
+                    'nombre' => $nombre,
+                    'apellido' => $apellido
+                ];
 
-            // Actualizar sesión
-            $_SESSION['nombre'] = $nombre;
-            $_SESSION['apellido'] = $apellido;
+                UsuarioService::updateAdmin($_SESSION['usuarioId'], $datos);
 
-            $mensaje = 'Perfil actualizado correctamente.';
-            $tipo_mensaje = 'success';
+                // Actualizar sesión
+                $_SESSION['nombre'] = $nombre;
+                $_SESSION['apellido'] = $apellido;
 
-            // Recargar datos
-            $usuario = UsuarioService::getUsuarioCompletoById($_SESSION['usuarioId']);
+                $mensaje = 'Perfil actualizado correctamente.';
+                $tipo_mensaje = 'success';
+
+                // Recargar datos
+                $usuario = UsuarioService::getUsuarioCompletoById($_SESSION['usuarioId']);
+            }
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $tipo_mensaje = 'danger';

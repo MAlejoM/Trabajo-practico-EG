@@ -48,14 +48,15 @@ if ($filtro_rol !== 'todos') {
                         <h1 class="h4 mb-0">Gestión de Usuarios</h1>
                         <div class="d-flex gap-2 align-items-center flex-wrap">
                             <div class="btn-group btn-group-sm" role="group">
-                                <a href="?rol=todos" class="btn btn-outline-primary <?php echo $filtro_rol === 'todos' ? 'active' : ''; ?>">Todos</a>
+                                <?php $inactivos_param = $mostrar_inactivos ? '&inactivos=1' : ''; ?>
+                                <a href="?rol=todos<?php echo $inactivos_param; ?>" class="btn btn-outline-primary <?php echo $filtro_rol === 'todos' ? 'active' : ''; ?>">Todos</a>
                                 <?php foreach ($roles_disponibles as $rol): ?>
-                                    <a href="?rol=<?php echo urlencode($rol); ?>"
+                                    <a href="?rol=<?php echo urlencode($rol) . $inactivos_param; ?>"
                                         class="btn btn-outline-primary <?php echo strtolower($filtro_rol) === strtolower($rol) ? 'active' : ''; ?>">
                                         <?php echo ucfirst(htmlspecialchars($rol)); ?>
                                     </a>
                                 <?php endforeach; ?>
-                                <a href="?rol=sin_rol" class="btn btn-outline-primary <?php echo $filtro_rol === 'sin_rol' ? 'active' : ''; ?>">Sin Rol</a>
+                                <a href="?rol=sin_rol<?php echo $inactivos_param; ?>" class="btn btn-outline-primary <?php echo $filtro_rol === 'sin_rol' ? 'active' : ''; ?>">Sin Rol</a>
                             </div>
                             <div class="form-check form-switch ms-3 d-flex align-items-center text-dark">
                                 <input class="form-check-input me-2" type="checkbox" id="mostrarInactivos"
@@ -70,6 +71,19 @@ if ($filtro_rol !== 'todos') {
                     </div>
                 </div>
                 <div class="card-body">
+                    <?php if (isset($_GET['creado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Usuario creado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['editado'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Usuario actualizado correctamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                     <?php if (empty($usuarios)): ?>
                         <div class="alert alert-info">No hay usuarios registrados.</div>
                     <?php else: ?>

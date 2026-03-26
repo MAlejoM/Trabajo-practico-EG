@@ -30,9 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['guardar_mascota'])) {
         try {
             if (MascotaService::update($mascota_id, $_POST, $_FILES)) {
-                $mensaje = 'Mascota actualizada correctamente.';
-                $tipo_mensaje = 'success';
-                $mascota = MascotaService::getById($mascota_id); // Refrescar
+                header("Location: index.php?editado=1");
+                exit();
             } else {
                 $mensaje = 'Error al actualizar la mascota.';
                 $tipo_mensaje = 'danger';
@@ -43,18 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif (isset($_POST['dar_baja'])) {
         if (MascotaService::delete($mascota_id)) {
-            $mensaje = 'Mascota dada de baja correctamente.';
-            $tipo_mensaje = 'success';
-            $mascota['activo'] = 0;
+            header("Location: index.php?baja=1");
+            exit();
         } else {
             $mensaje = 'Error al dar de baja la mascota.';
             $tipo_mensaje = 'danger';
         }
     } elseif (isset($_POST['reactivar'])) {
         if (MascotaService::reactivate($mascota_id)) {
-            $mensaje = 'Mascota reactivada correctamente.';
-            $tipo_mensaje = 'success';
-            $mascota['activo'] = 1;
+            header("Location: index.php?reactivado=1");
+            exit();
         } else {
             $mensaje = 'Error al reactivar la mascota.';
             $tipo_mensaje = 'danger';

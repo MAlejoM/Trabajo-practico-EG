@@ -83,7 +83,7 @@ $mascotas = MascotaService::getByClienteId($_SESSION['cliente_id']);
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="d-grid">
-                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id_mascota=<?php echo $mascota['id']; ?>"
+                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>"
                                                         class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-notes-medical me-1"></i> Ver Atenciones
                                                     </a>

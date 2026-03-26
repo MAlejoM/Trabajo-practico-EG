@@ -108,15 +108,41 @@ class UsuarioRepository
     public static function update($id, $data)
     {
         $db = DB::getConn();
-        $stmt = $db->prepare("UPDATE usuarios SET email = ?, nombre = ?, apellido = ?, activo = ? WHERE id = ?");
-        $stmt->bind_param(
-            "sssii",
-            $data['email'],
-            $data['nombre'],
-            $data['apellido'],
-            $data['activo'],
-            $id
-        );
+        $sets = [];
+        $tipos = '';
+        $valores = [];
+
+        $permitidos = [
+            'email' => 's',
+            'nombre' => 's',
+            'apellido' => 's',
+            'clave' => 's',
+            'activo' => 'i'
+        ];
+
+        foreach ($permitidos as $campo => $tipo) {
+            if (array_key_exists($campo, $data)) {
+                $sets[] = "`$campo` = ?";
+                $tipos .= $tipo;
+                $valores[] = $data[$campo];
+            }
+        }
+
+        if (empty($sets)) return true;
+
+        $tipos .= 'i';
+        $valores[] = $id;
+
+        $sql = "UPDATE `usuarios` SET " . implode(', ', $sets) . " WHERE `id` = ?";
+        $stmt = $db->prepare($sql);
+
+        // Crear array de referencias para bind_param
+        $refs = [$tipos];
+        for ($i = 0; $i < count($valores); $i++) {
+            $refs[] = &$valores[$i];
+        }
+        call_user_func_array([$stmt, 'bind_param'], $refs);
+
         return $stmt->execute();
     }
 

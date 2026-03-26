@@ -1,20 +1,11 @@
 <?php
-include_once __DIR__ . "/../../src/Templates/header.php";
-// Para menús y roles
+// AJAX handlers - deben estar ANTES del header para no incluir HTML
+require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Atenciones\AtencionService;
 use App\Modules\Mascotas\MascotaService;
 use App\Modules\Servicios\ServicioService;
 use App\Modules\Usuarios\UsuarioService;
-
-// Verificar que sea personal autorizado
-if (!UsuarioService::esPersonal()) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
-
-$user_role = $_SESSION['rol'] ?? '';
-$my_personal_id = $_SESSION['personal_id'] ?? null;
 
 // AJAX para búsqueda de mascotas
 if (isset($_GET['ajax_mascotas'])) {
@@ -72,6 +63,18 @@ if (isset($_GET['ajax_servicios'])) {
     }
     exit();
 }
+
+include_once __DIR__ . "/../../src/Templates/header.php";
+// Para menús y roles
+
+// Verificar que sea personal autorizado
+if (!UsuarioService::esPersonal()) {
+    header('Location: ' . BASE_URL . 'auth/login.php');
+    exit();
+}
+
+$user_role = $_SESSION['rol'] ?? '';
+$my_personal_id = $_SESSION['personal_id'] ?? null;
 
 $id_mascota_inicial = $_GET['id_mascota'] ?? null;
 $mascota_inicial = null;
