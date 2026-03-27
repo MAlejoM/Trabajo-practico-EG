@@ -14,11 +14,11 @@ define('PUBLIC_PATH', PROJECT_ROOT . '/public');
 define('UPLOADS_PATH', PUBLIC_PATH . '/uploads');
 
 // Configuración del correo
-define('MAILHOST', getenv('MAIL_HOST') ?: "smtp.gmail.com");
+define('MAILHOST', $_ENV['MAIL_HOST'] ?? (getenv('MAIL_HOST') ?: "smtp.gmail.com"));
 
-define('USERNAME', getenv('MAIL_USER') ?: "luhmannm0@gmail.com");
+define('USERNAME', $_ENV['MAIL_USER'] ?? (getenv('MAIL_USER') ?: "luhmannm0@gmail.com"));
 
-define('PASSWORD', getenv('MAIL_PASS') ?: "qbscabxaxvjoisvt");
+define('PASSWORD', $_ENV['MAIL_PASS'] ?? (getenv('MAIL_PASS') ?: "qbscabxaxvjoisvt"));
 
 define('SEND_FROM',"info@nosequeponer.com");
 
