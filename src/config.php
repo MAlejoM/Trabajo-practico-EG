@@ -3,15 +3,22 @@
 
 // Rutas base del proyecto
 define('PROJECT_ROOT', dirname(__DIR__));
+
+// Cargar variables de entorno si el archivo existe
+if (file_exists(PROJECT_ROOT . '/.env')) {
+    $dotenv = new \App\Core\DotEnv(PROJECT_ROOT . '/.env');
+    $dotenv->load();
+}
+
 define('PUBLIC_PATH', PROJECT_ROOT . '/public');
 define('UPLOADS_PATH', PUBLIC_PATH . '/uploads');
 
 // Configuración del correo
-define('MAILHOST', "smtp.gmail.com");
+define('MAILHOST', getenv('MAIL_HOST') ?: "smtp.gmail.com");
 
-define('USERNAME',"luhmannm0@gmail.com");
+define('USERNAME', getenv('MAIL_USER') ?: "luhmannm0@gmail.com");
 
-define('PASSWORD',"qbscabxaxvjoisvt");
+define('PASSWORD', getenv('MAIL_PASS') ?: "qbscabxaxvjoisvt");
 
 define('SEND_FROM',"info@nosequeponer.com");
 

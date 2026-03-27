@@ -9,12 +9,14 @@ class DB
 
     private function __construct()
     {
-        $host = 'localhost';
-        $user = 'root';
-        $pass = '';
-        $name = 'veterinaria_db';
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $user = getenv('DB_USER') ?: 'root';
+        $pass = getenv('DB_PASS') ?: '';
+        $name = getenv('DB_NAME') ?: 'veterinaria_db';
+        $port = getenv('DB_PORT') ?: 3306;
 
-        $this->connection = mysqli_connect($host, $user, $pass, $name, 3306);
+
+        $this->connection = mysqli_connect($host, $user, $pass, $name, $port);
 
         if (!$this->connection) {
             $error = mysqli_connect_error();
