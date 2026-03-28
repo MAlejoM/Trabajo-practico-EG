@@ -30,7 +30,7 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 -- ============================================================
 CREATE TABLE `usuarios` (
   `id`                   INT(11)      NOT NULL AUTO_INCREMENT,
-  `email`                VARCHAR(200) NOT NULL UNIQUE,
+  `email`                VARCHAR(191) NOT NULL UNIQUE,
   `nombre`               VARCHAR(100) NOT NULL,
   `apellido`             VARCHAR(100) NOT NULL,
   `clave`                VARCHAR(300) NOT NULL,
@@ -39,10 +39,11 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Usuario administrador predeterminado
--- Contraseña: password (cambiar en producción)
+-- Usuarios iniciales — contraseña para todos: "123123"
 INSERT INTO `usuarios` (`id`, `email`, `nombre`, `apellido`, `clave`, `activo`) VALUES
-(1, 'admin@veterinaria.com', 'Admin', 'Sistema', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1);
+(1, 'admin@gmail.com',       'Admin',  'Sistema', '$2y$10$ovLEXZUeufcjpT8UsS2lze0yCtMRCRoHAzcVnMjC8O74IUmf6DuvC', 1),
+(2, 'veterinario@gmail.com', 'Carlos', 'Lopez',   '$2y$10$ovLEXZUeufcjpT8UsS2lze0yCtMRCRoHAzcVnMjC8O74IUmf6DuvC', 1),
+(3, 'cliente@gmail.com',     'Maria',  'Garcia',  '$2y$10$ovLEXZUeufcjpT8UsS2lze0yCtMRCRoHAzcVnMjC8O74IUmf6DuvC', 1);
 
 -- ============================================================
 -- TABLA: personal
@@ -58,8 +59,10 @@ CREATE TABLE `personal` (
   CONSTRAINT `fk_personal_rol`     FOREIGN KEY (`rolId`)     REFERENCES `roles`    (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- admin → rol admin (1), veterinario → rol Veterinario (2)
 INSERT INTO `personal` (`id`, `usuarioId`, `rolId`, `activo`) VALUES
-(1, 1, 1, 1);
+(1, 1, 1, 1),
+(2, 2, 2, 1);
 
 -- ============================================================
 -- TABLA: clientes
@@ -74,6 +77,10 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_clientes_usuario` FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- cliente@gmail.com es cliente (usuarioId = 3)
+INSERT INTO `clientes` (`id`, `usuarioId`, `ciudad`, `telefono`, `direccion`) VALUES
+(1, 3, 'Buenos Aires', '1122334455', 'Av. Siempreviva 742');
 
 -- ============================================================
 -- TABLA: mascotas
@@ -163,7 +170,7 @@ CREATE TABLE `novedades` (
   `contenido`        TEXT         NOT NULL,
   `imagen`           LONGBLOB     DEFAULT NULL,
   `usuarioId`        INT(11)      NOT NULL,
-  `fechaPublicacion` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fechaPublicacion` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_novedades_usuario` FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -197,7 +204,7 @@ CREATE TABLE `password_reset_tokens` (
   `expira_en`     DATETIME     NOT NULL,
   `usado`         TINYINT(1)   NOT NULL DEFAULT 0,
   `ip_solicitud`  VARCHAR(45)  DEFAULT NULL,
-  `creado_en`     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creado_en`     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_prt_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
