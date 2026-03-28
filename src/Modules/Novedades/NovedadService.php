@@ -4,6 +4,11 @@ namespace App\Modules\Novedades;
 
 class NovedadService
 {
+    public static function getAllPaginated($page)
+    {
+        return NovedadRepository::getAllPaginated($page);
+    }
+
     public static function getAll()
     {
         return NovedadRepository::getAll();

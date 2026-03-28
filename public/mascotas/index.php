@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../../src/autoload.php";
+require_once __DIR__ . "/../../src/Templates/pagination.php";
 
 use App\Modules\Mascotas\MascotaService;
 
@@ -9,6 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Obtener parámetro para mostrar inactivos
 $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
+$page              = max(1, (int)($_GET['page'] ?? 1));
 
 // Manejo de búsqueda AJAX
 if (isset($_GET['ajax_search'])) {
@@ -77,7 +79,8 @@ if (!isset($_SESSION['personal_id'])) {
     exit();
 }
 
-$mascotas = MascotaService::getAll($mostrar_inactivos);
+$paginacion = MascotaService::getAllPaginated($page, $mostrar_inactivos);
+$mascotas   = $paginacion['data'];
 ?>
 
 <div class="container py-4">
@@ -193,6 +196,13 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
                         </table>
                     </div>
                 </div>
+                <div id="paginationContainer">
+                    <?php
+                    renderPagination($paginacion['page'], $paginacion['pages'], [
+                        'inactivos' => $mostrar_inactivos ? '1' : '0',
+                    ]);
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -200,8 +210,9 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
-        const tableBody = document.getElementById('mascotaTableBody');
+        const searchInput       = document.getElementById('searchInput');
+        const tableBody         = document.getElementById('mascotaTableBody');
+        const paginationContainer = document.getElementById('paginationContainer');
         let debounceTimer;
 
         searchInput.addEventListener('input', function() {
@@ -209,7 +220,14 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
             const query = this.value.trim();
 
             debounceTimer = setTimeout(() => {
-                fetch(`index.php?ajax_search=1&q=${encodeURIComponent(query)}`) // index.php es self
+                if (query === '') {
+                    window.location.href = '?inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>&page=1';
+                    return;
+                }
+
+                paginationContainer.style.display = 'none';
+
+                fetch(`index.php?ajax_search=1&q=${encodeURIComponent(query)}`)
                     .then(response => response.text())
                     .then(html => {
                         tableBody.innerHTML = html;

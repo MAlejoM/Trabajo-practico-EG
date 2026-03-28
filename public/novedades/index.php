@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
+include_once __DIR__ . "/../../src/Templates/pagination.php";
 
 
 use App\Modules\Novedades\NovedadService;
@@ -12,8 +13,10 @@ if (UsuarioService::esAdmin()) {
     $esAdmin = false;
 }
 
-// Obtener todas las novedades
-$novedades = NovedadService::getAll();
+// Listado paginado
+$page       = max(1, (int)($_GET['page'] ?? 1));
+$paginacion = NovedadService::getAllPaginated($page);
+$novedades  = $paginacion['data'];
 
 // Mensajes de éxito/error (usando sesión para persistencia post-redirect)
 $mensaje = isset($_SESSION['mensaje']) ? $_SESSION['mensaje'] : null;
@@ -126,6 +129,7 @@ $novedades_js = array_map(function ($n) {
                         </div>
                     <?php endif; ?>
                 </div>
+                <?php renderPagination($paginacion['page'], $paginacion['pages']); ?>
             </div>
         </div>
     </div>

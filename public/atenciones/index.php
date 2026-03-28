@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../../src/autoload.php";
+require_once __DIR__ . "/../../src/Templates/pagination.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -150,9 +151,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['completar_id'])) {
 $filtro_fecha = $_GET['fecha'] ?? '';
 
 if (!empty($filtro_fecha)) {
-    $atenciones = AtencionService::search('', $filtro_fecha);
+    $atenciones   = AtencionService::search('', $filtro_fecha);
+    $paginacion   = null;
 } else {
-    $atenciones = AtencionService::getAll();
+    $page         = max(1, (int)($_GET['page'] ?? 1));
+    $paginacion   = AtencionService::getAllPaginated($page);
+    $atenciones   = $paginacion['data'];
 }
 ?>
 
@@ -351,6 +355,11 @@ if (!empty($filtro_fecha)) {
                         </table>
                     </div>
                 </div>
+                <?php if ($paginacion): ?>
+                    <div id="paginationContainer">
+                        <?php renderPagination($paginacion['page'], $paginacion['pages']); ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -358,14 +367,22 @@ if (!empty($filtro_fecha)) {
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
-        const dateFilter = document.getElementById('dateFilter');
-        const tableBody = document.getElementById('atencionTableBody');
+        const searchInput         = document.getElementById('searchInput');
+        const dateFilter          = document.getElementById('dateFilter');
+        const tableBody           = document.getElementById('atencionTableBody');
+        const paginationContainer = document.getElementById('paginationContainer');
         let debounceTimer;
 
         function doSearch() {
             const query = searchInput.value.trim();
             const fecha = dateFilter.value;
+
+            if (query === '' && fecha === '') {
+                window.location.href = '?page=1';
+                return;
+            }
+
+            if (paginationContainer) paginationContainer.style.display = 'none';
 
             fetch(`index.php?ajax_search=1&q=${encodeURIComponent(query)}&fecha=${encodeURIComponent(fecha)}`)
                 .then(response => response.text())

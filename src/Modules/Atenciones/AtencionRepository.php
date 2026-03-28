@@ -6,6 +6,50 @@ use App\Core\DB;
 
 class AtencionRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page)
+    {
+        $db = DB::getConn();
+        $page = max(1, (int)$page);
+
+        // COUNT
+        $total = $db->query("SELECT COUNT(*) as total FROM atenciones")->fetch_assoc()['total'];
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $stmt = $db->prepare("
+            SELECT
+                a.id, a.fechaHora, a.titulo, a.descripcion, a.estado, a.personalId,
+                m.nombre as nombre_mascota,
+                uc.nombre as nombre_cliente, uc.apellido as apellido_cliente,
+                up.nombre as nombre_personal, up.apellido as apellido_personal
+            FROM atenciones a
+            JOIN mascotas m ON a.mascotaId = m.id
+            JOIN clientes c ON m.clienteId = c.id
+            JOIN usuarios uc ON c.usuarioId = uc.id
+            JOIN personal p ON a.personalId = p.id
+            JOIN usuarios up ON p.usuarioId = up.id
+            ORDER BY a.fechaHora DESC
+            LIMIT ? OFFSET ?
+        ");
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
     public static function getAll()
     {
         $db = DB::getConn();

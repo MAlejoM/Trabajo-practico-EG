@@ -6,6 +6,52 @@ use App\Core\DB;
 
 class MascotaRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page, $mostrarInactivas = false)
+    {
+        $db = DB::getConn();
+        $page  = max(1, (int)$page);
+        $whereClause = $mostrarInactivas ? '' : 'WHERE m.activo = 1';
+
+        $joins = "
+            FROM mascotas m
+            JOIN clientes c ON m.clienteId = c.id
+            JOIN usuarios u ON c.usuarioId = u.id
+            $whereClause
+        ";
+
+        // COUNT
+        $total = $db->query("SELECT COUNT(*) as total $joins")->fetch_assoc()['total'];
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $stmt = $db->prepare("
+            SELECT
+                m.id, m.nombre, m.raza, m.color, m.foto,
+                m.fechaDeNac, m.fechaMuerte, m.activo,
+                u.nombre as nombre_cliente, u.apellido as apellido_cliente
+            $joins
+            ORDER BY m.nombre ASC
+            LIMIT ? OFFSET ?
+        ");
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
     public static function getAll($mostrarInactivas = false)
     {
         $db = DB::getConn();

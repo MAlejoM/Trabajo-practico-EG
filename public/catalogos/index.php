@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
+include_once __DIR__ . "/../../src/Templates/pagination.php";
 
 
 use App\Modules\Catalogos\CatalogoService;
@@ -9,9 +10,11 @@ $esAdmin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
 
 // Filtros
 $categoriaFiltro = $_GET['categoria'] ?? '';
-$busqueda = $_GET['busqueda'] ?? '';
+$busqueda        = $_GET['busqueda'] ?? '';
+$page            = max(1, (int)($_GET['page'] ?? 1));
 
-$productos = CatalogoService::getAll($categoriaFiltro ?: null, $busqueda ?: null);
+$paginacion = CatalogoService::getAllPaginated($page, $categoriaFiltro ?: null, $busqueda ?: null);
+$productos  = $paginacion['data'];
 $categorias = CatalogoService::getCategorias();
 
 // Preprocesar para JS modal
@@ -108,6 +111,12 @@ $productos_js = array_map(function ($p) {
                         </div>
                     <?php endif; ?>
                 </div>
+                <?php
+                renderPagination($paginacion['page'], $paginacion['pages'], [
+                    'categoria' => $categoriaFiltro,
+                    'busqueda'  => $busqueda,
+                ]);
+                ?>
             </div>
         </div>
     </div>

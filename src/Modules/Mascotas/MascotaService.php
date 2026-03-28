@@ -4,6 +4,11 @@ namespace App\Modules\Mascotas;
 
 class MascotaService
 {
+    public static function getAllPaginated($page, $mostrarInactivas = false)
+    {
+        return MascotaRepository::getAllPaginated($page, $mostrarInactivas);
+    }
+
     public static function getAll($mostrarInactivas = false)
     {
         return MascotaRepository::getAll($mostrarInactivas);
