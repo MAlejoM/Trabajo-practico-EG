@@ -48,7 +48,7 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h1 class="h4 mb-0">Atenciones de <?php echo htmlspecialchars($mascota['nombre']); ?></h1>
                     <?php
-                    $volver_url = isset($_SESSION['cliente_id']) ? "mis_mascotas.php" : "mascotas/index.php";
+                    $volver_url = isset($_SESSION['cliente_id']) ? "mascotas/mis_mascotas.php" : "mascotas/index.php";
                     ?>
                     <a href="<?php echo BASE_URL . $volver_url; ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-arrow-left me-1"></i>Volver
