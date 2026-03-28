@@ -1,9 +1,9 @@
 <?php
 
-/**
- * CONFIGURACIÓN DE MODO - Cambiar a false en producción
- */
-define('DEV_MODE', true);
+
+$mode = $_ENV['DEV_MODE'] ?? (getenv('DEV_MODE') ?: 'true');
+$modeValue = strtolower(trim($mode)) === 'true' || $mode === '1';
+define('DEV_MODE', $modeValue);
 
 /**
  * Manejador global de excepciones

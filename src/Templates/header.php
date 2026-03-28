@@ -4,9 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Incluir el manejador de errores
-require_once __DIR__ . '/../Core/error_handler.php';
+// Cargar autoload y variables de entorno PRIMERO
 require_once __DIR__ . '/../autoload.php';
+
+// LUEGO incluir el manejador de errores (ahora $_ENV está disponible)
+require_once __DIR__ . '/../Core/error_handler.php';
 require_once __DIR__ . '/../config.php';
 
 if (!defined('BASE_URL')) {

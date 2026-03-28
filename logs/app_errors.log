@@ -174,3 +174,63 @@ Stack trace:
 
 ================================================================================
 
+[2026-03-28 21:06:41] WARNING: mysqli_connect(): (HY000/1045): Access denied for user 'freedb_admin_vet'@'190.2.96.25' (using password: YES) in C:\xampp\htdocs\src\Core\DB.php:23
+[2026-03-28 21:06:41] Exception: Error fallback de conexión a la base de datos: [1045] Access denied for user 'freedb_admin_vet'@'190.2.96.25' (using password: YES) in C:\xampp\htdocs\src\Core\DB.php:36
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Novedades\NovedadRepository.php(11): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Novedades\NovedadService.php(9): App\Modules\Novedades\NovedadRepository::getAll()
+#4 C:\xampp\htdocs\public\novedades\index.php(16): App\Modules\Novedades\NovedadService::getAll()
+#5 {main}
+
+================================================================================
+
+[2026-03-28 21:08:06] WARNING: mysqli_connect(): (HY000/1045): Access denied for user 'freedb_admin_vet'@'190.2.96.25' (using password: YES) in C:\xampp\htdocs\src\Core\DB.php:23
+[2026-03-28 21:08:06] Exception: Error fallback de conexión a la base de datos: [1045] Access denied for user 'freedb_admin_vet'@'190.2.96.25' (using password: YES) in C:\xampp\htdocs\src\Core\DB.php:36
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Novedades\NovedadRepository.php(11): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Novedades\NovedadService.php(9): App\Modules\Novedades\NovedadRepository::getAll()
+#4 C:\xampp\htdocs\public\novedades\index.php(16): App\Modules\Novedades\NovedadService::getAll()
+#5 {main}
+
+================================================================================
+
+[2026-03-28 21:10:42] WARNING: mysqli_connect(): (HY000/2002): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:23
+[2026-03-28 21:10:42] Exception: Error fallback de conexión a la base de datos: [2002] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:36
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoRepository.php(11): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoService.php(11): App\Modules\Catalogos\CatalogoRepository::getAll(NULL, NULL)
+#4 C:\xampp\htdocs\public\catalogos\index.php(14): App\Modules\Catalogos\CatalogoService::getAll(NULL, NULL)
+#5 {main}
+
+================================================================================
+
+[2026-03-28 21:13:27] WARNING: mysqli_connect(): (HY000/2002): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:23
+[2026-03-28 21:13:27] Exception: Error fallback de conexión a la base de datos: [2002] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:36
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Usuarios\UsuarioRepository.php(11): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Usuarios\UsuarioService.php(35): App\Modules\Usuarios\UsuarioRepository::getAll(false)
+#4 C:\xampp\htdocs\public\usuarios\index.php(15): App\Modules\Usuarios\UsuarioService::getAll(false)
+#5 {main}
+
+================================================================================
+
+[2026-03-28 21:15:18] WARNING: mysqli_connect(): (HY000/2002): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:23
+[2026-03-28 21:15:18] Exception: Error fallback de conexión a la base de datos: [2002] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder in C:\xampp\htdocs\src\Core\DB.php:36
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoRepository.php(11): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoService.php(11): App\Modules\Catalogos\CatalogoRepository::getAll(NULL, NULL)
+#4 C:\xampp\htdocs\public\catalogos\index.php(14): App\Modules\Catalogos\CatalogoService::getAll(NULL, NULL)
+#5 {main}
+
+================================================================================
+
