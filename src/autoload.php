@@ -1,4 +1,6 @@
 <?php
+
+
 spl_autoload_register(function ($class) {
     // Namespace base
     $prefix = 'App\\';
@@ -22,3 +24,13 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
+
+if (!defined('PROJECT_ROOT')) {
+    define('PROJECT_ROOT', dirname(__DIR__));
+}
+
+// Cargar variables de entorno si el archivo existe
+if (file_exists(PROJECT_ROOT . '/.env')) {
+    $dotenv = new \App\Core\DotEnv(PROJECT_ROOT . '/.env');
+    $dotenv->load();
+}
