@@ -1,10 +1,11 @@
 <?php
 
+use App\Core\SessionHandler;
 
-$is_logged_in = isset($_SESSION['usuarioId']);
-$user_role = $_SESSION['rol'] ?? null;
-$is_personal = isset($_SESSION['personal_id']);
-$is_cliente = isset($_SESSION['cliente_id']);
+$is_logged_in = SessionHandler::estaAutenticado();
+$user_role    = SessionHandler::getRol();
+$is_personal  = SessionHandler::esPersonal();
+$is_cliente   = SessionHandler::esCliente();
 
 ?>
 

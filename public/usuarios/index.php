@@ -3,9 +3,10 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 // Para menús y roles
 
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que sea administrador
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
     header('Location: ' . BASE_URL . 'index.php');
     exit();
 }

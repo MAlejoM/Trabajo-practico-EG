@@ -3,8 +3,9 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
     header('Location: ' . BASE_URL . 'index.php');
     exit();
 }

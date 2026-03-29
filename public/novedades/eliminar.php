@@ -1,15 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
 require_once __DIR__ . '/../../src/autoload.php';
 
 use App\Modules\Novedades\NovedadService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que el usuario sea admin
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
   header('Location: index.php');
   exit;
 }

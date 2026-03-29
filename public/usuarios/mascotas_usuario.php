@@ -4,8 +4,9 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 use App\Modules\Usuarios\UsuarioService;
 use App\Modules\Mascotas\MascotaService;
+use App\Core\SessionHandler;
 
-if (!UsuarioService::esPersonal()) {
+if (!SessionHandler::esPersonal()) {
   header('Location: ' . BASE_URL . 'index.php');
   exit();
 }

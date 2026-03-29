@@ -3,9 +3,10 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 use App\Modules\Mascotas\MascotaService;
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que sea admin o personal
-if (!UsuarioService::esPersonal()) {
+if (!SessionHandler::esPersonal()) {
     header('Location: ' . BASE_URL . 'index.php');
     exit();
 }

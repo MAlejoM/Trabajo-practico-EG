@@ -6,30 +6,6 @@ use Exception;
 
 class UsuarioService
 {
-    public static function ObtenerUsuarioLoggedId(): int
-    {
-        return $_SESSION['usuarioId'];
-    }
-
-    public static function ObtenerPersonalLoggedId(): ?int
-    {
-        return $_SESSION['personal_id'] ?? null;
-    }
-    public static function esAdmin()
-    {
-        return isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
-    }
-
-    public static function esPersonal()
-    {
-        return isset($_SESSION['personal_id']);
-    }
-
-    public static function esCliente()
-    {
-        return isset($_SESSION['cliente_id']);
-    }
-
     public static function getAll($mostrarInactivos = false)
     {
         return UsuarioRepository::getAll($mostrarInactivos);

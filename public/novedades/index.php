@@ -3,14 +3,10 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 
 use App\Modules\Novedades\NovedadService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar si el usuario es admin
-if (UsuarioService::esAdmin()) {
-    $esAdmin = true;
-} else {
-    $esAdmin = false;
-}
+$esAdmin = SessionHandler::esAdmin();
 
 // Obtener todas las novedades
 $novedades = NovedadService::getAll();

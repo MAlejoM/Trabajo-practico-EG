@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Servicios\ServicioService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -60,7 +60,7 @@ if (isset($_GET['ajax_search'])) {
 include_once __DIR__ . "/../../src/Templates/header.php";
 
 // Solo administradores pueden gestionar servicios
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
     header("Location: " . BASE_URL . "index.php");
     exit();
 }

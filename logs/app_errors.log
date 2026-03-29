@@ -174,3 +174,15 @@ Stack trace:
 
 ================================================================================
 
+[2026-03-29 19:14:38] Exception: Call to undefined method App\Modules\Usuarios\UsuarioService::esAdmin() in C:\xampp\htdocs\public\novedades\index.php:9
+Stack trace:
+#0 {main}
+
+================================================================================
+
+[2026-03-29 19:18:47] Exception: Call to undefined method App\Modules\Usuarios\UsuarioService::esAdmin() in C:\xampp\htdocs\public\servicios\index.php:63
+Stack trace:
+#0 {main}
+
+================================================================================
+
