@@ -1,13 +1,10 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
 
-
 use App\Modules\Catalogos\CatalogoService;
+use App\Core\SessionHandler;
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-  header('Location: ' . BASE_URL . 'index.php');
-  exit();
-}
+SessionHandler::requiereAdmin(BASE_URL . 'index.php');
 
 $mensaje = '';
 $tipo_mensaje = '';
@@ -15,7 +12,7 @@ $tipo_mensaje = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear'])) {
   try {
     $datos = $_POST;
-    $datos['usuarioId'] = $_SESSION['usuarioId'];
+    $datos['usuarioId'] = SessionHandler::getId();
     $datos['imagen'] = null;
 
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {

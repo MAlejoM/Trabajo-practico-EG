@@ -4,7 +4,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 use App\Modules\Atenciones\AtencionService;
 use App\Modules\Mascotas\MascotaService;
-
+use App\Core\SessionHandler;
 
 $mascota_id = $_GET['id'] ?? null;
 
@@ -23,7 +23,7 @@ if (!$mascota) {
 }
 
 
-if (!isset($_SESSION['personal_id']) && (!isset($_SESSION['cliente_id']) || $mascota['clienteId'] != $_SESSION['cliente_id'])) {
+if (!SessionHandler::esPersonal() && (!SessionHandler::esCliente() || $mascota['clienteId'] != SessionHandler::getClienteId())) {
     echo "<div class='container py-4'><div class='alert alert-danger'>No tienes permiso para ver esta mascota.</div></div>";
     include_once __DIR__ . "/../../src/Templates/footer.php";
     exit;
@@ -48,7 +48,7 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h1 class="h4 mb-0">Atenciones de <?php echo htmlspecialchars($mascota['nombre']); ?></h1>
                     <?php
-                    $volver_url = isset($_SESSION['cliente_id']) ? "mis_mascotas.php" : "mascotas/index.php";
+                    $volver_url = SessionHandler::esCliente() ? "mascotas/mis_mascotas.php" : "mascotas/index.php";
                     ?>
                     <a href="<?php echo BASE_URL . $volver_url; ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-arrow-left me-1"></i>Volver

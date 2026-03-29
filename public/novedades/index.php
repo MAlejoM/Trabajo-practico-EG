@@ -11,11 +11,6 @@ $esAdmin = SessionHandler::esAdmin();
 // Obtener todas las novedades
 $novedades = NovedadService::getAll();
 
-// Mensajes de éxito/error (usando sesión para persistencia post-redirect)
-$mensaje = isset($_SESSION['mensaje']) ? $_SESSION['mensaje'] : null;
-$tipoMensaje = isset($_SESSION['tipo_mensaje']) ? $_SESSION['tipo_mensaje'] : null;
-unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']);
-
 // Preprocesar novedades para base64 si tienen imagen (para JS)
 $novedades_js = array_map(function ($n) {
     if (!empty($n['imagen'])) {
@@ -51,13 +46,6 @@ $novedades_js = array_map(function ($n) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php if ($mensaje): ?>
-                        <div class="alert alert-<?php echo $tipoMensaje === 'success' ? 'success' : 'danger'; ?> alert-dismissible fade show" role="alert">
-                            <?php echo htmlspecialchars($mensaje); ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-
                     <?php if (empty($novedades)): ?>
                         <div class="alert alert-info">No hay novedades publicadas aún.</div>
                     <?php else: ?>
@@ -190,14 +178,11 @@ $novedades_js = array_map(function ($n) {
 // Procesar eliminación si es POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'eliminar' && isset($_POST['id']) && $esAdmin) {
     if (NovedadService::delete($_POST['id'])) {
-        $_SESSION['mensaje'] = 'Novedad eliminada correctamente.';
-        $_SESSION['tipo_mensaje'] = 'success';
+        SessionHandler::setMensaje('Novedad eliminada correctamente.');
     } else {
-        $_SESSION['mensaje'] = 'Error al eliminar la novedad.';
-        $_SESSION['tipo_mensaje'] = 'danger';
+        SessionHandler::setMensaje('Error al eliminar la novedad.', 'danger');
     }
-    // Redirigir para evitar reenvío de formulario
-    echo "<script>window.location.href = 'index.php';</script>";
+    header('Location: index.php');
     exit();
 }
 

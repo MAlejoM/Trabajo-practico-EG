@@ -1,18 +1,18 @@
 <?php
 require_once __DIR__ . "/../../src/autoload.php";
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 use App\Modules\Atenciones\AtencionService;
+use App\Core\SessionHandler;
 
-$user_role = $_SESSION['rol'] ?? '';
-$my_personal_id = $_SESSION['personal_id'] ?? null;
+SessionHandler::iniciar();
 
+$user_role      = SessionHandler::getRol() ?? '';
+$my_personal_id = SessionHandler::getPersonalId();
+
+// Manejo de búsqueda AJAX
 if (isset($_GET['ajax_search'])) {
     // Verificar autenticación
-    if (!isset($_SESSION['personal_id'])) {
+    if (!SessionHandler::esPersonal()) {
         exit();
     }
 
@@ -119,10 +119,7 @@ if (isset($_GET['ajax_search'])) {
 include_once __DIR__ . "/../../src/Templates/header.php";
 
 // Verificar que sea personal autorizado
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
+SessionHandler::requierePersonal(BASE_URL . 'auth/login.php');
 
 // --- MANEJO DE POST (Mutaciones) ---
 
@@ -132,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
     $atencion_check = AtencionService::getById($id_a_eliminar);
     if ($atencion_check && ($user_role === 'admin' || $atencion_check['personalId'] == $my_personal_id)) {
         if (AtencionService::delete($id_a_eliminar)) {
-            header("Location: index.php?eliminado=1");
+            SessionHandler::setMensaje('Atención eliminada correctamente.');
+            header('Location: index.php');
             exit();
         }
     }
@@ -142,7 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['completar_id'])) {
     $id_a_completar = $_POST['completar_id'];
     if (AtencionService::updateEstado($id_a_completar, 'realizada')) {
-        header("Location: index.php?completado=1");
+        SessionHandler::setMensaje('Atención marcada como realizada.');
+        header('Location: index.php');
         exit();
     }
 }
@@ -179,33 +178,6 @@ if (!empty($filtro_fecha)) {
                 </div>
 
                 <div class="card-body text-dark">
-                    <?php if (isset($_GET['registrado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Atención registrada con éxito.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($_GET['eliminado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Atención eliminada correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($_GET['completado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Atención marcada como realizada.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($_GET['editado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Atención actualizada correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
 
                     <!-- Buscador y Filtro -->
                     <div class="row g-3 mb-4">

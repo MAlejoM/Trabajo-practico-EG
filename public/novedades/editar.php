@@ -21,8 +21,7 @@ if ($id <= 0) {
 $novedad = NovedadService::getById($id);
 
 if (!$novedad) {
-  $_SESSION['mensaje'] = 'Novedad no encontrada';
-  $_SESSION['tipo_mensaje'] = 'danger';
+  SessionHandler::setMensaje('Novedad no encontrada', 'danger');
   header('Location: index.php');
   exit;
 }
@@ -35,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = NovedadService::update($id, $_POST);
 
     if ($resultado) {
-      $_SESSION['mensaje'] = 'Novedad actualizada exitosamente';
-      $_SESSION['tipo_mensaje'] = 'success';
+      SessionHandler::setMensaje('Novedad actualizada exitosamente');
       header('Location: index.php');
       exit;
     } else {

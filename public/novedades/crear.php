@@ -17,8 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $resultado = NovedadService::create($_POST, SessionHandler::getId());
     if ($resultado) {
-      $_SESSION['mensaje'] = 'Novedad creada exitosamente';
-      $_SESSION['tipo_mensaje'] = 'success';
+      SessionHandler::setMensaje('Novedad creada exitosamente');
       header('Location: index.php');
       exit;
     } else {

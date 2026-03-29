@@ -21,6 +21,8 @@ class SessionHandler
     private const KEY_PERSONAL_ID = 'personal_id';
     private const KEY_CLIENTE_ID  = 'cliente_id';
     private const KEY_SYSTEM_ERR  = 'system_error';
+    private const KEY_MENSAJE      = 'mensaje';
+    private const KEY_TIPO_MENSAJE = 'tipo_mensaje';
 
     // --- Ciclo de vida ---
 
@@ -173,6 +175,31 @@ class SessionHandler
             header("Location: $url");
             exit;
         }
+    }
+
+    // --- Flash de mensajes de feedback (CRUD) ---
+
+    // Guarda un mensaje para mostrarlo en el próximo request (usado tras redirect)
+    public static function setMensaje(string $texto, string $tipo = 'success'): void
+    {
+        self::iniciar();
+        $_SESSION[self::KEY_MENSAJE]      = $texto;
+        $_SESSION[self::KEY_TIPO_MENSAJE] = $tipo;
+    }
+
+    // Lee y borra el mensaje de feedback de la sesión (patrón flash)
+    public static function getMensaje(): ?array
+    {
+        self::iniciar();
+        if (!isset($_SESSION[self::KEY_MENSAJE])) {
+            return null;
+        }
+        $data = [
+            'texto' => $_SESSION[self::KEY_MENSAJE],
+            'tipo'  => $_SESSION[self::KEY_TIPO_MENSAJE] ?? 'success',
+        ];
+        unset($_SESSION[self::KEY_MENSAJE], $_SESSION[self::KEY_TIPO_MENSAJE]);
+        return $data;
     }
 
     // --- Flash de errores de sistema ---

@@ -4,14 +4,13 @@ require_once __DIR__ . "/../../src/autoload.php";
 use App\Modules\Atenciones\AtencionService;
 use App\Modules\Usuarios\UsuarioService;
 use App\Modules\Servicios\ServicioService;
+use App\Core\SessionHandler;
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+SessionHandler::iniciar();
 
 // AJAX para servicios
 if (isset($_GET['ajax_servicios'])) {
-    if (!isset($_SESSION['personal_id'])) {
+    if (!SessionHandler::esPersonal()) {
         exit();
     }
     $p_id = $_GET['personal_id'] ?? 0;
@@ -25,10 +24,7 @@ if (isset($_GET['ajax_servicios'])) {
 include_once __DIR__ . "/../../src/Templates/header.php";
 
 // Verificar que sea personal autorizado
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
+SessionHandler::requierePersonal(BASE_URL . 'auth/login.php');
 
 $id_atencion = $_GET['id'] ?? null;
 if (!$id_atencion) {
@@ -42,8 +38,8 @@ if (!$atencion) {
     exit;
 }
 
-$user_role = $_SESSION['rol'] ?? '';
-$my_personal_id = $_SESSION['personal_id'] ?? null;
+$user_role      = SessionHandler::getRol() ?? '';
+$my_personal_id = SessionHandler::getPersonalId();
 
 // Verificar permisos: Admin o el personal asignado
 if ($user_role !== 'admin' && $atencion['personalId'] != $my_personal_id) {
@@ -67,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if (AtencionService::update($id_atencion, $_POST)) {
-            header("Location: index.php?editado=1");
+            SessionHandler::setMensaje('Atención actualizada correctamente.');
+            header('Location: index.php');
             exit();
         } else {
             $error = "Hubo un error al actualizar la atención.";

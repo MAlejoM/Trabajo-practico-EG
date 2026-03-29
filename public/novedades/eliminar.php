@@ -17,15 +17,12 @@ if ($id > 0) {
   $resultado = NovedadService::delete($id);
 
   if ($resultado) {
-    $_SESSION['mensaje'] = 'Novedad eliminada exitosamente';
-    $_SESSION['tipo_mensaje'] = 'success';
+    SessionHandler::setMensaje('Novedad eliminada exitosamente');
   } else {
-    $_SESSION['mensaje'] = 'Error al eliminar la novedad';
-    $_SESSION['tipo_mensaje'] = 'error';
+    SessionHandler::setMensaje('Error al eliminar la novedad', 'danger');
   }
 } else {
-  $_SESSION['mensaje'] = 'ID de novedad inválido';
-  $_SESSION['tipo_mensaje'] = 'error';
+  SessionHandler::setMensaje('ID de novedad inválido', 'danger');
 }
 
 header('Location: index.php');

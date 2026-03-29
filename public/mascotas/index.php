@@ -2,17 +2,16 @@
 require_once __DIR__ . "/../../src/autoload.php";
 
 use App\Modules\Mascotas\MascotaService;
+use App\Core\SessionHandler;
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+SessionHandler::iniciar();
 
 // Obtener parámetro para mostrar inactivos
 $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
 
 // Manejo de búsqueda AJAX
 if (isset($_GET['ajax_search'])) {
-    if (!isset($_SESSION['personal_id'])) {
+    if (!SessionHandler::esPersonal()) {
         exit();
     }
 
@@ -72,10 +71,7 @@ if (isset($_GET['ajax_search'])) {
 include_once __DIR__ . "/../../src/Templates/header.php";
 
 // Verificar que sea personal autorizado
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
+SessionHandler::requierePersonal(BASE_URL . 'auth/login.php');
 
 $mascotas = MascotaService::getAll($mostrar_inactivos);
 ?>
@@ -107,30 +103,6 @@ $mascotas = MascotaService::getAll($mostrar_inactivos);
                 </div>
 
                 <div class="card-body">
-                    <?php if (isset($_GET['creado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Mascota registrada correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($_GET['editado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Mascota actualizada correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($_GET['baja'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Mascota dada de baja correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($_GET['reactivado'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Mascota reactivada correctamente.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
 
                     <!-- Buscador -->
                     <div class="input-group mb-4">

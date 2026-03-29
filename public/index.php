@@ -2,16 +2,18 @@
 
 include_once __DIR__ . "/../src/Templates/header.php";
 
+use App\Core\SessionHandler;
+
 ?>
 <main>
-  <?php if (isset($_SESSION['usuarioId']) && isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+  <?php if (SessionHandler::esAdmin()): ?>
     <!-- Panel de administración para Administradores -->
     <section class="py-5">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <h1 class="display-5 fw-semibold mb-3">Panel de Administrador</h1>
-            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars(SessionHandler::getNombre() . ' ' . SessionHandler::getApellido()); ?></p>
           </div>
         </div>
 
@@ -145,14 +147,14 @@ include_once __DIR__ . "/../src/Templates/header.php";
         </div>
       </div>
     </section>
-  <?php elseif (isset($_SESSION['usuarioId']) && isset($_SESSION['personal_id'])): ?>
+  <?php elseif (SessionHandler::esPersonal()): ?>
     <!-- Panel para Personal (veterinarios, peluqueros, etc.) -->
     <section class="py-5">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <h1 class="display-5 fw-semibold mb-3">Panel de Personal</h1>
-            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars(SessionHandler::getNombre() . ' ' . SessionHandler::getApellido()); ?></p>
           </div>
         </div>
 
@@ -244,14 +246,14 @@ include_once __DIR__ . "/../src/Templates/header.php";
         </div>
       </div>
     </section>
-  <?php elseif (isset($_SESSION['usuarioId']) && isset($_SESSION['cliente_id'])): ?>
+  <?php elseif (SessionHandler::esCliente()): ?>
     <!-- Panel de Cliente -->
     <section class="py-5">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <h1 class="display-5 fw-semibold mb-3">Panel de Cliente</h1>
-            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?></p>
+            <p class="lead mb-4">Bienvenido/a <?php echo htmlspecialchars(SessionHandler::getNombre() . ' ' . SessionHandler::getApellido()); ?></p>
           </div>
         </div>
 

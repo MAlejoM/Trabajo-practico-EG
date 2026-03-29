@@ -55,6 +55,17 @@ if (!defined('BASE_URL')) {
                 </div>
             </div>
         <?php endif; ?>
+        <?php
+        $flash = SessionHandler::getMensaje();
+        if ($flash): ?>
+            <div class="container mt-3">
+                <div class="alert alert-<?php echo htmlspecialchars($flash['tipo']); ?> alert-dismissible fade show shadow-sm" role="alert">
+                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2"></i>
+                    <?php echo htmlspecialchars($flash['texto']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php endif; ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>index.php">
