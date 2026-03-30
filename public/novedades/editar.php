@@ -1,15 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
 include_once __DIR__ . '/../../src/Templates/header.php';
 
 use App\Modules\Novedades\NovedadService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que el usuario sea admin
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
   header('Location: index.php');
   exit;
 }
@@ -25,8 +21,7 @@ if ($id <= 0) {
 $novedad = NovedadService::getById($id);
 
 if (!$novedad) {
-  $_SESSION['mensaje'] = 'Novedad no encontrada';
-  $_SESSION['tipo_mensaje'] = 'danger';
+  SessionHandler::setMensaje('Novedad no encontrada', 'danger');
   header('Location: index.php');
   exit;
 }
@@ -39,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = NovedadService::update($id, $_POST);
 
     if ($resultado) {
-      $_SESSION['mensaje'] = 'Novedad actualizada exitosamente';
-      $_SESSION['tipo_mensaje'] = 'success';
+      SessionHandler::setMensaje('Novedad actualizada exitosamente');
       header('Location: index.php');
       exit;
     } else {

@@ -3,15 +3,13 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que el usuario esté logueado
-if (!isset($_SESSION['usuarioId'])) {
-    header('Location: ../auth/login.php');
-    exit();
-}
+SessionHandler::requiereAutenticacion('../auth/login.php');
 
 // Obtener datos del usuario usando el Service
-$usuario = UsuarioService::getUsuarioCompletoById($_SESSION['usuarioId']);
+$usuario = UsuarioService::getUsuarioCompletoById(SessionHandler::getId());
 
 if (!$usuario) {
     header('Location: ../auth/logout.php');
@@ -19,9 +17,9 @@ if (!$usuario) {
 }
 
 // Determinar permisos
-$es_cliente = $usuario['cliente_id'] != null;
+$es_cliente  = $usuario['cliente_id'] != null;
 $es_personal = $usuario['personal_id'] != null;
-$es_admin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
+$es_admin    = SessionHandler::esAdmin();
 
 // Procesar actualización de perfil (solo para personal y admin)
 $mensaje = '';
@@ -55,17 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_perfil']))
                     'apellido' => $apellido
                 ];
 
-                UsuarioService::updateAdmin($_SESSION['usuarioId'], $datos);
+                UsuarioService::updateAdmin(SessionHandler::getId(), $datos);
 
                 // Actualizar sesión
-                $_SESSION['nombre'] = $nombre;
-                $_SESSION['apellido'] = $apellido;
+                SessionHandler::actualizarPerfil($nombre, $apellido);
 
                 $mensaje = 'Perfil actualizado correctamente.';
                 $tipo_mensaje = 'success';
 
                 // Recargar datos
-                $usuario = UsuarioService::getUsuarioCompletoById($_SESSION['usuarioId']);
+                $usuario = UsuarioService::getUsuarioCompletoById(SessionHandler::getId());
             }
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
@@ -85,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
             throw new Exception("Las contraseñas nuevas no coinciden.");
         }
 
-        UsuarioService::cambiarPassword($_SESSION['usuarioId'], $clave_actual, $nueva_clave);
+        UsuarioService::cambiarPassword(SessionHandler::getId(), $clave_actual, $nueva_clave);
         $mensaje = "Contraseña actualizada correctamente.";
         $tipo_mensaje = 'success';
     } catch (Exception $e) {

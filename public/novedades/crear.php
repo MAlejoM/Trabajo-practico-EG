@@ -1,15 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
 include_once __DIR__ . '/../../src/Templates/header.php';
 
 use App\Modules\Novedades\NovedadService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que el usuario sea admin
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
   header('Location: index.php');
   exit;
 }
@@ -19,10 +15,9 @@ $tipoMensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
-    $resultado = NovedadService::create($_POST, $_SESSION['usuarioId']);
+    $resultado = NovedadService::create($_POST, SessionHandler::getId());
     if ($resultado) {
-      $_SESSION['mensaje'] = 'Novedad creada exitosamente';
-      $_SESSION['tipo_mensaje'] = 'success';
+      SessionHandler::setMensaje('Novedad creada exitosamente');
       header('Location: index.php');
       exit;
     } else {

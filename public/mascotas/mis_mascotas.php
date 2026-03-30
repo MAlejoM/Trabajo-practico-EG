@@ -2,13 +2,14 @@
 include_once __DIR__ . "/../../src/Templates/header.php";
 
 use App\Modules\Mascotas\MascotaService;
+use App\Core\SessionHandler;
 
-if (!isset($_SESSION['cliente_id'])) {
+if (!SessionHandler::esCliente()) {
     header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
 
-$mascotas = MascotaService::getByClienteId($_SESSION['cliente_id']);
+$mascotas = MascotaService::getByClienteId(SessionHandler::getClienteId());
 ?>
 
 <div class="container py-4">

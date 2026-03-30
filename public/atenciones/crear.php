@@ -6,6 +6,7 @@ use App\Modules\Atenciones\AtencionService;
 use App\Modules\Mascotas\MascotaService;
 use App\Modules\Servicios\ServicioService;
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // AJAX para búsqueda de mascotas
 if (isset($_GET['ajax_mascotas'])) {
@@ -68,13 +69,13 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 // Para menús y roles
 
 // Verificar que sea personal autorizado
-if (!UsuarioService::esPersonal()) {
+if (!SessionHandler::esPersonal()) {
     header('Location: ' . BASE_URL . 'auth/login.php');
     exit();
 }
 
-$user_role = $_SESSION['rol'] ?? '';
-$my_personal_id = $_SESSION['personal_id'] ?? null;
+$user_role = SessionHandler::getRol() ?? '';
+$my_personal_id = SessionHandler::getPersonalId();
 
 $id_mascota_inicial = $_GET['id_mascota'] ?? null;
 $mascota_inicial = null;
@@ -115,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 $personal_list = UsuarioService::getAllPersonal();
-$personal_por_defecto = UsuarioService::esAdmin() ? null : UsuarioService::ObtenerPersonalLoggedId();
+$personal_por_defecto = SessionHandler::esAdmin() ? null : SessionHandler::getPersonalId();
 $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPersonalId($personal_por_defecto) : [];
 
 ?>
@@ -187,7 +188,7 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
 
                             <div class="col-md-6">
                                 <label for="personal_id" class="form-label fw-bold">Veterinario Asignado *</label>
-                                <select name="personal_id" id="personalId" class="form-select" required <?php echo (!UsuarioService::esAdmin()) ? 'disabled' : ''; ?> <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
+                                <select name="personal_id" id="personalId" class="form-select" required <?php echo (!SessionHandler::esAdmin()) ? 'disabled' : ''; ?> <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
                                     <option value="">Seleccione un profesional</option>
                                     <?php foreach ($personal_list as $pers): ?>
                                         <option value="<?php echo $pers['id']; ?>" <?php echo ($pers['id'] == $personal_por_defecto) ? 'selected' : ''; ?>>
@@ -195,8 +196,8 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
-                                <?php if (!UsuarioService::esAdmin()): ?>
-                                    <input type="hidden" name="personal_id" value="<?php echo UsuarioService::ObtenerPersonalLoggedId(); ?>">
+                                <?php if (!SessionHandler::esAdmin()): ?>
+                                    <input type="hidden" name="personal_id" value="<?php echo SessionHandler::getPersonalId(); ?>">
                                 <?php endif; ?>
                             </div>
 

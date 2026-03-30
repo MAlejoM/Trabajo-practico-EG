@@ -166,7 +166,11 @@ function global_exception_handler($exception)
         exit;
     }
 
-    // En producción, redirigir con mensaje genérico
+    // En producción, redirigir con mensaje genérico.
+    // EXCEPCIÓN DOCUMENTADA: este archivo se carga antes del autoload (ver bootstrap),
+    // por lo que SessionHandler no está disponible aquí. El acceso directo a $_SESSION
+    // está justificado y es la única excepción permitida en todo el proyecto.
+    // La clave 'system_error' está definida también como SessionHandler::KEY_SYSTEM_ERR.
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }

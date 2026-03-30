@@ -4,9 +4,9 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 // include_once __DIR__ . "/../../src/logic/servicios.logic.php";
 
 use App\Modules\Servicios\ServicioService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
-if (!UsuarioService::esAdmin()) {
+if (!SessionHandler::esAdmin()) {
     header("Location: " . BASE_URL . "index.php");
     exit();
 }

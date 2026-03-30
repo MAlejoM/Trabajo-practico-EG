@@ -3,6 +3,7 @@
 namespace App\Modules\Usuarios;
 
 use App\Core\DB;
+use App\Core\SessionHandler;
 use Exception;
 
 class AuthService
@@ -26,17 +27,7 @@ class AuthService
 
         // Soporte para contraseñas legacy y hash
         if (password_verify($clave, $user['clave']) || $clave === $user['clave']) {
-            if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['usuarioId'] = $user['id'];
-            $_SESSION['nombre'] = $user['nombre'];
-            $_SESSION['apellido'] = $user['apellido'];
-            if ($user['personal_id']) {
-                $_SESSION['personal_id'] = $user['personal_id'];
-                $_SESSION['rol'] = $user['rol_nombre'];
-            }
-            if ($user['cliente_id']) {
-                $_SESSION['cliente_id'] = $user['cliente_id'];
-            }
+            SessionHandler::poblar($user);
             return true;
         }
         return false;
@@ -44,7 +35,6 @@ class AuthService
 
     public static function logout()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        session_destroy();
+        SessionHandler::destruir();
     }
 }

@@ -3,9 +3,10 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
 use App\Modules\Mascotas\MascotaService;
 use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar que sea admin o personal
-if (!UsuarioService::esPersonal()) {
+if (!SessionHandler::esPersonal()) {
     header('Location: ' . BASE_URL . 'index.php');
     exit();
 }
@@ -37,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
     try {
         $exito = MascotaService::create($_POST, $_FILES);
         if ($exito) {
-            header("Location: index.php?creado=1");
+            SessionHandler::setMensaje('Mascota registrada correctamente.');
+            header('Location: index.php');
             exit();
         } else {
             $mensaje = 'Error al registrar la mascota.';

@@ -1,13 +1,10 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
 
-
 use App\Modules\Mascotas\MascotaService;
+use App\Core\SessionHandler;
 
-if (!isset($_SESSION['personal_id'])) {
-    header('Location: ' . BASE_URL . 'index.php');
-    exit();
-}
+SessionHandler::requierePersonal(BASE_URL . 'index.php');
 
 if (!isset($_GET['id'])) {
     header('Location: index.php');
@@ -30,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['guardar_mascota'])) {
         try {
             if (MascotaService::update($mascota_id, $_POST, $_FILES)) {
-                header("Location: index.php?editado=1");
+                SessionHandler::setMensaje('Mascota actualizada correctamente.');
+                header('Location: index.php');
                 exit();
             } else {
                 $mensaje = 'Error al actualizar la mascota.';
@@ -42,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif (isset($_POST['dar_baja'])) {
         if (MascotaService::delete($mascota_id)) {
-            header("Location: index.php?baja=1");
+            SessionHandler::setMensaje('Mascota dada de baja correctamente.');
+            header('Location: index.php');
             exit();
         } else {
             $mensaje = 'Error al dar de baja la mascota.';
@@ -50,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif (isset($_POST['reactivar'])) {
         if (MascotaService::reactivate($mascota_id)) {
-            header("Location: index.php?reactivado=1");
+            SessionHandler::setMensaje('Mascota reactivada correctamente.');
+            header('Location: index.php');
             exit();
         } else {
             $mensaje = 'Error al reactivar la mascota.';

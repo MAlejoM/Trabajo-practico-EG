@@ -1,8 +1,6 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+use App\Core\SessionHandler;
 
 // Cargar autoload y variables de entorno PRIMERO
 require_once __DIR__ . '/../autoload.php';
@@ -10,6 +8,8 @@ require_once __DIR__ . '/../autoload.php';
 // LUEGO incluir el manejador de errores (ahora $_ENV está disponible)
 require_once __DIR__ . '/../Core/error_handler.php';
 require_once __DIR__ . '/../config.php';
+
+SessionHandler::iniciar();
 
 if (!defined('BASE_URL')) {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
@@ -41,19 +41,29 @@ if (!defined('BASE_URL')) {
 <body>
     <!-- Navbar -->
     <header>
-        <?php if (isset($_SESSION['system_error'])): ?>
+        <?php
+        $systemError = SessionHandler::getError();
+        if ($systemError): ?>
             <div class="container mt-3">
                 <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
                     <div class="d-flex align-items-center">
                         <i class="fas fa-exclamation-triangle me-2 fs-4"></i>
                         <div>
                             <strong>¡Ops! Algo salió mal</strong><br>
-                            <?php
-                            echo htmlspecialchars($_SESSION['system_error']);
-                            unset($_SESSION['system_error']);
-                            ?>
+                            <?php echo htmlspecialchars($systemError); ?>
                         </div>
                     </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php
+        $flash = SessionHandler::getMensaje();
+        if ($flash): ?>
+            <div class="container mt-3">
+                <div class="alert alert-<?php echo htmlspecialchars($flash['tipo']); ?> alert-dismissible fade show shadow-sm" role="alert">
+                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2"></i>
+                    <?php echo htmlspecialchars($flash['texto']); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
@@ -72,13 +82,13 @@ if (!defined('BASE_URL')) {
                         <?php
                         // Obtener el nombre del archivo actual
                         $current_page = basename($_SERVER['PHP_SELF']);
-                        $show_mobile_menu = !isset($_SESSION['usuarioId']) ||
+                        $show_mobile_menu = !SessionHandler::estaAutenticado() ||
                             in_array($current_page, ['index.php', 'buscar.php']); // Simplificado para que aparezcan en la mayoría de las páginas si no está logueado
                         ?>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
 
-                        <?php if (isset($_SESSION['usuarioId'])): ?>
+                        <?php if (SessionHandler::estaAutenticado()): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">

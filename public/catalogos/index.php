@@ -2,11 +2,11 @@
 include_once __DIR__ . "/../../src/Templates/header.php";
 include_once __DIR__ . "/../../src/Templates/pagination.php";
 
-
 use App\Modules\Catalogos\CatalogoService;
+use App\Core\SessionHandler;
 
 // Verificar si el usuario es admin
-$esAdmin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
+$esAdmin = SessionHandler::esAdmin();
 
 // Filtros
 $categoriaFiltro = $_GET['categoria'] ?? '';
@@ -169,8 +169,13 @@ $productos_js = array_map(function ($p) {
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_id']) && $esAdmin) {
-    CatalogoService::delete($_POST['eliminar_id']);
-    echo "<script>window.location.href='index.php';</script>";
+    if (CatalogoService::delete($_POST['eliminar_id'])) {
+        SessionHandler::setMensaje('Producto eliminado correctamente.');
+    } else {
+        SessionHandler::setMensaje('Error al eliminar el producto.', 'danger');
+    }
+    header('Location: index.php');
+    exit();
 }
 include_once __DIR__ . "/../../src/Templates/footer.php";
 ?>

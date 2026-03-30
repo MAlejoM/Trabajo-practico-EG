@@ -1,11 +1,10 @@
 <?php
 require_once __DIR__ . '/../../src/autoload.php';
 
+use App\Core\SessionHandler;
+
 // Si ya está logueado, redirigir al inicio
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-if (isset($_SESSION['usuarioId'])) {
+if (SessionHandler::estaAutenticado()) {
   header('Location: ../index.php');
   exit();
 }

@@ -4,24 +4,15 @@ include_once __DIR__ . "/../../src/Templates/pagination.php";
 
 
 use App\Modules\Novedades\NovedadService;
-use App\Modules\Usuarios\UsuarioService;
+use App\Core\SessionHandler;
 
 // Verificar si el usuario es admin
-if (UsuarioService::esAdmin()) {
-    $esAdmin = true;
-} else {
-    $esAdmin = false;
-}
+$esAdmin = SessionHandler::esAdmin();
 
 // Listado paginado
 $page       = max(1, (int)($_GET['page'] ?? 1));
 $paginacion = NovedadService::getAllPaginated($page);
 $novedades  = $paginacion['data'];
-
-// Mensajes de éxito/error (usando sesión para persistencia post-redirect)
-$mensaje = isset($_SESSION['mensaje']) ? $_SESSION['mensaje'] : null;
-$tipoMensaje = isset($_SESSION['tipo_mensaje']) ? $_SESSION['tipo_mensaje'] : null;
-unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']);
 
 // Preprocesar novedades para base64 si tienen imagen (para JS)
 $novedades_js = array_map(function ($n) {
@@ -58,13 +49,6 @@ $novedades_js = array_map(function ($n) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php if ($mensaje): ?>
-                        <div class="alert alert-<?php echo $tipoMensaje === 'success' ? 'success' : 'danger'; ?> alert-dismissible fade show" role="alert">
-                            <?php echo htmlspecialchars($mensaje); ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
-
                     <?php if (empty($novedades)): ?>
                         <div class="alert alert-info">No hay novedades publicadas aún.</div>
                     <?php else: ?>
@@ -198,14 +182,11 @@ $novedades_js = array_map(function ($n) {
 // Procesar eliminación si es POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'eliminar' && isset($_POST['id']) && $esAdmin) {
     if (NovedadService::delete($_POST['id'])) {
-        $_SESSION['mensaje'] = 'Novedad eliminada correctamente.';
-        $_SESSION['tipo_mensaje'] = 'success';
+        SessionHandler::setMensaje('Novedad eliminada correctamente.');
     } else {
-        $_SESSION['mensaje'] = 'Error al eliminar la novedad.';
-        $_SESSION['tipo_mensaje'] = 'danger';
+        SessionHandler::setMensaje('Error al eliminar la novedad.', 'danger');
     }
-    // Redirigir para evitar reenvío de formulario
-    echo "<script>window.location.href = 'index.php';</script>";
+    header('Location: index.php');
     exit();
 }
 
