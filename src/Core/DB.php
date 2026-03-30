@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use Exception;
+
 class DB
 {
     private static $instance = null;
@@ -25,13 +27,13 @@ class DB
             $debugEnv = json_encode($_ENV);
             $debugGetenv = getenv('DB_HOST');
             $configFileLoaded = defined('PROJECT_ROOT') ? 'YES' : 'NO';
-            die("Error de conexión a la BD: [$errno] $error | INTENTO HOST: $host | CONFIG LOADED: $configFileLoaded | ENV_DUMP: $debugEnv | GETENV: $debugGetenv");
+            throw new Exception("Error de conexión a la BD: [$errno] $error | INTENTO HOST: $host | CONFIG LOADED: $configFileLoaded | ENV_DUMP: $debugEnv | GETENV: $debugGetenv");
         }
 
         if (!$this->connection) {
             $error = mysqli_connect_error();
             $errno = mysqli_connect_errno();
-            die("Error fallback de conexión a la base de datos: [$errno] $error");
+            throw new Exception("Error fallback de conexión a la base de datos: [$errno] $error");
         }
 
         $this->connection->set_charset("utf8mb4");

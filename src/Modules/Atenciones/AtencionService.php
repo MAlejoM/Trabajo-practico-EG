@@ -4,6 +4,11 @@ namespace App\Modules\Atenciones;
 
 class AtencionService
 {
+    public static function getAllPaginated($page)
+    {
+        return AtencionRepository::getAllPaginated($page);
+    }
+
     public static function getAll()
     {
         return AtencionRepository::getAll();

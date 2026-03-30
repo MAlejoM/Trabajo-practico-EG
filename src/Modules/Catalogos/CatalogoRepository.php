@@ -6,6 +6,68 @@ use App\Core\DB;
 
 class CatalogoRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page, $categoria = null, $busqueda = null)
+    {
+        $db = DB::getConn();
+        $page = max(1, (int)$page);
+
+        $conditions = 'WHERE 1=1';
+        $types  = '';
+        $params = [];
+
+        if ($categoria) {
+            $conditions .= ' AND p.categoria = ?';
+            $types  .= 's';
+            $params[] = $categoria;
+        }
+
+        if ($busqueda) {
+            $conditions .= ' AND (p.nombre LIKE ? OR p.descripcion LIKE ?)';
+            $types  .= 'ss';
+            $term    = '%' . $busqueda . '%';
+            $params[] = $term;
+            $params[] = $term;
+        }
+
+        $from = "FROM productos p INNER JOIN usuarios u ON p.usuarioId = u.id $conditions";
+
+        // COUNT
+        $countSql = "SELECT COUNT(*) as total $from";
+        if (!empty($params)) {
+            $stmt = $db->prepare($countSql);
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $total = $stmt->get_result()->fetch_assoc()['total'];
+        } else {
+            $total = $db->query($countSql)->fetch_assoc()['total'];
+        }
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $dataSql    = "SELECT p.*, u.nombre as autorNombre, u.apellido as autorApellido $from ORDER BY p.nombre ASC LIMIT ? OFFSET ?";
+        $dataTypes  = $types . 'ii';
+        $dataParams = array_merge($params, [$limit, $offset]);
+
+        $stmt = $db->prepare($dataSql);
+        $stmt->bind_param($dataTypes, ...$dataParams);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
     public static function getAll($categoria = null, $busqueda = null)
     {
         $db = DB::getConn();

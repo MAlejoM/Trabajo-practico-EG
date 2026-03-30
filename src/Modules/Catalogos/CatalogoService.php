@@ -6,6 +6,11 @@ use Exception;
 
 class CatalogoService
 {
+    public static function getAllPaginated($page, $categoria = null, $busqueda = null)
+    {
+        return CatalogoRepository::getAllPaginated($page, $categoria, $busqueda);
+    }
+
     public static function getAll($categoria = null, $busqueda = null)
     {
         return CatalogoRepository::getAll($categoria, $busqueda);

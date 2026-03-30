@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
+include_once __DIR__ . "/../../src/Templates/pagination.php";
 
 
 use App\Modules\Novedades\NovedadService;
@@ -8,8 +9,10 @@ use App\Core\SessionHandler;
 // Verificar si el usuario es admin
 $esAdmin = SessionHandler::esAdmin();
 
-// Obtener todas las novedades
-$novedades = NovedadService::getAll();
+// Listado paginado
+$page       = max(1, (int)($_GET['page'] ?? 1));
+$paginacion = NovedadService::getAllPaginated($page);
+$novedades  = $paginacion['data'];
 
 // Preprocesar novedades para base64 si tienen imagen (para JS)
 $novedades_js = array_map(function ($n) {
@@ -110,6 +113,7 @@ $novedades_js = array_map(function ($n) {
                         </div>
                     <?php endif; ?>
                 </div>
+                <?php renderPagination($paginacion['page'], $paginacion['pages']); ?>
             </div>
         </div>
     </div>

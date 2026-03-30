@@ -6,6 +6,125 @@ use App\Core\DB;
 
 class UsuarioRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page, $mostrarInactivos = false, $filtroRol = 'todos')
+    {
+        $db = DB::getConn();
+        $page = max(1, (int)$page);
+
+        // Build WHERE conditions
+        $whereParts = [];
+        $types  = '';
+        $params = [];
+
+        if (!$mostrarInactivos) {
+            $whereParts[] = "u.activo = 1";
+        }
+
+        if ($filtroRol !== 'todos' && $filtroRol !== null) {
+            if ($filtroRol === 'sin_rol') {
+                $whereParts[] = "r.nombre IS NULL AND c.id IS NULL";
+            } elseif (strtolower($filtroRol) === 'cliente') {
+                $whereParts[] = "c.id IS NOT NULL";
+            } else {
+                $whereParts[] = "LOWER(r.nombre) = LOWER(?)";
+                $types  .= 's';
+                $params[] = $filtroRol;
+            }
+        }
+
+        $whereClause = !empty($whereParts) ? 'WHERE ' . implode(' AND ', $whereParts) : '';
+
+        $joins = "
+            FROM usuarios u
+            LEFT JOIN personal p ON p.usuarioId = u.id
+            LEFT JOIN clientes c ON c.usuarioId = u.id
+            LEFT JOIN roles r ON p.rolId = r.id
+            $whereClause
+        ";
+
+        // COUNT
+        $countSql = "SELECT COUNT(*) as total $joins";
+        if (!empty($params)) {
+            $stmt = $db->prepare($countSql);
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $total = $stmt->get_result()->fetch_assoc()['total'];
+        } else {
+            $total = $db->query($countSql)->fetch_assoc()['total'];
+        }
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $dataSql = "
+            SELECT
+                u.id, u.email, u.nombre, u.apellido, u.activo,
+                p.id as personal_id, c.id as cliente_id,
+                CASE
+                    WHEN r.nombre IS NOT NULL THEN r.nombre
+                    WHEN c.id IS NOT NULL THEN 'Cliente'
+                    ELSE 'Sin Rol'
+                END as rol_nombre,
+                CASE
+                    WHEN p.id IS NOT NULL THEN 'Personal'
+                    WHEN c.id IS NOT NULL THEN 'Cliente'
+                    ELSE 'Desconocido'
+                END as tipo_usuario
+            $joins
+            ORDER BY u.id ASC
+            LIMIT ? OFFSET ?
+        ";
+
+        $dataTypes  = $types . 'ii';
+        $dataParams = array_merge($params, [$limit, $offset]);
+
+        $stmt = $db->prepare($dataSql);
+        $stmt->bind_param($dataTypes, ...$dataParams);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
+    public static function getRolesDisponibles($mostrarInactivos = false)
+    {
+        $db = DB::getConn();
+        $whereClause = $mostrarInactivos ? '' : 'WHERE u.activo = 1';
+
+        $sql = "
+            SELECT DISTINCT
+                CASE
+                    WHEN r.nombre IS NOT NULL THEN r.nombre
+                    WHEN c.id IS NOT NULL THEN 'Cliente'
+                    ELSE 'Sin Rol'
+                END as rol_nombre
+            FROM usuarios u
+            LEFT JOIN personal p ON p.usuarioId = u.id
+            LEFT JOIN clientes c ON c.usuarioId = u.id
+            LEFT JOIN roles r ON p.rolId = r.id
+            $whereClause
+            ORDER BY rol_nombre ASC
+        ";
+
+        $result = $db->query($sql);
+        $roles  = [];
+        while ($row = $result->fetch_assoc()) {
+            $roles[] = $row['rol_nombre'];
+        }
+        return array_values(array_filter($roles, fn($r) => $r !== 'Sin Rol'));
+    }
+
     public static function getAll($mostrarInactivos = false)
     {
         $db = DB::getConn();

@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . "/../../src/Templates/header.php";
-// Para menús y roles
+include_once __DIR__ . "/../../src/Templates/pagination.php";
 
 use App\Modules\Usuarios\UsuarioService;
 use App\Core\SessionHandler;
@@ -11,24 +11,16 @@ if (!SessionHandler::esAdmin()) {
     exit();
 }
 
-// Cargar usuarios con o sin inactivos
 $mostrar_inactivos = isset($_GET['inactivos']) && $_GET['inactivos'] === '1';
-$usuarios = UsuarioService::getAll($mostrar_inactivos);
+$filtro_rol        = $_GET['rol'] ?? 'todos';
+$page              = max(1, (int)($_GET['page'] ?? 1));
 
-// Obtener lista de roles únicos para los filtros
-$roles_disponibles = array_unique(array_filter(array_map(function ($u) {
-    return $u['rol_nombre'];
-}, $usuarios)));
-sort($roles_disponibles);
+// Roles disponibles para los botones de filtro (consulta ligera)
+$roles_disponibles = UsuarioService::getRolesDisponibles($mostrar_inactivos);
 
-// Filtrar por rol si se especifica
-$filtro_rol = $_GET['rol'] ?? 'todos';
-if ($filtro_rol !== 'todos') {
-    $usuarios = array_filter($usuarios, function ($u) use ($filtro_rol) {
-        if ($filtro_rol === 'sin_rol') return empty($u['rol_nombre']);
-        return strtolower($u['rol_nombre']) === strtolower($filtro_rol);
-    });
-}
+// Listado paginado (filtro de rol resuelto en el repository)
+$paginacion = UsuarioService::getAllPaginated($page, $mostrar_inactivos, $filtro_rol);
+$usuarios   = $paginacion['data'];
 ?>
 
 <div class="container py-4">
@@ -147,6 +139,12 @@ if ($filtro_rol !== 'todos') {
                         </div>
                     <?php endif; ?>
                 </div>
+                <?php
+                renderPagination($paginacion['page'], $paginacion['pages'], [
+                    'rol'      => $filtro_rol,
+                    'inactivos' => $mostrar_inactivos ? '1' : '0',
+                ]);
+                ?>
             </div>
         </div>
     </div>

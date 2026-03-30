@@ -2,13 +2,12 @@
 //se declaran las variables para mas seguridad y comodidad
 
 // Rutas base del proyecto
-define('PROJECT_ROOT', dirname(__DIR__));
-
-// Cargar variables de entorno si el archivo existe
-if (file_exists(PROJECT_ROOT . '/.env')) {
-    $dotenv = new \App\Core\DotEnv(PROJECT_ROOT . '/.env');
-    $dotenv->load();
+if (!defined('PROJECT_ROOT')) {
+    define('PROJECT_ROOT', dirname(__DIR__));
 }
+
+// Las variables de entorno ya se cargan en autoload.php
+// No se duplica aquí
 
 define('PUBLIC_PATH', PROJECT_ROOT . '/public');
 define('UPLOADS_PATH', PUBLIC_PATH . '/uploads');

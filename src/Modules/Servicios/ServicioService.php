@@ -9,6 +9,11 @@ class ServicioService
         return ServicioRepository::getServiciosByPersonalId($personalId);
     }
 
+    public static function getAllPaginated($page, $mostrarInactivos = false)
+    {
+        return ServicioRepository::getAllPaginated($page, $mostrarInactivos);
+    }
+
     public static function getAll($mostrarInactivos = false)
     {
         return ServicioRepository::getAll($mostrarInactivos);

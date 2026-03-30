@@ -6,6 +6,16 @@ use Exception;
 
 class UsuarioService
 {
+    public static function getAllPaginated($page, $mostrarInactivos = false, $filtroRol = 'todos')
+    {
+        return UsuarioRepository::getAllPaginated($page, $mostrarInactivos, $filtroRol);
+    }
+
+    public static function getRolesDisponibles($mostrarInactivos = false)
+    {
+        return UsuarioRepository::getRolesDisponibles($mostrarInactivos);
+    }
+
     public static function getAll($mostrarInactivos = false)
     {
         return UsuarioRepository::getAll($mostrarInactivos);

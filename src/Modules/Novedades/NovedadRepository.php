@@ -6,6 +6,42 @@ use App\Core\DB;
 
 class NovedadRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page)
+    {
+        $db = DB::getConn();
+        $page = max(1, (int)$page);
+
+        // COUNT
+        $total = $db->query("SELECT COUNT(*) as total FROM novedades")->fetch_assoc()['total'];
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $stmt = $db->prepare("
+            SELECT n.*, u.nombre as autorNombre, u.apellido as autorApellido
+            FROM novedades n
+            INNER JOIN usuarios u ON n.usuarioId = u.id
+            ORDER BY n.fechaPublicacion DESC
+            LIMIT ? OFFSET ?
+        ");
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
     public static function getAll()
     {
         $db = DB::getConn();

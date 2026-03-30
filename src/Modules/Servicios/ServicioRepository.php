@@ -6,6 +6,37 @@ use App\Core\DB;
 
 class ServicioRepository
 {
+    const PAGE_SIZE = 5;
+
+    public static function getAllPaginated($page, $mostrarInactivos = false)
+    {
+        $db = DB::getConn();
+        $page  = max(1, (int)$page);
+        $whereClause = $mostrarInactivos ? '' : 'WHERE activo = 1';
+
+        // COUNT
+        $total = $db->query("SELECT COUNT(*) as total FROM servicios $whereClause")->fetch_assoc()['total'];
+
+        $totalPages = max(1, (int)ceil($total / self::PAGE_SIZE));
+        $page   = min($page, $totalPages);
+        $offset = ($page - 1) * self::PAGE_SIZE;
+        $limit  = self::PAGE_SIZE;
+
+        // DATA
+        $stmt = $db->prepare("SELECT * FROM servicios $whereClause ORDER BY nombre ASC LIMIT ? OFFSET ?");
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return [
+            'data'     => $data,
+            'total'    => (int)$total,
+            'pages'    => $totalPages,
+            'page'     => $page,
+            'per_page' => self::PAGE_SIZE,
+        ];
+    }
+
     public static function getServiciosByPersonalId($personalId)
     {
         $db = DB::getConn();
