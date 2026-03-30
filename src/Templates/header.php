@@ -80,13 +80,31 @@ if (!defined('BASE_URL')) {
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
                         <?php
-                        // Obtener el nombre del archivo actual
-                        $current_page = basename($_SERVER['PHP_SELF']);
-                        $show_mobile_menu = !SessionHandler::estaAutenticado() ||
-                            in_array($current_page, ['index.php', 'buscar.php']); // Simplificado para que aparezcan en la mayoría de las páginas si no está logueado
+                        $_nav_logged_in  = SessionHandler::estaAutenticado();
+                        $_nav_role       = SessionHandler::getRol();
+                        $_nav_is_personal = SessionHandler::esPersonal();
+                        $_nav_is_cliente  = SessionHandler::esCliente();
                         ?>
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
-                        <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                        <?php if ($_nav_logged_in && $_nav_is_personal && $_nav_role === 'admin'): ?>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Administrar Catálogo</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Administrar Novedades</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>usuarios/index.php">Usuarios</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>servicios/index.php">Servicios</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
+                        <?php elseif ($_nav_logged_in && $_nav_is_personal): ?>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
+                        <?php elseif ($_nav_logged_in && $_nav_is_cliente): ?>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis Mascotas</a></li>
+                        <?php else: ?>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Catálogo</a></li>
+                            <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                        <?php endif; ?>
 
                         <?php if (SessionHandler::estaAutenticado()): ?>
                             <li class="nav-item dropdown">
