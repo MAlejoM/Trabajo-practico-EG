@@ -2,6 +2,7 @@
 
 namespace App\Modules\Usuarios;
 
+use App\Modules\Mail\MailService;
 use Exception;
 
 class UsuarioService
@@ -115,7 +116,12 @@ class UsuarioService
         }
 
         $hash = password_hash($nueva, PASSWORD_DEFAULT);
-        return UsuarioRepository::updatePassword($usuarioId, $hash);
+        $resultado = UsuarioRepository::updatePassword($usuarioId, $hash);
+
+        // Enviar confirmación por email (no bloqueante)
+        MailService::enviarConfirmacionCambio($usuario['email'], $usuario['nombre']);
+
+        return $resultado;
     }
 
     public static function setEstado($id, $activo)

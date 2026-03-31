@@ -1,5 +1,9 @@
 <?php
 
+// Autoload de Composer (PHPMailer, etc.)
+if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    require_once dirname(__DIR__) . '/vendor/autoload.php';
+}
 
 spl_autoload_register(function ($class) {
     // Namespace base

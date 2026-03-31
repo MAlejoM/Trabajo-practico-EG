@@ -15,9 +15,9 @@ define('UPLOADS_PATH', PUBLIC_PATH . '/uploads');
 // Configuración del correo
 define('MAILHOST', $_ENV['MAIL_HOST'] ?? (getenv('MAIL_HOST') ?: "smtp.gmail.com"));
 
-define('USERNAME', $_ENV['MAIL_USER'] ?? (getenv('MAIL_USER') ?: "luhmannm0@gmail.com"));
+define('USERNAME', $_ENV['MAIL_USER'] ?? (getenv('MAIL_USER') ?: ''));
 
-define('PASSWORD', $_ENV['MAIL_PASS'] ?? (getenv('MAIL_PASS') ?: "qbscabxaxvjoisvt"));
+define('PASSWORD', $_ENV['MAIL_PASS'] ?? (getenv('MAIL_PASS') ?: ''));
 
 define('SEND_FROM',"info@nosequeponer.com");
 

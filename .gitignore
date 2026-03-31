@@ -7,3 +7,7 @@ logs/
 config.local.php
 
 app_errors.log
+
+# Dependencias de Composer
+vendor/
+composer.phar

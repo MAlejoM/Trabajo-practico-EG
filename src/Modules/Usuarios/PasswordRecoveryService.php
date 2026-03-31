@@ -3,6 +3,7 @@
 namespace App\Modules\Usuarios;
 
 use App\Core\DB;
+use App\Modules\Mail\MailService;
 use Exception;
 
 class PasswordRecoveryService
@@ -37,9 +38,13 @@ class PasswordRecoveryService
         $stmt->bind_param("issss", $user['id'], $token, $token_hash, $expira, $ip);
 
         if ($stmt->execute()) {
-            // Aquí iría el envío de email real. Por ahora simulamos o usamos una función de mail.
-            // Para no romper el flujo, asumimos que existe una clase MailService o similar.
-            return ['success' => true, 'message' => 'Instrucciones enviadas a tu email.'];
+            $enviado = MailService::enviarRecuperacion($user['email'], $user['nombre'], $token);
+
+            if (!$enviado) {
+                error_log("[PasswordRecovery] No se pudo enviar email de recuperación a: {$user['email']}");
+            }
+
+            return ['success' => true, 'message' => 'Si el email existe en nuestro sistema, recibirás instrucciones.'];
         }
 
         return ['success' => false, 'message' => 'Error al procesar la solicitud.'];
