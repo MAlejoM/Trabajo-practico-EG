@@ -6,9 +6,6 @@ namespace App\Core;
  * Maneja todo lo relacionado a la sesión del usuario.
  * La idea es que nadie más toque $_SESSION directamente, así los cambios
  * en las claves de sesión se hacen en un solo lugar.
- *
- * Excepción: error_handler.php escribe $_SESSION['system_error'] directo
- * porque se carga antes del autoload y no puede llegar a esta clase.
  */
 class SessionHandler
 {
