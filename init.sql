@@ -21,8 +21,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `nombre`) VALUES
 (1, 'admin'),
-(2, 'Veterinario'),
-(3, 'Recepcionista');
+(2, 'Veterinario');
 
 -- ============================================================
 -- TABLA: usuarios
@@ -132,11 +131,10 @@ CREATE TABLE `rolesservicios` (
   CONSTRAINT `fk_rs_servicio` FOREIGN KEY (`servicioId`) REFERENCES `servicios`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- El Administrador puede hacer todo; el Veterinario todo excepto Estética; Recepcionista solo Consulta
+-- El Administrador puede hacer todo; el Veterinario todo excepto Estética
 INSERT INTO `rolesservicios` (`rolId`, `servicioId`) VALUES
 (1, 1),(1, 2),(1, 3),(1, 4),
-(2, 1),(2, 2),(2, 3),
-(3, 1);
+(2, 1),(2, 2),(2, 3);
 
 -- ============================================================
 -- TABLA: atenciones

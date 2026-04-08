@@ -73,6 +73,14 @@ class UsuarioService
             }
 
             $db->commit();
+
+            // Notificar al usuario con sus credenciales de acceso
+            MailService::enviarBienvenida(
+                $data['email'],
+                $data['nombre'] . ' ' . $data['apellido'],
+                $data['clave']
+            );
+
             return $id;
         } catch (Exception $e) {
             $db->rollback();
