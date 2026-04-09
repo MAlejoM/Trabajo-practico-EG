@@ -66,7 +66,7 @@ $mascotas = MascotaService::getByClienteId($usuario['cliente_id']);
                     <?php endif; ?>
 
                     <div class="card-body d-flex flex-column">
-                      <h5 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
+                      <h2 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h2>
                       <p class="card-text small text-muted mb-3"><?php echo htmlspecialchars($mascota['raza'] ?? 'Sin raza'); ?></p>
                       <div class="mt-auto d-flex gap-2">
                         <a href="<?php echo BASE_URL; ?>mascotas/editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-sm btn-outline-secondary flex-fill">Editar</a>

@@ -21,7 +21,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <div class="card shadow-sm border-0 bg-light">
                         <div class="card-body d-flex flex-column p-3">
-                            <h3 class="fw-semibold mb-3 text-center">Información de Contacto</h3>
+                            <h2 class="fw-semibold mb-3 text-center">Información de Contacto</h2>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
@@ -29,7 +29,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Dirección</h5>
+                                    <h3 class="h5 mb-1">Dirección</h3>
                                     <p class="mb-0 text-muted">Calle Falsa 123, Ciudad</p>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Teléfono</h5>
+                                    <h3 class="h5 mb-1">Teléfono</h3>
                                     <p class="mb-0 text-muted">+54 11 1234-5678</p>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Correo Electrónico</h5>
+                                    <h3 class="h5 mb-1">Correo Electrónico</h3>
                                     <p class="mb-0 text-muted">contacto@veterinariasananton.com</p>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Horario de Atención</h5>
+                                    <h3 class="h5 mb-1">Horario de Atención</h3>
                                     <p class="mb-0 text-muted">Lun - Vie: 9:00 - 18:00 hs<br>Sab: 9:00 - 13:00 hs</p>
                                 </div>
                             </div>

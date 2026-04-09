@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                         <!-- Información básica -->
                         <div class="text-center mb-4">
                             <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover">
-                            <h5><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h5>
+                            <h2 class="h5"><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h2>
                             <?php if ($usuario['rol_nombre']): ?>
                                 <span class="badge bg-success"><?php echo htmlspecialchars($usuario['rol_nombre']); ?></span>
                             <?php else: ?>
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                                 <strong>Información:</strong> Como cliente, solo puedes cambiar tu contraseña.
                             </div>
 
-                            <h5 class="mt-4 mb-3">Información Personal</h5>
+                            <h2 class="h5 mt-4 mb-3">Información Personal</h2>
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-2">
                                     <label class="form-label text-muted small">Nombre</label>
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <?php endif; ?>
 
                             <hr class="my-4">
-                            <h5 class="mb-3">Cambiar Contraseña</h5>
+                            <h2 class="h5 mb-3">Cambiar Contraseña</h2>
                             <form method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña Actual *</label>
@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             </form>
 
                             <hr class="my-4">
-                            <h5 class="mb-3">Cambiar Contraseña</h5>
+                            <h2 class="h5 mb-3">Cambiar Contraseña</h2>
                             <form method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña Actual *</label>

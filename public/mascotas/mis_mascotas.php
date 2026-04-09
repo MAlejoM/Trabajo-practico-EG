@@ -54,7 +54,7 @@ $mascotas = MascotaService::getByClienteId(SessionHandler::getClienteId());
                                         <?php endif; ?>
 
                                         <div class="card-body d-flex flex-column text-dark">
-                                            <h5 class="card-title fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
+                                            <h2 class="h5 card-title fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h2>
                                             <div class="card-text small text-muted mb-3">
                                                 <?php if ($mascota['raza']): ?>
                                                     <span class="d-block"><i class="fas fa-tag me-1"></i> <?php echo htmlspecialchars($mascota['raza']); ?></span>

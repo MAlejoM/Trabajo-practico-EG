@@ -76,7 +76,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-4">
                   <i class="fas fa-check-circle fa-4x text-success"></i>
                 </div>
-                <h5 class="mb-3">¡Contraseña Actualizada!</h5>
+                <h2 class="h5 mb-3">¡Contraseña Actualizada!</h2>
                 <p class="text-muted mb-4">
                   Tu contraseña ha sido cambiada correctamente.
                   Ya puedes iniciar sesión con tu nueva contraseña.
@@ -92,7 +92,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-4">
                   <i class="fas fa-exclamation-triangle fa-4x text-danger"></i>
                 </div>
-                <h5 class="mb-3">Token Inválido</h5>
+                <h2 class="h5 mb-3">Token Inválido</h2>
                 <div class="alert alert-danger">
                   <?php echo htmlspecialchars($validacion['message']); ?>
                 </div>

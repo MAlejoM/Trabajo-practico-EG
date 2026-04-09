@@ -70,7 +70,7 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                 </div>
                             <?php endif; ?>
                             <div>
-                                <h5 class="mb-0"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
+                                <h2 class="h5 mb-0"><?php echo htmlspecialchars($mascota['nombre']); ?></h2>
                                 <small class="text-muted"><?php echo htmlspecialchars($mascota['raza'] ?? 'Raza no especificada'); ?></small>
                             </div>
                         </div>
@@ -120,24 +120,24 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Detalle de Atención</h5>
+                                                                <h2 class="h5 modal-title">Detalle de Atención</h2>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Título</h6>
+                                                                    <h3 class="h6 fw-bold">Título</h3>
                                                                     <p><?php echo htmlspecialchars($atencion['titulo'] ?? '-'); ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Estado</h6>
+                                                                    <h3 class="h6 fw-bold">Estado</h3>
                                                                     <span class="badge bg-<?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Fecha y Hora</h6>
+                                                                    <h3 class="h6 fw-bold">Fecha y Hora</h3>
                                                                     <p><?php echo $fechaHora ? date('d/m/Y H:i', strtotime($fechaHora)) : '-'; ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Descripción</h6>
+                                                                    <h3 class="h6 fw-bold">Descripción</h3>
                                                                     <p class="text-break" style="white-space: pre-wrap;"><?php echo htmlspecialchars($atencion['descripcion'] ?? ''); ?></p>
                                                                 </div>
                                                             </div>

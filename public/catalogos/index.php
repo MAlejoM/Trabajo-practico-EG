@@ -90,7 +90,7 @@ $productos_js = array_map(function ($p) {
                                         <?php endif; ?>
 
                                         <div class="card-body d-flex flex-column text-dark">
-                                            <h5 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($producto['nombre']); ?></h5>
+                                            <h2 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($producto['nombre']); ?></h2>
                                             <div class="mb-2">
                                                 <span class="badge bg-light text-dark border"><?php echo htmlspecialchars($producto['categoria'] ?: 'Sin categoría'); ?></span>
                                             </div>
@@ -127,7 +127,7 @@ $productos_js = array_map(function ($p) {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitulo"></h5>
+                <h2 class="h5 modal-title" id="modalTitulo"></h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body text-dark" id="modalContenido"></div>

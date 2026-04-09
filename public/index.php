@@ -29,7 +29,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Administrar Catálogo</h5>
+                    <h2 class="h5 card-title mb-0">Administrar Catálogo</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Gestión completa de productos y servicios del catálogo.</p>
@@ -50,7 +50,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Administrar Novedades</h5>
+                    <h2 class="h5 card-title mb-0">Administrar Novedades</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Control de noticias y actualizaciones del sitio web.</p>
@@ -71,7 +71,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Usuarios</h5>
+                    <h2 class="h5 card-title mb-0">Usuarios</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Administración de usuarios, roles y permisos del sistema.</p>
@@ -92,7 +92,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Servicios</h5>
+                    <h2 class="h5 card-title mb-0">Servicios</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Configuración y gestión de servicios disponibles.</p>
@@ -113,7 +113,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Mascotas</h5>
+                    <h2 class="h5 card-title mb-0">Mascotas</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas y historial médico.</p>
@@ -134,7 +134,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Atenciones</h5>
+                    <h2 class="h5 card-title mb-0">Atenciones</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas y consultas.</p>
@@ -170,7 +170,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Catálogo</h5>
+                    <h2 class="h5 card-title mb-0">Catálogo</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Ver productos y servicios disponibles en la veterinaria.</p>
@@ -191,7 +191,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Novedades</h5>
+                    <h2 class="h5 card-title mb-0">Novedades</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Últimas noticias y actualizaciones de la veterinaria.</p>
@@ -212,7 +212,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Mascotas</h5>
+                    <h2 class="h5 card-title mb-0">Mascotas</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas, historial médico y datos de contacto.</p>
@@ -233,7 +233,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Atenciones</h5>
+                    <h2 class="h5 card-title mb-0">Atenciones</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas, consultas y seguimientos de pacientes.</p>
@@ -271,7 +271,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Mis Mascotas</h5>
+                    <h2 class="h5 card-title mb-0">Mis Mascotas</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
@@ -293,7 +293,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Catálogo</h5>
+                    <h2 class="h5 card-title mb-0">Catálogo</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
@@ -315,7 +315,7 @@ use App\Core\SessionHandler;
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h5 class="card-title mb-0">Novedades</h5>
+                    <h2 class="h5 card-title mb-0">Novedades</h2>
                   </div>
                 </div>
                 <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
@@ -342,7 +342,7 @@ use App\Core\SessionHandler;
             </div>
           </div>
           <div class="col-12 col-lg-6 text-center">
-            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Imagen de bienvenida" />
+            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Imagen de bienvenida">
           </div>
         </div>
       </div>

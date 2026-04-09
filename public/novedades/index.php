@@ -68,7 +68,7 @@ $novedades_js = array_map(function ($n) {
                                         <?php endif; ?>
 
                                         <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title"><?php echo htmlspecialchars($novedad['titulo']); ?></h5>
+                                            <h2 class="h5 card-title"><?php echo htmlspecialchars($novedad['titulo']); ?></h2>
 
                                             <p class="text-muted small mb-2">
                                                 <i class="fas fa-calendar me-1"></i>
@@ -124,7 +124,7 @@ $novedades_js = array_map(function ($n) {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detalleModalLabel"></h5>
+                <h2 class="h5 modal-title" id="detalleModalLabel"></h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modalContenido"></div>

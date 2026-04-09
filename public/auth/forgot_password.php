@@ -100,7 +100,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-4">
                   <i class="fas fa-envelope-open-text fa-4x text-success"></i>
                 </div>
-                <h5 class="mb-3">¡Email enviado!</h5>
+                <h2 class="h5 mb-3">¡Email enviado!</h2>
                 <p class="text-muted mb-4">
                   Revisa tu bandeja de entrada. Si el email existe en nuestro sistema,
                   recibirás instrucciones para recuperar tu contraseña.

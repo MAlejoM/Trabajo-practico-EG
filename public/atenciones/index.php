@@ -65,40 +65,40 @@ if (isset($_GET['ajax_search'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-dark">Detalle de Atención #<?php echo $atencion['id']; ?></h5>
+                            <h2 class="h5 modal-title text-dark">Detalle de Atención #<?php echo $atencion['id']; ?></h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-dark">
                             <div class="mb-3">
-                                <h6 class="fw-bold">Mascota</h6>
+                                <h3 class="h6 fw-bold">Mascota</h3>
                                 <p><?php echo $mascota; ?></p>
                             </div>
                             <div class="mb-3">
-                                <h6 class="fw-bold">Cliente</h6>
+                                <h3 class="h6 fw-bold">Cliente</h3>
                                 <p><?php echo $cliente; ?></p>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <h6 class="fw-bold">Fecha y Hora</h6>
+                                    <h3 class="h6 fw-bold">Fecha y Hora</h3>
                                     <p><?php echo $fechaText; ?></p>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="fw-bold">Estado</h6>
+                                    <h3 class="h6 fw-bold">Estado</h3>
                                     <p><span class="badge <?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <h6 class="fw-bold">Veterinario</h6>
+                                    <h3 class="h6 fw-bold">Veterinario</h3>
                                     <p><?php echo $veterinario; ?></p>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <h6 class="fw-bold">Título / Motivo</h6>
+                                <h3 class="h6 fw-bold">Título / Motivo</h3>
                                 <p><?php echo $titulo; ?></p>
                             </div>
                             <div class="mb-0">
-                                <h6 class="fw-bold">Descripción</h6>
+                                <h3 class="h6 fw-bold">Descripción</h3>
                                 <p class="text-break mb-0" style="white-space: pre-wrap;"><?php echo htmlspecialchars($descripcion); ?></p>
                             </div>
                         </div>
@@ -273,40 +273,40 @@ if (!empty($filtro_fecha)) {
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title text-dark">Detalle de Atención #<?php echo $atencion['id']; ?></h5>
+                                                                <h2 class="h5 modal-title text-dark">Detalle de Atención #<?php echo $atencion['id']; ?></h2>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-dark">
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Mascota</h6>
+                                                                    <h3 class="h6 fw-bold">Mascota</h3>
                                                                     <p><?php echo $mascota; ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Cliente</h6>
+                                                                    <h3 class="h6 fw-bold">Cliente</h3>
                                                                     <p><?php echo $cliente; ?></p>
                                                                 </div>
                                                                 <div class="row mb-3">
                                                                     <div class="col-6">
-                                                                        <h6 class="fw-bold">Fecha y Hora</h6>
+                                                                        <h3 class="h6 fw-bold">Fecha y Hora</h3>
                                                                         <p><?php echo date('d/m/Y H:i', strtotime($atencion['fechaHora'])); ?></p>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="fw-bold">Estado</h6>
+                                                                        <h3 class="h6 fw-bold">Estado</h3>
                                                                         <p><span class="badge <?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-3">
                                                                     <div class="col-12">
-                                                                        <h6 class="fw-bold">Veterinario</h6>
+                                                                        <h3 class="h6 fw-bold">Veterinario</h3>
                                                                         <p><?php echo $veterinario; ?></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <h6 class="fw-bold">Título / Motivo</h6>
+                                                                    <h3 class="h6 fw-bold">Título / Motivo</h3>
                                                                     <p><?php echo $titulo; ?></p>
                                                                 </div>
                                                                 <div class="mb-0">
-                                                                    <h6 class="fw-bold">Descripción</h6>
+                                                                    <h3 class="h6 fw-bold">Descripción</h3>
                                                                     <p class="text-break mb-0" style="white-space: pre-wrap;"><?php echo htmlspecialchars($descripcion); ?></p>
                                                                 </div>
                                                             </div>

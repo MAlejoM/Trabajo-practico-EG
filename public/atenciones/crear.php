@@ -28,7 +28,7 @@ if (isset($_GET['ajax_mascotas'])) {
             $fotoHtml = "";
             if (!empty($m['foto'])) {
                 $fotoData = "data:image/jpeg;base64," . base64_encode($m['foto']);
-                $fotoHtml = "<img src='$fotoData' class='rounded-circle me-3' style='width: 35px; height: 35px; object-fit: cover;' />";
+                $fotoHtml = "<img src='$fotoData' class='rounded-circle me-3' style='width: 35px; height: 35px; object-fit: cover;'>";
             } else {
                 $fotoHtml = "<div class='bg-light rounded-circle d-flex align-items-center justify-content-center me-3' style='width: 35px; height: 35px;'><i class='fas fa-paw text-muted small'></i></div>";
             }

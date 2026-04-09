@@ -117,7 +117,7 @@ if (!$usuario) {
 
                         <?php if ($usuario['tipo_usuario'] === 'Cliente'): ?>
                             <hr class="my-4">
-                            <h5 class="mb-3">Datos del Cliente</h5>
+                            <h2 class="h5 mb-3">Datos del Cliente</h2>
                             <input type="hidden" name="cliente_id" value="<?php echo $usuario['cliente_id']; ?>">
                             <div class="row">
                                 <div class="col-md-6 mb-3">

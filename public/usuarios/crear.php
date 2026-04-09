@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
                             </div>
                         </div>
 
-                        <h5 class="border-bottom pb-2 mb-3">Datos Básicos</h5>
+                        <h2 class="h5 border-bottom pb-2 mb-3">Datos Básicos</h2>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nombre" class="form-label">Nombre *</label>
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
                         </div>
 
                         <div id="campos_personal" style="display: none;">
-                            <h5 class="border-bottom pb-2 mb-3">Datos del Personal</h5>
+                            <h2 class="h5 border-bottom pb-2 mb-3">Datos del Personal</h2>
                             <div class="mb-3">
                                 <label for="rol_id" class="form-label">Rol *</label>
                                 <select class="form-select" id="rol_id" name="rol_id">
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
                         </div>
 
                         <div id="campos_cliente">
-                            <h5 class="border-bottom pb-2 mb-3">Datos del Cliente</h5>
+                            <h2 class="h5 border-bottom pb-2 mb-3">Datos del Cliente</h2>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="telefono" class="form-label">Teléfono</label>

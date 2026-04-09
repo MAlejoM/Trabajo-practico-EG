@@ -28,7 +28,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="card-title mb-0">Nuestra Misión</h5>
+                                    <h2 class="h5 card-title mb-0">Nuestra Misión</h2>
                                 </div>
                             </div>
                             <p class="card-text text-muted flex-grow-1">Brindar atención veterinaria de calidad, con calidez humana y compromiso profesional, garantizando el bienestar de cada animal que llega a nuestra clínica.</p>
@@ -46,7 +46,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="card-title mb-0">Nuestra Visión</h5>
+                                    <h2 class="h5 card-title mb-0">Nuestra Visión</h2>
                                 </div>
                             </div>
                             <p class="card-text text-muted flex-grow-1">Ser la veterinaria de referencia en la comunidad, reconocida por la excelencia en el trato, la tecnología aplicada al cuidado animal y el vínculo de confianza con nuestros clientes.</p>
@@ -64,7 +64,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="card-title mb-0">Nuestros Valores</h5>
+                                    <h2 class="h5 card-title mb-0">Nuestros Valores</h2>
                                 </div>
                             </div>
                             <p class="card-text text-muted flex-grow-1">Actuamos con responsabilidad, empatía y transparencia. Creemos en el respeto hacia cada animal y en la importancia del vínculo entre las mascotas y sus familias.</p>

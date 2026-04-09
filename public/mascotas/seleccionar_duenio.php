@@ -39,7 +39,7 @@ $mascotas = MascotaService::getByClienteDni($dni);
                                             </div>
                                         <?php endif; ?>
                                         <div class="card-body d-flex flex-column text-dark">
-                                            <h5 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h5>
+                                            <h2 class="card-title h6 fw-bold mb-1"><?php echo htmlspecialchars($mascota['nombre']); ?></h2>
                                             <p class="small text-muted mb-3">
                                                 Raza: <?php echo htmlspecialchars($mascota['raza']); ?><br>
                                                 Sexo: <?php echo htmlspecialchars($mascota['sexo']); ?>

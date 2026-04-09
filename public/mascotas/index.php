@@ -48,7 +48,7 @@ if (isset($_GET['ajax_search'])) {
             echo "<tr>";
             echo "<td>";
             if (!empty($mascota['foto'])) {
-                echo "<img src='data:image/jpeg;base64," . base64_encode($mascota['foto']) . "' class='rounded' style='width: 40px; height: 40px; object-fit: cover;' />";
+                echo "<img src='data:image/jpeg;base64," . base64_encode($mascota['foto']) . "' class='rounded' style='width: 40px; height: 40px; object-fit: cover;'>";
             } else {
                 echo "<div class='bg-light rounded d-flex align-items-center justify-content-center' style='width: 40px; height: 40px;'><i class='fas fa-paw text-muted'></i></div>";
             }
@@ -138,7 +138,7 @@ $mascotas   = $paginacion['data'];
                                         <tr>
                                             <td>
                                                 <?php if (!empty($mascota['foto'])): ?>
-                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>" class="rounded" style="width: 40px; height: 40px; object-fit: cover;" alt="<?php echo $mascota['nombre']; ?>" />
+                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>" class="rounded" style="width: 40px; height: 40px; object-fit: cover;" alt="<?php echo $mascota['nombre']; ?>">
                                                 <?php else: ?>
                                                     <div class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                                         <i class="fas fa-paw text-muted"></i>

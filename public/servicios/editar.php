@@ -115,7 +115,7 @@ $roles_asignados = ServicioService::getRolesIds($id);
                             <hr class="my-4">
 
                             <div class="col-12">
-                                <h5 class="mb-3">Roles con acceso</h5>
+                                <h2 class="h5 mb-3">Roles con acceso</h2>
                                 <p class="small text-muted mb-3">Selecciona los roles que podrán gestionar o visualizar este servicio.</p>
 
                                 <div class="row row-cols-1 row-cols-sm-2 g-2">
