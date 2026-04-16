@@ -8,8 +8,8 @@ services:
       dockerfile: Dockerfile.php
     container_name: app_veterinaria
     restart: always
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     environment:
       # Estas variables las configurás en Dokploy
       DB_HOST: ${DB_HOST:-localhost}
