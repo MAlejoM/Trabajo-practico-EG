@@ -1,0 +1,22 @@
+# docker-compose.yml
+# Solo la app PHP — la BD ya está en Dokploy
+
+services:
+  app_veterinaria:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: app_veterinaria
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      # Estas variables las configurás en Dokploy
+      DB_HOST: ${DB_HOST:-localhost}
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-}
+      DB_NAME: ${DB_NAME:-veterinaria_db}
+      DB_PORT: ${DB_PORT:-3306}
+      MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
+      MAIL_USER: ${MAIL_USER:-}
+      MAIL_PASS: ${MAIL_PASS:-}

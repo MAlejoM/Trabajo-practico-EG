@@ -1,0 +1,10 @@
+# docker-compose.override.yml
+# Solo para desarrollo local (no se sube a producción)
+
+services:
+  app_veterinaria:
+    volumes:
+      # Monta el código local para ver cambios en tiempo real
+      - .:/var/www/html
+    environment:
+      DEV_MODE: "true"

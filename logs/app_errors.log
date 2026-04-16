@@ -186,3 +186,12 @@ Stack trace:
 
 ================================================================================
 
+[2026-04-16 01:32:33] Exception: Table 'veterinaria_db.productos' doesn't exist in /var/www/html/src/Modules/Catalogos/CatalogoRepository.php:44
+Stack trace:
+#0 /var/www/html/src/Modules/Catalogos/CatalogoRepository.php(44): mysqli->query('SELECT COUNT(*)...')
+#1 /var/www/html/src/Modules/Catalogos/CatalogoService.php(11): App\Modules\Catalogos\CatalogoRepository::getAllPaginated(1, NULL, NULL)
+#2 /var/www/html/public/catalogos/index.php(16): App\Modules\Catalogos\CatalogoService::getAllPaginated(1, NULL, NULL)
+#3 {main}
+
+================================================================================
+
