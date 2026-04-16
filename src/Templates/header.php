@@ -12,13 +12,10 @@ require_once __DIR__ . '/../config.php';
 SessionHandler::iniciar();
 
 if (!defined('BASE_URL')) {
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+    $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+    $protocol = $isHttps ? 'https://' : 'http://';
     $host = $_SERVER['HTTP_HOST'];
-    // Ajustar el subdirectorio si cambia el nombre del repo o carpeta de despliegue
-    
-    // Asumiendo que ahora la raíz del virtualhost/proyecto es htdocs directamente
-    // Todos los links en el sitio asumen que BASE_URL termina en "/" pero luego tienen "public/..."
-    // Modificaremos el header y footer para que no usen public, o ajustaremos aquí si se armó mal
     define('BASE_URL', $protocol . $host . "/");
 }
 ?>
