@@ -3,6 +3,8 @@
 
 services:
   app_veterinaria:
+    ports:
+      - "8080:80"
     volumes:
       # Monta el código local para ver cambios en tiempo real
       - .:/var/www/html

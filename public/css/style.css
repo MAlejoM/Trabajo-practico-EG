@@ -4,13 +4,19 @@
 	--brand-green: #198754; /* Bootstrap success */
 }
 
-html, body {
+html {
 	height: 100%;
 }
 
 body {
+	min-height: 100%;
 	display: flex;
 	flex-direction: column;
+}
+
+/* El contenedor principal de cada página ocupa el espacio disponible */
+body > .container {
+	flex: 1;
 }
 
 /* Ajuste específico para páginas de login */
