@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="mb-3 text-center">
                                 <label class="form-label d-block">Foto Actual</label>
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>"
-                                    alt="<?php echo htmlspecialchars($mascota['nombre']); ?>"
+                                    alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>"
                                     class="img-thumbnail"
                                     style="max-width: 200px; max-height: 200px; object-fit: cover;">
                             </div>

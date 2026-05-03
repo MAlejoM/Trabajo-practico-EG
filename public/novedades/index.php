@@ -59,7 +59,7 @@ $novedades_js = array_map(function ($n) {
                                         <?php if ($novedad['imagen']): ?>
                                             <img src="data:image/jpeg;base64,<?php echo base64_encode($novedad['imagen']); ?>"
                                                 class="card-img-top"
-                                                alt="<?php echo htmlspecialchars($novedad['titulo']); ?>"
+                                                alt="Novedad - <?php echo htmlspecialchars($novedad['titulo']); ?>"
                                                 style="height: 200px; object-fit: cover;">
                                         <?php else: ?>
                                             <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">

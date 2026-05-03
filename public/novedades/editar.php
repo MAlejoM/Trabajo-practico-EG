@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <?php if ($novedad['imagen']): ?>
                 <div class="mb-2">
                   <img src="data:image/jpeg;base64,<?php echo base64_encode($novedad['imagen']); ?>"
-                    alt="Imagen actual"
+                    alt="Novedad - <?php echo htmlspecialchars($novedad['titulo']); ?>"
                     class="img-thumbnail"
                     style="max-width: 200px;">
                   <p class="text-muted small mb-0">Imagen actual</p>

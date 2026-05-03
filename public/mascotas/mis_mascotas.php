@@ -46,7 +46,7 @@ $mascotas = MascotaService::getByClienteId(SessionHandler::getClienteId());
                                             <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>"
                                                 class="card-img-top"
                                                 style="height: 180px; object-fit: cover;"
-                                                alt="<?php echo htmlspecialchars($mascota['nombre']); ?>">
+                                                alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>">
                                         <?php else: ?>
                                             <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
                                                 <i class="fas fa-paw fa-3x text-muted opacity-25"></i>
