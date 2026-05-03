@@ -26,49 +26,19 @@ $is_cliente = SessionHandler::esCliente();
                         <li><i class="fas fa-clock me-2"></i>Lun - Vie: 9:00 - 18:00 hs | Sab: 9:00 - 13:00 hs</li>
                     </ul>
                 </div>
-                <div class="col-12 col-md-4">
-                    <h2 class="h6 text-uppercase fw-semibold">Enlaces rapidos</h2>
-                    <ul class="list-unstyled small mb-0">
-                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogo</a></li>
-                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
-                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
-                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
-                        <?php if (!$is_logged_in): ?>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
-                        <?php else: ?>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesion</a></li>
-                        <?php endif; ?>
-                        <?php if ($is_cliente): ?>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
-                        <?php endif; ?>
-                        <?php if ($is_personal && !$is_admin): ?>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
-                        <?php endif; ?>
-                        <?php if ($is_admin): ?>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/index.php">Usuarios</a></li>
-                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/index.php">Servicios</a></li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
             </div>
-
-            <div class="border-top pt-3 mt-4">
                 <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#footerMore" aria-expanded="false" aria-controls="footerMore">
-                    Mas informacion <i class="fas fa-chevron-down ms-1"></i>
+                    Mapa de Sitio <i class="fas fa-chevron-down ms-1"></i>
                 </button>
                 <div class="collapse" id="footerMore">
                     <div class="row g-4 mt-2">
                         <div class="col-6 col-lg-3">
                             <h3 class="h6 text-uppercase fw-semibold">Publico</h3>
                             <ul class="list-unstyled small mb-0">
-                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogo</a></li>
-                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
-                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
-                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
+                                <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogo</a></li>
+                                <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                                <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
+                                <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
                             </ul>
                         </div>
 
@@ -76,16 +46,16 @@ $is_cliente = SessionHandler::esCliente();
                             <div class="col-6 col-lg-3">
                                 <h3 class="h6 text-uppercase fw-semibold">Autenticacion</h3>
                                 <ul class="list-unstyled small mb-0">
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/forgot_password.php">Recuperar contrasena</a></li>
+                                    <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
+                                    <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/forgot_password.php">Recuperar contrasena</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
                             <div class="col-6 col-lg-3">
                                 <h3 class="h6 text-uppercase fw-semibold">Cuenta</h3>
                                 <ul class="list-unstyled small mb-0">
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesion</a></li>
+                                    <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
+                                    <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesion</a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>
@@ -94,34 +64,106 @@ $is_cliente = SessionHandler::esCliente();
                             <div class="col-6 col-lg-3">
                                 <h3 class="h6 text-uppercase fw-semibold">Cliente</h3>
                                 <ul class="list-unstyled small mb-0">
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
+                                    <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>
 
                         <?php if ($is_personal && !$is_admin): ?>
                             <div class="col-6 col-lg-3">
-                                <h3 class="h6 text-uppercase fw-semibold">Personal</h3>
-                                <ul class="list-unstyled small mb-0">
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
-                                </ul>
+                                <h3 class="h6 text-uppercase fw-semibold">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#personalAtenciones">
+                                        Atenciones <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="personalAtenciones">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Ver atenciones</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/crear.php">Crear atencion</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#personalMascotas">
+                                        Mascotas <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="personalMascotas">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Ver mascotas</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/crear.php">Crear mascota</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         <?php endif; ?>
 
                         <?php if ($is_admin): ?>
                             <div class="col-6 col-lg-3">
-                                <h3 class="h6 text-uppercase fw-semibold">Personal/Admin</h3>
-                                <ul class="list-unstyled small mb-0">
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/index.php">Usuarios</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/index.php">Servicios</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
-                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
-                                </ul>
+                                <h3 class="h6 text-uppercase fw-semibold">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminUsuarios">
+                                        Usuarios <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminUsuarios">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/index.php">Ver usuarios</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/crear.php">Crear usuario</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminServicios">
+                                        Servicios <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminServicios">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/index.php">Ver servicios</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/crear.php">Crear servicio</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminAtenciones">
+                                        Atenciones <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminAtenciones">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Ver atenciones</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/crear.php">Crear atencion</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminMascotas">
+                                        Mascotas <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminMascotas">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Ver mascotas</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/crear.php">Crear mascota</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminCatalogos">
+                                        Catalogos <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminCatalogos">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Ver catalogos</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/crear.php">Crear catalogo</a></li>
+                                    </ul>
+                                </div>
+                                <h3 class="h6 text-uppercase fw-semibold mt-2">
+                                    <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNovedades">
+                                        Novedades <i class="fas fa-chevron-down ms-1"></i>
+                                    </button>
+                                </h3>
+                                <div class="collapse" id="adminNovedades">
+                                    <ul class="list-unstyled small mb-0">
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Ver novedades</a></li>
+                                        <li class="mb-1"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/crear.php">Crear novedad</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         <?php endif; ?>
                     </div>

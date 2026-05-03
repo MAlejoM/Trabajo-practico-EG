@@ -6,6 +6,9 @@ use App\Modules\Atenciones\AtencionService;
 use App\Modules\Mascotas\MascotaService;
 use App\Core\SessionHandler;
 
+$user_role      = SessionHandler::getRol() ?? '';
+$my_personal_id = SessionHandler::getPersonalId();
+
 $mascota_id = $_GET['id'] ?? null;
 
 if (!$mascota_id) {
@@ -97,6 +100,19 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                         $estado = $atencion['estado'] ?? 'pendiente';
                                         $badgeClass = ($estado === 'realizada') ? 'success' : 'warning';
                                         $fechaHora = $atencion['fechaHora'] ?? null;
+                                        $fechaHoraTs = $fechaHora ? (new DateTime($fechaHora, new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp() : 0;
+                                        $ahora = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp();
+                                        $puedeCompletar = ($estado === 'pendiente' && $ahora >= $fechaHoraTs);
+                                        $tooltipCompletar = '';
+                                        if ($estado === 'pendiente') {
+                                            if ($user_role !== 'admin' && $atencion['personalId'] != $my_personal_id) {
+                                                $tooltipCompletar = 'No tienes permiso para completar esta atención';
+                                            } elseif ($ahora < $fechaHoraTs) {
+                                                $tooltipCompletar = 'Solo se puede marcar como realizada una vez pasado el horario del turno';
+                                            }
+                                        } else {
+                                            $tooltipCompletar = 'La atención ya está completada';
+                                        }
                                         ?>
                                         <tr>
                                             <td>
@@ -113,6 +129,12 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>">
                                                     <i class="fas fa-eye me-1"></i>Ver
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-outline-success <?php echo !$puedeCompletar ? 'disabled' : ''; ?>"
+                                                    onclick="<?php echo $puedeCompletar ? "completarAtencion({$atencion['id']})" : ''; ?>"
+                                                    title="<?php echo htmlspecialchars($tooltipCompletar); ?>"
+                                                    style="<?php echo !$puedeCompletar ? 'opacity: 0.5; cursor: not-allowed; pointer-events: auto;' : ''; ?>">
+                                                    <i class="fas fa-check me-1"></i>Completar
                                                 </button>
 
                                                 <!-- Modal -->
@@ -159,6 +181,23 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
         </div>
     </div>
 </div>
+
+<script>
+function completarAtencion(id) {
+    confirmarAccion('¿Deseas marcar esta atención como realizada?', function() {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '';
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'completar_id';
+        input.value = id;
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }, { titulo: 'Completar atención', btnTexto: 'Confirmar', btnClase: 'btn-success' });
+}
+</script>
 
 <?php
 include_once __DIR__ . "/../../src/Templates/footer.php";

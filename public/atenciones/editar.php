@@ -78,11 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $servicios_filtrados = ServicioService::getServiciosByPersonalId($atencion['personalId']);
 $personal_list = UsuarioService::getAllPersonal();
 $minFechaHora = null;
-if (($atencion['estado'] ?? '') !== 'realizada') {
-    $minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
-        ->modify('+60 minutes')
-        ->format('Y-m-d\TH:i');
-}
+// En edición no se aplica restricción de 60 minutos (ya está en el backend solo para creación)
 
 ?>
 

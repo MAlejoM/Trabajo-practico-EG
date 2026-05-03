@@ -5,6 +5,7 @@ namespace App\Modules\Atenciones;
 class AtencionService
 {
     private const MIN_ANTICIPACION_MINUTOS = 60;
+    private const TIMEZONE = 'America/Argentina/Buenos_Aires';
 
     public static function getAllPaginated($page)
     {
@@ -76,13 +77,13 @@ class AtencionService
         return AtencionRepository::update($id, $titulo, $descripcion, $servicioId, $personalId, $fechaHora, $estado);
     }
 
-    private static function validateFechaHora($fechaHora, $estado = null, $isUpdate = false)
+   private static function validateFechaHora($fechaHora, $estado = null, $isUpdate = false)
     {
         if (!is_string($fechaHora) || trim($fechaHora) === '') {
             throw new \Exception("La fecha y hora son obligatorias.");
         }
 
-        $timezone = new \DateTimeZone('UTC');
+        $timezone = new \DateTimeZone(self::TIMEZONE);
         $now = new \DateTimeImmutable('now', $timezone);
 
         try {
@@ -92,13 +93,18 @@ class AtencionService
         }
 
         $estadoNormalizado = is_string($estado) ? strtolower(trim($estado)) : '';
-        $permitePasado = $isUpdate && $estadoNormalizado === 'realizada';
+        $esMarcarRealizada = $isUpdate && $estadoNormalizado === 'realizada';
 
-        if ($fecha < $now && !$permitePasado) {
-            throw new \Exception("No se pueden registrar consultas en fechas pasadas.");
+        // Si es marcar como realizada, la fecha del turno YA debe haber pasado
+        if ($esMarcarRealizada) {
+            if ($fecha > $now) {
+                throw new \Exception("No se puede marcar como realizada antes de la hora del turno.");
+            }
+            return; // Válido: el turno ya pasó y se está marcando como realizada
         }
 
-        if (!$permitePasado && $fecha->format('Y-m-d') === $now->format('Y-m-d')) {
+        // Validar anticipación mínima solo en creación, y solo si el turno es hoy
+        if (!$isUpdate && $fecha->format('Y-m-d') === $now->format('Y-m-d')) {
             $minimo = $now->modify('+' . self::MIN_ANTICIPACION_MINUTOS . ' minutes');
             if ($fecha < $minimo) {
                 throw new \Exception("La consulta debe programarse con al menos 60 minutos de anticipación.");
@@ -108,6 +114,18 @@ class AtencionService
 
     public static function updateEstado($id, $estado)
     {
+        $estadoNormalizado = is_string($estado) ? strtolower(trim($estado)) : '';
+        if ($estadoNormalizado === 'realizada') {
+            $atencion = self::getById($id);
+            if ($atencion) {
+                $timezone = new \DateTimeZone(self::TIMEZONE);
+                $fechaHora = new \DateTimeImmutable($atencion['fechaHora'], $timezone);
+                $ahora = new \DateTimeImmutable('now', $timezone);
+                if ($fechaHora > $ahora) {
+                    throw new \Exception("No se puede marcar como realizada antes de la hora del turno.");
+                }
+            }
+        }
         return AtencionRepository::updateEstado($id, $estado);
     }
 

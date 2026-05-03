@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $personal_list = UsuarioService::getAllPersonal();
 $personal_por_defecto = SessionHandler::esAdmin() ? null : SessionHandler::getPersonalId();
 $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPersonalId($personal_por_defecto) : [];
-$minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
+$minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('America/Argentina/Buenos_Aires')))
     ->modify('+60 minutes')
     ->format('Y-m-d\TH:i');
 

@@ -37,6 +37,22 @@ if (isset($_GET['ajax_search'])) {
             $badgeClass = ($estado === 'realizada') ? 'bg-success' : 'bg-warning text-dark';
             $puedeEditar = ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id);
 
+            $fechaHora = (new DateTime($atencion['fechaHora'], new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp();
+            $ahora = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp();
+            $puedeCompletar = ($estado === 'pendiente' && ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id) && $ahora >= $fechaHora);
+            $tooltipCompletar = '';
+            if ($estado === 'pendiente' && !$puedeCompletar) {
+                if ($user_role !== 'admin' && $atencion['personalId'] != $my_personal_id) {
+                    $tooltipCompletar = 'No tienes permiso para completar esta atención';
+                } elseif ($ahora < $fechaHora) {
+                    $tooltipCompletar = 'Solo se puede marcar como realizada una vez pasado el horario del turno';
+                }
+            } elseif ($estado !== 'pendiente') {
+                $tooltipCompletar = 'La atención ya está completada';
+            } else {
+                $tooltipCompletar = 'Marcar como realizada';
+            }
+
             echo "<tr>";
             echo "<td>{$atencion['id']}</td>";
             echo "<td class='fw-semibold'>$mascota</td>";
@@ -50,8 +66,12 @@ if (isset($_GET['ajax_search'])) {
                 <button type='button' class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalDetalle{$atencion['id']}' title='Ver'>
                   <i class='fas fa-eye'></i>
                 </button>";
-            if ($estado === 'pendiente' && ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id)) {
-                echo "  <button type='button' class='btn btn-outline-success' onclick='completarAtencion({$atencion['id']})' title='Marcar como realizada'><i class='fas fa-check'></i></button>";
+            if ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id || $estado !== 'pendiente') {
+                $disabledClass = !$puedeCompletar ? ' disabled' : '';
+                $onclick = $puedeCompletar ? "onclick='completarAtencion({$atencion['id']})'" : '';
+                $style = !$puedeCompletar ? "style='opacity: 0.5; cursor: not-allowed; pointer-events: auto;'" : '';
+                $title = "title='" . htmlspecialchars($tooltipCompletar) . "'";
+                echo "  <button type='button' class='btn btn-outline-success$disabledClass' $onclick $title $style><i class='fas fa-check'></i></button>";
             }
             if ($puedeEditar) {
                 echo "  <a href='editar.php?id={$atencion['id']}' class='btn btn-outline-secondary' title='Editar'><i class='fas fa-edit'></i></a>";
@@ -250,13 +270,33 @@ if (!empty($filtro_fecha)) {
                                                 </span>
                                             </td>
                                             <td><?php echo $veterinario; ?></td>
+                                            <?php
+                                        $fechaHora = (new DateTime($atencion['fechaHora'], new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp();
+                                        $ahora = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->getTimestamp();
+                                        $puedeCompletar = ($estado === 'pendiente' && ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id) && $ahora >= $fechaHora);
+                                        $tooltipCompletar = '';
+                                        if ($estado === 'pendiente' && !$puedeCompletar) {
+                                            if ($user_role !== 'admin' && $atencion['personalId'] != $my_personal_id) {
+                                                $tooltipCompletar = 'No tienes permiso para completar esta atención';
+                                            } elseif ($ahora < $fechaHora) {
+                                                $tooltipCompletar = 'Solo se puede marcar como realizada una vez pasado el horario del turno';
+                                            }
+                                        } elseif ($estado !== 'pendiente') {
+                                            $tooltipCompletar = 'La atención ya está completada';
+                                        } else {
+                                            $tooltipCompletar = 'Marcar como realizada';
+                                        }
+                                        ?>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
                                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>" title="Ver">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
-                                                    <?php if ($estado === 'pendiente' && ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id)): ?>
-                                                        <button type="button" class="btn btn-outline-success" onclick="completarAtencion(<?php echo $atencion['id']; ?>)" title="Marcar como realizada">
+                                                    <?php if ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id || ($estado !== 'pendiente')): ?>
+                                                        <button type="button" class="btn btn-outline-success <?php echo !$puedeCompletar ? 'disabled' : ''; ?>"
+                                                            onclick="<?php echo $puedeCompletar ? "completarAtencion({$atencion['id']})" : ''; ?>"
+                                                            title="<?php echo htmlspecialchars($tooltipCompletar); ?>"
+                                                            style="<?php echo !$puedeCompletar ? 'opacity: 0.5; cursor: not-allowed; pointer-events: auto;' : ''; ?>">
                                                             <i class="fas fa-check"></i>
                                                         </button>
                                                     <?php endif; ?>
