@@ -27,6 +27,11 @@ class UsuarioService
         return UsuarioRepository::getById($id);
     }
 
+    public static function getAdmins()
+    {
+        return UsuarioRepository::getAdmins();
+    }
+
     public static function getUsuarioCompletoById($id)
     {
         return UsuarioRepository::getUsuarioCompletoById($id);
