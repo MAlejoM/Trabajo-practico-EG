@@ -33,7 +33,6 @@ $is_cliente = SessionHandler::esCliente();
                         <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
                         <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
                         <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
-                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/mapa_del_sitio.php">Mapa del sitio</a></li>
                         <?php if (!$is_logged_in): ?>
                             <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
                         <?php else: ?>
@@ -43,7 +42,7 @@ $is_cliente = SessionHandler::esCliente();
                         <?php if ($is_cliente): ?>
                             <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
                         <?php endif; ?>
-                        <?php if ($is_personal): ?>
+                        <?php if ($is_personal && !$is_admin): ?>
                             <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
                             <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
                             <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
@@ -57,9 +56,80 @@ $is_cliente = SessionHandler::esCliente();
                 </div>
             </div>
 
+            <div class="border-top pt-3 mt-4">
+                <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#footerMore" aria-expanded="false" aria-controls="footerMore">
+                    Mas informacion <i class="fas fa-chevron-down ms-1"></i>
+                </button>
+                <div class="collapse" id="footerMore">
+                    <div class="row g-4 mt-2">
+                        <div class="col-6 col-lg-3">
+                            <h3 class="h6 text-uppercase fw-semibold">Publico</h3>
+                            <ul class="list-unstyled small mb-0">
+                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogo</a></li>
+                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
+                                <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
+                            </ul>
+                        </div>
+
+                        <?php if (!$is_logged_in): ?>
+                            <div class="col-6 col-lg-3">
+                                <h3 class="h6 text-uppercase fw-semibold">Autenticacion</h3>
+                                <ul class="list-unstyled small mb-0">
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/forgot_password.php">Recuperar contrasena</a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <div class="col-6 col-lg-3">
+                                <h3 class="h6 text-uppercase fw-semibold">Cuenta</h3>
+                                <ul class="list-unstyled small mb-0">
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesion</a></li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($is_cliente): ?>
+                            <div class="col-6 col-lg-3">
+                                <h3 class="h6 text-uppercase fw-semibold">Cliente</h3>
+                                <ul class="list-unstyled small mb-0">
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($is_personal && !$is_admin): ?>
+                            <div class="col-6 col-lg-3">
+                                <h3 class="h6 text-uppercase fw-semibold">Personal</h3>
+                                <ul class="list-unstyled small mb-0">
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($is_admin): ?>
+                            <div class="col-6 col-lg-3">
+                                <h3 class="h6 text-uppercase fw-semibold">Personal/Admin</h3>
+                                <ul class="list-unstyled small mb-0">
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/index.php">Usuarios</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/index.php">Servicios</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
+                                    <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+
             <div class="border-top pt-3 mt-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <span class="text-body-secondary small">© <?php echo date('Y'); ?> Veterinaria San Antón</span>
-                <a href="<?php echo BASE_URL; ?>site/mapa_del_sitio.php" class="small text-decoration-none">Mapa del sitio</a>
             </div>
         </div>
     </footer>
