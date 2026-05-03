@@ -1,11 +1,65 @@
 <?php
+use App\Core\SessionHandler;
+
+$is_logged_in = SessionHandler::estaAutenticado();
+$is_admin = SessionHandler::esAdmin();
+$is_personal = SessionHandler::esPersonal();
+$is_cliente = SessionHandler::esCliente();
 ?>
-    <footer class="border-top py-4 mt-auto">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-            <span class="text-body-secondary small">© <?php echo date('Y'); ?> Veterinaria San Antón</span>
-            <div class="d-flex gap-2">
-                <a href="<?php echo BASE_URL; ?>site/contacto.php" class="btn btn-outline-success btn-sm">Contacto</a>
-                <a href="<?php echo BASE_URL; ?>site/quienes_somos.php" class="btn btn-success btn-sm">¿Quiénes somos?</a>
+    <footer class="border-top mt-auto bg-light">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <h2 class="h6 text-uppercase fw-semibold">Veterinaria San Antón</h2>
+                    <p class="small text-muted mb-2">
+                        Cuidamos a tus mascotas con atencion profesional y calidez humana.
+                    </p>
+                    <div class="small text-muted">
+                        <i class="fas fa-map-marker-alt me-2"></i>Av. San Martin 1234, CABA
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h2 class="h6 text-uppercase fw-semibold">Contacto</h2>
+                    <ul class="list-unstyled small text-muted mb-0">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i>+54 11 1234-5678</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i>contacto@veterinariasananton.com</li>
+                        <li><i class="fas fa-clock me-2"></i>Lun - Vie: 9:00 - 18:00 hs | Sab: 9:00 - 13:00 hs</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h2 class="h6 text-uppercase fw-semibold">Enlaces rapidos</h2>
+                    <ul class="list-unstyled small mb-0">
+                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogo</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/contacto.php">Contacto</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/quienes_somos.php">Quienes somos</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>site/mapa_del_sitio.php">Mapa del sitio</a></li>
+                        <?php if (!$is_logged_in): ?>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/login.php">Iniciar sesion</a></li>
+                        <?php else: ?>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>auth/logout.php">Cerrar sesion</a></li>
+                        <?php endif; ?>
+                        <?php if ($is_cliente): ?>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php">Mis mascotas</a></li>
+                        <?php endif; ?>
+                        <?php if ($is_personal): ?>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>atenciones/index.php">Atenciones</a></li>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>mascotas/index.php">Mascotas</a></li>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>catalogos/index.php">Catalogos</a></li>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>novedades/index.php">Novedades</a></li>
+                        <?php endif; ?>
+                        <?php if ($is_admin): ?>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>usuarios/index.php">Usuarios</a></li>
+                            <li class="mb-2"><a class="text-decoration-none" href="<?php echo BASE_URL; ?>servicios/index.php">Servicios</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-top pt-3 mt-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <span class="text-body-secondary small">© <?php echo date('Y'); ?> Veterinaria San Antón</span>
+                <a href="<?php echo BASE_URL; ?>site/mapa_del_sitio.php" class="small text-decoration-none">Mapa del sitio</a>
             </div>
         </div>
     </footer>

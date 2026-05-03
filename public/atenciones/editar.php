@@ -77,6 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $servicios_filtrados = ServicioService::getServiciosByPersonalId($atencion['personalId']);
 $personal_list = UsuarioService::getAllPersonal();
+$minFechaHora = null;
+if (($atencion['estado'] ?? '') !== 'realizada') {
+    $minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
+        ->modify('+60 minutes')
+        ->format('Y-m-d\TH:i');
+}
 
 ?>
 
@@ -159,7 +165,7 @@ $personal_list = UsuarioService::getAllPersonal();
 
                             <div class="col-md-6">
                                 <label for="fechaHora" class="form-label fw-bold">Fecha y Hora *</label>
-                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($atencion['fechaHora'])); ?>" required>
+                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($atencion['fechaHora'])); ?>" <?php echo $minFechaHora ? 'min="' . $minFechaHora . '"' : ''; ?> required>
                             </div>
 
                             <div class="col-md-6">

@@ -91,11 +91,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="clave" class="form-label">Contraseña *</label>
-                                <input type="password" class="form-control" id="clave" name="clave" minlength="6" required>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="clave" name="clave" minlength="6" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="confirmar_clave" class="form-label">Confirmar Contraseña *</label>
-                                <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="6" required>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="6" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -144,6 +156,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
 </div>
 
 <script>
+    function setupPasswordToggle(buttonId, inputId) {
+        const button = document.getElementById(buttonId);
+        const input = document.getElementById(inputId);
+
+        if (!button || !input) {
+            return;
+        }
+
+        button.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            const isHidden = input.type === 'password';
+
+            input.type = isHidden ? 'text' : 'password';
+            if (isHidden) {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                button.setAttribute('aria-label', 'Ocultar contraseña');
+                button.setAttribute('aria-pressed', 'true');
+            } else {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                button.setAttribute('aria-label', 'Mostrar contraseña');
+                button.setAttribute('aria-pressed', 'false');
+            }
+        });
+    }
+
     document.querySelectorAll('input[name="tipo"]').forEach(radio => {
         radio.addEventListener('change', function() {
             document.getElementById('campos_cliente').style.display = (this.value === 'cliente' ? 'block' : 'none');
@@ -151,6 +190,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
             document.getElementById('rol_id').required = (this.value === 'personal');
         });
     });
+
+    setupPasswordToggle('toggleClave', 'clave');
+    setupPasswordToggle('toggleConfirmarClave', 'confirmar_clave');
 </script>
 
 <?php

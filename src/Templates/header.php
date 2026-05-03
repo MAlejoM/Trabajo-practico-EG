@@ -82,6 +82,9 @@ if (!defined('BASE_URL')) {
                         $_nav_role       = SessionHandler::getRol();
                         $_nav_is_personal = SessionHandler::esPersonal();
                         $_nav_is_cliente  = SessionHandler::esCliente();
+                        $_nav_nombre = trim(SessionHandler::getNombre());
+                        $_nav_label_desktop = $_nav_nombre !== '' ? 'Hola, ' . $_nav_nombre : 'Hola';
+                        $_nav_label_mobile = $_nav_nombre !== '' ? $_nav_nombre : 'Mi cuenta';
                         ?>
                         <?php if ($_nav_logged_in && $_nav_is_personal && $_nav_role === 'admin'): ?>
                             <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Administrar Catálogo</a></li>
@@ -108,7 +111,8 @@ if (!defined('BASE_URL')) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
-                                    <span>Mi cuenta</span>
+                                    <span class="d-none d-lg-inline"><?php echo htmlspecialchars($_nav_label_desktop); ?></span>
+                                    <span class="d-inline d-lg-none"><?php echo htmlspecialchars($_nav_label_mobile); ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>

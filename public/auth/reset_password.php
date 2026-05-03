@@ -133,7 +133,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                       minlength="8"
                       required
                       placeholder="Mínimo 8 caracteres">
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1" aria-label="Mostrar contraseña" aria-pressed="false">
                       <i class="fas fa-eye"></i>
                     </button>
                   </div>
@@ -154,7 +154,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                       minlength="8"
                       required
                       placeholder="Repite la contraseña">
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2" aria-label="Mostrar contraseña" aria-pressed="false">
                       <i class="fas fa-eye"></i>
                     </button>
                   </div>
@@ -195,10 +195,14 @@ require_once __DIR__ . '/../../src/Templates/header.php';
       input.type = 'text';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
+      this.setAttribute('aria-label', 'Ocultar contraseña');
+      this.setAttribute('aria-pressed', 'true');
     } else {
       input.type = 'password';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
+      this.setAttribute('aria-label', 'Mostrar contraseña');
+      this.setAttribute('aria-pressed', 'false');
     }
   });
 
@@ -209,10 +213,14 @@ require_once __DIR__ . '/../../src/Templates/header.php';
       input.type = 'text';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
+      this.setAttribute('aria-label', 'Ocultar contraseña');
+      this.setAttribute('aria-pressed', 'true');
     } else {
       input.type = 'password';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
+      this.setAttribute('aria-label', 'Mostrar contraseña');
+      this.setAttribute('aria-pressed', 'false');
     }
   });
 

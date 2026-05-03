@@ -159,15 +159,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <form method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña Actual *</label>
-                                    <input type="password" class="form-control" name="clave_actual" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="clave_actual" name="clave_actual" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleClaveActual" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Nueva Contraseña *</label>
-                                    <input type="password" class="form-control" name="nueva_clave" minlength="8" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="8" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleNuevaClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Confirmar Nueva Contraseña *</label>
-                                    <input type="password" class="form-control" name="confirmar_clave" minlength="8" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="8" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <button type="submit" name="cambiar_contrasena" class="btn btn-success w-100">Cambiar Contraseña</button>
                             </form>
@@ -204,15 +222,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <form method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña Actual *</label>
-                                    <input type="password" class="form-control" name="clave_actual" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="clave_actual" name="clave_actual" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleClaveActual" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Nueva Contraseña *</label>
-                                    <input type="password" class="form-control" name="nueva_clave" minlength="8" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="8" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleNuevaClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Confirmar Nueva Contraseña *</label>
-                                    <input type="password" class="form-control" name="confirmar_clave" minlength="8" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="8" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <button type="submit" name="cambiar_contrasena" class="btn btn-warning w-100">Cambiar Contraseña</button>
                             </form>
@@ -228,5 +264,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
         </div>
     </div>
 </main>
+
+<script>
+    (function() {
+        function setupPasswordToggle(buttonId, inputId) {
+            const button = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+
+            if (!button || !input) {
+                return;
+            }
+
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const isHidden = input.type === 'password';
+
+                input.type = isHidden ? 'text' : 'password';
+                if (isHidden) {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                    button.setAttribute('aria-label', 'Ocultar contraseña');
+                    button.setAttribute('aria-pressed', 'true');
+                } else {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                    button.setAttribute('aria-label', 'Mostrar contraseña');
+                    button.setAttribute('aria-pressed', 'false');
+                }
+            });
+        }
+
+        setupPasswordToggle('toggleClaveActual', 'clave_actual');
+        setupPasswordToggle('toggleNuevaClave', 'nueva_clave');
+        setupPasswordToggle('toggleConfirmarClave', 'confirmar_clave');
+    })();
+</script>
 
 <?php include_once __DIR__ . "/../../src/Templates/footer.php"; ?>

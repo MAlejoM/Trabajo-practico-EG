@@ -118,6 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $personal_list = UsuarioService::getAllPersonal();
 $personal_por_defecto = SessionHandler::esAdmin() ? null : SessionHandler::getPersonalId();
 $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPersonalId($personal_por_defecto) : [];
+$minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
+    ->modify('+60 minutes')
+    ->format('Y-m-d\TH:i');
 
 ?>
 
@@ -215,7 +218,7 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
 
                             <div class="col-md-12">
                                 <label for="fechaHora" class="form-label fw-bold">Fecha y Hora *</label>
-                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i'); ?>" required <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
+                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo $minFechaHora; ?>" min="<?php echo $minFechaHora; ?>" required <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
                             </div>
 
                             <div class="col-12">

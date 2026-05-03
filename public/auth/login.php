@@ -50,7 +50,13 @@ require_once __DIR__ . '/../../src/Templates/header.php';
 
               <div class="mb-4">
                 <label for="clave" class="form-label">Contraseña</label>
-                <input type="password" name="clave" id="clave" required class="form-control" placeholder="Ingresá tu contraseña">
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                  <input type="password" name="clave" id="clave" required class="form-control" placeholder="Ingresá tu contraseña">
+                  <button class="btn btn-outline-secondary" type="button" id="toggleClave" aria-label="Mostrar contraseña" aria-pressed="false">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
               </div>
 
               <div class="d-grid">
@@ -69,6 +75,35 @@ require_once __DIR__ . '/../../src/Templates/header.php';
     </div>
   </div>
 </main>
+
+<script>
+  (function() {
+    const button = document.getElementById('toggleClave');
+    const input = document.getElementById('clave');
+
+    if (!button || !input) {
+      return;
+    }
+
+    button.addEventListener('click', function() {
+      const icon = this.querySelector('i');
+      const isHidden = input.type === 'password';
+
+      input.type = isHidden ? 'text' : 'password';
+      if (isHidden) {
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+        button.setAttribute('aria-label', 'Ocultar contraseña');
+        button.setAttribute('aria-pressed', 'true');
+      } else {
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+        button.setAttribute('aria-label', 'Mostrar contraseña');
+        button.setAttribute('aria-pressed', 'false');
+      }
+    });
+  })();
+</script>
 
 <?php
 require_once __DIR__ . '/../../src/Templates/footer.php';

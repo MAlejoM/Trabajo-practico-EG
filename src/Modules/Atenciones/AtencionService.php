@@ -4,6 +4,8 @@ namespace App\Modules\Atenciones;
 
 class AtencionService
 {
+    private const MIN_ANTICIPACION_MINUTOS = 60;
+
     public static function getAllPaginated($page)
     {
         return AtencionRepository::getAllPaginated($page);
@@ -51,6 +53,8 @@ class AtencionService
             throw new \Exception("Faltan datos requeridos (Cliente, Mascota o Personal).");
         }
 
+        self::validateFechaHora($fechaHora);
+
         return AtencionRepository::create($clienteId, $mascotaId, $personalId, $fechaHora, $titulo, $servicioId, $descripcion);
     }
 
@@ -67,7 +71,39 @@ class AtencionService
             throw new \Exception("El motivo (título) es obligatorio.");
         }
 
+        self::validateFechaHora($fechaHora, $estado, true);
+
         return AtencionRepository::update($id, $titulo, $descripcion, $servicioId, $personalId, $fechaHora, $estado);
+    }
+
+    private static function validateFechaHora($fechaHora, $estado = null, $isUpdate = false)
+    {
+        if (!is_string($fechaHora) || trim($fechaHora) === '') {
+            throw new \Exception("La fecha y hora son obligatorias.");
+        }
+
+        $timezone = new \DateTimeZone('UTC');
+        $now = new \DateTimeImmutable('now', $timezone);
+
+        try {
+            $fecha = new \DateTimeImmutable($fechaHora, $timezone);
+        } catch (\Exception $e) {
+            throw new \Exception("La fecha y hora ingresadas no son válidas.");
+        }
+
+        $estadoNormalizado = is_string($estado) ? strtolower(trim($estado)) : '';
+        $permitePasado = $isUpdate && $estadoNormalizado === 'realizada';
+
+        if ($fecha < $now && !$permitePasado) {
+            throw new \Exception("No se pueden registrar consultas en fechas pasadas.");
+        }
+
+        if (!$permitePasado && $fecha->format('Y-m-d') === $now->format('Y-m-d')) {
+            $minimo = $now->modify('+' . self::MIN_ANTICIPACION_MINUTOS . ' minutes');
+            if ($fecha < $minimo) {
+                throw new \Exception("La consulta debe programarse con al menos 60 minutos de anticipación.");
+            }
+        }
     }
 
     public static function updateEstado($id, $estado)
