@@ -98,10 +98,10 @@ $productos_js = array_map(function ($p) {
                                             <p class="small text-muted mb-3">Stock: <?php echo $producto['stock']; ?></p>
 
                                             <div class="btn-group btn-group-sm mt-auto">
-                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $producto['id']; ?>)">Ver</button>
+                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $producto['id']; ?>)" aria-label="Ver detalle del producto: <?php echo htmlspecialchars($producto['nombre']); ?>">Ver</button>
                                                 <?php if ($esAdmin): ?>
-                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar producto: <?php echo htmlspecialchars($producto['nombre']); ?>"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)" aria-label="Eliminar producto: <?php echo htmlspecialchars($producto['nombre']); ?>"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

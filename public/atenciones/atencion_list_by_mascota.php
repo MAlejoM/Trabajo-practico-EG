@@ -129,12 +129,13 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-outline-primary"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>">
+                                                    data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>"
+                                                    aria-label="Ver detalle de la atención">
                                                     <i class="fas fa-eye me-1"></i>Ver
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-outline-success <?php echo !$puedeCompletar ? 'disabled' : ''; ?>"
                                                     onclick="<?php echo $puedeCompletar ? "completarAtencion({$atencion['id']})" : ''; ?>"
-                                                    title="<?php echo htmlspecialchars($tooltipCompletar); ?>"
+                                                    aria-label="<?php echo htmlspecialchars($tooltipCompletar); ?>"
                                                     style="<?php echo !$puedeCompletar ? 'opacity: 0.5; cursor: not-allowed; pointer-events: auto;' : ''; ?>">
                                                     <i class="fas fa-check me-1"></i>Completar
                                                 </button>

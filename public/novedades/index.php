@@ -90,19 +90,20 @@ $novedades_js = array_map(function ($n) {
                                             </p>
 
                                             <div class="btn-group btn-group-sm mt-auto">
-                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $novedad['id']; ?>)">
+                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $novedad['id']; ?>)" aria-label="Ver detalle de la novedad: <?php echo htmlspecialchars($novedad['titulo']); ?>">
                                                     <i class="fas fa-eye me-1" aria-hidden="true"></i>Ver más
                                                 </button>
 
                                                 <?php if ($esAdmin): ?>
-                                                    <a href="editar.php?id=<?php echo $novedad['id']; ?>" class="btn btn-outline-warning">
+                                                    <a href="editar.php?id=<?php echo $novedad['id']; ?>" class="btn btn-outline-warning" aria-label="Editar novedad: <?php echo htmlspecialchars($novedad['titulo']); ?>">
                                                         <i class="fas fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                     <form action="index.php" method="POST" class="d-inline" id="formEliminarNovedad<?php echo $novedad['id']; ?>">
                                                         <input type="hidden" name="accion" value="eliminar">
                                                         <input type="hidden" name="id" value="<?php echo $novedad['id']; ?>">
                                                         <button type="button" class="btn btn-outline-danger"
-                                                            onclick="confirmarAccion('¿Estás seguro de que deseas eliminar esta novedad?', function(){ document.getElementById('formEliminarNovedad<?php echo $novedad['id']; ?>').submit(); }, { titulo: 'Eliminar novedad', btnTexto: 'Eliminar' })">
+                                                            onclick="confirmarAccion('¿Estás seguro de que deseas eliminar esta novedad?', function(){ document.getElementById('formEliminarNovedad<?php echo $novedad['id']; ?>').submit(); }, { titulo: 'Eliminar novedad', btnTexto: 'Eliminar' })"
+                                                            aria-label="Eliminar novedad: <?php echo htmlspecialchars($novedad['titulo']); ?>">
                                                             <i class="fas fa-trash" aria-hidden="true"></i>
                                                         </button>
                                                     </form>

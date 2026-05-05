@@ -63,19 +63,20 @@ if (isset($_GET['ajax_search'])) {
             echo "<td>$veterinario</td>";
             echo "<td>
               <div class='btn-group btn-group-sm'>
-                <button type='button' class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalDetalle{$atencion['id']}' title='Ver'>
+                <button type='button' class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalDetalle{$atencion['id']}' aria-label='Ver atención: " . $titulo . "'>
                   <i class='fas fa-eye'></i>
                 </button>";
             if ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id || $estado !== 'pendiente') {
                 $disabledClass = !$puedeCompletar ? ' disabled' : '';
                 $onclick = $puedeCompletar ? "onclick='completarAtencion({$atencion['id']})'" : '';
                 $style = !$puedeCompletar ? "style='opacity: 0.5; cursor: not-allowed; pointer-events: auto;'" : '';
-                $title = "title='" . htmlspecialchars($tooltipCompletar) . "'";
+                $tooltipCompletar = $tooltipCompletar ?: 'Marcar como realizada';
+                $title = "aria-label='$tooltipCompletar: " . $titulo . "'";
                 echo "  <button type='button' class='btn btn-outline-success$disabledClass' $onclick $title $style><i class='fas fa-check'></i></button>";
             }
             if ($puedeEditar) {
-                echo "  <a href='editar.php?id={$atencion['id']}' class='btn btn-outline-secondary' title='Editar'><i class='fas fa-edit'></i></a>";
-                echo "  <button type='button' class='btn btn-outline-danger' onclick='confirmarEliminacion({$atencion['id']})' title='Eliminar'><i class='fas fa-trash'></i></button>";
+                echo "  <a href='editar.php?id={$atencion['id']}' class='btn btn-outline-secondary' aria-label='Editar atención: " . $titulo . "'><i class='fas fa-edit'></i></a>";
+                echo "  <button type='button' class='btn btn-outline-danger' onclick='confirmarEliminacion({$atencion['id']})' aria-label='Eliminar atención: " . $titulo . "'><i class='fas fa-trash'></i></button>";
             }
             echo "  </div>
             </td>
@@ -289,20 +290,20 @@ if (!empty($filtro_fecha)) {
                                         ?>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>" aria-label="Ver">
+                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>" aria-label="Ver atención: <?php echo $titulo; ?>">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </button>
                                                     <?php if ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id || ($estado !== 'pendiente')): ?>
                                                         <button type="button" class="btn btn-outline-success <?php echo !$puedeCompletar ? 'disabled' : ''; ?>"
                                                             onclick="<?php echo $puedeCompletar ? "completarAtencion({$atencion['id']})" : ''; ?>"
-                                                            aria-label="<?php echo htmlspecialchars($tooltipCompletar); ?>"
+                                                            aria-label="<?php echo htmlspecialchars($tooltipCompletar); ?>: <?php echo $titulo; ?>"
                                                             style="<?php echo !$puedeCompletar ? 'opacity: 0.5; cursor: not-allowed; pointer-events: auto;' : ''; ?>">
                                                             <i class="fas fa-check" aria-hidden="true"></i>
                                                         </button>
                                                     <?php endif; ?>
                                                     <?php if ($puedeEditar): ?>
-                                                        <a href="editar.php?id=<?php echo $atencion['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmarEliminacion(<?php echo $atencion['id']; ?>)" aria-label="Eliminar">
+                                                        <a href="editar.php?id=<?php echo $atencion['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar atención: <?php echo $titulo; ?>"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmarEliminacion(<?php echo $atencion['id']; ?>)" aria-label="Eliminar atención: <?php echo $titulo; ?>">
                                                             <i class="fas fa-trash" aria-hidden="true"></i>
                                                         </button>
                                                     <?php endif; ?>

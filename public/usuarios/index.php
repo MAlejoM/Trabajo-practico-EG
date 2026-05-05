@@ -120,13 +120,13 @@ $usuarios   = $paginacion['data'];
                                                 <div class="btn-group btn-group-sm">
                                                     <a href="editar.php?id=<?php echo $usuario['id']; ?>"
                                                         class="btn btn-outline-primary"
-                                                        title="Editar usuario">
+                                                        aria-label="Editar usuario: <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <?php if ($usuario['tipo_usuario'] === 'Cliente'): ?>
                                                         <a href="mascotas_usuario.php?id=<?php echo $usuario['id']; ?>"
                                                             class="btn btn-outline-info"
-                                                            title="Ver mascotas">
+                                                            aria-label="Ver mascotas de <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>">
                                                             <i class="fas fa-paw"></i>
                                                         </a>
                                                     <?php endif; ?>

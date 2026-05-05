@@ -156,9 +156,9 @@ $mascotas   = $paginacion['data'];
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <a href="editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar mascota: <?php echo htmlspecialchars($mascota['nombre']); ?>"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                                     <!-- Nota: atencion_list_by_mascota.php todavía no ha sido migrado, se mantiene el enlace relativo o absoluto -->
-                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" aria-label="Atenciones"><i class="fas fa-notes-medical" aria-hidden="true"></i></a>
+                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" aria-label="Ver atenciones de <?php echo htmlspecialchars($mascota['nombre']); ?>"><i class="fas fa-notes-medical" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
