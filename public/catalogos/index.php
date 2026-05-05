@@ -82,7 +82,7 @@ $productos_js = array_map(function ($p) {
                                 <div class="col-sm-6 col-xl-4">
                                     <div class="card h-100 shadow-sm border-0">
                                         <?php if ($producto['imagen']): ?>
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($produto['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Producto - <?php echo htmlspecialchars($produto['nombre']); ?>" title="<?php echo htmlspecialchars($produto['nombre']); ?>" role="img">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($producto['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Producto - <?php echo htmlspecialchars($producto['nombre']); ?>" title="<?php echo htmlspecialchars($producto['nombre']); ?>" role="img">
                                         <?php else: ?>
                                             <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 180px;">
                                                 <i class="fas fa-box fa-3x opacity-25" aria-hidden="true"></i>
