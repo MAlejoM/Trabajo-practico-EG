@@ -289,21 +289,21 @@ if (!empty($filtro_fecha)) {
                                         ?>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>" title="Ver">
-                                                        <i class="fas fa-eye"></i>
+                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle<?php echo $atencion['id']; ?>" aria-label="Ver">
+                                                        <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </button>
                                                     <?php if ($user_role === 'admin' || $atencion['personalId'] == $my_personal_id || ($estado !== 'pendiente')): ?>
                                                         <button type="button" class="btn btn-outline-success <?php echo !$puedeCompletar ? 'disabled' : ''; ?>"
                                                             onclick="<?php echo $puedeCompletar ? "completarAtencion({$atencion['id']})" : ''; ?>"
-                                                            title="<?php echo htmlspecialchars($tooltipCompletar); ?>"
+                                                            aria-label="<?php echo htmlspecialchars($tooltipCompletar); ?>"
                                                             style="<?php echo !$puedeCompletar ? 'opacity: 0.5; cursor: not-allowed; pointer-events: auto;' : ''; ?>">
-                                                            <i class="fas fa-check"></i>
+                                                            <i class="fas fa-check" aria-hidden="true"></i>
                                                         </button>
                                                     <?php endif; ?>
                                                     <?php if ($puedeEditar): ?>
-                                                        <a href="editar.php?id=<?php echo $atencion['id']; ?>" class="btn btn-outline-secondary" title="Editar"><i class="fas fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmarEliminacion(<?php echo $atencion['id']; ?>)" title="Eliminar">
-                                                            <i class="fas fa-trash"></i>
+                                                        <a href="editar.php?id=<?php echo $atencion['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmarEliminacion(<?php echo $atencion['id']; ?>)" aria-label="Eliminar">
+                                                            <i class="fas fa-trash" aria-hidden="true"></i>
                                                         </button>
                                                     <?php endif; ?>
                                                 </div>

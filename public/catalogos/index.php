@@ -66,9 +66,9 @@ $productos_js = array_map(function ($p) {
                         </div>
                         <div class="col-md-3">
                             <div class="btn-group btn-group-sm w-100">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
                                 <?php if ($categoriaFiltro || $busqueda): ?>
-                                    <a href="index.php" class="btn btn-secondary"><i class="fas fa-times"></i></a>
+                                    <a href="index.php" class="btn btn-secondary"><i class="fas fa-times" aria-hidden="true"></i></a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ $productos_js = array_map(function ($p) {
                                             <img src="data:image/jpeg;base64,<?php echo base64_encode($producto['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Producto - <?php echo htmlspecialchars($producto['nombre']); ?>">
                                         <?php else: ?>
                                             <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 180px;">
-                                                <i class="fas fa-box fa-3x opacity-25"></i>
+                                                <i class="fas fa-box fa-3x opacity-25" aria-hidden="true"></i>
                                             </div>
                                         <?php endif; ?>
 
@@ -100,8 +100,8 @@ $productos_js = array_map(function ($p) {
                                             <div class="btn-group btn-group-sm mt-auto">
                                                 <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $producto['id']; ?>)">Ver</button>
                                                 <?php if ($esAdmin): ?>
-                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary"><i class="fas fa-edit"></i></a>
-                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)"><i class="fas fa-trash"></i></button>
+                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

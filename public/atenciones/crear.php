@@ -147,18 +147,18 @@ $minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('America/Argentin
 
                     <?php if ($error): ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i><?php echo $error; ?>
+                            <i class="fas fa-exclamation-triangle me-2" aria-hidden="true"></i><?php echo $error; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
 
                     <!-- Buscador de Mascotas -->
                     <div class="mb-4 p-3 bg-light rounded border border-info-subtle">
-                        <label class="form-label fw-bold"><i class="fas fa-paw me-2 text-info"></i>Buscar Mascota *</label>
+                        <label class="form-label fw-bold"><i class="fas fa-paw me-2 text-info" aria-hidden="true"></i>Buscar Mascota *</label>
                         <div class="position-relative">
                             <div class="input-group shadow-sm">
                                 <span class="input-group-text bg-white border-end-0">
-                                    <i class="fas fa-search text-muted small"></i>
+                                    <i class="fas fa-search text-muted small" aria-hidden="true"></i>
                                 </span>
                                 <input type="text" id="petSearch" class="form-control border-start-0" placeholder="Escriba el nombre de la mascota..." autocomplete="off">
                             </div>
@@ -167,14 +167,14 @@ $minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('America/Argentin
                         </div>
                         <div id="petSelectedInfo" class="mt-3 <?php echo $mascota_inicial ? '' : 'd-none'; ?>">
                             <div class="alert alert-info d-flex align-items-center mb-0 py-2 px-3">
-                                <i class="fas fa-check-circle me-2 fs-5"></i>
+                                <i class="fas fa-check-circle me-2 fs-5" aria-hidden="true"></i>
                                 <div>
                                     <span class="small text-uppercase fw-bold d-block" style="font-size: 0.7rem;">Mascota Seleccionada:</span>
                                     <span id="selectedPetText" class="fw-semibold">
                                         <?php echo $mascota_inicial ? htmlspecialchars($mascota_inicial['nombre']) . ' (' . htmlspecialchars($cliente_inicial) . ')' : ''; ?>
                                     </span>
                                 </div>
-                                <button type="button" id="clearPet" class="btn btn-sm btn-link text-info ms-auto p-0"><i class="fas fa-times"></i></button>
+                                <button type="button" id="clearPet" class="btn btn-sm btn-link text-info ms-auto p-0" aria-label="Limpiar selección"><i class="fas fa-times" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ $minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('America/Argentin
 
                             <div class="col-12 text-end mt-4">
                                 <button type="submit" id="submitBtn" class="btn btn-success px-4" <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
-                                    <i class="fas fa-save me-2"></i>Registrar Atención
+                                    <i class="fas fa-save me-2" aria-hidden="true"></i>Registrar Atención
                                 </button>
                             </div>
                         </div>

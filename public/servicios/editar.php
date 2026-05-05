@@ -80,7 +80,7 @@ $roles_asignados = ServicioService::getRolesIds($id);
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white py-3">
                     <h1 class="h4 mb-0">
-                        <i class="fas fa-edit me-2"></i>
+                        <i class="fas fa-edit me-2" aria-hidden="true"></i>
                         Editar Servicio: <?php echo htmlspecialchars($servicio['nombre']); ?>
                     </h1>
                 </div>
@@ -143,21 +143,21 @@ $roles_asignados = ServicioService::getRolesIds($id);
                                 <hr class="my-4">
                                 <div class="d-flex gap-2 flex-wrap justify-content-between">
                                     <a href="index.php" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left me-1"></i> Volver a Lista
+                                        <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Volver a Lista
                                     </a>
                                     <div class="d-flex gap-2">
                                         <?php if ($servicio['activo']): ?>
                                             <button type="button" class="btn btn-outline-danger"
                                                 onclick="confirmarAccion('¿Está seguro que desea desactivar este servicio?', function(){ var f = document.querySelector('form[action*=editar]'); var h = document.createElement('input'); h.type='hidden'; h.name='dar_baja'; h.value='1'; f.appendChild(h); f.submit(); }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' })">
-                                                <i class="fas fa-ban me-1"></i> Desactivar
+                                                <i class="fas fa-ban me-1" aria-hidden="true"></i> Desactivar
                                             </button>
                                         <?php else: ?>
                                             <button type="submit" name="reactivar" class="btn btn-outline-success">
-                                                <i class="fas fa-check-circle me-1"></i> Reactivar
+                                                <i class="fas fa-check-circle me-1" aria-hidden="true"></i> Reactivar
                                             </button>
                                         <?php endif; ?>
                                         <button type="submit" name="guardar_cambios" class="btn btn-success">
-                                            <i class="fas fa-save me-1"></i> Guardar Cambios
+                                            <i class="fas fa-save me-1" aria-hidden="true"></i> Guardar Cambios
                                         </button>
                                     </div>
                                 </div>

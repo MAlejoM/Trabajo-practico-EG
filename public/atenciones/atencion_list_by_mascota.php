@@ -69,7 +69,7 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                             <?php else: ?>
                                 <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-3"
                                     style="width: 60px; height: 60px;">
-                                    <i class="fas fa-paw text-white fa-lg"></i>
+                                    <i class="fas fa-paw text-white fa-lg" aria-hidden="true"></i>
                                 </div>
                             <?php endif; ?>
                             <div>
@@ -81,7 +81,7 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
 
                     <?php if (empty($atenciones)): ?>
                         <div class="alert alert-info">
-                            <i class="fas fa-info-circle me-2"></i>No hay atenciones registradas para esta mascota.
+                            <i class="fas fa-info-circle me-2" aria-hidden="true"></i>No hay atenciones registradas para esta mascota.
                         </div>
                     <?php else: ?>
                         <div class="table-responsive">

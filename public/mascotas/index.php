@@ -110,7 +110,7 @@ $mascotas   = $paginacion['data'];
                     <!-- Buscador -->
                     <div class="input-group mb-4">
                         <span class="input-group-text bg-white border-end-0">
-                            <i class="fas fa-search text-muted"></i>
+                            <i class="fas fa-search text-muted" aria-hidden="true"></i>
                         </span>
                         <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Buscar por mascota o cliente..." autocomplete="off">
                     </div>
@@ -141,7 +141,7 @@ $mascotas   = $paginacion['data'];
                                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>" class="rounded" style="width: 40px; height: 40px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>">
                                                 <?php else: ?>
                                                     <div class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                        <i class="fas fa-paw text-muted"></i>
+                                                        <i class="fas fa-paw text-muted" aria-hidden="true"></i>
                                                     </div>
                                                 <?php endif; ?>
                                             </td>
@@ -156,9 +156,9 @@ $mascotas   = $paginacion['data'];
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-secondary" title="Editar"><i class="fas fa-edit"></i></a>
+                                                    <a href="editar.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                                     <!-- Nota: atencion_list_by_mascota.php todavía no ha sido migrado, se mantiene el enlace relativo o absoluto -->
-                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" title="Atenciones"><i class="fas fa-notes-medical"></i></a>
+                                                    <a href="<?php echo BASE_URL; ?>atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>" class="btn btn-outline-info" aria-label="Atenciones"><i class="fas fa-notes-medical" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

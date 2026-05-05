@@ -25,7 +25,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -46,7 +46,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -67,7 +67,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-users"></i>
+                      <i class="fas fa-users" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -88,7 +88,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-cogs"></i>
+                      <i class="fas fa-cogs" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -109,7 +109,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -130,7 +130,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-stethoscope"></i>
+                      <i class="fas fa-stethoscope" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -166,7 +166,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -187,7 +187,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -208,7 +208,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -229,7 +229,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-stethoscope"></i>
+                      <i class="fas fa-stethoscope" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -267,7 +267,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -289,7 +289,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -311,7 +311,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">

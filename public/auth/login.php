@@ -51,10 +51,10 @@ require_once __DIR__ . '/../../src/Templates/header.php';
               <div class="mb-4">
                 <label for="clave" class="form-label">Contraseña</label>
                 <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                  <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                   <input type="password" name="clave" id="clave" required class="form-control" placeholder="Ingresá tu contraseña">
                   <button class="btn btn-outline-secondary" type="button" id="toggleClave" aria-label="Mostrar contraseña" aria-pressed="false">
-                    <i class="fas fa-eye"></i>
+                    <i class="fas fa-eye" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
@@ -65,7 +65,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
 
               <div class="text-center mt-3">
                 <a href="forgot_password.php" class="text-muted small text-decoration-none">
-                  <i class="fas fa-key me-1"></i>¿Olvidaste tu contraseña?
+                  <i class="fas fa-key me-1" aria-hidden="true"></i>¿Olvidaste tu contraseña?
                 </a>
               </div>
             </form>

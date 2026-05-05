@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card">
                 <div class="card-header">
                     <h1 class="h4 mb-0">
-                        <i class="fas fa-edit me-2"></i>
+                        <i class="fas fa-edit me-2" aria-hidden="true"></i>
                         Editar Mascota
                     </h1>
                 </div>
@@ -163,20 +163,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <hr class="my-4">
                         <div class="d-flex gap-2 flex-wrap justify-content-between">
                             <a href="index.php" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left me-1"></i> Volver a Lista
+                                <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Volver a Lista
                             </a>
                             <button type="submit" name="guardar_mascota" class="btn btn-success">
-                                <i class="fas fa-save me-1"></i> Guardar Cambios
+                                <i class="fas fa-save me-1" aria-hidden="true"></i> Guardar Cambios
                             </button>
 
                             <?php if ($mascota['activo']): ?>
                                 <button type="button" class="btn btn-outline-danger"
                                     onclick="confirmarAccion('¿Está seguro que desea dar de baja a esta mascota?', function(){ var f = document.querySelector('form[method=post]'); var h = document.createElement('input'); h.type='hidden'; h.name='dar_baja'; h.value='1'; f.appendChild(h); f.submit(); }, { titulo: 'Dar de baja mascota', btnTexto: 'Dar de Baja' })">
-                                    <i class="fas fa-ban me-1"></i> Dar de Baja
+                                    <i class="fas fa-ban me-1" aria-hidden="true"></i> Dar de Baja
                                 </button>
                             <?php else: ?>
                                 <button type="submit" name="reactivar" class="btn btn-outline-success">
-                                    <i class="fas fa-check-circle me-1"></i> Reactivar Mascota
+                                    <i class="fas fa-check-circle me-1" aria-hidden="true"></i> Reactivar Mascota
                                 </button>
                             <?php endif; ?>
                         </div>

@@ -15,20 +15,20 @@ $is_cliente = SessionHandler::esCliente();
                         Cuidamos a tus mascotas con atencion profesional y calidez humana.
                     </p>
                     <div class="small text-muted">
-                        <i class="fas fa-map-marker-alt me-2"></i>Av. San Martin 1234, CABA
+                        <i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i>Av. Pellegrini 1234, Rosario, Santa Fe
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2 class="h6 text-uppercase fw-semibold">Contacto</h2>
                     <ul class="list-unstyled small text-muted mb-0">
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i>+54 11 1234-5678</li>
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i>contacto@veterinariasananton.com</li>
-                        <li><i class="fas fa-clock me-2"></i>Lun - Vie: 9:00 - 18:00 hs | Sab: 9:00 - 13:00 hs</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2" aria-hidden="true"></i>+54 11 1234-5678</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2" aria-hidden="true"></i>contacto@veterinariasananton.com</li>
+                        <li><i class="fas fa-clock me-2" aria-hidden="true"></i>Lun - Vie: 9:00 - 18:00 hs | Sab: 9:00 - 13:00 hs</li>
                     </ul>
                 </div>
             </div>
                 <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#footerMore" aria-expanded="false" aria-controls="footerMore">
-                    Mapa de Sitio <i class="fas fa-chevron-down ms-1"></i>
+                    Mapa de Sitio <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                 </button>
                 <div class="collapse" id="footerMore">
                     <div class="row g-4 mt-2">
@@ -73,7 +73,7 @@ $is_cliente = SessionHandler::esCliente();
                             <div class="col-6 col-lg-3">
                                 <h3 class="h6 text-uppercase fw-semibold">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#personalAtenciones">
-                                        Atenciones <i class="fas fa-chevron-down ms-1"></i>
+                                        Atenciones <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="personalAtenciones">
@@ -84,7 +84,7 @@ $is_cliente = SessionHandler::esCliente();
                                 </div>
                                 <h3 class="h6 text-uppercase fw-semibold mt-2">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#personalMascotas">
-                                        Mascotas <i class="fas fa-chevron-down ms-1"></i>
+                                        Mascotas <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="personalMascotas">
@@ -100,7 +100,7 @@ $is_cliente = SessionHandler::esCliente();
                             <div class="col-6 col-lg-3">
                                 <h3 class="h6 text-uppercase fw-semibold">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminUsuarios">
-                                        Usuarios <i class="fas fa-chevron-down ms-1"></i>
+                                        Usuarios <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="adminUsuarios">
@@ -111,7 +111,7 @@ $is_cliente = SessionHandler::esCliente();
                                 </div>
                                 <h3 class="h6 text-uppercase fw-semibold mt-2">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminServicios">
-                                        Servicios <i class="fas fa-chevron-down ms-1"></i>
+                                        Servicios <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="adminServicios">
@@ -144,7 +144,7 @@ $is_cliente = SessionHandler::esCliente();
                                 </div>
                                 <h3 class="h6 text-uppercase fw-semibold mt-2">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminCatalogos">
-                                        Catalogos <i class="fas fa-chevron-down ms-1"></i>
+                                        Catalogos <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="adminCatalogos">
@@ -155,7 +155,7 @@ $is_cliente = SessionHandler::esCliente();
                                 </div>
                                 <h3 class="h6 text-uppercase fw-semibold mt-2">
                                     <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNovedades">
-                                        Novedades <i class="fas fa-chevron-down ms-1"></i>
+                                        Novedades <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>
                                     </button>
                                 </h3>
                                 <div class="collapse" id="adminNovedades">

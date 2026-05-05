@@ -18,10 +18,10 @@ include_once __DIR__ . "/../../src/Templates/header.php";
 
             <div class="d-flex justify-content-center gap-3">
                 <a href="<?php echo BASE_URL; ?>index.php" class="btn btn-success btn-lg px-4 shadow-sm">
-                    <i class="fas fa-home me-2"></i>Volver al inicio
+                    <i class="fas fa-home me-2" aria-hidden="true"></i>Volver al inicio
                 </a>
                 <button onclick="window.history.back()" class="btn btn-outline-secondary btn-lg px-4 shadow-sm">
-                    <i class="fas fa-arrow-left me-2"></i>Regresar
+                    <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Regresar
                 </button>
             </div>
         </div>

@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                         <?php if ($es_cliente): ?>
                             <!-- VISTA PARA CLIENTES -->
                             <div class="alert alert-info">
-                                <i class="fas fa-info-circle me-1"></i>
+                                <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
                                 <strong>Información:</strong> Como cliente, solo puedes cambiar tu contraseña.
                             </div>
 
@@ -160,30 +160,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña Actual *</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                                         <input type="password" class="form-control" id="clave_actual" name="clave_actual" required>
                                         <button class="btn btn-outline-secondary" type="button" id="toggleClaveActual" aria-label="Mostrar contraseña" aria-pressed="false">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-eye" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Nueva Contraseña *</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                                         <input type="password" class="form-control" id="nueva_clave" name="nueva_clave" minlength="8" required>
                                         <button class="btn btn-outline-secondary" type="button" id="toggleNuevaClave" aria-label="Mostrar contraseña" aria-pressed="false">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-eye" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Confirmar Nueva Contraseña *</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                                         <input type="password" class="form-control" id="confirmar_clave" name="confirmar_clave" minlength="8" required>
                                         <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarClave" aria-label="Mostrar contraseña" aria-pressed="false">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-eye" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
                             <!-- VISTA PARA PERSONAL -->
                             <?php if ($es_admin): ?>
                                 <div class="alert alert-success">
-                                    <i class="fas fa-crown me-1"></i>
+                                    <i class="fas fa-crown me-1" aria-hidden="true"></i>
                                     <strong>Admin:</strong> Gestiona usuarios en el <a href="<?php echo BASE_URL; ?>usuarios/index.php" class="alert-link">módulo de usuarios</a>.
                                 </div>
                             <?php endif; ?>

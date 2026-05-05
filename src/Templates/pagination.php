@@ -26,7 +26,7 @@ function renderPagination(int $currentPage, int $totalPages, array $queryParams 
             <!-- Previous -->
             <li class="page-item <?php echo $currentPage <= 1 ? 'disabled' : ''; ?>">
                 <a class="page-link" href="<?php echo $baseQuery . ($currentPage - 1); ?>" aria-label="Anterior">
-                    <i class="fas fa-chevron-left"></i>
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
                 </a>
             </li>
 
@@ -60,7 +60,7 @@ function renderPagination(int $currentPage, int $totalPages, array $queryParams 
             <!-- Next -->
             <li class="page-item <?php echo $currentPage >= $totalPages ? 'disabled' : ''; ?>">
                 <a class="page-link" href="<?php echo $baseQuery . ($currentPage + 1); ?>" aria-label="Siguiente">
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </a>
             </li>
 

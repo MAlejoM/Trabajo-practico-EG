@@ -50,18 +50,18 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h3 class="h5 mb-1">Dirección</h3>
-                                    <p class="mb-0 text-muted">Calle Falsa 123, Ciudad</p>
+                                    <p class="mb-0 text-muted">Av. Pellegrini 1234, Rosario, Santa Fe</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-phone"></i>
+                                        <i class="fas fa-phone" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -72,7 +72,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-envelope"></i>
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -83,7 +83,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mt-auto">
                                 <div class="flex-shrink-0">
                                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">

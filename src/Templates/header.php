@@ -45,7 +45,7 @@ if (!defined('BASE_URL')) {
             <div class="container mt-3">
                 <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-exclamation-triangle me-2 fs-4"></i>
+                        <i class="fas fa-exclamation-triangle me-2 fs-4" aria-hidden="true"></i>
                         <div>
                             <strong>¡Ops! Algo salió mal</strong><br>
                             <?php echo htmlspecialchars($systemError); ?>
@@ -60,7 +60,7 @@ if (!defined('BASE_URL')) {
         if ($flash): ?>
             <div class="container mt-3">
                 <div class="alert alert-<?php echo htmlspecialchars($flash['tipo']); ?> alert-dismissible fade show shadow-sm" role="alert">
-                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2"></i>
+                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2" aria-hidden="true"></i>
                     <?php echo htmlspecialchars($flash['texto']); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>

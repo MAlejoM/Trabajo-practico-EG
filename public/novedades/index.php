@@ -63,7 +63,7 @@ $novedades_js = array_map(function ($n) {
                                                 style="height: 200px; object-fit: cover;">
                                         <?php else: ?>
                                             <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-                                                <i class="fas fa-newspaper fa-3x opacity-50"></i>
+                                                <i class="fas fa-newspaper fa-3x opacity-50" aria-hidden="true"></i>
                                             </div>
                                         <?php endif; ?>
 
@@ -89,19 +89,19 @@ $novedades_js = array_map(function ($n) {
 
                                             <div class="btn-group btn-group-sm mt-auto">
                                                 <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $novedad['id']; ?>)">
-                                                    <i class="fas fa-eye me-1"></i>Ver más
+                                                    <i class="fas fa-eye me-1" aria-hidden="true"></i>Ver más
                                                 </button>
 
                                                 <?php if ($esAdmin): ?>
                                                     <a href="editar.php?id=<?php echo $novedad['id']; ?>" class="btn btn-outline-warning">
-                                                        <i class="fas fa-edit"></i>
+                                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                     <form action="index.php" method="POST" class="d-inline" id="formEliminarNovedad<?php echo $novedad['id']; ?>">
                                                         <input type="hidden" name="accion" value="eliminar">
                                                         <input type="hidden" name="id" value="<?php echo $novedad['id']; ?>">
                                                         <button type="button" class="btn btn-outline-danger"
                                                             onclick="confirmarAccion('¿Estás seguro de que deseas eliminar esta novedad?', function(){ document.getElementById('formEliminarNovedad<?php echo $novedad['id']; ?>').submit(); }, { titulo: 'Eliminar novedad', btnTexto: 'Eliminar' })">
-                                                            <i class="fas fa-trash"></i>
+                                                            <i class="fas fa-trash" aria-hidden="true"></i>
                                                         </button>
                                                     </form>
                                                 <?php endif; ?>
@@ -149,10 +149,10 @@ $novedades_js = array_map(function ($n) {
 
         contenidoHTML += `
       <p class="text-muted small mb-3">
-        <i class="fas fa-calendar me-1"></i> ${formatearFecha(novedad.fechaPublicacion)}`;
+        <i class="fas fa-calendar me-1" aria-hidden="true"></i> ${formatearFecha(novedad.fechaPublicacion)}`;
 
         if (novedad.autorNombre) {
-            contenidoHTML += `<br><i class="fas fa-user me-1"></i> ${novedad.autorNombre} ${novedad.autorApellido}`;
+            contenidoHTML += `<br><i class="fas fa-user me-1" aria-hidden="true"></i> ${novedad.autorNombre} ${novedad.autorApellido}`;
         }
 
         contenidoHTML += `
