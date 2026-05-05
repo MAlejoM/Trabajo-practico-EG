@@ -57,7 +57,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
           <div class="card-body p-4">
             <div class="text-center mb-4">
               <div class="mb-3">
-                <i class="fas fa-lock-open fa-3x text-success"></i>
+                <i class="fas fa-lock-open fa-3x text-success" aria-hidden="true"></i>
               </div>
               <h1 class="h4 mb-2">Restablecer Contraseña</h1>
               <p class="text-muted small">Crea una nueva contraseña segura</p>
@@ -74,7 +74,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
               <!-- Contraseña cambiada exitosamente -->
               <div class="text-center">
                 <div class="mb-4">
-                  <i class="fas fa-check-circle fa-4x text-success"></i>
+                  <i class="fas fa-check-circle fa-4x text-success" aria-hidden="true"></i>
                 </div>
                 <h2 class="h5 mb-3">¡Contraseña Actualizada!</h2>
                 <p class="text-muted mb-4">
@@ -82,7 +82,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                   Ya puedes iniciar sesión con tu nueva contraseña.
                 </p>
                 <a href="login.php" class="btn btn-success btn-lg">
-                  <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                  <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>Iniciar Sesión
                 </a>
               </div>
 
@@ -90,7 +90,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
               <!-- Token inválido o expirado -->
               <div class="text-center">
                 <div class="mb-4">
-                  <i class="fas fa-exclamation-triangle fa-4x text-danger"></i>
+                  <i class="fas fa-exclamation-triangle fa-4x text-danger" aria-hidden="true"></i>
                 </div>
                 <h2 class="h5 mb-3">Token Inválido</h2>
                 <div class="alert alert-danger">
@@ -101,10 +101,10 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 </p>
                 <div class="d-grid gap-2">
                   <a href="forgot_password.php" class="btn btn-primary">
-                    <i class="fas fa-redo me-2"></i>Solicitar Nuevo Enlace
+                    <i class="fas fa-redo me-2" aria-hidden="true"></i>Solicitar Nuevo Enlace
                   </a>
                   <a href="login.php" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>Volver al Login
+                    <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Volver al Login
                   </a>
                 </div>
               </div>
@@ -112,7 +112,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
             <?php else: ?>
               <!-- Formulario de nueva contraseña -->
               <div class="alert alert-info small mb-4">
-                <i class="fas fa-user me-1"></i>
+                <i class="fas fa-user me-1" aria-hidden="true"></i>
                 Estás restableciendo la contraseña para:
                 <strong><?php echo htmlspecialchars($validacion['nombre']); ?></strong>
                 (<?php echo htmlspecialchars($validacion['email']); ?>)
@@ -124,7 +124,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-3">
                   <label for="nueva_clave" class="form-label">Nueva Contraseña *</label>
                   <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                     <input
                       type="password"
                       class="form-control"
@@ -133,8 +133,8 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                       minlength="8"
                       required
                       placeholder="Mínimo 8 caracteres">
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
-                      <i class="fas fa-eye"></i>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1" aria-label="Mostrar contraseña" aria-pressed="false">
+                      <i class="fas fa-eye" aria-hidden="true"></i>
                     </button>
                   </div>
                   <div class="form-text">
@@ -145,7 +145,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-4">
                   <label for="confirmar_clave" class="form-label">Confirmar Contraseña *</label>
                   <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <span class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></span>
                     <input
                       type="password"
                       class="form-control"
@@ -154,8 +154,8 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                       minlength="8"
                       required
                       placeholder="Repite la contraseña">
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
-                      <i class="fas fa-eye"></i>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2" aria-label="Mostrar contraseña" aria-pressed="false">
+                      <i class="fas fa-eye" aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>
@@ -195,10 +195,14 @@ require_once __DIR__ . '/../../src/Templates/header.php';
       input.type = 'text';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
+      this.setAttribute('aria-label', 'Ocultar contraseña');
+      this.setAttribute('aria-pressed', 'true');
     } else {
       input.type = 'password';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
+      this.setAttribute('aria-label', 'Mostrar contraseña');
+      this.setAttribute('aria-pressed', 'false');
     }
   });
 
@@ -209,10 +213,14 @@ require_once __DIR__ . '/../../src/Templates/header.php';
       input.type = 'text';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
+      this.setAttribute('aria-label', 'Ocultar contraseña');
+      this.setAttribute('aria-pressed', 'true');
     } else {
       input.type = 'password';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
+      this.setAttribute('aria-label', 'Mostrar contraseña');
+      this.setAttribute('aria-pressed', 'false');
     }
   });
 

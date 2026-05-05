@@ -77,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $servicios_filtrados = ServicioService::getServiciosByPersonalId($atencion['personalId']);
 $personal_list = UsuarioService::getAllPersonal();
+$minFechaHora = null;
+// En edición no se aplica restricción de 60 minutos (ya está en el backend solo para creación)
 
 ?>
 
@@ -96,21 +98,21 @@ $personal_list = UsuarioService::getAllPersonal();
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h1 class="h4 mb-0 text-dark">Editar Atención #<?php echo $id_atencion; ?></h1>
                     <a href="index.php" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-arrow-left me-1"></i>Volver
+                        <i class="fas fa-arrow-left me-1" aria-hidden="true"></i>Volver
                     </a>
                 </div>
                 <div class="card-body p-4">
 
                     <?php if ($mensaje): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i><?php echo $mensaje; ?>
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i><?php echo $mensaje; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($error): ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i><?php echo $error; ?>
+                            <i class="fas fa-exclamation-triangle me-2" aria-hidden="true"></i><?php echo $error; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     <?php endif; ?>
@@ -159,7 +161,7 @@ $personal_list = UsuarioService::getAllPersonal();
 
                             <div class="col-md-6">
                                 <label for="fechaHora" class="form-label fw-bold">Fecha y Hora *</label>
-                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($atencion['fechaHora'])); ?>" required>
+                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($atencion['fechaHora'])); ?>" <?php echo $minFechaHora ? 'min="' . $minFechaHora . '"' : ''; ?> required>
                             </div>
 
                             <div class="col-md-6">
@@ -180,7 +182,7 @@ $personal_list = UsuarioService::getAllPersonal();
 
                             <div class="col-12 text-end mt-4">
                                 <button type="submit" class="btn btn-primary px-4 bg-primary border-primary">
-                                    <i class="fas fa-save me-2"></i>Guardar Cambios
+                                    <i class="fas fa-save me-2" aria-hidden="true"></i>Guardar Cambios
                                 </button>
                             </div>
                         </div>

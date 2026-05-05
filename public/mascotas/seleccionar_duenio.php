@@ -32,10 +32,10 @@ $mascotas = MascotaService::getByClienteDni($dni);
                                 <div class="col-sm-6 col-xl-4">
                                     <div class="card h-100 shadow-sm">
                                         <?php if ($mascota['imagen']): ?>
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" title="<?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" role="img">
                                         <?php else: ?>
                                             <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 180px;">
-                                                <i class="fas fa-paw fa-3x opacity-25"></i>
+                                                <i class="fas fa-paw fa-3x opacity-25" aria-hidden="true"></i>
                                             </div>
                                         <?php endif; ?>
                                         <div class="card-body d-flex flex-column text-dark">
@@ -45,8 +45,8 @@ $mascotas = MascotaService::getByClienteDni($dni);
                                                 Sexo: <?php echo htmlspecialchars($mascota['sexo']); ?>
                                             </p>
                                             <div class="btn-group btn-group-sm mt-auto">
-                                                <a href='../atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>' class="btn btn-outline-primary">Atenciones</a>
-                                                <a href='../atenciones/crear.php?id_mascota=<?php echo $mascota['id']; ?>' class="btn btn-outline-success">Registrar</a>
+                                                <a href='../atenciones/atencion_list_by_mascota.php?id=<?php echo $mascota['id']; ?>' class="btn btn-outline-primary" aria-label="Ver atenciones de la mascota">Atenciones</a>
+                                                <a href='../atenciones/crear.php?id_mascota=<?php echo $mascota['id']; ?>' class="btn btn-outline-success" aria-label="Registrar nueva atención">Registrar</a>
                                             </div>
                                         </div>
                                     </div>

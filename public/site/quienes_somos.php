@@ -24,7 +24,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-2">
                                 <div class="flex-shrink-0">
                                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-heart"></i>
+                                        <i class="fas fa-heart" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -42,7 +42,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-2">
                                 <div class="flex-shrink-0">
                                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-eye"></i>
+                                        <i class="fas fa-eye" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -60,7 +60,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-2">
                                 <div class="flex-shrink-0">
                                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">

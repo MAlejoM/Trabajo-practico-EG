@@ -163,4 +163,60 @@ class MailService
 
         return self::enviar($email, $asunto, $html);
     }
+
+    public static function enviarContacto(string $nombre, string $email, string $telefono, string $mensaje): bool
+    {
+        $admins = \App\Modules\Usuarios\UsuarioService::getAdmins();
+        if (empty($admins)) {
+            error_log("[MailService] No se encontraron administradores para enviar contacto.");
+            return false;
+        }
+
+        $asunto = 'Nuevo mensaje de contacto - ' . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+
+        $nombreSeguro   = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+        $emailSeguro    = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+        $telefonoSeguro = htmlspecialchars($telefono, ENT_QUOTES, 'UTF-8');
+        $mensajeSeguro  = nl2br(htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'));
+
+        $html = <<<HTML
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background-color: #0d6efd; color: white; padding: 20px; text-align: center;">
+                <h1 style="margin: 0;">Veterinaria San Antón</h1>
+                <p style="margin: 5px 0 0;">Nuevo mensaje de contacto</p>
+            </div>
+            <div style="padding: 30px; background-color: #f8f9fa;">
+                <h2 style="color: #333;">Datos del contacto:</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>Nombre:</strong></td>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">{$nombreSeguro}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>Email:</strong></td>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><a href="mailto:{$emailSeguro}">{$emailSeguro}</a></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>Teléfono:</strong></td>
+                        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">{$telefonoSeguro}</td>
+                    </tr>
+                </table>
+                <h2 style="color: #333; margin-top: 20px;">Mensaje:</h2>
+                <div style="background-color: #fff; padding: 15px; border-radius: 5px; border: 1px solid #dee2e6;">
+                    {$mensajeSeguro}
+                </div>
+            </div>
+        </div>
+        HTML;
+
+        $todosEnviados = true;
+        foreach ($admins as $admin) {
+            $resultado = self::enviar($admin['email'], $asunto, $html);
+            if (!$resultado) {
+                $todosEnviados = false;
+                error_log("[MailService] Falló envío de contacto a admin {$admin['email']}");
+            }
+        }
+        return $todosEnviados;
+    }
 }

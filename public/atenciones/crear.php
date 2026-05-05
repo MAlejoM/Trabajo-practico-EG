@@ -28,7 +28,7 @@ if (isset($_GET['ajax_mascotas'])) {
             $fotoHtml = "";
             if (!empty($m['foto'])) {
                 $fotoData = "data:image/jpeg;base64," . base64_encode($m['foto']);
-                $fotoHtml = "<img src='$fotoData' class='rounded-circle me-3' style='width: 35px; height: 35px; object-fit: cover;'>";
+                $fotoHtml = "<img src='$fotoData' class='rounded-circle me-3' style='width: 35px; height: 35px; object-fit: cover;' alt='Mascota - $nombreMascota'>";
             } else {
                 $fotoHtml = "<div class='bg-light rounded-circle d-flex align-items-center justify-content-center me-3' style='width: 35px; height: 35px;'><i class='fas fa-paw text-muted small'></i></div>";
             }
@@ -118,6 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $personal_list = UsuarioService::getAllPersonal();
 $personal_por_defecto = SessionHandler::esAdmin() ? null : SessionHandler::getPersonalId();
 $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPersonalId($personal_por_defecto) : [];
+$minFechaHora = (new DateTimeImmutable('now', new DateTimeZone('America/Argentina/Buenos_Aires')))
+    ->modify('+60 minutes')
+    ->format('Y-m-d\TH:i');
 
 ?>
 
@@ -144,18 +147,18 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
 
                     <?php if ($error): ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i><?php echo $error; ?>
+                            <i class="fas fa-exclamation-triangle me-2" aria-hidden="true"></i><?php echo $error; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
 
                     <!-- Buscador de Mascotas -->
                     <div class="mb-4 p-3 bg-light rounded border border-info-subtle">
-                        <label class="form-label fw-bold"><i class="fas fa-paw me-2 text-info"></i>Buscar Mascota *</label>
+                        <label class="form-label fw-bold"><i class="fas fa-paw me-2 text-info" aria-hidden="true"></i>Buscar Mascota *</label>
                         <div class="position-relative">
                             <div class="input-group shadow-sm">
                                 <span class="input-group-text bg-white border-end-0">
-                                    <i class="fas fa-search text-muted small"></i>
+                                    <i class="fas fa-search text-muted small" aria-hidden="true"></i>
                                 </span>
                                 <input type="text" id="petSearch" class="form-control border-start-0" placeholder="Escriba el nombre de la mascota..." autocomplete="off">
                             </div>
@@ -164,14 +167,14 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
                         </div>
                         <div id="petSelectedInfo" class="mt-3 <?php echo $mascota_inicial ? '' : 'd-none'; ?>">
                             <div class="alert alert-info d-flex align-items-center mb-0 py-2 px-3">
-                                <i class="fas fa-check-circle me-2 fs-5"></i>
+                                <i class="fas fa-check-circle me-2 fs-5" aria-hidden="true"></i>
                                 <div>
                                     <span class="small text-uppercase fw-bold d-block" style="font-size: 0.7rem;">Mascota Seleccionada:</span>
                                     <span id="selectedPetText" class="fw-semibold">
                                         <?php echo $mascota_inicial ? htmlspecialchars($mascota_inicial['nombre']) . ' (' . htmlspecialchars($cliente_inicial) . ')' : ''; ?>
                                     </span>
                                 </div>
-                                <button type="button" id="clearPet" class="btn btn-sm btn-link text-info ms-auto p-0"><i class="fas fa-times"></i></button>
+                                <button type="button" id="clearPet" class="btn btn-sm btn-link text-info ms-auto p-0" aria-label="Limpiar selección"><i class="fas fa-times" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -215,7 +218,7 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
 
                             <div class="col-md-12">
                                 <label for="fechaHora" class="form-label fw-bold">Fecha y Hora *</label>
-                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo date('Y-m-d\TH:i'); ?>" required <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
+                                <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control" value="<?php echo $minFechaHora; ?>" min="<?php echo $minFechaHora; ?>" required <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
                             </div>
 
                             <div class="col-12">
@@ -225,7 +228,7 @@ $servicios_filtrados = $personal_por_defecto ? ServicioService::getServiciosByPe
 
                             <div class="col-12 text-end mt-4">
                                 <button type="submit" id="submitBtn" class="btn btn-success px-4" <?php echo $mascota_inicial ? '' : 'disabled'; ?>>
-                                    <i class="fas fa-save me-2"></i>Registrar Atención
+                                    <i class="fas fa-save me-2" aria-hidden="true"></i>Registrar Atención
                                 </button>
                             </div>
                         </div>

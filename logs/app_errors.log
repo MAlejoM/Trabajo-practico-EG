@@ -195,3 +195,36 @@ Stack trace:
 
 ================================================================================
 
+[2026-05-06 00:44:17] Exception: Error de conexión a la BD: [1045] Access denied for user 'sql10821592'@'186.158.237.249' (using password: YES) | INTENTO HOST: sql10.freesqldatabase.com | CONFIG LOADED: YES | ENV_DUMP: {"DB_HOST":"sql10.freesqldatabase.com","DB_USER":"sql10821592","DB_PASS":"Vhd5s5yrXQ","DB_NAME":"sql10821592","DB_PORT":"3306","MAIL_HOST":"smtp.gmail.com","MAIL_USER":"luhmannm0@gmail.com","MAIL_PASS":"tsxm iezg luco ifwi"} | GETENV: sql10.freesqldatabase.com in C:\xampp\htdocs\src\Core\DB.php:30
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoRepository.php(13): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoService.php(11): App\Modules\Catalogos\CatalogoRepository::getAllPaginated(1, NULL, NULL)
+#4 C:\xampp\htdocs\public\catalogos\index.php(16): App\Modules\Catalogos\CatalogoService::getAllPaginated(1, NULL, NULL)
+#5 {main}
+
+================================================================================
+
+[2026-05-06 00:46:23] Exception: Error de conexión a la BD: [1045] Access denied for user 'sql10821592'@'186.158.237.249' (using password: YES) | INTENTO HOST: sql10.freesqldatabase.com | CONFIG LOADED: YES | ENV_DUMP: {"DB_HOST":"sql10.freesqldatabase.com","DB_USER":"sql10821592","DB_PASS":"Vhd5s5yrXQ","DB_NAME":"sql10821592","DB_PORT":"3306","MAIL_HOST":"smtp.gmail.com","MAIL_USER":"luhmannm0@gmail.com","MAIL_PASS":"tsxm iezg luco ifwi"} | GETENV: sql10.freesqldatabase.com in C:\xampp\htdocs\src\Core\DB.php:30
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Novedades\NovedadRepository.php(13): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Novedades\NovedadService.php(9): App\Modules\Novedades\NovedadRepository::getAllPaginated(1)
+#4 C:\xampp\htdocs\public\novedades\index.php(14): App\Modules\Novedades\NovedadService::getAllPaginated(1)
+#5 {main}
+
+================================================================================
+
+[2026-05-06 00:57:29] Exception: Error de conexión a la BD: [1045] Access denied for user 'sql10821592'@'186.158.237.249' (using password: YES) | INTENTO HOST: sql10.freesqldatabase.com | CONFIG LOADED: YES | ENV_DUMP: {"DB_HOST":"sql10.freesqldatabase.com","DB_USER":"sql10821592","DB_PASS":"Vhd5s5yrXQ","DB_NAME":"sql10821592","DB_PORT":"3306","MAIL_HOST":"smtp.gmail.com","MAIL_USER":"luhmannm0@gmail.com","MAIL_PASS":"tsxm iezg luco ifwi"} | GETENV: sql10.freesqldatabase.com in C:\xampp\htdocs\src\Core\DB.php:30
+Stack trace:
+#0 C:\xampp\htdocs\src\Core\DB.php(45): App\Core\DB->__construct()
+#1 C:\xampp\htdocs\src\Core\DB.php(57): App\Core\DB::getInstance()
+#2 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoRepository.php(13): App\Core\DB::getConn()
+#3 C:\xampp\htdocs\src\Modules\Catalogos\CatalogoService.php(11): App\Modules\Catalogos\CatalogoRepository::getAllPaginated(1, NULL, NULL)
+#4 C:\xampp\htdocs\public\catalogos\index.php(16): App\Modules\Catalogos\CatalogoService::getAllPaginated(1, NULL, NULL)
+#5 {main}
+
+================================================================================
+

@@ -25,7 +25,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -34,7 +34,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Gestión completa de productos y servicios del catálogo.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info" aria-label="Acceder a la administración del catálogo">Acceder</a>
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -55,7 +55,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Control de noticias y actualizaciones del sitio web.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning" aria-label="Acceder a la administración de novedades">Acceder</a>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-users"></i>
+                      <i class="fas fa-users" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -76,7 +76,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Administración de usuarios, roles y permisos del sistema.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>usuarios/index.php" class="btn btn-danger">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>usuarios/index.php" class="btn btn-danger" aria-label="Acceder a la administración de usuarios">Acceder</a>
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-cogs"></i>
+                      <i class="fas fa-cogs" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -97,7 +97,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Configuración y gestión de servicios disponibles.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>servicios/index.php" class="btn btn-secondary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>servicios/index.php" class="btn btn-secondary" aria-label="Acceder a la administración de servicios">Acceder</a>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -118,7 +118,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas y historial médico.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>mascotas/index.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>mascotas/index.php" class="btn btn-success" aria-label="Acceder a la administración de mascotas">Acceder</a>
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-stethoscope"></i>
+                      <i class="fas fa-stethoscope" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -139,7 +139,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas y consultas.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>atenciones/index.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>atenciones/index.php" class="btn btn-primary" aria-label="Acceder a la administración de atenciones">Acceder</a>
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -175,7 +175,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Ver productos y servicios disponibles en la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info" aria-label="Acceder al catálogo">Acceder</a>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -196,7 +196,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Últimas noticias y actualizaciones de la veterinaria.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning" aria-label="Acceder a novedades">Acceder</a>
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -217,7 +217,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Administración de fichas de mascotas, historial médico y datos de contacto.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>mascotas/index.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>mascotas/index.php" class="btn btn-success" aria-label="Acceder a la administración de mascotas">Acceder</a>
                 </div>
               </div>
             </div>
@@ -229,7 +229,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-stethoscope"></i>
+                      <i class="fas fa-stethoscope" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -238,7 +238,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Gestión de atenciones médicas, consultas y seguimientos de pacientes.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>atenciones/index.php" class="btn btn-primary">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>atenciones/index.php" class="btn btn-primary" aria-label="Acceder a la administración de atenciones">Acceder</a>
                 </div>
               </div>
             </div>
@@ -267,7 +267,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-paw"></i>
+                      <i class="fas fa-paw" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -276,7 +276,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Ver y gestionar tus mascotas registradas.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php" class="btn btn-success">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>mascotas/mis_mascotas.php" class="btn btn-success" aria-label="Acceder a mis mascotas">Acceder</a>
                 </div>
               </div>
             </div>
@@ -289,7 +289,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -298,7 +298,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Explora nuestros productos y servicios disponibles.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>catalogos/index.php" class="btn btn-info" aria-label="Acceder al catálogo">Acceder</a>
                 </div>
               </div>
             </div>
@@ -311,7 +311,7 @@ use App\Core\SessionHandler;
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0">
                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <i class="fas fa-newspaper"></i>
+                      <i class="fas fa-newspaper" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
@@ -320,7 +320,7 @@ use App\Core\SessionHandler;
                 </div>
                 <p class="card-text flex-grow-1">Mantente informado con las últimas noticias.</p>
                 <div class="mt-auto">
-                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning">Acceder</a>
+                  <a href="<?php echo BASE_URL; ?>novedades/index.php" class="btn btn-warning" aria-label="Acceder a novedades">Acceder</a>
                 </div>
               </div>
             </div>
@@ -337,12 +337,12 @@ use App\Core\SessionHandler;
             <h1 class="display-5 fw-semibold mb-3">Bienvenido a Veterinaria San Antón</h1>
             <p class="lead mb-4">Cuidamos a tus mascotas con amor y profesionalismo. Conocé nuestros servicios, novedades y catálogo.</p>
             <div class="d-flex gap-2 flex-wrap">
-              <a class="btn btn-success" href="<?php echo BASE_URL; ?>catalogos/index.php">Ver catálogo</a>
-              <a class="btn btn- outline-success" href="<?php echo BASE_URL; ?>novedades/index.php">Últimas novedades</a>
+              <a class="btn btn-success" href="<?php echo BASE_URL; ?>catalogos/index.php" aria-label="Acceder al catálogo">Ver catálogo</a>
+              <a class="btn btn-outline-success" href="<?php echo BASE_URL; ?>novedades/index.php" aria-label="Acceder a novedades">Últimas novedades</a>
             </div>
           </div>
           <div class="col-12 col-lg-6 text-center">
-            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Imagen de bienvenida">
+            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Banner de bienvenida - Veterinaria San Antón" title="Banner de bienvenida - Veterinaria San Antón" role="img">
           </div>
         </div>
       </div>

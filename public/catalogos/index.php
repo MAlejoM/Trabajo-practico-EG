@@ -66,9 +66,9 @@ $productos_js = array_map(function ($p) {
                         </div>
                         <div class="col-md-3">
                             <div class="btn-group btn-group-sm w-100">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
                                 <?php if ($categoriaFiltro || $busqueda): ?>
-                                    <a href="index.php" class="btn btn-secondary"><i class="fas fa-times"></i></a>
+                                    <a href="index.php" class="btn btn-secondary"><i class="fas fa-times" aria-hidden="true"></i></a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -82,10 +82,10 @@ $productos_js = array_map(function ($p) {
                                 <div class="col-sm-6 col-xl-4">
                                     <div class="card h-100 shadow-sm border-0">
                                         <?php if ($producto['imagen']): ?>
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($producto['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($produto['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Producto - <?php echo htmlspecialchars($produto['nombre']); ?>" title="<?php echo htmlspecialchars($produto['nombre']); ?>" role="img">
                                         <?php else: ?>
                                             <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 180px;">
-                                                <i class="fas fa-box fa-3x opacity-25"></i>
+                                                <i class="fas fa-box fa-3x opacity-25" aria-hidden="true"></i>
                                             </div>
                                         <?php endif; ?>
 
@@ -98,10 +98,10 @@ $productos_js = array_map(function ($p) {
                                             <p class="small text-muted mb-3">Stock: <?php echo $producto['stock']; ?></p>
 
                                             <div class="btn-group btn-group-sm mt-auto">
-                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $producto['id']; ?>)">Ver</button>
+                                                <button class="btn btn-outline-primary" onclick="verDetalle(<?php echo $producto['id']; ?>)" aria-label="Ver detalle del producto: <?php echo htmlspecialchars($producto['nombre']); ?>">Ver</button>
                                                 <?php if ($esAdmin): ?>
-                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary"><i class="fas fa-edit"></i></a>
-                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)"><i class="fas fa-trash"></i></button>
+                                                    <a href="editar.php?id=<?php echo $producto['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar producto: <?php echo htmlspecialchars($producto['nombre']); ?>"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <button class="btn btn-outline-danger" onclick="confirmarEliminar(<?php echo $producto['id']; ?>)" aria-label="Eliminar producto: <?php echo htmlspecialchars($producto['nombre']); ?>"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@ $productos_js = array_map(function ($p) {
         const p = productos.find(x => x.id == id);
         if (!p) return;
         document.getElementById('modalTitulo').innerText = p.nombre;
-        let html = p.imagen_base64 ? `<img src="data:image/jpeg;base64,${p.imagen_base64}" class="img-fluid rounded mb-3 w-100" style="max-height: 400px; object-fit: contain;">` : '';
+        let html = p.imagen_base64 ? `<img src="data:image/jpeg;base64,${p.imagen_base64}" class="img-fluid rounded mb-3 w-100" style="max-height: 400px; object-fit: contain;" alt="Producto - ${p.nombre}">` : '';
         html += `<p><strong>Categoría:</strong> ${p.categoria || '-'}</p>`;
         html += `<p class="h4 text-success">$${Number(p.precio).toLocaleString('es-AR', {minimumFractionDigits:2})}</p>`;
         html += `<p><strong>Stock:</strong> ${p.stock}</p>`;

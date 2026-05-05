@@ -52,7 +52,7 @@ $all_roles = ServicioService::getAllRoles();
             <div class="card shadow-sm">
                 <div class="card-header bg-white py-3">
                     <h1 class="h4 mb-0">
-                        <i class="fas fa-plus me-2"></i>
+                        <i class="fas fa-plus me-2" aria-hidden="true"></i>
                         Nuevo Servicio
                     </h1>
                 </div>
@@ -107,10 +107,10 @@ $all_roles = ServicioService::getAllRoles();
                                 <hr class="my-4">
                                 <div class="d-flex gap-2 flex-wrap justify-content-between">
                                     <a href="index.php" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left me-1"></i> Volver a Lista
+                                        <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Volver a Lista
                                     </a>
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-save me-1"></i> Guardar Servicio
+                                        <i class="fas fa-save me-1" aria-hidden="true"></i> Guardar Servicio
                                     </button>
                                 </div>
                             </div>

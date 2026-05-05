@@ -45,7 +45,7 @@ if (!defined('BASE_URL')) {
             <div class="container mt-3">
                 <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-exclamation-triangle me-2 fs-4"></i>
+                        <i class="fas fa-exclamation-triangle me-2 fs-4" aria-hidden="true"></i>
                         <div>
                             <strong>¡Ops! Algo salió mal</strong><br>
                             <?php echo htmlspecialchars($systemError); ?>
@@ -60,7 +60,7 @@ if (!defined('BASE_URL')) {
         if ($flash): ?>
             <div class="container mt-3">
                 <div class="alert alert-<?php echo htmlspecialchars($flash['tipo']); ?> alert-dismissible fade show shadow-sm" role="alert">
-                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2"></i>
+                    <i class="fas fa-<?php echo $flash['tipo'] === 'danger' ? 'exclamation-circle' : 'check-circle'; ?> me-2" aria-hidden="true"></i>
                     <?php echo htmlspecialchars($flash['texto']); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -69,7 +69,7 @@ if (!defined('BASE_URL')) {
         <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>index.php">
-                    <img src="<?php echo BASE_URL; ?>uploads/Logo.jpeg" alt="Logo Veterinaria San Anton" width="40" height="40" class="me-2 rounded-circle object-fit-cover">
+                    <img src="<?php echo BASE_URL; ?>uploads/Logo.jpeg" alt="Logo Veterinaria San Anton" title="Logo Veterinaria San Anton" width="40" height="40" class="me-2 rounded-circle object-fit-cover" role="img">
                     <span class="brand-title">Veterinaria San Antón</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,6 +82,9 @@ if (!defined('BASE_URL')) {
                         $_nav_role       = SessionHandler::getRol();
                         $_nav_is_personal = SessionHandler::esPersonal();
                         $_nav_is_cliente  = SessionHandler::esCliente();
+                        $_nav_nombre = trim(SessionHandler::getNombre());
+                        $_nav_label_desktop = $_nav_nombre !== '' ? 'Hola, ' . $_nav_nombre : 'Hola';
+                        $_nav_label_mobile = $_nav_nombre !== '' ? $_nav_nombre : 'Mi cuenta';
                         ?>
                         <?php if ($_nav_logged_in && $_nav_is_personal && $_nav_role === 'admin'): ?>
                             <li class="nav-item d-lg-none"><a class="nav-link" href="<?php echo BASE_URL; ?>catalogos/index.php">Administrar Catálogo</a></li>
@@ -107,8 +110,9 @@ if (!defined('BASE_URL')) {
                         <?php if (SessionHandler::estaAutenticado()): ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
-                                    <span>Mi cuenta</span>
+                                    <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" title="Foto de perfil" width="32" height="32" class="rounded-circle me-2 object-fit-cover" role="img">
+                                    <span class="d-none d-lg-inline"><?php echo htmlspecialchars($_nav_label_desktop); ?></span>
+                                    <span class="d-inline d-lg-none"><?php echo htmlspecialchars($_nav_label_mobile); ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>perfil/index.php">Mi perfil</a></li>

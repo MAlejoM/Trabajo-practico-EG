@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
             <div class="card">
                 <div class="card-header">
                     <h1 class="h4 mb-0">
-                        <i class="fas fa-paw me-2"></i>
+                        <i class="fas fa-paw me-2" aria-hidden="true"></i>
                         Nueva Mascota
                     </h1>
                 </div>
@@ -155,12 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar_mascota'])) {
                                     </a>
                                 <?php else: ?>
                                     <a href="index.php" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left me-1"></i> Volver a Mascotas
+                                        <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Volver a Mascotas
                                     </a>
                                 <?php endif; ?>
                             </div>
                             <button type="submit" name="guardar_mascota" class="btn btn-success">
-                                <i class="fas fa-save me-1"></i> Guardar Mascota
+                                <i class="fas fa-save me-1" aria-hidden="true"></i> Guardar Mascota
                             </button>
                         </div>
                     </form>

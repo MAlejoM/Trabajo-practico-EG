@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="card">
         <div class="card-header">
           <h1 class="h4 mb-0">
-            <i class="fas fa-edit me-2"></i>
+            <i class="fas fa-edit me-2" aria-hidden="true"></i>
             Editar Novedad
           </h1>
         </div>
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <?php if ($novedad['imagen']): ?>
                 <div class="mb-2">
                   <img src="data:image/jpeg;base64,<?php echo base64_encode($novedad['imagen']); ?>"
-                    alt="Imagen actual"
+                    alt="Novedad - <?php echo htmlspecialchars($novedad['titulo']); ?>"
                     class="img-thumbnail"
                     style="max-width: 200px;">
                   <p class="text-muted small mb-0">Imagen actual</p>
@@ -125,10 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <hr class="my-4">
             <div class="d-flex gap-2 justify-content-between">
               <a href="index.php" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Volver
+                <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Volver
               </a>
               <button type="submit" class="btn btn-success">
-                <i class="fas fa-save me-1"></i> Guardar Cambios
+                <i class="fas fa-save me-1" aria-hidden="true"></i> Guardar Cambios
               </button>
             </div>
           </form>

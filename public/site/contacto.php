@@ -1,4 +1,29 @@
 <?php
+include_once __DIR__ . "/../../src/autoload.php";
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre  = trim($_POST['nombre'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
+    $telefono = trim($_POST['telefono'] ?? '');
+    $mensaje = trim($_POST['mensaje'] ?? '');
+
+    if (empty($nombre) || empty($email) || empty($mensaje)) {
+        $error = 'Por favor, completá todos los campos obligatorios.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'El correo electrónico no es válido.';
+    } else {
+        $resultado = \App\Modules\Mail\MailService::enviarContacto($nombre, $email, $telefono, $mensaje);
+        if ($resultado) {
+            $success = 'Tu mensaje fue enviado correctamente. Te responderemos a la brevedad.';
+        } else {
+            $error = 'Hubo un problema al enviar tu mensaje. Intentá nuevamente.';
+        }
+    }
+}
+
 include_once __DIR__ . "/../../src/Templates/header.php";
 ?>
 
@@ -25,18 +50,18 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h3 class="h5 mb-1">Dirección</h3>
-                                    <p class="mb-0 text-muted">Calle Falsa 123, Ciudad</p>
+                                    <p class="mb-0 text-muted">Av. Pellegrini 1234, Rosario, Santa Fe</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-phone"></i>
+                                        <i class="fas fa-phone" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -47,7 +72,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0">
                                     <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-envelope"></i>
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -58,7 +83,7 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                             <div class="d-flex align-items-center mt-auto">
                                 <div class="flex-shrink-0">
                                     <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -66,6 +91,59 @@ include_once __DIR__ . "/../../src/Templates/header.php";
                                     <p class="mb-0 text-muted">Lun - Vie: 9:00 - 18:00 hs<br>Sab: 9:00 - 13:00 hs</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="fw-semibold mb-4 text-center">Envianos un mensaje</h3>
+
+                            <?php if ($error): ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?= htmlspecialchars($error) ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($success): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?= htmlspecialchars($success) ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                                </div>
+                            <?php endif; ?>
+
+                            <form method="POST" action="">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre completo *</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required
+                                           value="<?= htmlspecialchars($nombre ?? '') ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo electrónico *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required
+                                           value="<?= htmlspecialchars($email ?? '') ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono"
+                                           value="<?= htmlspecialchars($telefono ?? '') ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mensaje" class="form-label">Mensaje *</label>
+                                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required><?= htmlspecialchars($mensaje ?? '') ?></textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">Enviar mensaje</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

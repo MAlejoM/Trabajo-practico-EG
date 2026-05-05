@@ -66,13 +66,13 @@ $usuarios   = $paginacion['data'];
                 <div class="card-body">
                     <?php if (isset($_GET['creado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Usuario creado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Usuario creado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
                     <?php if (isset($_GET['editado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Usuario actualizado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Usuario actualizado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
@@ -120,13 +120,13 @@ $usuarios   = $paginacion['data'];
                                                 <div class="btn-group btn-group-sm">
                                                     <a href="editar.php?id=<?php echo $usuario['id']; ?>"
                                                         class="btn btn-outline-primary"
-                                                        title="Editar usuario">
+                                                        aria-label="Editar usuario: <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <?php if ($usuario['tipo_usuario'] === 'Cliente'): ?>
                                                         <a href="mascotas_usuario.php?id=<?php echo $usuario['id']; ?>"
                                                             class="btn btn-outline-info"
-                                                            title="Ver mascotas">
+                                                            aria-label="Ver mascotas de <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>">
                                                             <i class="fas fa-paw"></i>
                                                         </a>
                                                     <?php endif; ?>

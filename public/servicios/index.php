@@ -111,25 +111,25 @@ $servicios  = $paginacion['data'];
                 <div class="card-body">
                     <?php if (isset($_GET['exito'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Servicio creado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Servicio creado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
                     <?php if (isset($_GET['editado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Servicio actualizado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Servicio actualizado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
                     <?php if (isset($_GET['desactivado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Servicio desactivado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Servicio desactivado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
                     <?php if (isset($_GET['reactivado'])): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>Servicio reactivado correctamente.
+                            <i class="fas fa-check-circle me-2" aria-hidden="true"></i>Servicio reactivado correctamente.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
@@ -137,7 +137,7 @@ $servicios  = $paginacion['data'];
                     <!-- Buscador -->
                     <div class="input-group mb-4">
                         <span class="input-group-text bg-white border-end-0">
-                            <i class="fas fa-search text-muted"></i>
+                            <i class="fas fa-search text-muted" aria-hidden="true"></i>
                         </span>
                         <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Buscar por nombre..." autocomplete="off">
                     </div>
@@ -171,19 +171,19 @@ $servicios  = $paginacion['data'];
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="editar.php?id=<?php echo $s['id']; ?>" class="btn btn-outline-secondary" title="Editar">
-                                                        <i class="fas fa-edit"></i>
+                                                    <a href="editar.php?id=<?php echo $s['id']; ?>" class="btn btn-outline-secondary" aria-label="Editar">
+                                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                     <?php if ($s['activo']): ?>
                                                         <a href="#"
                                                             class="btn btn-outline-danger"
-                                                            onclick="confirmarAccion('¿Está seguro de desactivar este servicio?', function(){ window.location.href='?accion=baja&id=<?php echo $s['id']; ?>&inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>'; }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' }); return false;" title="Desactivar">
-                                                            <i class="fas fa-toggle-on"></i>
+                                                            onclick="confirmarAccion('¿Está seguro de desactivar este servicio?', function(){ window.location.href='?accion=baja&id=<?php echo $s['id']; ?>&inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>'; }, { titulo: 'Desactivar servicio', btnTexto: 'Desactivar' }); return false;" aria-label="Desactivar">
+                                                            <i class="fas fa-toggle-on" aria-hidden="true"></i>
                                                         </a>
                                                     <?php else: ?>
                                                         <a href="?accion=reactivar&id=<?php echo $s['id']; ?>&inactivos=<?php echo $mostrar_inactivos ? '1' : '0'; ?>"
-                                                            class="btn btn-outline-success" title="Reactivar">
-                                                            <i class="fas fa-toggle-off"></i>
+                                                            class="btn btn-outline-success" aria-label="Reactivar">
+                                                            <i class="fas fa-toggle-off" aria-hidden="true"></i>
                                                         </a>
                                                     <?php endif; ?>
                                                 </div>

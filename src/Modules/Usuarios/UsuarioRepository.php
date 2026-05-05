@@ -206,6 +206,20 @@ class UsuarioRepository
         return $stmt->get_result()->fetch_assoc();
     }
 
+    public static function getAdmins()
+    {
+        $db = DB::getConn();
+        $stmt = $db->prepare("
+            SELECT u.id, u.email, u.nombre, u.apellido
+            FROM usuarios u
+            INNER JOIN personal p ON p.usuarioId = u.id
+            INNER JOIN roles r ON p.rolId = r.id
+            WHERE r.nombre = 'admin' AND u.activo = 1 AND p.activo = 1
+        ");
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public static function create($data)
     {
         $db = DB::getConn();

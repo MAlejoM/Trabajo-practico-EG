@@ -47,7 +47,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
           <div class="card-body p-4">
             <div class="text-center mb-4">
               <div class="mb-3">
-                <i class="fas fa-key fa-3x text-primary"></i>
+                <i class="fas fa-key fa-3x text-primary" aria-hidden="true"></i>
               </div>
               <h1 class="h4 mb-2">¿Olvidaste tu contraseña?</h1>
               <p class="text-muted small">No te preocupes, te ayudaremos a recuperarla</p>
@@ -65,7 +65,7 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 <div class="mb-4">
                   <label for="email" class="form-label">Email</label>
                   <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <span class="input-group-text"><i class="fas fa-envelope" aria-hidden="true"></i></span>
                     <input
                       type="email"
                       name="email"
@@ -81,24 +81,24 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                 </div>
 
                 <div class="alert alert-info small mb-4">
-                  <i class="fas fa-info-circle me-1"></i>
+                  <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
                   Te enviaremos un enlace para que puedas crear una nueva contraseña.
                   El enlace será válido por <strong>1 hora</strong>.
                 </div>
 
                 <div class="d-grid gap-2">
                   <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fas fa-paper-plane me-2"></i>Enviar Instrucciones
+                    <i class="fas fa-paper-plane me-2" aria-hidden="true"></i>Enviar Instrucciones
                   </button>
                   <a href="login.php" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>Volver al Login
+                    <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Volver al Login
                   </a>
                 </div>
               </form>
             <?php else: ?>
               <div class="text-center">
                 <div class="mb-4">
-                  <i class="fas fa-envelope-open-text fa-4x text-success"></i>
+                  <i class="fas fa-envelope-open-text fa-4x text-success" aria-hidden="true"></i>
                 </div>
                 <h2 class="h5 mb-3">¡Email enviado!</h2>
                 <p class="text-muted mb-4">
@@ -106,11 +106,11 @@ require_once __DIR__ . '/../../src/Templates/header.php';
                   recibirás instrucciones para recuperar tu contraseña.
                 </p>
                 <div class="alert alert-warning small">
-                  <i class="fas fa-clock me-1"></i>
+                  <i class="fas fa-clock me-1" aria-hidden="true"></i>
                   Si no ves el email en unos minutos, revisa tu carpeta de spam.
                 </div>
                 <a href="login.php" class="btn btn-primary">
-                  <i class="fas fa-sign-in-alt me-2"></i>Ir al Login
+                  <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>Ir al Login
                 </a>
               </div>
             <?php endif; ?>
