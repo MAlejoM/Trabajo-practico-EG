@@ -138,7 +138,7 @@ $mascotas   = $paginacion['data'];
                                         <tr>
                                             <td>
                                                 <?php if (!empty($mascota['foto'])): ?>
-                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>" class="rounded" style="width: 40px; height: 40px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>">
+                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>" class="rounded" style="width: 40px; height: 40px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" title="<?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" role="img">
                                                 <?php else: ?>
                                                     <div class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                                         <i class="fas fa-paw text-muted" aria-hidden="true"></i>

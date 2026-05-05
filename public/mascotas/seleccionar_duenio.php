@@ -32,7 +32,7 @@ $mascotas = MascotaService::getByClienteDni($dni);
                                 <div class="col-sm-6 col-xl-4">
                                     <div class="card h-100 shadow-sm">
                                         <?php if ($mascota['imagen']): ?>
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['imagen']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" title="<?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>" role="img">
                                         <?php else: ?>
                                             <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 180px;">
                                                 <i class="fas fa-paw fa-3x opacity-25" aria-hidden="true"></i>

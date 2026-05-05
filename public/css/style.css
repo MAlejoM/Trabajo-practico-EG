@@ -59,3 +59,62 @@ body.login-page {
 	align-items: center;
 	padding: 2rem 0;
 }
+
+/* ========================================
+   IMAGE ACCESSIBILITY & TOOLTIPS
+   Usa atributos HTML nativos (title, alt, aria-label)
+   sin depender de JavaScript
+   ======================================== */
+
+/* Mejorar visualización de imágenes con tooltips */
+img[alt] {
+	cursor: help;
+	transition: opacity 0.2s ease;
+}
+
+img[alt]:hover {
+	opacity: 0.95;
+}
+
+/* Tooltip nativo del navegador - mejorar apariencia */
+img[title] {
+	/* El navegador maneja el tooltip nativamente */
+	/* Narrator leerá el atributo title como descripción */
+}
+
+/* Asegurar que imágenes focusables con teclado tengan indicador visual */
+img[tabindex]:focus {
+	outline: 2px solid var(--brand-green);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Mejorar accesibilidad de imágenes decorativas vs. informativas */
+img:not([role="presentation"]):not([aria-hidden="true"]) {
+	/* Las imágenes sin role="presentation" son tratadas como contenido importante */
+}
+
+/* Tooltip personalizado en CSS puro (alternativa visual) */
+img[data-tooltip]::after {
+	content: attr(data-tooltip);
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #212529;
+	color: white;
+	padding: 0.5rem 0.75rem;
+	border-radius: 0.375rem;
+	white-space: nowrap;
+	font-size: 0.875rem;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	z-index: 1000;
+	margin-bottom: 8px;
+	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+img[data-tooltip]:hover::after {
+	opacity: 1;
+}

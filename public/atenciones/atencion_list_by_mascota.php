@@ -65,7 +65,9 @@ $atenciones = AtencionService::getByMascotaId($mascota_id);
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($mascota['foto']); ?>"
                                     class="rounded-circle me-3"
                                     style="width: 60px; height: 60px; object-fit: cover;"
-                                    alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>">
+                                    alt="Mascota - <?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>"
+                                    title="<?php echo htmlspecialchars($mascota['nombre'] . ' - ' . $mascota['raza']); ?>"
+                                    role="img">
                             <?php else: ?>
                                 <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-3"
                                     style="width: 60px; height: 60px;">

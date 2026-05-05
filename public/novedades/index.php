@@ -60,7 +60,9 @@ $novedades_js = array_map(function ($n) {
                                             <img src="data:image/jpeg;base64,<?php echo base64_encode($novedad['imagen']); ?>"
                                                 class="card-img-top"
                                                 alt="Novedad - <?php echo htmlspecialchars($novedad['titulo']); ?>"
-                                                style="height: 200px; object-fit: cover;">
+                                                title="<?php echo htmlspecialchars($novedad['titulo']); ?>"
+                                                style="height: 200px; object-fit: cover;"
+                                                role="img">
                                         <?php else: ?>
                                             <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
                                                 <i class="fas fa-newspaper fa-3x opacity-50" aria-hidden="true"></i>

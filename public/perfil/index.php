@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_contrasena'])
 
                         <!-- Información básica -->
                         <div class="text-center mb-4">
-                            <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover">
+                            <img src="<?php echo BASE_URL; ?>uploads/Perfil.jpeg" alt="Foto de perfil" title="Foto de perfil" width="80" height="80" class="rounded-circle mb-3 object-fit-cover" role="img">
                             <h2 class="h5"><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h2>
                             <?php if ($usuario['rol_nombre']): ?>
                                 <span class="badge bg-success"><?php echo htmlspecialchars($usuario['rol_nombre']); ?></span>

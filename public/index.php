@@ -342,7 +342,7 @@ use App\Core\SessionHandler;
             </div>
           </div>
           <div class="col-12 col-lg-6 text-center">
-            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Banner de bienvenida - Veterinaria San Antón">
+            <img class="img-fluid rounded shadow-sm hero-image" src="<?php echo BASE_URL; ?>uploads/bienvenida.png" alt="Banner de bienvenida - Veterinaria San Antón" title="Banner de bienvenida - Veterinaria San Antón" role="img">
           </div>
         </div>
       </div>
