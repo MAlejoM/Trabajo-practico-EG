@@ -7,3 +7,5 @@ RewriteRule ^contacto\.php$ site/contacto.php [L]
 
 # Redirigir quienes_somos.php a site/quienes_somos.php internamente
 RewriteRule ^quienes_somos\.php$ site/quienes_somos.php [L]
+
+ErrorDocument 404 /site/404.php
